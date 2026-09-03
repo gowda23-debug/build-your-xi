@@ -8,11 +8,10 @@ import { createClient } from "@/lib/supabase/client";
 function getRegisterErrorMessage(message: string) {
   const error = message.toLowerCase();
 
-  if (error.includes("already registered")) {
-    return "An account with this email already exists. Try logging in instead.";
-  }
-
-  if (error.includes("user already registered")) {
+  if (
+    error.includes("already registered") ||
+    error.includes("user already registered")
+  ) {
     return "An account with this email already exists. Try logging in instead.";
   }
 
@@ -20,11 +19,14 @@ function getRegisterErrorMessage(message: string) {
     return "Your password doesn't meet the required security requirements. Please choose a stronger password.";
   }
 
-  if (error.includes("email")) {
+  if (error.includes("invalid email")) {
     return "Please enter a valid email address.";
   }
 
-  if (error.includes("too many requests")) {
+  if (
+    error.includes("too many requests") ||
+    error.includes("rate limit")
+  ) {
     return "Too many attempts. Please wait a moment before trying again.";
   }
 
@@ -48,7 +50,9 @@ export default function Register() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  async function handleRegister(event: FormEvent<HTMLFormElement>) {
+  async function handleRegister(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     setError("");
@@ -57,15 +61,47 @@ export default function Register() {
 
     try {
       /*
-       * Check whether the visitor is currently playing
-       * as an anonymous guest.
+       * This is where Supabase should send the user
+       * after they click the confirmation email.
+       *
+       * Example:
+       *
+       * localhost:
+       * http://localhost:3000/auth/callback?next=/email-confirmed
+       *
+       * production:
+       * https://build-your-xi.vercel.app/auth/callback?next=/email-confirmed
+       */
+      const emailRedirectTo =
+        `${window.location.origin}/auth/callback?next=/email-confirmed`;
+
+      /*
+       * ==========================================
+       * CHECK FOR AN EXISTING SESSION
+       * ==========================================
+       *
+       * A normal visitor will not have a session.
+       *
+       * That is completely normal and should NOT
+       * prevent registration.
+       *
+       * Anonymous guests will have a valid session.
        */
       const {
         data: { user },
         error: userError,
       } = await supabase.auth.getUser();
 
-      if (userError) {
+      /*
+       * AuthSessionMissingError is expected when
+       * someone visits the register page normally.
+       *
+       * Only throw other unexpected errors.
+       */
+      if (
+        userError &&
+        userError.name !== "AuthSessionMissingError"
+      ) {
         throw userError;
       }
 
@@ -74,56 +110,74 @@ export default function Register() {
        * GUEST → REGISTERED ACCOUNT
        * ==========================================
        *
-       * We upgrade the SAME Supabase user instead
-       * of creating a new account.
+       * Upgrade the SAME anonymous Supabase user.
        *
-       * This preserves the user's ID and therefore
-       * preserves future gameplay/stat relationships.
+       * This preserves:
+       *
+       * - User ID
+       * - Future gameplay
+       * - Scores
+       * - Challenge relationships
        */
       if (user?.is_anonymous) {
-        const { data, error: updateError } =
-          await supabase.auth.updateUser({
+        const {
+          data: updateData,
+          error: updateError,
+        } = await supabase.auth.updateUser(
+          {
             email,
             password,
             data: {
               display_name: displayName,
               gamer_tag: gamerTag,
             },
-          });
+          },
+          {
+            emailRedirectTo,
+          }
+        );
 
         if (updateError) {
-          setError(getRegisterErrorMessage(updateError.message));
+          setError(
+            getRegisterErrorMessage(
+              updateError.message
+            )
+          );
+
           setLoading(false);
           return;
         }
 
         /*
-         * Create or update the profile.
+         * Create or update the user's public profile.
          *
-         * upsert ensures that:
-         * - if a profile already exists, it is updated
-         * - if no profile exists, it is created
+         * The anonymous user is authenticated,
+         * so your authenticated RLS policies apply.
          */
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .upsert(
-            {
-              id: user.id,
-              display_name: displayName,
-              gamer_tag: gamerTag,
-              email,
-              updated_at: new Date().toISOString(),
-            },
-            {
-              onConflict: "id",
-            }
-          );
+        const { error: profileError } =
+          await supabase
+            .from("profiles")
+            .upsert(
+              {
+                id: user.id,
+                display_name: displayName,
+                gamer_tag: gamerTag,
+                email,
+                updated_at: new Date().toISOString(),
+              },
+              {
+                onConflict: "id",
+              }
+            );
 
         if (profileError) {
-          console.error("Profile update error:", profileError);
+          console.error(
+            "Profile update error:",
+            profileError
+          );
 
           setError(
-            "Your account was created, but we couldn't save your profile details. Please try updating your profile."
+            "Your account was updated, but we couldn't save your profile details. Please try again."
           );
 
           setLoading(false);
@@ -131,10 +185,11 @@ export default function Register() {
         }
 
         /*
-         * Depending on your Supabase email confirmation
-         * settings, the user may need to confirm their email.
+         * If the email still requires confirmation,
+         * keep the user on this page and show the
+         * confirmation message.
          */
-        if (!data.user?.email_confirmed_at) {
+        if (!updateData.user?.email_confirmed_at) {
           setMessage(
             "Your account has been upgraded! Please check your email and confirm your address."
           );
@@ -143,6 +198,9 @@ export default function Register() {
           return;
         }
 
+        /*
+         * In case email confirmation is disabled.
+         */
         router.push("/home");
         router.refresh();
 
@@ -155,20 +213,35 @@ export default function Register() {
        * ==========================================
        */
 
-      const { data, error: signUpError } =
-        await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              display_name: displayName,
-              gamer_tag: gamerTag,
-            },
+      const {
+        data,
+        error: signUpError,
+      } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            display_name: displayName,
+            gamer_tag: gamerTag,
           },
-        });
+
+          /*
+           * IMPORTANT:
+           *
+           * For signUp(), emailRedirectTo belongs
+           * inside the options object.
+           */
+          emailRedirectTo,
+        },
+      });
 
       if (signUpError) {
-        setError(getRegisterErrorMessage(signUpError.message));
+        setError(
+          getRegisterErrorMessage(
+            signUpError.message
+          )
+        );
+
         setLoading(false);
         return;
       }
@@ -183,63 +256,79 @@ export default function Register() {
       }
 
       /*
-       * Create the public profile immediately.
+       * If a session exists, the user can immediately
+       * write their profile using the authenticated
+       * RLS policy.
        *
-       * This ensures that both:
-       *
-       * auth.users
-       * public.profiles
-       *
-       * have a matching user.
+       * This normally happens when email confirmation
+       * is disabled.
        */
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .upsert(
-          {
-            id: data.user.id,
-            display_name: displayName,
-            gamer_tag: gamerTag,
-            email,
-            updated_at: new Date().toISOString(),
-          },
-          {
-            onConflict: "id",
-          }
-        );
+      if (data.session) {
+        const { error: profileError } =
+          await supabase
+            .from("profiles")
+            .upsert(
+              {
+                id: data.user.id,
+                display_name: displayName,
+                gamer_tag: gamerTag,
+                email,
+                updated_at: new Date().toISOString(),
+              },
+              {
+                onConflict: "id",
+              }
+            );
 
-      if (profileError) {
-        console.error(
-          "Profile creation error:",
-          profileError
-        );
+        if (profileError) {
+          console.error(
+            "Profile creation error:",
+            profileError
+          );
 
-        setError(
-          "Your account was created, but we couldn't save your profile details. Please contact support if this problem continues."
-        );
+          setError(
+            "Your account was created, but we couldn't save your profile details. Please contact support if this problem continues."
+          );
 
-        setLoading(false);
+          setLoading(false);
+          return;
+        }
+
+        /*
+         * User is immediately authenticated.
+         */
+        router.push("/home");
+        router.refresh();
+
         return;
       }
 
       /*
-       * Email confirmation enabled.
+       * ==========================================
+       * EMAIL CONFIRMATION ENABLED
+       * ==========================================
+       *
+       * With email confirmation enabled, Supabase
+       * normally returns:
+       *
+       * data.user    → exists
+       * data.session → null
+       *
+       * This is expected.
+       *
+       * The confirmation email contains the callback
+       * redirect configured above.
        */
-      if (!data.session) {
-        setMessage(
-          "Account created! Please check your email and confirm your account before logging in."
-        );
+      setMessage(
+        "Account created! Please check your email and confirm your account before logging in."
+      );
 
-        setLoading(false);
-        return;
-      }
-
-      /*
-       * User is immediately authenticated.
-       */
-      router.push("/home");
-      router.refresh();
+      setLoading(false);
     } catch (err) {
-      console.error(err);
+      console.error(
+        "Registration error:",
+        err
+      );
 
       setError(
         "Something went wrong while creating your account. Please try again."
@@ -271,6 +360,8 @@ export default function Register() {
           onSubmit={handleRegister}
           className="mt-8 space-y-4"
         >
+          {/* DISPLAY NAME */}
+
           <input
             type="text"
             placeholder="Display name"
@@ -280,6 +371,8 @@ export default function Register() {
             }
             required
           />
+
+          {/* GAMER TAG */}
 
           <input
             type="text"
@@ -291,6 +384,8 @@ export default function Register() {
             required
           />
 
+          {/* EMAIL */}
+
           <input
             type="email"
             placeholder="Email address"
@@ -300,6 +395,8 @@ export default function Register() {
             }
             required
           />
+
+          {/* PASSWORD */}
 
           <input
             type="password"
@@ -312,17 +409,23 @@ export default function Register() {
             required
           />
 
+          {/* ERROR */}
+
           {error && (
             <p className="text-sm text-red-400">
               {error}
             </p>
           )}
 
+          {/* SUCCESS MESSAGE */}
+
           {message && (
             <p className="text-sm text-green-400">
               {message}
             </p>
           )}
+
+          {/* SUBMIT */}
 
           <button
             type="submit"
