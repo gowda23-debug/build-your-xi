@@ -6,8 +6,12 @@ export async function GET(request: Request) {
 
   const code = searchParams.get("code");
 
+  /*
+   * After a successful email confirmation,
+   * show the confirmation success page.
+   */
   const next =
-    searchParams.get("next") ?? "/home";
+    searchParams.get("next") ?? "/email-confirmed";
 
   if (code) {
     const supabase = await createClient();
@@ -16,9 +20,13 @@ export async function GET(request: Request) {
       await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      const redirectPath = next.startsWith("/")
-        ? next
-        : "/home";
+      /*
+       * Prevent redirects to external websites.
+       */
+      const redirectPath =
+        next.startsWith("/") && !next.startsWith("//")
+          ? next
+          : "/email-confirmed";
 
       return NextResponse.redirect(
         `${origin}${redirectPath}`
@@ -28,6 +36,10 @@ export async function GET(request: Request) {
     console.error(
       "Email confirmation error:",
       error.message
+    );
+  } else {
+    console.error(
+      "Email confirmation error: No confirmation code received."
     );
   }
 
