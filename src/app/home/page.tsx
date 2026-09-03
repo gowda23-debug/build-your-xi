@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -6,7 +10,40 @@ import {
   Trophy,
 } from "lucide-react";
 
+import { createClient } from "@/lib/supabase/client";
+
 export default function HomePage() {
+  const router = useRouter();
+  const supabase = createClient();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      // If there is no logged-in user or guest session,
+      // send them back to the landing/login page.
+      if (!user) {
+        router.replace("/");
+        return;
+      }
+
+      setLoading(false);
+    };
+
+    checkUser();
+  }, [router, supabase]);
+
+  // Prevent the page from appearing before authentication is checked
+  if (loading) {
+    return (
+      <main className="flex flex-1" />
+    );
+  }
+
   return (
     <main className="flex flex-1 flex-col">
       {/* =========================
@@ -23,6 +60,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 py-4 md:px-10 md:py-5">
+          
           {/* =========================
               HERO
           ========================= */}
@@ -54,6 +92,7 @@ export default function HomePage() {
           ========================= */}
 
           <div className="mt-6 grid gap-5 md:grid-cols-3">
+
             {/* IPL CHALLENGE */}
 
             <article className="card group relative flex min-h-[280px] flex-col overflow-hidden p-7 transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)]/50">
@@ -171,6 +210,7 @@ export default function HomePage() {
                 Coming Soon
               </button>
             </article>
+
           </div>
         </div>
       </section>
