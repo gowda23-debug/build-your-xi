@@ -1,166 +1,184 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {
+  useMemo,
+  useState,
+} from "react";
 
 import ChallengeRandomizer from "./ChallengeRandomizer";
 import IPLGame from "./IPLGame";
+import PlayerPool from "./PlayerPool";
+import PlayingXI from "./PlayingXI";
+
+import {
+  getRandomPitch,
+} from "@/lib/ipl-challenge/pitches";
+
+import {
+  canAddPlayer,
+  validateXI,
+} from "@/lib/ipl-challenge/validate-xi";
 
 import type {
   IPLChallenge,
   IPLGameState,
   IPLPlayer,
+  PitchProfile,
+  PlayerRole,
 } from "@/types/ipl";
 
 const MAX_PLAYERS = 11;
 
 export default function XISelectionGame() {
   /*
-   * The currently spun challenge.
+   * Persistent game context.
    *
-   * This exists only while the user is
-   * choosing one player from that challenge.
+   * This is never cleared after a player
+   * is selected.
    */
-  const [challenge, setChallenge] =
+  const [
+    gameChallenge,
+    setGameChallenge,
+  ] =
     useState<IPLChallenge | null>(
       null
     );
 
   /*
-   * Player pool belonging to the current
-   * team-season challenge.
-   */
-  const [players, setPlayers] =
-    useState<IPLPlayer[]>([]);
-
-  /*
-   * Selected players are stored as complete
-   * player objects.
+   * Current spin.
    *
-   * This is important because every new spin
-   * can replace the available player pool.
-   * Previously selected players must remain
-   * available in the Playing XI.
+   * This is cleared after selecting
+   * one player.
    */
-  const [selectedPlayers, setSelectedPlayers] =
+  const [
+    currentChallenge,
+    setCurrentChallenge,
+  ] =
+    useState<IPLChallenge | null>(
+      null
+    );
+
+  const [
+    currentPlayers,
+    setCurrentPlayers,
+  ] =
     useState<IPLPlayer[]>([]);
 
-  const [searchQuery, setSearchQuery] =
-    useState("");
+  const [
+    selectedPlayers,
+    setSelectedPlayers,
+  ] =
+    useState<IPLPlayer[]>([]);
 
-  const [gameState, setGameState] =
+  const [
+    pitch,
+    setPitch,
+  ] =
+    useState<PitchProfile | null>(
+      null
+    );
+
+  const [
+    gameState,
+    setGameState,
+  ] =
     useState<IPLGameState>(
       "challenge"
     );
 
-  /*
-   * Used to remount the randomizer after
-   * every completed player selection.
-   *
-   * This resets its internal challenge state
-   * and brings the Spin button back.
-   */
-  const [randomizerKey, setRandomizerKey] =
+  const [
+    searchQuery,
+    setSearchQuery,
+  ] =
+    useState("");
+
+  const [
+    roleFilter,
+    setRoleFilter,
+  ] =
+    useState<
+      "ALL" | PlayerRole
+    >("ALL");
+
+  const [
+    randomizerKey,
+    setRandomizerKey,
+  ] =
     useState(0);
 
-  /*
-   * Receive a freshly generated challenge
-   * and its valid player pool.
-   *
-   * At this point the player list becomes
-   * visible and the user can choose exactly
-   * one player.
-   */
   function handleChallengeReady(
-    nextChallenge: IPLChallenge,
-    nextPlayers: IPLPlayer[]
+    challenge: IPLChallenge,
+    players: IPLPlayer[]
   ) {
-    if (
-      selectedPlayers.length >=
-      MAX_PLAYERS
-    ) {
-      return;
+    setCurrentChallenge(
+      challenge
+    );
+
+    setCurrentPlayers(
+      players
+    );
+
+    /*
+     * First spin defines the
+     * persistent game context.
+     */
+    if (!gameChallenge) {
+      setGameChallenge(
+        challenge
+      );
+
+      setPitch(
+        getRandomPitch()
+      );
     }
 
-    setChallenge(
-      nextChallenge
-    );
-
-    setPlayers(
-      nextPlayers
-    );
-
     setSearchQuery("");
+    setRoleFilter("ALL");
 
     setGameState(
       "selection"
     );
   }
 
-  /*
-   * Select exactly one player from the
-   * current spin.
-   *
-   * Once selected:
-   *
-   * 1. Player is added to the XI.
-   * 2. Current player pool disappears.
-   * 3. Current challenge disappears.
-   * 4. Randomizer is reset.
-   * 5. User can spin again.
-   */
   function handleSelectPlayer(
     player: IPLPlayer
   ) {
-    if (
-      selectedPlayers.length >=
-      MAX_PLAYERS
-    ) {
-      return;
-    }
-
-    const alreadySelected =
-      selectedPlayers.some(
-        (selectedPlayer) =>
-          selectedPlayer.id ===
-          player.id
+    const canSelect =
+      canAddPlayer(
+        selectedPlayers,
+        player
       );
 
-    /*
-     * Safety protection against duplicate
-     * player selection.
-     */
-    if (alreadySelected) {
+    if (!canSelect) {
       return;
     }
 
     setSelectedPlayers(
-      (currentPlayers) => [
-        ...currentPlayers,
+      (
+        current
+      ) => [
+        ...current,
         player,
       ]
     );
 
     /*
-     * Remove the current challenge and pool.
-     *
-     * This makes the player list disappear
-     * immediately after selecting one player.
+     * Current spin ends.
      */
-    setChallenge(
+    setCurrentChallenge(
       null
     );
 
-    setPlayers([]);
+    setCurrentPlayers([]);
 
     setSearchQuery("");
+    setRoleFilter("ALL");
 
-    /*
-     * Reset the randomizer so the user gets
-     * a fresh Spin button.
-     */
     setRandomizerKey(
-      (currentKey) =>
-        currentKey + 1
+      (
+        current
+      ) =>
+        current + 1
     );
 
     setGameState(
@@ -168,64 +186,38 @@ export default function XISelectionGame() {
     );
   }
 
-  /*
-   * Remove a player from the XI.
-   *
-   * We keep this for now because the user
-   * should be able to correct a selection.
-   */
   function handleRemovePlayer(
     playerId: string
   ) {
     setSelectedPlayers(
-      (currentPlayers) =>
-        currentPlayers.filter(
-          (player) =>
-            player.id !== playerId
+      (
+        current
+      ) =>
+        current.filter(
+          (
+            player
+          ) =>
+            player.id !==
+            playerId
         )
     );
   }
 
-  /*
-   * Filter only the current challenge pool.
-   */
-  const filteredPlayers =
-    useMemo(() => {
-      const normalizedQuery =
-        searchQuery
-          .trim()
-          .toLowerCase();
-
-      if (!normalizedQuery) {
-        return players;
-      }
-
-      return players.filter(
-        (player) =>
-          player.name
-            .toLowerCase()
-            .includes(
-              normalizedQuery
-            )
-      );
-    }, [
-      players,
-      searchQuery,
-    ]);
-
-  /*
-   * The XI can continue only when all
-   * 11 players have been selected.
-   *
-   * Role validation will be added after
-   * we finalize the player-role system.
-   */
-  const canContinue =
-    selectedPlayers.length ===
-    MAX_PLAYERS;
+  const validation =
+    useMemo(
+      () =>
+        validateXI(
+          selectedPlayers
+        ),
+      [
+        selectedPlayers,
+      ]
+    );
 
   function handleContinue() {
-    if (!canContinue) {
+    if (
+      !validation.valid
+    ) {
       return;
     }
 
@@ -235,7 +227,10 @@ export default function XISelectionGame() {
   }
 
   function handleStartGame() {
-    if (!canContinue) {
+    if (
+      !validation.valid ||
+      !gameChallenge
+    ) {
       return;
     }
 
@@ -245,24 +240,24 @@ export default function XISelectionGame() {
   }
 
   /*
-   * =========================
-   * PLAYING STATE
-   * =========================
+   * GAME
    */
-
   if (
-    gameState === "playing" &&
-    challenge
+    gameState ===
+      "playing" &&
+    gameChallenge
   ) {
     return (
       <IPLGame
-        challenge={challenge}
+        challenge={
+          gameChallenge
+        }
         selectedPlayers={
           selectedPlayers
         }
         onBackToSelection={() =>
           setGameState(
-            "challenge"
+            "ready"
           )
         }
       />
@@ -270,28 +265,40 @@ export default function XISelectionGame() {
   }
 
   /*
-   * =========================
-   * READY STATE
-   * =========================
+   * READY
    */
-
   if (
-    gameState === "ready"
+    gameState ===
+    "ready"
   ) {
     return (
       <main className="w-full">
-        <section className="card mx-auto max-w-3xl p-6">
+        <section className="card mx-auto max-w-4xl p-5">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
             Playing XI Ready
           </p>
 
           <h1 className="mt-2 text-2xl font-black">
-            Your XI is locked in
+            Your XI is ready
           </h1>
 
           <p className="mt-2 text-sm text-[var(--muted)]">
-            You have selected{" "}
-            {selectedPlayers.length} players.
+            {
+              validation.counts.BAT
+            }{" "}
+            BAT ·{" "}
+            {
+              validation.counts.WK
+            }{" "}
+            WK ·{" "}
+            {
+              validation.counts.AR
+            }{" "}
+            AR ·{" "}
+            {
+              validation.counts.BOWL
+            }{" "}
+            BOWL
           </p>
 
           <div className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -301,22 +308,28 @@ export default function XISelectionGame() {
                 index
               ) => (
                 <div
-                  key={player.id}
-                  className="flex items-center gap-3 rounded-xl border border-[var(--line)] px-3 py-2.5"
+                  key={
+                    player.id
+                  }
+                  className="flex items-center gap-3 rounded-xl border border-[var(--line)] p-3"
                 >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-xs font-black text-[var(--accent)]">
-                    {index + 1}
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-xs font-black text-[var(--accent)]">
+                    {
+                      index + 1
+                    }
                   </span>
 
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-bold">
-                      {player.name}
+                  <div>
+                    <p className="text-sm font-bold">
+                      {
+                        player.name
+                      }
                     </p>
 
                     <p className="text-xs text-[var(--muted)]">
-                      {player.stats.runs} runs
-                      {" · "}
-                      {player.stats.wickets} wickets
+                      {
+                        player.role
+                      }
                     </p>
                   </div>
                 </div>
@@ -353,197 +366,111 @@ export default function XISelectionGame() {
   }
 
   /*
-   * =========================
-   * SELECTION / SPIN STATE
-   * =========================
+   * MAIN SELECTION FLOW
    */
-
   return (
-    <main className="w-full">
-      <section className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
-        {/* =====================
-            LEFT SIDE
-        ===================== */}
+    <main className="flex min-h-0 w-full flex-1">
+      <section className="grid min-h-0 w-full gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
+        {/* LEFT */}
 
-        <section className="min-w-0">
-          {/* =====================
-              RANDOMIZER
-          ===================== */}
+        <section className="flex min-h-0 flex-col">
+          {selectedPlayers.length <
+            MAX_PLAYERS && (
+            <>
+              {/* No player pool before spin */}
 
-          {!challenge &&
-            selectedPlayers.length <
-              MAX_PLAYERS && (
-              <ChallengeRandomizer
-                key={
-                  randomizerKey
-                }
-                onChallengeReady={
-                  handleChallengeReady
-                }
-              />
-            )}
+              {!currentChallenge && (
+                <ChallengeRandomizer
+                  key={
+                    randomizerKey
+                  }
+                  onChallengeReady={
+                    handleChallengeReady
+                  }
+                />
+              )}
 
-          {/* =====================
-              PLAYER POOL
-          ===================== */}
+              {/* Player pool after spin */}
 
-          {challenge && (
-            <section className="card overflow-hidden">
-              {/* HEADER */}
-
-              <div className="border-b border-[var(--line)] px-5 py-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-                      Available Players
-                    </p>
-
-                    <p className="mt-1 text-sm text-[var(--muted)]">
-                      {
-                        challenge.team
-                          .name
-                      }
-
-                      {" · "}
-
-                      {
-                        challenge.season
-                          .season
-                      }
-                    </p>
-                  </div>
-
-                  <span className="rounded-lg bg-[var(--accent)]/10 px-3 py-1.5 text-xs font-bold text-[var(--accent)]">
-                    Select 1 Player
-                  </span>
-                </div>
-
-                <input
-                  type="search"
-                  value={
+              {currentChallenge && (
+                <PlayerPool
+                  players={
+                    currentPlayers
+                  }
+                  selectedPlayers={
+                    selectedPlayers
+                  }
+                  searchQuery={
                     searchQuery
                   }
-                  onChange={(event) =>
-                    setSearchQuery(
-                      event.target.value
+                  roleFilter={
+                    roleFilter
+                  }
+                  onSearchChange={
+                    setSearchQuery
+                  }
+                  onRoleFilterChange={
+                    setRoleFilter
+                  }
+                  onSelectPlayer={
+                    handleSelectPlayer
+                  }
+                  canSelectPlayer={(
+                    player
+                  ) =>
+                    canAddPlayer(
+                      selectedPlayers,
+                      player
                     )
                   }
-                  placeholder="Search players..."
-                  className="mt-4 w-full rounded-xl border border-[var(--line)] bg-transparent px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
                 />
-              </div>
-
-              {/* SCROLLABLE PLAYER LIST */}
-
-              <div className="max-h-[calc(100vh-280px)] overflow-y-auto divide-y divide-[var(--line)]">
-                {filteredPlayers.map(
-                  (player) => {
-                    const alreadySelected =
-                      selectedPlayers.some(
-                        (
-                          selectedPlayer
-                        ) =>
-                          selectedPlayer.id ===
-                          player.id
-                      );
-
-                    return (
-                      <button
-                        key={player.id}
-                        type="button"
-                        disabled={
-                          alreadySelected
-                        }
-                        onClick={() =>
-                          handleSelectPlayer(
-                            player
-                          )
-                        }
-                        className={[
-                          "flex w-full items-center justify-between gap-4 px-5 py-3 text-left transition",
-                          alreadySelected
-                            ? "cursor-not-allowed opacity-40"
-                            : "hover:bg-[var(--surface-hover)]",
-                        ].join(" ")}
-                      >
-                        <div className="min-w-0">
-                          <p className="truncate text-sm font-bold">
-                            {
-                              player.name
-                            }
-                          </p>
-
-                          <p className="mt-1 text-xs text-[var(--muted)]">
-                            {
-                              player.stats
-                                .matches
-                            }{" "}
-                            matches
-
-                            {" · "}
-
-                            {
-                              player.stats
-                                .runs
-                            }{" "}
-                            runs
-
-                            {" · "}
-
-                            {
-                              player.stats
-                                .wickets
-                            }{" "}
-                            wickets
-                          </p>
-                        </div>
-
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)] text-sm font-black text-[var(--accent)]">
-                          +
-                        </span>
-                      </button>
-                    );
-                  }
-                )}
-
-                {filteredPlayers.length ===
-                  0 && (
-                  <div className="px-5 py-10 text-center">
-                    <p className="text-sm font-semibold">
-                      No players found
-                    </p>
-
-                    <p className="mt-1 text-xs text-[var(--muted)]">
-                      Try a different search.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </section>
+              )}
+            </>
           )}
-
-          {/* =====================
-              XI COMPLETE
-          ===================== */}
 
           {selectedPlayers.length ===
             MAX_PLAYERS && (
-            <section className="card p-6">
+            <section className="card p-5">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-                Selection Complete
+                XI Complete
               </p>
 
-              <h2 className="mt-2 text-2xl font-black">
-                Your XI is ready
+              <h2 className="mt-2 text-xl font-black">
+                Validate your team
               </h2>
 
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                You have selected all
-                {MAX_PLAYERS} players.
-              </p>
+              {!validation.valid && (
+                <div className="mt-4 space-y-2">
+                  {validation.errors.map(
+                    (
+                      error
+                    ) => (
+                      <p
+                        key={
+                          error
+                        }
+                        className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+                      >
+                        {
+                          error
+                        }
+                      </p>
+                    )
+                  )}
+                </div>
+              )}
+
+              {validation.valid && (
+                <p className="mt-3 text-sm text-emerald-400">
+                  Your XI satisfies all team composition rules.
+                </p>
+              )}
 
               <button
                 type="button"
+                disabled={
+                  !validation.valid
+                }
                 onClick={
                   handleContinue
                 }
@@ -555,102 +482,21 @@ export default function XISelectionGame() {
           )}
         </section>
 
-        {/* =====================
-            RIGHT SIDE
-        ===================== */}
+        {/* RIGHT */}
 
-        <aside className="card h-fit overflow-hidden lg:sticky lg:top-6">
-          <div className="border-b border-[var(--line)] px-5 py-4">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Your Playing XI
-            </p>
-
-            <div className="mt-2 flex items-end justify-between">
-              <p className="text-sm text-[var(--muted)]">
-                One player per spin
-              </p>
-
-              <p className="text-lg font-black">
-                {
-                  selectedPlayers.length
-                }
-                /{MAX_PLAYERS}
-              </p>
-            </div>
-          </div>
-
-          <div className="max-h-[calc(100vh-260px)] overflow-y-auto p-3">
-            {selectedPlayers.length ===
-            0 ? (
-              <div className="rounded-xl border border-dashed border-[var(--line)] px-4 py-8 text-center">
-                <p className="text-sm font-semibold">
-                  Your XI is empty
-                </p>
-
-                <p className="mt-1 text-xs text-[var(--muted)]">
-                  Spin a challenge and
-                  choose your first player.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {selectedPlayers.map(
-                  (
-                    player,
-                    index
-                  ) => (
-                    <div
-                      key={player.id}
-                      className="flex items-center gap-3 rounded-xl border border-[var(--line)] px-3 py-2.5"
-                    >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-xs font-black text-[var(--accent)]">
-                        {
-                          index + 1
-                        }
-                      </span>
-
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold">
-                          {
-                            player.name
-                          }
-                        </p>
-
-                        <p className="mt-0.5 text-xs text-[var(--muted)]">
-                          {
-                            player.stats
-                              .runs
-                          }{" "}
-                          runs
-
-                          {" · "}
-
-                          {
-                            player.stats
-                              .wickets
-                          }{" "}
-                          wickets
-                        </p>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleRemovePlayer(
-                            player.id
-                          )
-                        }
-                        className="text-xs font-semibold text-[var(--muted)] transition hover:text-red-400"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  )
-                )}
-              </div>
-            )}
-          </div>
-        </aside>
+        <div className="min-h-0">
+          <PlayingXI
+            players={
+              selectedPlayers
+            }
+            pitch={
+              pitch
+            }
+            onRemovePlayer={
+              handleRemovePlayer
+            }
+          />
+        </div>
       </section>
     </main>
   );

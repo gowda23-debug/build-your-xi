@@ -24,6 +24,8 @@ type ChallengeRandomizerProps = {
     challenge: IPLChallenge,
     players: IPLPlayer[]
   ) => void;
+
+  compact?: boolean;
 };
 
 type LoadingAction =
@@ -41,7 +43,8 @@ const ROLLING_CHARACTERS =
 
 export default function ChallengeRandomizer({
   onChallengeReady,
-}: ChallengeRandomizerProps) {
+  compact = false,
+}: ChallengeRandomizerProps)  {
   const [challenge, setChallenge] =
     useState<IPLChallenge | null>(
       null
@@ -492,7 +495,84 @@ export default function ChallengeRandomizer({
 
   const isSeasonRolling =
     rollingField === "season";
+  if (
+    compact &&
+    challenge
+  ) {
+    return (
+      <section className="card overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] px-4 py-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
+              Current Spin
+            </p>
 
+            <p className="mt-1 text-sm font-bold">
+              {challenge.team.name}
+
+              <span className="mx-1 text-[var(--muted)]">
+                ·
+              </span>
+
+              {challenge.season.season}
+            </p>
+          </div>
+
+          <span className="rounded-lg bg-[var(--accent)]/10 px-3 py-1.5 text-xs font-bold text-[var(--accent)]">
+            Select 1 Player
+          </span>
+        </div>
+
+        <div className="grid gap-px bg-[var(--line)] sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={handleRespinTeam}
+            disabled={isLoading}
+            className="flex items-center justify-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold transition hover:bg-[var(--surface-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <RotateCcw
+              size={15}
+              className={
+                loadingAction === "team"
+                  ? "animate-spin"
+                  : ""
+              }
+            />
+
+            {loadingAction === "team"
+              ? "Respining..."
+              : "Respin Team"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRespinSeason}
+            disabled={isLoading}
+            className="flex items-center justify-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold transition hover:bg-[var(--surface-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <RotateCcw
+              size={15}
+              className={
+                loadingAction === "season"
+                  ? "animate-spin"
+                  : ""
+              }
+            />
+
+            {loadingAction === "season"
+              ? "Respining..."
+              : "Respin Season"}
+          </button>
+        </div>
+
+        {error && (
+          <div className="border-t border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </div>
+        )}
+      </section>
+    );
+  }
   return (
     <section className="w-full">
       {/* =========================

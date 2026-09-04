@@ -20,7 +20,7 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col grid-bg">
           <AppHeader />
 
-          <div className="flex flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 flex-col">
             {children}
           </div>
 

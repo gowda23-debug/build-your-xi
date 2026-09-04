@@ -1,296 +1,364 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
 import {
-  Check,
   Search,
-  UserPlus,
-  X,
+  Plus,
 } from "lucide-react";
 
 import type {
   IPLPlayer,
+  PlayerRole,
 } from "@/types/ipl";
+
+import {
+  getBattingAverage,
+  getBowlingAverage,
+  getEconomyRate,
+  getStrikeRate,
+} from "@/lib/ipl-challenge/player-stats";
 
 type PlayerPoolProps = {
   players: IPLPlayer[];
 
-  selectedPlayerIds: string[];
+  selectedPlayers: IPLPlayer[];
+
+  searchQuery: string;
+
+  roleFilter:
+    | "ALL"
+    | PlayerRole;
+
+  onSearchChange: (
+    value: string
+  ) => void;
+
+  onRoleFilterChange: (
+    role:
+      | "ALL"
+      | PlayerRole
+  ) => void;
 
   onSelectPlayer: (
     player: IPLPlayer
   ) => void;
 
-  maxPlayersReached: boolean;
+  canSelectPlayer: (
+    player: IPLPlayer
+  ) => boolean;
 };
+
+const FILTERS = [
+  {
+    value: "ALL",
+    label: "All",
+  },
+  {
+    value: "BAT",
+    label: "Bat",
+  },
+  {
+    value: "WK",
+    label: "WK",
+  },
+  {
+    value: "AR",
+    label: "AR",
+  },
+  {
+    value: "BOWL",
+    label: "Bowl",
+  },
+] as const;
+
+function getRoleLabel(
+  role: PlayerRole
+) {
+  switch (role) {
+    case "BAT":
+      return "Batter";
+
+    case "WK":
+      return "Wicketkeeper";
+
+    case "AR":
+      return "All-Rounder";
+
+    case "BOWL":
+      return "Bowler";
+  }
+}
 
 export default function PlayerPool({
   players,
-  selectedPlayerIds,
+  searchQuery,
+  roleFilter,
+  onSearchChange,
+  onRoleFilterChange,
   onSelectPlayer,
-  maxPlayersReached,
+  canSelectPlayer,
 }: PlayerPoolProps) {
-  const [searchQuery, setSearchQuery] =
-    useState("");
-
   const filteredPlayers =
-    useMemo(() => {
-      const query =
-        searchQuery
-          .trim()
-          .toLowerCase();
-
-      if (!query) {
-        return players;
-      }
-
-      return players.filter(
-        (player) =>
+    players.filter(
+      (player) => {
+        const matchesSearch =
           player.name
             .toLowerCase()
-            .includes(query)
-      );
-    }, [
-      players,
-      searchQuery,
-    ]);
+            .includes(
+              searchQuery
+                .toLowerCase()
+                .trim()
+            );
+
+        const matchesRole =
+          roleFilter === "ALL" ||
+          player.role ===
+            roleFilter;
+
+        return (
+          matchesSearch &&
+          matchesRole
+        );
+      }
+    );
 
   return (
-    <section className="card flex min-h-[650px] flex-col overflow-hidden">
-      {/* =========================
-          HEADER
-      ========================= */}
+    <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
+      <div className="border-b border-[var(--line)] px-4 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+              Available Players
+            </p>
 
-      <div className="border-b border-[var(--line)] p-6">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent)]">
-          Available Squad
-        </p>
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              Select exactly one player
+            </p>
+          </div>
 
-        <h2 className="mt-3 text-3xl font-black">
-          Player Pool
-        </h2>
+          <span className="text-sm font-black">
+            {
+              filteredPlayers.length
+            }
+          </span>
+        </div>
 
-        <p className="mt-2 text-sm text-[var(--muted)]">
-          Search and select players from
-          the available squad.
-        </p>
-
-        {/* SEARCH */}
-
-        <div className="relative mt-5">
+        <div className="relative mt-3">
           <Search
-            size={18}
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]"
+            size={15}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]"
           />
 
           <input
             type="search"
             value={searchQuery}
             onChange={(event) =>
-              setSearchQuery(
+              onSearchChange(
                 event.target.value
               )
             }
             placeholder="Search players..."
-            className="w-full rounded-xl border border-[var(--line)] bg-white/[0.03] py-3 pl-11 pr-11 text-sm outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--accent)]/60"
+            className="w-full rounded-lg border border-[var(--line)] bg-transparent py-2 pl-9 pr-3 text-sm outline-none focus:border-[var(--accent)]"
           />
-
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() =>
-                setSearchQuery("")
-              }
-              className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg text-[var(--muted)] hover:bg-white/5 hover:text-white"
-              aria-label="Clear search"
-            >
-              <X size={16} />
-            </button>
-          )}
         </div>
 
-        <p className="mt-3 text-xs text-[var(--muted)]">
-          Showing{" "}
-          {filteredPlayers.length}{" "}
-          of {players.length} players
-        </p>
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+          {FILTERS.map(
+            (filter) => (
+              <button
+                key={
+                  filter.value
+                }
+                type="button"
+                onClick={() =>
+                  onRoleFilterChange(
+                    filter.value
+                  )
+                }
+                className={[
+                  "shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition",
+                  roleFilter ===
+                  filter.value
+                    ? "bg-[var(--accent)] text-white"
+                    : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)]",
+                ].join(" ")}
+              >
+                {
+                  filter.label
+                }
+              </button>
+            )
+          )}
+        </div>
       </div>
 
-      {/* =========================
-          PLAYER LIST
-      ========================= */}
-
-      <div className="flex-1 divide-y divide-[var(--line)]">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         {filteredPlayers.map(
           (player) => {
-            const isSelected =
-              selectedPlayerIds.includes(
-                player.id
+            const canSelect =
+              canSelectPlayer(
+                player
               );
 
-            const isDisabled =
-              !isSelected &&
-              maxPlayersReached;
+            const battingAverage =
+              getBattingAverage(
+                player
+              );
+
+            const strikeRate =
+              getStrikeRate(
+                player
+              );
+
+            const bowlingAverage =
+              getBowlingAverage(
+                player
+              );
+
+            const economy =
+              getEconomyRate(
+                player
+              );
 
             return (
-              <article
-                key={player.id}
-                className="p-5 transition hover:bg-white/[0.02]"
+              <button
+                key={
+                  player.id
+                }
+                type="button"
+                disabled={
+                  !canSelect
+                }
+                onClick={() =>
+                  onSelectPlayer(
+                    player
+                  )
+                }
+                className={[
+                  "flex w-full items-center justify-between gap-4 border-b border-[var(--line)] px-4 py-3 text-left transition",
+                  canSelect
+                    ? "hover:bg-[var(--surface-hover)]"
+                    : "cursor-not-allowed opacity-40",
+                ].join(" ")}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-3">
-                      <h3 className="truncate text-lg font-black">
-                        {player.name}
-                      </h3>
-
-                      {isSelected && (
-                        <span className="rounded-full bg-[var(--accent)]/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-                          Selected
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="mt-1 text-xs text-[var(--muted)]">
-                      {player.stats.matches} matches
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="truncate text-sm font-bold">
+                      {
+                        player.name
+                      }
                     </p>
 
-                    <div className="mt-4 grid grid-cols-3 gap-2 text-center sm:grid-cols-6">
-                      <Stat
-                        label="Runs"
-                        value={
-                          player.stats.runs
-                        }
-                      />
-
-                      <Stat
-                        label="HS"
-                        value={
-                          player.stats
-                            .highestScore
-                        }
-                      />
-
-                      <Stat
-                        label="4s"
-                        value={
-                          player.stats.fours
-                        }
-                      />
-
-                      <Stat
-                        label="6s"
-                        value={
-                          player.stats.sixes
-                        }
-                      />
-
-                      <Stat
-                        label="Wkts"
-                        value={
-                          player.stats.wickets
-                        }
-                      />
-
-                      <Stat
-                        label="Overs"
-                        value={
-                          formatOvers(
-                            player.stats
-                              .ballsBowled
-                          )
-                        }
-                      />
-                    </div>
+                    <span className="rounded-md bg-[var(--accent)]/10 px-2 py-0.5 text-[10px] font-black text-[var(--accent)]">
+                      {
+                        player.role
+                      }
+                    </span>
                   </div>
 
-                  <button
-                    type="button"
-                    disabled={
-                      isSelected ||
-                      isDisabled
-                    }
-                    onClick={() =>
-                      onSelectPlayer(
-                        player
+                  <p className="mt-1 text-xs text-[var(--muted)]">
+                    {
+                      getRoleLabel(
+                        player.role
                       )
                     }
-                    className={
-                      isSelected
-                        ? "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)]/15 text-[var(--accent)]"
-                        : "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--line)] text-[var(--muted)] transition hover:border-[var(--accent)]/50 hover:text-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
-                    }
-                    aria-label={
-                      isSelected
-                        ? `${player.name} selected`
-                        : `Select ${player.name}`
-                    }
-                  >
-                    {isSelected ? (
-                      <Check size={18} />
-                    ) : (
-                      <UserPlus size={18} />
+                    {" · "}
+                    {
+                      player.stats
+                        .matches
+                    } matches
+                  </p>
+
+                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-[var(--muted)]">
+                    <span>
+                      Runs{" "}
+                      <strong>
+                        {
+                          player.stats
+                            .runs
+                        }
+                      </strong>
+                    </span>
+
+                    {battingAverage !==
+                      null && (
+                      <span>
+                        Avg{" "}
+                        <strong>
+                          {
+                            battingAverage
+                          }
+                        </strong>
+                      </span>
                     )}
-                  </button>
+
+                    {strikeRate !==
+                      null && (
+                      <span>
+                        SR{" "}
+                        <strong>
+                          {
+                            strikeRate
+                          }
+                        </strong>
+                      </span>
+                    )}
+
+                    <span>
+                      Wkts{" "}
+                      <strong>
+                        {
+                          player.stats
+                            .wickets
+                        }
+                      </strong>
+                    </span>
+
+                    {bowlingAverage !==
+                      null && (
+                      <span>
+                        Bowl Avg{" "}
+                        <strong>
+                          {
+                            bowlingAverage
+                          }
+                        </strong>
+                      </span>
+                    )}
+
+                    {economy !==
+                      null && (
+                      <span>
+                        Econ{" "}
+                        <strong>
+                          {
+                            economy
+                          }
+                        </strong>
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </article>
+
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)]">
+                  <Plus
+                    size={16}
+                    className="text-[var(--accent)]"
+                  />
+                </span>
+              </button>
             );
           }
         )}
 
         {filteredPlayers.length ===
           0 && (
-          <div className="flex min-h-[400px] flex-col items-center justify-center px-6 text-center">
-            <Search
-              size={30}
-              className="text-[var(--muted)]"
-            />
-
-            <h3 className="mt-4 text-xl font-black">
+          <div className="p-8 text-center">
+            <p className="text-sm font-bold">
               No players found
-            </h3>
-
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              Try a different player name.
             </p>
           </div>
         )}
       </div>
     </section>
   );
-}
-
-function Stat({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) {
-  return (
-    <div className="rounded-xl bg-white/[0.03] px-2 py-2">
-      <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
-        {label}
-      </p>
-
-      <p className="mt-1 text-sm font-black">
-        {value}
-      </p>
-    </div>
-  );
-}
-
-function formatOvers(
-  balls: number
-) {
-  const overs =
-    Math.floor(
-      balls / 6
-    );
-
-  const remainingBalls =
-    balls % 6;
-
-  return `${overs}.${remainingBalls}`;
 }

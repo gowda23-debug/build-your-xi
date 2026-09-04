@@ -140,10 +140,11 @@ export async function GET(
         runs_conceded,
         wickets,
 
-        player:ipl_players (
-          id,
-          name
-        )
+       player:ipl_players (
+  id,
+  name,
+  role
+)
       `)
       .eq(
         "team_season_id",
@@ -164,7 +165,14 @@ export async function GET(
 
       throw statsError;
     }
-
+    if (
+      !player.role ||
+      !["BAT", "WK", "AR", "BOWL"].includes(
+        player.role
+      )
+    ) {
+      return null;
+    }
     const players =
       (playerStats ?? [])
         .map((stat) => {
@@ -233,33 +241,33 @@ export async function GET(
           > => player !== null
         );
 
-return NextResponse.json({
-  challenge: {
-    teamSeasonId:
-      teamSeason.id,
+    return NextResponse.json({
+      challenge: {
+        teamSeasonId:
+          teamSeason.id,
 
-    team: {
-      id:
-        team.id,
+        team: {
+          id:
+            team.id,
 
-      name:
-        team.name,
-    },
+          name:
+            team.name,
+        },
 
-    season: {
-      id:
-        season.id,
+        season: {
+          id:
+            season.id,
 
-      season:
-        season.season,
+          season:
+            season.season,
 
-      startYear:
-        season.start_year,
-    },
-  },
+          startYear:
+            season.start_year,
+        },
+      },
 
-  players,
-});
+      players,
+    });
   } catch (error) {
     console.error(
       "Player pool endpoint error:",
