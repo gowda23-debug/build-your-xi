@@ -1,0 +1,69 @@
+{
+  "sample_file": "1082591.json",
+  "top_level_keys": [
+    "meta",
+    "info",
+    "innings"
+  ],
+  "info": {
+    "keys": [
+      "balls_per_over",
+      "city",
+      "dates",
+      "event",
+      "gender",
+      "match_type",
+      "officials",
+      "outcome",
+      "overs",
+      "player_of_match",
+      "players",
+      "registry",
+      "season",
+      "team_type",
+      "teams",
+      "toss",
+      "venue"
+    ],
+    "season": 2017,
+    "teams": [
+      "Sunrisers Hyderabad",
+      "Royal Challengers Bangalore"
+    ]
+  },
+  "innings": {
+    "is_array": true,
+    "count": 2,
+    "first_innings_keys": [
+      "team",
+      "overs",
+      "powerplays"
+    ],
+    "team": "Sunrisers Hyderabad",
+    "overs_count": 20,
+    "first_over_keys": [
+      "over",
+      "deliveries"
+    ],
+    "first_over_number": 0,
+    "deliveries_count": 7,
+    "first_delivery_keys": [
+      "actual_delivery",
+      "batter",
+      "bowler",
+      "non_striker",
+      "runs"
+    ],
+    "first_delivery": {
+      "actual_delivery": "0.1",
+      "batter": "DA Warner",
+      "bowler": "TS Mills",
+      "non_striker": "S Dhawan",
+      "runs": {
+        "batter": 0,
+        "extras": 0,
+        "total": 0
+      }
+    }
+  }
+}

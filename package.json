@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "data:download": "tsx scripts/download-ipl-data.ts",
+    "data:process": "tsx scripts/process-ipl-data.ts",
+    "data:import": "tsx scripts/import-ipl-data.ts",
+    "data:validate": "tsx scripts/validate-ipl-data.ts",
+    "data:validate-import": "tsx scripts/validate-ipl-import.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",
@@ -14,6 +19,8 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "adm-zip": "^0.6.0",
+    "dotenv": "^17.4.2",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
@@ -21,10 +28,12 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
+    "@types/adm-zip": "^0.5.8",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
+    "tsx": "^4.23.13",
     "typescript": "latest"
   }
 }

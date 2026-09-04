@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Trophy, Users, Zap } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -10,41 +10,92 @@ export default function LandingPage() {
   const router = useRouter();
   const supabase = createClient();
 
+  const [checkingSession, setCheckingSession] = useState(true);
   const [guestLoading, setGuestLoading] = useState(false);
   const [error, setError] = useState("");
+
+  /*
+   * Check whether the visitor already has an active
+   * authenticated or guest session.
+   *
+   * If they do, there is no reason to show the landing page.
+   */
+  useEffect(() => {
+    async function checkSession() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        router.replace("/home");
+        return;
+      }
+
+      setCheckingSession(false);
+    }
+
+    checkSession();
+  }, [router, supabase]);
 
   async function handleGuestLogin() {
     setError("");
     setGuestLoading(true);
 
-    const { error } = await supabase.auth.signInAnonymously();
+    try {
+      const { error } = await supabase.auth.signInAnonymously();
 
-    if (error) {
-  setError(
-    "We couldn't start a guest session right now. Please check your connection and try again."
-  );
+      if (error) {
+        setError(
+          "We couldn't start a guest session right now. Please check your connection and try again."
+        );
 
-  setGuestLoading(false);
-  return;
-}
+        setGuestLoading(false);
+        return;
+      }
 
-    router.push("/home");
-    router.refresh();
+      router.push("/home");
+      router.refresh();
+    } catch (err) {
+      console.error("Guest login error:", err);
+
+      setError(
+        "Something went wrong while starting your guest session. Please try again."
+      );
+
+      setGuestLoading(false);
+    }
+  }
+
+  /*
+   * Prevent the landing page from flashing briefly
+   * before an existing user is redirected to /home.
+   */
+  if (checkingSession) {
+    return <main className="min-h-screen grid-bg" />;
   }
 
   return (
     <main className="min-h-screen grid-bg px-6 py-6 md:px-12">
       <nav className="mx-auto flex max-w-7xl items-center justify-between">
         <div className="text-xl font-black tracking-tight">
-          BUILD YOUR <span className="text-[var(--accent)]">XI</span>
+          BUILD YOUR{" "}
+          <span className="text-[var(--accent)]">
+            XI
+          </span>
         </div>
 
         <div className="flex gap-3">
-          <Link className="btn btn-secondary" href="/login">
+          <Link
+            className="btn btn-secondary"
+            href="/login"
+          >
             Log in
           </Link>
 
-          <Link className="btn btn-primary" href="/register">
+          <Link
+            className="btn btn-primary"
+            href="/register"
+          >
             Sign up
           </Link>
         </div>
@@ -53,22 +104,31 @@ export default function LandingPage() {
       <section className="mx-auto grid max-w-7xl gap-12 py-20 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
         <div>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-white/5 px-4 py-2 text-sm text-[var(--muted)]">
-            <Zap size={15} className="text-[var(--accent2)]" />
+            <Zap
+              size={15}
+              className="text-[var(--accent2)]"
+            />
+
             A cricket strategy game
           </div>
 
           <h1 className="max-w-4xl text-5xl font-black leading-[.95] tracking-tight md:text-7xl">
             ADAPT TO THE PITCH.
             <br />
-            <span className="text-[var(--accent)]">BUILD YOUR XI.</span>
+
+            <span className="text-[var(--accent)]">
+              BUILD YOUR XI.
+            </span>
+
             <br />
+
             CONQUER THE RUN.
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-            Spin the conditions. Accept the squad fate. Study the players.
-            Build your strongest Playing XI and survive the ultimate undefeated
-            cricket challenge.
+            Spin the conditions. Accept the squad fate. Study the
+            players. Build your strongest Playing XI and survive the
+            ultimate undefeated cricket challenge.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -78,11 +138,17 @@ export default function LandingPage() {
               disabled={guestLoading}
               className="btn btn-primary"
             >
-              {guestLoading ? "Starting..." : "Play as Guest"}
+              {guestLoading
+                ? "Starting..."
+                : "Play as Guest"}
+
               <ArrowRight size={18} />
             </button>
 
-            <Link className="btn btn-secondary" href="/register">
+            <Link
+              className="btn btn-secondary"
+              href="/register"
+            >
               Create account
             </Link>
           </div>
@@ -99,11 +165,13 @@ export default function LandingPage() {
               title="14–0"
               text="One loss ends the run"
             />
+
             <Stat
               icon={<Users />}
               title="Build 11"
               text="Every choice matters"
             />
+
             <Stat
               icon={<Zap />}
               title="3 Respins"
@@ -114,7 +182,9 @@ export default function LandingPage() {
 
         <div className="card overflow-hidden p-6 shadow-2xl shadow-black/30">
           <div className="flex items-center justify-between text-sm text-[var(--muted)]">
-            <span>FEATURED CHALLENGE</span>
+            <span>
+              FEATURED CHALLENGE
+            </span>
 
             <span className="rounded-full bg-[var(--accent)]/15 px-3 py-1 text-[var(--accent)]">
               LIVE SOON
@@ -126,20 +196,39 @@ export default function LandingPage() {
               THE LAUNCH RUN
             </div>
 
-            <div className="mt-3 text-5xl font-black">14–0</div>
+            <div className="mt-3 text-5xl font-black">
+              14–0
+            </div>
 
-            <div className="mt-2 text-xl font-bold">CHALLENGE</div>
+            <div className="mt-2 text-xl font-bold">
+              CHALLENGE
+            </div>
 
             <p className="mt-5 text-[var(--muted)]">
-              Random pitch. Random team. Random season. Your strategy decides
-              what happens next.
+              Random pitch. Random team. Random season. Your strategy
+              decides what happens next.
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
-              <Mini label="Pitch" value="Random" />
-              <Mini label="Respins" value="3 Total" />
-              <Mini label="Squad" value="Team + Year" />
-              <Mini label="Goal" value="14 Wins" />
+              <Mini
+                label="Pitch"
+                value="Random"
+              />
+
+              <Mini
+                label="Respins"
+                value="3 Total"
+              />
+
+              <Mini
+                label="Squad"
+                value="Team + Year"
+              />
+
+              <Mini
+                label="Goal"
+                value="14 Wins"
+              />
             </div>
           </div>
         </div>
@@ -159,9 +248,17 @@ function Stat({
 }) {
   return (
     <div className="card p-4">
-      <div className="text-[var(--accent)]">{icon}</div>
-      <div className="mt-3 text-lg font-black">{title}</div>
-      <div className="text-xs text-[var(--muted)]">{text}</div>
+      <div className="text-[var(--accent)]">
+        {icon}
+      </div>
+
+      <div className="mt-3 text-lg font-black">
+        {title}
+      </div>
+
+      <div className="text-xs text-[var(--muted)]">
+        {text}
+      </div>
     </div>
   );
 }
@@ -175,8 +272,13 @@ function Mini({
 }) {
   return (
     <div className="rounded-2xl bg-black/20 p-4">
-      <div className="text-xs text-[var(--muted)]">{label}</div>
-      <div className="mt-1 font-bold">{value}</div>
+      <div className="text-xs text-[var(--muted)]">
+        {label}
+      </div>
+
+      <div className="mt-1 font-bold">
+        {value}
+      </div>
     </div>
   );
 }
