@@ -59,3 +59,10 @@ export type PlayerPoolResponse = {
 
   players: IPLPlayer[];
 };
+
+export type IPLGameState =
+  | "challenge"
+  | "selection"
+  | "ready"
+  | "playing"
+  | "finished";

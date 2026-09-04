@@ -233,33 +233,33 @@ export async function GET(
           > => player !== null
         );
 
-    return NextResponse.json({
-      challenge: {
-        id:
-          teamSeason.id,
+return NextResponse.json({
+  challenge: {
+    teamSeasonId:
+      teamSeason.id,
 
-        team: {
-          id:
-            team.id,
+    team: {
+      id:
+        team.id,
 
-          name:
-            team.name,
-        },
+      name:
+        team.name,
+    },
 
-        season: {
-          id:
-            season.id,
+    season: {
+      id:
+        season.id,
 
-          season:
-            season.season,
+      season:
+        season.season,
 
-          startYear:
-            season.start_year,
-        },
-      },
+      startYear:
+        season.start_year,
+    },
+  },
 
-      players,
-    });
+  players,
+});
   } catch (error) {
     console.error(
       "Player pool endpoint error:",

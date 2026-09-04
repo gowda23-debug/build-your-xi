@@ -71,7 +71,7 @@ export default function ChallengeRandomizer({
   ): Promise<IPLPlayer[]> {
     const response =
       await fetch(
-        `/api/ipl/team-seasons/${teamSeasonId}/players`
+        `/api/ipl/team-season/${teamSeasonId}/players`
       );
 
     const data =
