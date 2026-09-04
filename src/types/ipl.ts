@@ -70,10 +70,22 @@ export type PlayerPoolResponse = {
 
   players: IPLPlayer[];
 };
-
+export type FieldPosition =
+  | "WK"
+  | "SLIP"
+  | "POINT"
+  | "COVER"
+  | "MID_OFF"
+  | "MID_ON"
+  | "MIDWICKET"
+  | "SQUARE_LEG"
+  | "FINE_LEG"
+  | "THIRD_MAN"
+  | "LONG_OFF";
 export type IPLGameState =
   | "challenge"
   | "selection"
+  | "placement"
   | "ready"
   | "playing"
   | "finished";
