@@ -11,7 +11,8 @@
     "data:process": "tsx scripts/process-ipl-data.ts",
     "data:import": "tsx scripts/import-ipl-data.ts",
     "data:validate": "tsx scripts/validate-ipl-data.ts",
-    "data:validate-import": "tsx scripts/validate-ipl-import.ts"
+    "data:validate-import": "tsx scripts/validate-ipl-import.ts",
+    "import:ipl:roles": "tsx scripts/import-ipl-roles.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",

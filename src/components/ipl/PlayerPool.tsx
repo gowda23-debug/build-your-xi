@@ -88,6 +88,14 @@ function getRoleLabel(
   }
 }
 
+function formatStat(
+  value: number | null
+) {
+  return value === null
+    ? "—"
+    : value.toFixed(2);
+}
+
 export default function PlayerPool({
   players,
   searchQuery,
@@ -100,13 +108,16 @@ export default function PlayerPool({
   const filteredPlayers =
     players.filter(
       (player) => {
+        const normalizedSearch =
+          searchQuery
+            .toLowerCase()
+            .trim();
+
         const matchesSearch =
           player.name
             .toLowerCase()
             .includes(
-              searchQuery
-                .toLowerCase()
-                .trim()
+              normalizedSearch
             );
 
         const matchesRole =
@@ -123,6 +134,10 @@ export default function PlayerPool({
 
   return (
     <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
+      {/* =====================================
+          HEADER
+      ====================================== */}
+
       <div className="border-b border-[var(--line)] px-4 py-3">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -136,11 +151,11 @@ export default function PlayerPool({
           </div>
 
           <span className="text-sm font-black">
-            {
-              filteredPlayers.length
-            }
+            {filteredPlayers.length}
           </span>
         </div>
+
+        {/* Search */}
 
         <div className="relative mt-3">
           <Search
@@ -160,6 +175,8 @@ export default function PlayerPool({
             className="w-full rounded-lg border border-[var(--line)] bg-transparent py-2 pl-9 pr-3 text-sm outline-none focus:border-[var(--accent)]"
           />
         </div>
+
+        {/* Role filters */}
 
         <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
           {FILTERS.map(
@@ -191,6 +208,10 @@ export default function PlayerPool({
         </div>
       </div>
 
+      {/* =====================================
+          PLAYER LIST
+      ====================================== */}
+
       <div className="min-h-0 flex-1 overflow-y-auto">
         {filteredPlayers.map(
           (player) => {
@@ -214,16 +235,14 @@ export default function PlayerPool({
                 player
               );
 
-            const economy =
+            const economyRate =
               getEconomyRate(
                 player
               );
 
             return (
               <button
-                key={
-                  player.id
-                }
+                key={player.id}
                 type="button"
                 disabled={
                   !canSelect
@@ -234,117 +253,153 @@ export default function PlayerPool({
                   )
                 }
                 className={[
-                  "flex w-full items-center justify-between gap-4 border-b border-[var(--line)] px-4 py-3 text-left transition",
+                  "w-full border-b border-[var(--line)] px-4 py-3 text-left transition",
                   canSelect
                     ? "hover:bg-[var(--surface-hover)]"
                     : "cursor-not-allowed opacity-40",
                 ].join(" ")}
               >
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="truncate text-sm font-bold">
+                {/* Player identity */}
+
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-sm font-bold">
+                        {
+                          player.name
+                        }
+                      </p>
+
+                      <span className="rounded-md bg-[var(--accent)]/10 px-2 py-0.5 text-[10px] font-black text-[var(--accent)]">
+                        {
+                          player.role
+                        }
+                      </span>
+                    </div>
+
+                    <p className="mt-1 text-xs text-[var(--muted)]">
                       {
-                        player.name
+                        getRoleLabel(
+                          player.role
+                        )
                       }
                     </p>
-
-                    <span className="rounded-md bg-[var(--accent)]/10 px-2 py-0.5 text-[10px] font-black text-[var(--accent)]">
-                      {
-                        player.role
-                      }
-                    </span>
                   </div>
 
-                  <p className="mt-1 text-xs text-[var(--muted)]">
-                    {
-                      getRoleLabel(
-                        player.role
-                      )
-                    }
-                    {" · "}
-                    {
-                      player.stats
-                        .matches
-                    } matches
-                  </p>
-
-                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-[var(--muted)]">
-                    <span>
-                      Runs{" "}
-                      <strong>
-                        {
-                          player.stats
-                            .runs
-                        }
-                      </strong>
-                    </span>
-
-                    {battingAverage !==
-                      null && (
-                      <span>
-                        Avg{" "}
-                        <strong>
-                          {
-                            battingAverage
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    {strikeRate !==
-                      null && (
-                      <span>
-                        SR{" "}
-                        <strong>
-                          {
-                            strikeRate
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    <span>
-                      Wkts{" "}
-                      <strong>
-                        {
-                          player.stats
-                            .wickets
-                        }
-                      </strong>
-                    </span>
-
-                    {bowlingAverage !==
-                      null && (
-                      <span>
-                        Bowl Avg{" "}
-                        <strong>
-                          {
-                            bowlingAverage
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    {economy !==
-                      null && (
-                      <span>
-                        Econ{" "}
-                        <strong>
-                          {
-                            economy
-                          }
-                        </strong>
-                      </span>
-                    )}
-                  </div>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)]">
+                    <Plus
+                      size={16}
+                      className="text-[var(--accent)]"
+                    />
+                  </span>
                 </div>
 
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)]">
-                  <Plus
-                    size={16}
-                    className="text-[var(--accent)]"
-                  />
-                </span>
+                {/* =================================
+                    REQUIRED PLAYER STATS
+                ================================== */}
+
+                <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Matches
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {
+                        player.stats
+                          .matches
+                      }
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Batting Avg
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {formatStat(
+                        battingAverage
+                      )}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Strike Rate
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {formatStat(
+                        strikeRate
+                      )}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Highest Score
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {
+                        player.stats
+                          .highestScore
+                      }
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Wickets
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {
+                        player.stats
+                          .wickets
+                      }
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Bowling Avg
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {formatStat(
+                        bowlingAverage
+                      )}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Economy Rate
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {formatStat(
+                        economyRate
+                      )}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      Role
+                    </p>
+
+                    <p className="mt-0.5 text-xs font-bold">
+                      {
+                        getRoleLabel(
+                          player.role
+                        )
+                      }
+                    </p>
+                  </div>
+                </div>
               </button>
             );
           }
@@ -355,6 +410,10 @@ export default function PlayerPool({
           <div className="p-8 text-center">
             <p className="text-sm font-bold">
               No players found
+            </p>
+
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              Try another search or role filter.
             </p>
           </div>
         )}

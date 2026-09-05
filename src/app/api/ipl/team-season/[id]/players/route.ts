@@ -4,7 +4,15 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
-const VALID_ROLES = ["BAT", "WK", "AR", "BOWL"] as const;
+const VALID_ROLES = [
+  "BAT",
+  "WK",
+  "AR",
+  "BOWL",
+] as const;
+
+type ValidRole =
+  (typeof VALID_ROLES)[number];
 
 export async function GET(
   request: Request,
@@ -18,18 +26,21 @@ export async function GET(
     /*
      * Authentication
      */
-    const { error: authError } = await requireUser();
+    const { error: authError } =
+      await requireUser();
 
     if (authError) {
       return authError;
     }
 
-    const { id } = await context.params;
+    const { id } =
+      await context.params;
 
     if (!id) {
       return NextResponse.json(
         {
-          error: "Team-season ID is required.",
+          error:
+            "Team-season ID is required.",
         },
         {
           status: 400,
@@ -38,8 +49,7 @@ export async function GET(
     }
 
     /*
-     * Verify that this team-season combination
-     * actually exists.
+     * Verify the team-season exists.
      */
     const {
       data: teamSeason,
@@ -73,7 +83,8 @@ export async function GET(
     if (!teamSeason) {
       return NextResponse.json(
         {
-          error: "Team-season combination not found.",
+          error:
+            "Team-season combination not found.",
         },
         {
           status: 404,
@@ -82,22 +93,24 @@ export async function GET(
     }
 
     /*
-     * Supabase may return relationship data
-     * as an object or an array depending on
-     * the relationship definition.
+     * Supabase relationships may be returned
+     * as objects or arrays.
      */
-    const team = Array.isArray(teamSeason.team)
-      ? teamSeason.team[0]
-      : teamSeason.team;
+    const team =
+      Array.isArray(teamSeason.team)
+        ? teamSeason.team[0]
+        : teamSeason.team;
 
-    const season = Array.isArray(teamSeason.season)
-      ? teamSeason.season[0]
-      : teamSeason.season;
+    const season =
+      Array.isArray(teamSeason.season)
+        ? teamSeason.season[0]
+        : teamSeason.season;
 
     if (!team || !season) {
       return NextResponse.json(
         {
-          error: "Invalid team-season relationship.",
+          error:
+            "Invalid team-season relationship.",
         },
         {
           status: 500,
@@ -106,14 +119,16 @@ export async function GET(
     }
 
     /*
-     * Retrieve statistics for players belonging
-     * to this exact team-season.
+     * Fetch players belonging to this exact
+     * team-season.
      */
     const {
       data: playerStats,
       error: statsError,
     } = await supabaseAdmin
-      .from("ipl_team_season_player_stats")
+      .from(
+        "ipl_team_season_player_stats"
+      )
       .select(`
         player_id,
         matches,
@@ -134,7 +149,10 @@ export async function GET(
           role
         )
       `)
-      .eq("team_season_id", id)
+      .eq(
+        "team_season_id",
+        id
+      )
       .order("runs", {
         ascending: false,
       });
@@ -151,77 +169,93 @@ export async function GET(
     /*
      * Normalize player data.
      *
-     * Players without a valid role are excluded
-     * from the challenge pool until their role
-     * has been properly populated.
+     * Players without a verified role are
+     * deliberately excluded from the game pool.
      */
-    const players = (playerStats ?? [])
+    const players = (
+      playerStats ?? []
+    )
       .map((stat) => {
-        const player = Array.isArray(stat.player)
-          ? stat.player[0]
-          : stat.player;
+        const player =
+          Array.isArray(stat.player)
+            ? stat.player[0]
+            : stat.player;
 
         if (!player) {
           return null;
         }
 
+        const role =
+          player.role as
+            | ValidRole
+            | null;
+
         if (
-          !player.role ||
-          !VALID_ROLES.includes(
-            player.role as (typeof VALID_ROLES)[number]
-          )
+          !role ||
+          !VALID_ROLES.includes(role)
         ) {
           return null;
         }
 
         return {
           id: player.id,
+
           name: player.name,
-          role: player.role,
 
-          matches: stat.matches ?? 0,
+          role,
 
-          battingInnings:
-            stat.batting_innings ?? 0,
+          stats: {
+            matches:
+              stat.matches ?? 0,
 
-          runs: stat.runs ?? 0,
+            battingInnings:
+              stat.batting_innings ?? 0,
 
-          ballsFaced:
-            stat.balls_faced ?? 0,
+            runs:
+              stat.runs ?? 0,
 
-          fours: stat.fours ?? 0,
+            ballsFaced:
+              stat.balls_faced ?? 0,
 
-          sixes: stat.sixes ?? 0,
+            fours:
+              stat.fours ?? 0,
 
-          highestScore:
-            stat.highest_score ?? 0,
+            sixes:
+              stat.sixes ?? 0,
 
-          dismissals:
-            stat.dismissals ?? 0,
+            highestScore:
+              stat.highest_score ?? 0,
 
-          bowlingInnings:
-            stat.bowling_innings ?? 0,
+            dismissals:
+              stat.dismissals ?? 0,
 
-          ballsBowled:
-            stat.balls_bowled ?? 0,
+            bowlingInnings:
+              stat.bowling_innings ?? 0,
 
-          runsConceded:
-            stat.runs_conceded ?? 0,
+            ballsBowled:
+              stat.balls_bowled ?? 0,
 
-          wickets:
-            stat.wickets ?? 0,
+            runsConceded:
+              stat.runs_conceded ?? 0,
+
+            wickets:
+              stat.wickets ?? 0,
+          },
         };
       })
       .filter(
         (
           player
-        ): player is NonNullable<typeof player> =>
+        ): player is NonNullable<
+          typeof player
+        > =>
           player !== null
       );
 
     return NextResponse.json({
       challenge: {
-        teamSeasonId: teamSeason.id,
+        teamSeasonId:
+          teamSeason.id,
 
         team: {
           id: team.id,
@@ -230,8 +264,10 @@ export async function GET(
 
         season: {
           id: season.id,
-          season: season.season,
-          startYear: season.start_year,
+          season:
+            season.season,
+          startYear:
+            season.start_year,
         },
       },
 
