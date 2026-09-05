@@ -1,566 +1,320 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-import ChallengeRandomizer from "./ChallengeRandomizer";
-import IPLGame from "./IPLGame";
-import PlayerPool from "./PlayerPool";
-import PlayingXI from "./PlayingXI";
-
-import { getRandomPitch } from "@/lib/ipl-challenge/pitches";
-
-import {
-  canAddPlayer,
-  validateXI,
-} from "@/lib/ipl-challenge/validate-xi";
-
+import { useState } from "react";
 import type {
   IPLChallenge,
-  IPLGameState,
   IPLPlayer,
-  PitchProfile,
-  PlayerRole,
+  IPLSeason,
+  IPLTeam,
+  RandomSeasonResponse,
+  RandomTeamResponse,
 } from "@/types/ipl";
 
-const MAX_PLAYERS = 11;
-
-export default function XISelectionGame() {
-  /*
-   * ==================================================
-   * PERSISTENT GAME CHALLENGE
-   * ==================================================
-   *
-   * The first successful spin establishes the
-   * Team + Season for the game.
-   *
-   * This remains unchanged throughout XI building.
-   */
-  const [
-    gameChallenge,
-    setGameChallenge,
-  ] = useState<IPLChallenge | null>(null);
-
-  /*
-   * ==================================================
-   * CURRENT SPIN
-   * ==================================================
-   *
-   * currentChallenge/currentPlayers represent
-   * the Team + Season and player pool generated
-   * by the current spin.
-   *
-   * After one player is selected these are cleared,
-   * causing the randomizer to appear again.
-   */
-  const [
-    currentChallenge,
-    setCurrentChallenge,
-  ] = useState<IPLChallenge | null>(null);
-
-  const [
-    currentPlayers,
-    setCurrentPlayers,
-  ] = useState<IPLPlayer[]>([]);
-
-  /*
-   * ==================================================
-   * SELECTED PLAYING XI
-   * ==================================================
-   */
-  const [
-    selectedPlayers,
-    setSelectedPlayers,
-  ] = useState<IPLPlayer[]>([]);
-
-  /*
-   * ==================================================
-   * PITCH
-   * ==================================================
-   *
-   * For now the pitch is selected when the first
-   * challenge is generated.
-   */
-  const [
-    pitch,
-    setPitch,
-  ] = useState<PitchProfile | null>(null);
-
-  /*
-   * ==================================================
-   * GAME STATE
-   * ==================================================
-   *
-   * challenge -> show randomizer
-   * selection -> show player pool
-   * ready     -> XI confirmation
-   * playing   -> actual game
-   */
-  const [
-    gameState,
-    setGameState,
-  ] = useState<IPLGameState>("challenge");
-
-  /*
-   * ==================================================
-   * PLAYER SEARCH / FILTER
-   * ==================================================
-   */
-  const [
-    searchQuery,
-    setSearchQuery,
-  ] = useState("");
-
-  const [
-    roleFilter,
-    setRoleFilter,
-  ] = useState<
-    "ALL" | PlayerRole
-  >("ALL");
-
-  /*
-   * ==================================================
-   * RANDOMIZER RESET KEY
-   * ==================================================
-   *
-   * Changing this key forces the randomizer to
-   * start fresh after a player is selected.
-   */
-  const [
-    randomizerKey,
-    setRandomizerKey,
-  ] = useState(0);
-
-  /*
-   * ==================================================
-   * CHALLENGE READY
-   * ==================================================
-   *
-   * Called by ChallengeRandomizer after a successful
-   * Team + Season spin and player pool load.
-   */
-  function handleChallengeReady(
+interface ChallengeRandomizerProps {
+  onChallengeReady: (
     challenge: IPLChallenge,
-    players: IPLPlayer[]
-  ) {
-    /*
-     * Save the current spin.
-     */
-    setCurrentChallenge(challenge);
-    setCurrentPlayers(players);
+    players: IPLPlayer[],
+  ) => void;
+}
 
-    /*
-     * The first spin establishes the persistent
-     * game challenge and pitch.
-     */
-    if (!gameChallenge) {
-      setGameChallenge(challenge);
-      setPitch(getRandomPitch());
-    }
+export default function ChallengeRandomizer({
+  onChallengeReady,
+}: ChallengeRandomizerProps) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-    /*
-     * Reset player search/filter.
-     */
-    setSearchQuery("");
-    setRoleFilter("ALL");
-
-    /*
-     * Show the player pool.
-     */
-    setGameState("selection");
-  }
-
-  /*
-   * ==================================================
-   * PLAYER SELECTED
-   * ==================================================
-   *
-   * One player is selected from each spin.
-   *
-   * There is deliberately NO field-position selection.
-   */
-  function handleSelectPlayer(
-    player: IPLPlayer
-  ) {
-    /*
-     * Ask the XI rules whether this player can
-     * currently be added.
-     */
-    const canSelect = canAddPlayer(
-      selectedPlayers,
-      player
+  const fetchPlayers = async (teamSeasonId: string) => {
+    const response = await fetch(
+      `/api/ipl/team-season/${encodeURIComponent(teamSeasonId)}/players`,
+      {
+        method: "GET",
+        cache: "no-store",
+      },
     );
 
-    if (!canSelect) {
-      return;
+    if (!response.ok) {
+      throw new Error("Unable to load available players.");
     }
 
-    /*
-     * Add player to the persistent XI.
-     */
-    setSelectedPlayers((current) => [
-      ...current,
-      player,
-    ]);
+    const data = (await response.json()) as {
+      players?: IPLPlayer[];
+    };
 
-    /*
-     * Clear the current spin.
-     *
-     * This causes the next render to show
-     * the Team + Season randomizer again.
-     */
-    setCurrentChallenge(null);
-    setCurrentPlayers([]);
-
-    /*
-     * Reset search/filter.
-     */
-    setSearchQuery("");
-    setRoleFilter("ALL");
-
-    /*
-     * Reset the randomizer animation/component.
-     */
-    setRandomizerKey(
-      (current) => current + 1
-    );
-
-    /*
-     * Return to the challenge state.
-     *
-     * If this was player #11, the validation
-     * section will automatically appear because
-     * selectedPlayers.length has now reached 11.
-     */
-    setGameState("challenge");
-  }
-
-  /*
-   * ==================================================
-   * REMOVE PLAYER
-   * ==================================================
-   *
-   * Used from the Playing XI panel.
-   */
-  function handleRemovePlayer(
-    playerId: string
-  ) {
-    setSelectedPlayers(
-      (current) =>
-        current.filter(
-          (player) =>
-            player.id !== playerId
-        )
-    );
-
-    /*
-     * Return to the next spin.
-     */
-    setCurrentChallenge(null);
-    setCurrentPlayers([]);
-
-    setSearchQuery("");
-    setRoleFilter("ALL");
-
-    setRandomizerKey(
-      (current) => current + 1
-    );
-
-    setGameState("challenge");
-  }
-
-  /*
-   * ==================================================
-   * XI VALIDATION
-   * ==================================================
-   */
-  const validation = useMemo(
-    () =>
-      validateXI(
-        selectedPlayers
-      ),
-    [selectedPlayers]
-  );
-
-  /*
-   * ==================================================
-   * CONTINUE TO READY SCREEN
-   * ==================================================
-   */
-  function handleContinue() {
-    if (!validation.valid) {
-      return;
+    if (!Array.isArray(data.players)) {
+      throw new Error("Invalid player data received.");
     }
 
-    setGameState("ready");
-  }
+    return data.players;
+  };
 
-  /*
-   * ==================================================
-   * START GAME
-   * ==================================================
-   */
-  function handleStartGame() {
-    if (
-      !validation.valid ||
-      !gameChallenge
-    ) {
-      return;
+  const spinInitialChallenge = async () => {
+    if (loading) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/ipl/random", {
+        method: "GET",
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to generate a challenge.");
+      }
+
+      const data = (await response.json()) as IPLChallenge;
+
+      if (!data?.team?.id || !data?.season?.id || !data?.teamSeasonId) {
+        throw new Error("Invalid challenge data received.");
+      }
+
+      const players = await fetchPlayers(data.teamSeasonId);
+
+      onChallengeReady(data, players);
+    } catch (err) {
+      console.error("Initial IPL challenge randomization failed:", err);
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to generate a challenge. Please try again.",
+      );
+    } finally {
+      setLoading(false);
     }
+  };
 
-    setGameState("playing");
-  }
+  const respinTeam = async () => {
+    if (!challenge || loading) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `/api/ipl/random/team?seasonId=${encodeURIComponent(
+          challenge.season.id,
+        )}`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to respin the team.");
+      }
+
+      const data = (await response.json()) as RandomTeamResponse;
+
+      if (!data?.team?.id || !data.teamSeasonId) {
+        throw new Error("Invalid team data received.");
+      }
+
+      const nextChallenge: IPLChallenge = {
+        teamSeasonId: data.teamSeasonId,
+        team: data.team,
+        season: challenge.season,
+      };
+
+      const players = await fetchPlayers(data.teamSeasonId);
+
+      onTeamChange?.(data.team);
+      onChallengeReady(nextChallenge, players);
+    } catch (err) {
+      console.error("IPL team respin failed:", err);
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to respin the team. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const respinSeason = async () => {
+    if (!challenge || loading) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `/api/ipl/random/season?teamId=${encodeURIComponent(
+          challenge.team.id,
+        )}`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to respin the season.");
+      }
+
+      const data = (await response.json()) as RandomSeasonResponse;
+
+      if (!data?.season?.id || !data.season.teamSeasonId) {
+        throw new Error("Invalid season data received.");
+      }
+
+      const nextSeason: IPLSeason = {
+        id: data.season.id,
+        season: data.season.season,
+        startYear: data.season.startYear,
+      };
+
+      const nextChallenge: IPLChallenge = {
+        teamSeasonId: data.season.teamSeasonId,
+        team: challenge.team,
+        season: nextSeason,
+      };
+
+      const players = await fetchPlayers(data.season.teamSeasonId);
+
+      onSeasonChange?.(nextSeason);
+      onChallengeReady(nextChallenge, players);
+    } catch (err) {
+      console.error("IPL season respin failed:", err);
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to respin the season. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   /*
-   * ==================================================
-   * PLAYING GAME
-   * ==================================================
+   * Initial state
    */
-  if (
-    gameState === "playing" &&
-    gameChallenge
-  ) {
+  if (!challenge) {
     return (
-      <IPLGame
-        challenge={gameChallenge}
-        selectedPlayers={selectedPlayers}
-        onBackToSelection={() =>
-          setGameState("ready")
-        }
-      />
-    );
-  }
+      <section className="w-full">
+        <div className="mx-auto w-full max-w-md">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-3 shadow-lg backdrop-blur">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-xl border border-emerald-400/15 bg-slate-900/80 px-3 py-2.5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Team
+                </p>
 
-  /*
-   * ==================================================
-   * READY SCREEN
-   * ==================================================
-   */
-  if (gameState === "ready") {
-    return (
-      <main className="w-full">
-        <section className="card mx-auto max-w-4xl p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-            Playing XI Ready
-          </p>
-
-          <h1 className="mt-2 text-2xl font-black">
-            Your XI is ready
-          </h1>
-
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            {validation.counts.BAT} BAT ·{" "}
-            {validation.counts.WK} WK ·{" "}
-            {validation.counts.AR} AR ·{" "}
-            {validation.counts.BOWL} BOWL
-          </p>
-
-          <div className="mt-5 grid gap-2 sm:grid-cols-2">
-            {selectedPlayers.map(
-              (player, index) => (
-                <div
-                  key={player.id}
-                  className="flex items-center gap-3 rounded-xl border border-[var(--line)] p-3"
-                >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-xs font-black text-[var(--accent)]">
-                    {index + 1}
-                  </span>
-
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-bold">
-                      {player.name}
-                    </p>
-
-                    <p className="text-xs text-[var(--muted)]">
-                      {player.role}
-                    </p>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() =>
-                setGameState("challenge")
-              }
-              className="btn btn-secondary"
-            >
-              Edit XI
-            </button>
-
-            <button
-              type="button"
-              onClick={handleStartGame}
-              className="btn btn-primary"
-            >
-              Start Game
-            </button>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  /*
-   * ==================================================
-   * MAIN XI BUILDING FLOW
-   * ==================================================
-   */
-  return (
-    <main className="flex min-h-0 w-full flex-1">
-      <section className="grid min-h-0 w-full gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-
-        {/* ============================================
-            LEFT SIDE
-        ============================================= */}
-        <section className="flex min-h-0 flex-col">
-
-          {/*
-           * Keep showing the randomizer while we
-           * still need players.
-           */}
-          {selectedPlayers.length <
-            MAX_PLAYERS && (
-            <>
-              {/*
-               * No current spin:
-               * show Team + Season randomizer.
-               */}
-              {!currentChallenge && (
-                <ChallengeRandomizer
-                  key={randomizerKey}
-                  onChallengeReady={
-                    handleChallengeReady
-                  }
-                />
-              )}
-
-              {/*
-               * Current spin exists:
-               * show the player pool.
-               */}
-              {currentChallenge &&
-                gameState === "selection" && (
-                  <PlayerPool
-                    players={currentPlayers}
-                    selectedPlayers={
-                      selectedPlayers
-                    }
-                    searchQuery={
-                      searchQuery
-                    }
-                    roleFilter={
-                      roleFilter
-                    }
-                    onSearchChange={
-                      setSearchQuery
-                    }
-                    onRoleFilterChange={
-                      setRoleFilter
-                    }
-                    onSelectPlayer={
-                      handleSelectPlayer
-                    }
-                    canSelectPlayer={(
-                      player
-                    ) =>
-                      canAddPlayer(
-                        selectedPlayers,
-                        player
-                      )
-                    }
-                  />
-                )}
-            </>
-          )}
-
-          {/* =========================================
-              XI COMPLETE
-          ========================================== */}
-          {selectedPlayers.length ===
-            MAX_PLAYERS && (
-            <section className="card p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-                XI Complete
-              </p>
-
-              <h2 className="mt-2 text-xl font-black">
-                Validate your team
-              </h2>
-
-              <div className="mt-3 flex flex-wrap gap-2 text-sm text-[var(--muted)]">
-                <span>
-                  {validation.counts.BAT} BAT
-                </span>
-
-                <span>·</span>
-
-                <span>
-                  {validation.counts.WK} WK
-                </span>
-
-                <span>·</span>
-
-                <span>
-                  {validation.counts.AR} AR
-                </span>
-
-                <span>·</span>
-
-                <span>
-                  {validation.counts.BOWL} BOWL
-                </span>
+                <p className="mt-1 text-sm font-semibold text-slate-200">
+                  Random
+                </p>
               </div>
 
-              {!validation.valid && (
-                <div className="mt-4 space-y-2">
-                  {validation.errors.map(
-                    (error) => (
-                      <p
-                        key={error}
-                        className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400"
-                      >
-                        {error}
-                      </p>
-                    )
-                  )}
-                </div>
-              )}
-
-              {validation.valid && (
-                <p className="mt-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
-                  Your XI satisfies all team
-                  composition rules.
+              <div className="rounded-xl border border-emerald-400/15 bg-slate-900/80 px-3 py-2.5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Season
                 </p>
-              )}
 
-              <button
-                type="button"
-                disabled={!validation.valid}
-                onClick={handleContinue}
-                className="btn btn-primary mt-5"
+                <p className="mt-1 text-sm font-semibold text-slate-200">
+                  Random
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={spinInitialChallenge}
+              disabled={loading}
+              className="mt-2.5 flex h-9 w-full items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-4 text-xs font-bold tracking-[0.14em] text-emerald-300 transition-all duration-200 hover:border-emerald-400/40 hover:bg-emerald-400/15 hover:text-emerald-200 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {loading ? "SPINNING..." : "SPIN"}
+            </button>
+
+            {error && (
+              <p
+                role="alert"
+                className="mt-2 text-center text-xs text-red-300"
               >
-                Continue
-              </button>
-            </section>
-          )}
-        </section>
-
-        {/* ============================================
-            RIGHT SIDE — PLAYING XI
-        ============================================= */}
-        <div className="min-h-0">
-          <PlayingXI
-            players={selectedPlayers}
-            pitch={pitch}
-            onRemovePlayer={
-              handleRemovePlayer
-            }
-          />
+                {error}
+              </p>
+            )}
+          </div>
         </div>
       </section>
-    </main>
+    );
+  }
+
+  /*
+   * After first spin
+   */
+  return (
+    <section className="w-full">
+      <div className="mx-auto w-full max-w-md">
+        <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-3 shadow-lg backdrop-blur">
+          <div className="grid grid-cols-2 gap-2">
+            {/* Team */}
+            <div className="min-w-0 rounded-xl border border-emerald-400/15 bg-slate-900/80 p-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Team
+                </p>
+
+                <button
+                  type="button"
+                  onClick={respinTeam}
+                  disabled={loading}
+                  aria-label="Respin team"
+                  className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-400 transition-colors hover:border-emerald-400/30 hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Respin
+                </button>
+              </div>
+
+              <p className="mt-1 truncate text-sm font-semibold text-slate-100">
+                {challenge.team.name}
+              </p>
+            </div>
+
+            {/* Season */}
+            <div className="min-w-0 rounded-xl border border-emerald-400/15 bg-slate-900/80 p-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Season
+                </p>
+
+                <button
+                  type="button"
+                  onClick={respinSeason}
+                  disabled={loading}
+                  aria-label="Respin season"
+                  className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-400 transition-colors hover:border-emerald-400/30 hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Respin
+                </button>
+              </div>
+
+              <p className="mt-1 truncate text-sm font-semibold text-slate-100">
+                {challenge.season.season}
+              </p>
+            </div>
+          </div>
+
+          {loading && (
+            <div className="mt-2 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
+              Spinning...
+            </div>
+          )}
+
+          {error && (
+            <p
+              role="alert"
+              className="mt-2 text-center text-xs text-red-300"
+            >
+              {error}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }

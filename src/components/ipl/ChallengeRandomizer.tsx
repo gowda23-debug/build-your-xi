@@ -1,815 +1,294 @@
 "use client";
 
 import { useState } from "react";
-
-import {
-  CalendarDays,
-  Dice5,
-  RefreshCw,
-  RotateCcw,
-  Trophy,
-  Users,
-} from "lucide-react";
-
 import type {
   IPLChallenge,
-  IPLPlayer,
-  PlayerPoolResponse,
+  IPLSeason,
+  IPLTeam,
   RandomSeasonResponse,
   RandomTeamResponse,
 } from "@/types/ipl";
 
-type ChallengeRandomizerProps = {
-  onChallengeReady: (
-    challenge: IPLChallenge,
-    players: IPLPlayer[]
-  ) => void;
-
-  compact?: boolean;
-};
-
-type LoadingAction =
-  | "challenge"
-  | "team"
-  | "season"
-  | null;
-
-type RollingField =
-  | "team"
-  | "season";
-
-const ROLLING_CHARACTERS =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/ ";
+interface ChallengeRandomizerProps {
+  challenge: IPLChallenge | null;
+  onChallengeReady: (challenge: IPLChallenge) => void;
+  onTeamChange?: (team: IPLTeam) => void;
+  onSeasonChange?: (season: IPLSeason) => void;
+}
 
 export default function ChallengeRandomizer({
+  challenge,
   onChallengeReady,
-  compact = false,
-}: ChallengeRandomizerProps)  {
-  const [challenge, setChallenge] =
-    useState<IPLChallenge | null>(
-      null
-    );
+  onTeamChange,
+  onSeasonChange,
+}: ChallengeRandomizerProps) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const [loadingAction, setLoadingAction] =
-    useState<LoadingAction>(
-      null
-    );
+  const spinInitialChallenge = async () => {
+    if (loading) return;
 
-  const [displayTeam, setDisplayTeam] =
-    useState("?");
-
-  const [displaySeason, setDisplaySeason] =
-    useState("?");
-
-  const [rollingField, setRollingField] =
-    useState<RollingField | null>(
-      null
-    );
-
-  const [error, setError] =
-    useState("");
-
-  async function loadPlayers(
-    teamSeasonId: string
-  ): Promise<IPLPlayer[]> {
-    const response =
-      await fetch(
-        `/api/ipl/team-season/${teamSeasonId}/players`
-      );
-
-    const data =
-      (await response.json()) as
-        | PlayerPoolResponse
-        | { error: string };
-
-    if (!response.ok) {
-      throw new Error(
-        "error" in data
-          ? data.error
-          : "Unable to load players."
-      );
-    }
-
-    if (!("players" in data)) {
-      throw new Error(
-        "Invalid player pool response."
-      );
-    }
-
-    return data.players;
-  }
-
-  function createRollingText(
-    target: string,
-    progress: number
-  ) {
-    const revealCount =
-      Math.floor(
-        target.length *
-          Math.min(
-            progress * 1.35,
-            1
-          )
-      );
-
-    return target
-      .split("")
-      .map((character, index) => {
-        if (character === " ") {
-          return " ";
-        }
-
-        if (index < revealCount) {
-          return character;
-        }
-
-        const randomIndex =
-          Math.floor(
-            Math.random() *
-              ROLLING_CHARACTERS.length
-          );
-
-        return ROLLING_CHARACTERS[
-          randomIndex
-        ];
-      })
-      .join("");
-  }
-
-  function animateValue(
-    field: RollingField,
-    target: string
-  ): Promise<void> {
-    return new Promise((resolve) => {
-      const duration = 700;
-      const intervalTime = 50;
-
-      const totalFrames =
-        Math.ceil(
-          duration / intervalTime
-        );
-
-      let currentFrame = 0;
-
-      setRollingField(field);
-
-      const interval =
-        window.setInterval(() => {
-          currentFrame += 1;
-
-          const progress =
-            currentFrame /
-            totalFrames;
-
-          const rollingText =
-            createRollingText(
-              target,
-              progress
-            );
-
-          if (field === "team") {
-            setDisplayTeam(
-              rollingText
-            );
-          } else {
-            setDisplaySeason(
-              rollingText
-            );
-          }
-
-          if (
-            currentFrame >=
-            totalFrames
-          ) {
-            window.clearInterval(
-              interval
-            );
-
-            if (field === "team") {
-              setDisplayTeam(
-                target
-              );
-            } else {
-              setDisplaySeason(
-                target
-              );
-            }
-
-            setRollingField(
-              null
-            );
-
-            resolve();
-          }
-        }, intervalTime);
-    });
-  }
-
-  async function publishChallenge(
-    nextChallenge: IPLChallenge,
-    options?: {
-      animateTeam?: boolean;
-      animateSeason?: boolean;
-    }
-  ) {
-    const players =
-      await loadPlayers(
-        nextChallenge.teamSeasonId
-      );
-
-    const animateTeam =
-      options?.animateTeam ?? true;
-
-    const animateSeason =
-      options?.animateSeason ?? true;
-
-    const animations: Promise<void>[] =
-      [];
-
-    if (animateTeam) {
-      animations.push(
-        animateValue(
-          "team",
-          nextChallenge.team.name
-        )
-      );
-    } else {
-      setDisplayTeam(
-        nextChallenge.team.name
-      );
-    }
-
-    if (animateSeason) {
-      animations.push(
-        animateValue(
-          "season",
-          nextChallenge.season.season
-        )
-      );
-    } else {
-      setDisplaySeason(
-        nextChallenge.season.season
-      );
-    }
-
-    await Promise.all(
-      animations
-    );
-
-    setChallenge(
-      nextChallenge
-    );
-
-    onChallengeReady(
-      nextChallenge,
-      players
-    );
-  }
-
-  async function handleSpinChallenge() {
-    try {
-      setLoadingAction(
-        "challenge"
-      );
-
-      setError("");
-
-      const response =
-        await fetch(
-          "/api/ipl/random/challenge"
-        );
-
-      const data =
-        (await response.json()) as
-          | IPLChallenge
-          | { error: string };
-
-      if (!response.ok) {
-        throw new Error(
-          "error" in data
-            ? data.error
-            : "Unable to generate challenge."
-        );
-      }
-
-      if (
-        !("teamSeasonId" in data)
-      ) {
-        throw new Error(
-          "Invalid challenge response."
-        );
-      }
-
-      await publishChallenge(
-        data,
-        {
-          animateTeam: true,
-          animateSeason: true,
-        }
-      );
-    } catch (error) {
-      console.error(
-        "Challenge spin error:",
-        error
-      );
-
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to generate challenge."
-      );
-    } finally {
-      setLoadingAction(
-        null
-      );
-    }
-  }
-
-  async function handleRespinTeam() {
-    if (!challenge) {
-      return;
-    }
+    setLoading(true);
+    setError(null);
 
     try {
-      setLoadingAction(
-        "team"
-      );
-
-      setError("");
-
-      const response =
-        await fetch(
-          `/api/ipl/random/team?seasonId=${challenge.season.id}`
-        );
-
-      const data =
-        (await response.json()) as
-          | RandomTeamResponse
-          | { error: string };
+      const response = await fetch("/api/ipl/random", {
+        method: "GET",
+        cache: "no-store",
+      });
 
       if (!response.ok) {
-        throw new Error(
-          "error" in data
-            ? data.error
-            : "Unable to respin team."
-        );
+        throw new Error("Unable to generate a challenge.");
       }
 
-      if (
-        !("team" in data) ||
-        !data.teamSeasonId
-      ) {
-        throw new Error(
-          "Invalid team respin response."
-        );
+      const data = (await response.json()) as IPLChallenge;
+
+      if (!data?.team?.id || !data?.season?.id || !data?.teamSeasonId) {
+        throw new Error("Invalid challenge data received.");
       }
 
-      const nextChallenge: IPLChallenge =
-        {
-          teamSeasonId:
-            data.teamSeasonId,
-
-          team:
-            data.team,
-
-          season:
-            challenge.season,
-        };
-
-      await publishChallenge(
-        nextChallenge,
-        {
-          animateTeam: true,
-          animateSeason: false,
-        }
-      );
-    } catch (error) {
-      console.error(
-        "Team respin error:",
-        error
-      );
+      onChallengeReady(data);
+    } catch (err) {
+      console.error("Initial IPL challenge randomization failed:", err);
 
       setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to respin team."
+        err instanceof Error
+          ? err.message
+          : "Unable to generate a challenge. Please try again.",
       );
     } finally {
-      setLoadingAction(
-        null
-      );
+      setLoading(false);
     }
-  }
+  };
 
-  async function handleRespinSeason() {
-    if (!challenge) {
-      return;
-    }
+  const respinTeam = async () => {
+    if (!challenge || loading) return;
+
+    setLoading(true);
+    setError(null);
 
     try {
-      setLoadingAction(
-        "season"
+      const response = await fetch(
+        `/api/ipl/random/team?seasonId=${encodeURIComponent(
+          challenge.season.id,
+        )}`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
       );
-
-      setError("");
-
-      const response =
-        await fetch(
-          `/api/ipl/random/season?teamId=${challenge.team.id}`
-        );
-
-      const data =
-        (await response.json()) as
-          | RandomSeasonResponse
-          | { error: string };
 
       if (!response.ok) {
-        throw new Error(
-          "error" in data
-            ? data.error
-            : "Unable to respin season."
-        );
+        throw new Error("Unable to respin the team.");
       }
 
-      if (
-        !("season" in data)
-      ) {
-        throw new Error(
-          "Invalid season respin response."
-        );
+      const data = (await response.json()) as RandomTeamResponse;
+
+      if (!data?.team?.id) {
+        throw new Error("Invalid team data received.");
       }
 
-      const nextSeason =
-        data.season;
+      onTeamChange?.(data.team);
 
-      const nextChallenge: IPLChallenge =
-        {
-          teamSeasonId:
-            nextSeason.teamSeasonId,
-
-          team:
-            challenge.team,
-
-          season: {
-            id:
-              nextSeason.id,
-
-            season:
-              nextSeason.season,
-
-            startYear:
-              nextSeason.startYear,
-          },
-        };
-
-      await publishChallenge(
-        nextChallenge,
-        {
-          animateTeam: false,
-          animateSeason: true,
-        }
-      );
-    } catch (error) {
-      console.error(
-        "Season respin error:",
-        error
-      );
+      if (data.teamSeasonId) {
+        onChallengeReady({
+          teamSeasonId: data.teamSeasonId,
+          team: data.team,
+          season: challenge.season,
+        });
+      }
+    } catch (err) {
+      console.error("IPL team respin failed:", err);
 
       setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to respin season."
+        err instanceof Error
+          ? err.message
+          : "Unable to respin the team. Please try again.",
       );
     } finally {
-      setLoadingAction(
-        null
-      );
+      setLoading(false);
     }
-  }
+  };
 
-  const isLoading =
-    loadingAction !== null;
+  const respinSeason = async () => {
+    if (!challenge || loading) return;
 
-  const isTeamRolling =
-    rollingField === "team";
+    setLoading(true);
+    setError(null);
 
-  const isSeasonRolling =
-    rollingField === "season";
-  if (
-    compact &&
-    challenge
-  ) {
+    try {
+      const response = await fetch(
+        `/api/ipl/random/season?teamId=${encodeURIComponent(
+          challenge.team.id,
+        )}`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to respin the season.");
+      }
+
+      const data = (await response.json()) as RandomSeasonResponse;
+
+      if (!data?.season?.id || !data.season.teamSeasonId) {
+        throw new Error("Invalid season data received.");
+      }
+
+      const nextSeason: IPLSeason = {
+        id: data.season.id,
+        season: data.season.season,
+        startYear: data.season.startYear,
+      };
+
+      onSeasonChange?.(nextSeason);
+
+      onChallengeReady({
+        teamSeasonId: data.season.teamSeasonId,
+        team: challenge.team,
+        season: nextSeason,
+      });
+    } catch (err) {
+      console.error("IPL season respin failed:", err);
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to respin the season. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /*
+   * Before the first spin:
+   * Keep the randomizer intentionally compact.
+   */
+  if (!challenge) {
     return (
-      <section className="card overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] px-4 py-3">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-              Current Spin
-            </p>
+      <section className="w-full">
+        <div className="mx-auto w-full max-w-md">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-3 shadow-lg backdrop-blur">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-xl border border-emerald-400/15 bg-slate-900/80 px-3 py-2.5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Team
+                </p>
 
-            <p className="mt-1 text-sm font-bold">
-              {challenge.team.name}
+                <p className="mt-1 text-sm font-semibold text-slate-200">
+                  Random
+                </p>
+              </div>
 
-              <span className="mx-1 text-[var(--muted)]">
-                ·
-              </span>
+              <div className="rounded-xl border border-emerald-400/15 bg-slate-900/80 px-3 py-2.5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Season
+                </p>
 
-              {challenge.season.season}
-            </p>
+                <p className="mt-1 text-sm font-semibold text-slate-200">
+                  Random
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={spinInitialChallenge}
+              disabled={loading}
+              className="mt-2.5 flex h-9 w-full items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-4 text-xs font-bold tracking-[0.14em] text-emerald-300 transition-all duration-200 hover:border-emerald-400/40 hover:bg-emerald-400/15 hover:text-emerald-200 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {loading ? "SPINNING..." : "SPIN"}
+            </button>
+
+            {error && (
+              <p
+                role="alert"
+                className="mt-2 text-center text-xs text-red-300"
+              >
+                {error}
+              </p>
+            )}
           </div>
-
-          <span className="rounded-lg bg-[var(--accent)]/10 px-3 py-1.5 text-xs font-bold text-[var(--accent)]">
-            Select 1 Player
-          </span>
         </div>
-
-        <div className="grid gap-px bg-[var(--line)] sm:grid-cols-2">
-          <button
-            type="button"
-            onClick={handleRespinTeam}
-            disabled={isLoading}
-            className="flex items-center justify-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold transition hover:bg-[var(--surface-hover)] disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            <RotateCcw
-              size={15}
-              className={
-                loadingAction === "team"
-                  ? "animate-spin"
-                  : ""
-              }
-            />
-
-            {loadingAction === "team"
-              ? "Respining..."
-              : "Respin Team"}
-          </button>
-
-          <button
-            type="button"
-            onClick={handleRespinSeason}
-            disabled={isLoading}
-            className="flex items-center justify-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold transition hover:bg-[var(--surface-hover)] disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            <RotateCcw
-              size={15}
-              className={
-                loadingAction === "season"
-                  ? "animate-spin"
-                  : ""
-              }
-            />
-
-            {loadingAction === "season"
-              ? "Respining..."
-              : "Respin Season"}
-          </button>
-        </div>
-
-        {error && (
-          <div className="border-t border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-            {error}
-          </div>
-        )}
       </section>
     );
   }
+
+  /*
+   * After the first spin:
+   * Display the current Team + Season and provide independent respins.
+   */
   return (
     <section className="w-full">
-      {/* =========================
-          COMPACT HEADER
-      ========================= */}
+      <div className="mx-auto w-full max-w-md">
+        <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-3 shadow-lg backdrop-blur">
+          <div className="grid grid-cols-2 gap-2">
+            {/* Team */}
+            <div className="min-w-0 rounded-xl border border-emerald-400/15 bg-slate-900/80 p-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Team
+                </p>
 
-      <div className="mb-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
-            <Trophy size={20} />
+                <button
+                  type="button"
+                  onClick={respinTeam}
+                  disabled={loading}
+                  aria-label="Respin team"
+                  className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-400 transition-colors hover:border-emerald-400/30 hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Respin
+                </button>
+              </div>
+
+              <p className="mt-1 truncate text-sm font-semibold text-slate-100">
+                {challenge.team.name}
+              </p>
+            </div>
+
+            {/* Season */}
+            <div className="min-w-0 rounded-xl border border-emerald-400/15 bg-slate-900/80 p-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                  Season
+                </p>
+
+                <button
+                  type="button"
+                  onClick={respinSeason}
+                  disabled={loading}
+                  aria-label="Respin season"
+                  className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-400 transition-colors hover:border-emerald-400/30 hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Respin
+                </button>
+              </div>
+
+              <p className="mt-1 truncate text-sm font-semibold text-slate-100">
+                {challenge.season.season}
+              </p>
+            </div>
           </div>
 
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-              Build Your XI
+          {loading && (
+            <div className="mt-2 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
+              Spinning...
+            </div>
+          )}
+
+          {error && (
+            <p
+              role="alert"
+              className="mt-2 text-center text-xs text-red-300"
+            >
+              {error}
             </p>
-
-            <h1 className="mt-0.5 text-2xl font-black tracking-tight">
-              IPL Challenge
-            </h1>
-          </div>
+          )}
         </div>
-
-        <p className="mt-3 text-sm text-[var(--muted)]">
-          Spin a team and season to
-          generate your player pool.
-        </p>
       </div>
-
-      {/* =========================
-          RANDOMIZER
-      ========================= */}
-
-      <section className="card overflow-hidden">
-        {/* HEADER */}
-
-        <div className="flex items-center justify-between border-b border-[var(--line)] px-4 py-3">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-              Challenge Randomizer
-            </p>
-
-            <p className="mt-1 text-xs text-[var(--muted)]">
-              Team and season determine
-              your available players.
-            </p>
-          </div>
-
-          <Dice5
-            size={20}
-            className="text-[var(--accent)]"
-          />
-        </div>
-
-        {/* TEAM */}
-
-        <div className="border-b border-[var(--line)] px-4 py-4">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
-              <Users size={16} />
-            </div>
-
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-              IPL Team
-            </p>
-          </div>
-
-          <div className="mt-4 min-h-[42px] overflow-hidden">
-            <p
-              className={[
-                "text-2xl font-black leading-tight transition-all duration-150",
-                isTeamRolling
-                  ? "text-[var(--accent)]"
-                  : "",
-              ].join(" ")}
-            >
-              {displayTeam}
-            </p>
-          </div>
-
-          {challenge && (
-            <button
-              type="button"
-              onClick={
-                handleRespinTeam
-              }
-              disabled={isLoading}
-              className="btn btn-secondary mt-4 inline-flex w-full items-center justify-center gap-2 text-sm"
-            >
-              {loadingAction ===
-              "team" ? (
-                <>
-                  <RefreshCw
-                    size={15}
-                    className="animate-spin"
-                  />
-
-                  Rolling...
-                </>
-              ) : (
-                <>
-                  <RotateCcw
-                    size={15}
-                  />
-
-                  Respin Team
-                </>
-              )}
-            </button>
-          )}
-        </div>
-
-        {/* SEASON */}
-
-        <div className="px-4 py-4">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
-              <CalendarDays
-                size={16}
-              />
-            </div>
-
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-              IPL Season
-            </p>
-          </div>
-
-          <div className="mt-4 min-h-[42px] overflow-hidden">
-            <p
-              className={[
-                "text-2xl font-black leading-tight transition-all duration-150",
-                isSeasonRolling
-                  ? "text-[var(--accent)]"
-                  : "",
-              ].join(" ")}
-            >
-              {displaySeason}
-            </p>
-          </div>
-
-          {challenge && (
-            <button
-              type="button"
-              onClick={
-                handleRespinSeason
-              }
-              disabled={isLoading}
-              className="btn btn-secondary mt-4 inline-flex w-full items-center justify-center gap-2 text-sm"
-            >
-              {loadingAction ===
-              "season" ? (
-                <>
-                  <RefreshCw
-                    size={15}
-                    className="animate-spin"
-                  />
-
-                  Rolling...
-                </>
-              ) : (
-                <>
-                  <RotateCcw
-                    size={15}
-                  />
-
-                  Respin Season
-                </>
-              )}
-            </button>
-          )}
-        </div>
-
-        {/* INITIAL SPIN */}
-
-        {!challenge && (
-          <div className="border-t border-[var(--line)] px-4 py-4">
-            <button
-              type="button"
-              onClick={
-                handleSpinChallenge
-              }
-              disabled={isLoading}
-              className="btn btn-primary inline-flex w-full items-center justify-center gap-2 text-sm"
-            >
-              {loadingAction ===
-              "challenge" ? (
-                <>
-                  <RefreshCw
-                    size={16}
-                    className="animate-spin"
-                  />
-
-                  Rolling Challenge...
-                </>
-              ) : (
-                <>
-                  <Dice5 size={16} />
-
-                  Spin Challenge
-                </>
-              )}
-            </button>
-          </div>
-        )}
-      </section>
-
-      {/* CHALLENGE READY */}
-
-      {challenge &&
-        !isLoading && (
-          <div className="mt-4 rounded-xl border border-[var(--line)] px-4 py-3">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-              Challenge Ready
-            </p>
-
-            <p className="mt-1.5 text-sm font-bold">
-              {challenge.team.name}
-
-              <span className="mx-1 text-[var(--muted)]">
-                —
-              </span>
-
-              {
-                challenge.season
-                  .season
-              }
-            </p>
-          </div>
-        )}
-
-      {/* ERROR */}
-
-      {error && (
-        <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-          {error}
-        </div>
-      )}
     </section>
   );
 }
