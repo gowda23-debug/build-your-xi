@@ -1,137 +1,266 @@
 "use client";
 
-import type { IPLPlayer, PitchProfile, PlayerRole } from "@/types/ipl";
+import { useMemo, useState } from "react";
+import ChallengeRandomizer from "./ChallengeRandomizer";
+import IPLGame from "./IPLGame";
+import PlayerPool from "./PlayerPool";
+import PlayingXI from "./PlayingXI";
+import { getRandomPitch } from "@/lib/ipl-challenge/pitches";
+import { canAddPlayer, validateXI } from "@/lib/ipl-challenge/validate-xi";
+import type { IPLChallenge, IPLGameState, IPLPlayer, PitchProfile, PlayerRole } from "@/types/ipl";
 
-interface PlayingXIProps {
-  players: IPLPlayer[];
-  pitch: PitchProfile | null;
-  onRemovePlayer: (playerId: string) => void;
-}
+const MAX_PLAYERS = 11;
+type RespinType = "team" | "season";
 
-const ROLE_LABELS: Record<PlayerRole, string> = {
-  WK: "Wicket Keepers",
-  BAT: "Batters",
-  AR: "All-Rounders",
-  BOWL: "Bowlers",
-};
+export default function XISelectionGame() {
+  const [gameChallenge, setGameChallenge] = useState<IPLChallenge | null>(null);
+  const [currentChallenge, setCurrentChallenge] = useState<IPLChallenge | null>(null);
+  const [currentPlayers, setCurrentPlayers] = useState<IPLPlayer[]>([]);
+  const [selectedPlayers, setSelectedPlayers] = useState<IPLPlayer[]>([]);
+  const [pitch, setPitch] = useState<PitchProfile | null>(null);
+  const [gameState, setGameState] = useState<IPLGameState>("challenge");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState<"ALL" | PlayerRole>("ALL");
+  const [randomizerKey, setRandomizerKey] = useState(0);
+  const [respinLoading, setRespinLoading] = useState<RespinType | null>(null);
+  const [teamRespinUsed, setTeamRespinUsed] = useState(false);
+  const [seasonRespinUsed, setSeasonRespinUsed] = useState(false);
 
-export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIProps) {
-  const groupedPlayers: Record<PlayerRole, IPLPlayer[]> = {
-    WK: players.filter((player) => player.role === "WK"),
-    BAT: players.filter((player) => player.role === "BAT"),
-    AR: players.filter((player) => player.role === "AR"),
-    BOWL: players.filter((player) => player.role === "BOWL"),
-  };
+  function resetPlayerPool(challenge: IPLChallenge, players: IPLPlayer[]) {
+    setCurrentChallenge(challenge);
+    setCurrentPlayers(players);
+    setSearchQuery("");
+    setRoleFilter("ALL");
+    setGameState("selection");
+  }
+
+  function handleChallengeReady(challenge: IPLChallenge, players: IPLPlayer[]) {
+    const startingNewXI = selectedPlayers.length === 0;
+    setGameChallenge(challenge);
+    if (startingNewXI) {
+      setTeamRespinUsed(false);
+      setSeasonRespinUsed(false);
+      setPitch(getRandomPitch());
+    }
+    resetPlayerPool(challenge, players);
+  }
+
+  async function fetchPlayers(teamSeasonId: string): Promise<IPLPlayer[]> {
+    const response = await fetch(`/api/ipl/team-season/${encodeURIComponent(teamSeasonId)}/players`, {
+      method: "GET",
+      cache: "no-store",
+    });
+    if (!response.ok) throw new Error("Unable to load available players.");
+    const data = await response.json();
+    if (!Array.isArray(data?.players)) throw new Error("Invalid player data received.");
+    return data.players;
+  }
+
+  async function respin(type: RespinType) {
+    if (!gameChallenge || respinLoading) return;
+    if (type === "team" && teamRespinUsed) return;
+    if (type === "season" && seasonRespinUsed) return;
+
+    setRespinLoading(type);
+    try {
+      const endpoint = type === "team"
+        ? `/api/ipl/random/team?seasonId=${encodeURIComponent(gameChallenge.season.id)}`
+        : `/api/ipl/random/season?teamId=${encodeURIComponent(gameChallenge.team.id)}`;
+      const response = await fetch(endpoint, { method: "GET", cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to respin the ${type}.`);
+
+      const data = await response.json();
+      let nextChallenge: IPLChallenge;
+
+      if (type === "team") {
+        if (!data?.team?.id || !data?.teamSeasonId) throw new Error("Invalid team data received.");
+        nextChallenge = {
+          teamSeasonId: data.teamSeasonId,
+          team: data.team,
+          season: gameChallenge.season,
+        };
+      } else {
+        if (!data?.season?.id || !data.season.teamSeasonId) throw new Error("Invalid season data received.");
+        nextChallenge = {
+          teamSeasonId: data.season.teamSeasonId,
+          team: gameChallenge.team,
+          season: {
+            id: data.season.id,
+            season: data.season.season,
+            startYear: data.season.startYear,
+          },
+        };
+      }
+
+      const players = await fetchPlayers(nextChallenge.teamSeasonId);
+      setGameChallenge(nextChallenge);
+      if (type === "team") setTeamRespinUsed(true);
+      if (type === "season") setSeasonRespinUsed(true);
+      resetPlayerPool(nextChallenge, players);
+    } catch (error) {
+      console.error(`IPL ${type} respin failed:`, error);
+    } finally {
+      setRespinLoading(null);
+    }
+  }
+
+  function handleSelectPlayer(player: IPLPlayer) {
+    if (!canAddPlayer(selectedPlayers, player)) return;
+    const nextPlayers = [...selectedPlayers, player];
+    setSelectedPlayers(nextPlayers);
+    setCurrentChallenge(null);
+    setCurrentPlayers([]);
+    setSearchQuery("");
+    setRoleFilter("ALL");
+    setRandomizerKey((current) => current + 1);
+
+    if (nextPlayers.length === MAX_PLAYERS && validateXI(nextPlayers).valid) {
+      setGameState("playing");
+      return;
+    }
+    setGameState("challenge");
+  }
+
+  function handleRemovePlayer(playerId: string) {
+    const nextPlayers = selectedPlayers.filter((player) => player.id !== playerId);
+    setSelectedPlayers(nextPlayers);
+    setCurrentChallenge(null);
+    setCurrentPlayers([]);
+    setSearchQuery("");
+    setRoleFilter("ALL");
+    setRandomizerKey((current) => current + 1);
+
+    if (nextPlayers.length === 0) {
+      setGameChallenge(null);
+      setTeamRespinUsed(false);
+      setSeasonRespinUsed(false);
+      setPitch(null);
+    }
+    setGameState("challenge");
+  }
+
+  const validation = useMemo(() => validateXI(selectedPlayers), [selectedPlayers]);
+
+  if (gameState === "playing") {
+    if (!gameChallenge) return null;
+    return (
+      <IPLGame
+        challenge={gameChallenge}
+        selectedPlayers={selectedPlayers}
+        onBackToSelection={() => setGameState("challenge")}
+      />
+    );
+  }
+
+  const building = selectedPlayers.length < MAX_PLAYERS;
+  const hasChallenge = Boolean(currentChallenge && gameState === "selection");
 
   return (
-    <section className="card flex h-full min-h-0 flex-col overflow-hidden">
-      <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] px-3 py-2">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">Your Playing XI</p>
-          <p className="mt-0.5 text-[10px] text-[var(--muted)]">{players.length} / 11 players</p>
-        </div>
-        <span className="rounded-full border border-[var(--line)] px-2 py-1 text-[8px] font-bold uppercase tracking-wider text-[var(--muted)]">
-          {players.length === 11 ? "XI Complete" : "Building XI"}
-        </span>
-      </header>
-
-      <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]">
-        <div className="relative min-h-0 overflow-hidden p-2">
-          <div className="relative h-full min-h-0 overflow-hidden rounded-[48%] border border-emerald-300/15 bg-emerald-950/50">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.14),transparent_60%)]" />
-            <div className="absolute inset-[5%] rounded-[48%] border border-emerald-200/10" />
-            <div className="absolute inset-[11%] rounded-[48%] border border-emerald-200/10" />
-            <div className="absolute left-1/2 top-1/2 h-[40%] w-[18%] -translate-x-1/2 -translate-y-1/2 rounded-[30%] border border-amber-200/20 bg-amber-100/[0.07]" />
-            <div className="absolute left-1/2 top-1/2 h-[27%] w-[7%] -translate-x-1/2 -translate-y-1/2 rounded border border-amber-100/10 bg-amber-100/[0.04]" />
-
-            <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 overflow-hidden px-2 py-4">
-              <RoleGroup label={ROLE_LABELS.WK} players={groupedPlayers.WK} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.BAT} players={groupedPlayers.BAT} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.AR} players={groupedPlayers.AR} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.BOWL} players={groupedPlayers.BOWL} onRemovePlayer={onRemovePlayer} />
-
-              {players.length === 0 && (
-                <div className="rounded-xl border border-dashed border-white/15 bg-black/20 px-5 py-4 text-center backdrop-blur-sm">
-                  <p className="text-sm font-semibold text-white/70">Your XI is empty</p>
-                  <p className="mt-1 text-xs text-white/40">Spin to select your first player</p>
+    <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
+      <section className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
+        <section className="min-h-0 overflow-hidden">
+          {currentChallenge && building ? (
+            <div className="flex h-full min-h-0 flex-col gap-3">
+              <div className="shrink-0">
+                <ChallengeBar
+                  challenge={currentChallenge}
+                  teamRespinUsed={teamRespinUsed}
+                  seasonRespinUsed={seasonRespinUsed}
+                  respinLoading={respinLoading}
+                  onRespinTeam={() => respin("team")}
+                  onRespinSeason={() => respin("season")}
+                />
+              </div>
+              <div className="min-h-0 flex-1 overflow-hidden">
+                {hasChallenge && (
+                  <PlayerPool
+  players={currentPlayers}
+  selectedPlayers={selectedPlayers}
+  searchQuery={searchQuery}
+  roleFilter={roleFilter}
+  onSearchChange={setSearchQuery}
+  onRoleFilterChange={setRoleFilter}
+  onSelectPlayer={handleSelectPlayer}
+ canSelectPlayer={(player) => canAddPlayer(selectedPlayers, player)}
+/>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="h-full min-h-0">
+              {building ? (
+                <ChallengeRandomizer key={randomizerKey} onChallengeReady={handleChallengeReady} />
+              ) : (
+                <div className="flex h-full items-center justify-center rounded-2xl border border-[var(--line)] bg-black/5 px-6 text-center">
+                  <p className="text-sm font-bold text-[var(--muted)]">XI complete</p>
                 </div>
               )}
             </div>
-
-            <div className="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.16em] text-white/40 backdrop-blur-sm">
-              Cricket Stadium
-            </div>
-          </div>
-        </div>
-
-        <aside className="min-h-0 overflow-y-auto border-l border-[var(--line)] bg-black/10 p-3">
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">Pitch Details</p>
-          <h2 className="mt-1 text-sm font-black">{pitch?.title ?? "Pitch information"}</h2>
-
-          <div className="mt-2 rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-2">
-            <p className="text-[8px] font-bold uppercase tracking-wider text-[var(--muted)]">Stadium</p>
-            <p className="mt-1 text-xs font-bold">Venue mapping pending</p>
-          </div>
-
-          {pitch && (
-            <>
-              <p className="mt-2 text-[10px] leading-4 text-[var(--muted)]">{pitch.summary}</p>
-              <div className="mt-2 grid grid-cols-2 gap-1.5">
-                <PitchStat label="Batting" value={pitch.batting} />
-                <PitchStat label="Pace" value={pitch.pace} />
-                <PitchStat label="Spin" value={pitch.spin} />
-                <PitchStat label="Dew" value={pitch.dew} />
-              </div>
-              <div className="mt-2 rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-2">
-                <p className="text-[8px] font-bold uppercase tracking-wider text-[var(--muted)]">Strategy</p>
-                <p className="mt-1 text-[10px] leading-4">{pitch.strategy}</p>
-              </div>
-            </>
           )}
-        </aside>
-      </div>
-    </section>
+
+          {selectedPlayers.length === MAX_PLAYERS && !validation.valid && (
+            <section className="card mt-3 p-4">
+              {validation.errors.map((error) => (
+                <p key={error} className="text-sm text-red-400">{error}</p>
+              ))}
+            </section>
+          )}
+        </section>
+
+        <div className="min-h-0 overflow-hidden">
+          <PlayingXI
+            players={selectedPlayers}
+            pitch={pitch}
+            onRemovePlayer={handleRemovePlayer}
+          />
+        </div>
+      </section>
+    </main>
   );
 }
 
-function RoleGroup({
-  label,
-  players,
-  onRemovePlayer,
+function ChallengeBar({
+  challenge,
+  teamRespinUsed,
+  seasonRespinUsed,
+  respinLoading,
+  onRespinTeam,
+  onRespinSeason,
 }: {
-  label: string;
-  players: IPLPlayer[];
-  onRemovePlayer: (playerId: string) => void;
+  challenge: IPLChallenge;
+  teamRespinUsed: boolean;
+  seasonRespinUsed: boolean;
+  respinLoading: RespinType | null;
+  onRespinTeam: () => void;
+  onRespinSeason: () => void;
 }) {
-  if (players.length === 0) return null;
-
   return (
-    <div className="w-full max-w-[420px] rounded-lg border border-white/10 bg-black/20 px-2.5 py-1.5 backdrop-blur-sm">
-      <p className="mb-1 text-center text-[8px] font-black uppercase tracking-[0.16em] text-white/50">{label}</p>
-      <div className="flex flex-wrap justify-center gap-1">
-        {players.map((player) => (
-          <div key={player.id} className="flex items-center gap-1 rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5">
-            <span className="max-w-[135px] truncate text-[9px] font-semibold text-white/90">{player.name}</span>
-            <button
-              type="button"
-              onClick={() => onRemovePlayer(player.id)}
-              className="text-xs leading-none text-white/30 transition hover:text-red-400"
-              aria-label={`Remove ${player.name}`}
-            >
-              ×
-            </button>
-          </div>
-        ))}
+    <div className="rounded-xl border border-[var(--line)] bg-[var(--surface)]/80 px-2.5 py-2 shadow-sm backdrop-blur">
+      <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
+          <ChallengeValue label="Team" value={challenge.team.name} />
+          <ChallengeValue label="Season" value={challenge.season.season} />
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--line)] pt-2 sm:border-l sm:border-t-0 sm:pl-2 sm:pt-0">
+          <button type="button" onClick={onRespinTeam} disabled={respinLoading !== null || teamRespinUsed}
+            className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35">
+            {respinLoading === "team" ? "Rolling…" : teamRespinUsed ? "Team used" : "↻ Team"}
+          </button>
+          <button type="button" onClick={onRespinSeason} disabled={respinLoading !== null || seasonRespinUsed}
+            className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35">
+            {respinLoading === "season" ? "Rolling…" : seasonRespinUsed ? "Season used" : "↻ Season"}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
-function PitchStat({ label, value }: { label: string; value: number }) {
+function ChallengeValue({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-[var(--line)] px-2 py-1.5">
-      <p className="text-[8px] uppercase tracking-wide text-[var(--muted)]">{label}</p>
-      <p className="mt-0.5 text-xs font-black">{value}</p>
+    <div className="min-w-0 rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-1.5">
+      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">{label}</p>
+      <p className="mt-0.5 truncate text-xs font-black">{value}</p>
     </div>
   );
 }
