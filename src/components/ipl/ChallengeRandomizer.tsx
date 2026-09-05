@@ -17,8 +17,7 @@ interface ChallengeRandomizerProps {
 export default function ChallengeRandomizer({
   onChallengeReady,
 }: ChallengeRandomizerProps) {
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [error, setError] =
     useState<string | null>(null);
@@ -26,13 +25,15 @@ export default function ChallengeRandomizer({
   async function fetchPlayers(
     teamSeasonId: string,
   ): Promise<IPLPlayer[]> {
-const response = await fetch(
-  "/api/ipl/random/challenge",
-  {
-    method: "GET",
-    cache: "no-store",
-  },
-);
+    const response = await fetch(
+      `/api/ipl/team-season/${encodeURIComponent(
+        teamSeasonId,
+      )}/players`,
+      {
+        method: "GET",
+        cache: "no-store",
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -61,7 +62,7 @@ const response = await fetch(
 
     try {
       const response = await fetch(
-        "/api/ipl/random",
+        "/api/ipl/random/challenge",
         {
           method: "GET",
           cache: "no-store",
