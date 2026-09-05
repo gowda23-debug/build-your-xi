@@ -2,7 +2,7 @@
 
 import { Plus, Search } from "lucide-react";
 
-import type { IPLChallenge, IPLPlayer, PlayerRole } from "@/types/ipl";
+import type { IPLPlayer, PlayerRole } from "@/types/ipl";
 import {
   getBattingAverage,
   getBowlingAverage,
@@ -11,7 +11,6 @@ import {
 } from "@/lib/ipl-challenge/player-stats";
 
 type PlayerPoolProps = {
-  challenge: IPLChallenge;
   players: IPLPlayer[];
   selectedPlayers: IPLPlayer[];
   searchQuery: string;
@@ -44,7 +43,6 @@ function formatStat(value: number | null) {
 }
 
 export default function PlayerPool({
-  challenge,
   players,
   searchQuery,
   roleFilter,
@@ -65,8 +63,8 @@ export default function PlayerPool({
       <header className="shrink-0 border-b border-[var(--line)] px-3 py-2">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <p className="truncate text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
-              {challenge.team.name} · {challenge.season.season}
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
+              Available Players
             </p>
             <p className="mt-0.5 text-[10px] text-[var(--muted)]">
               Choose 1 player · {filteredPlayers.length} available
@@ -108,7 +106,6 @@ export default function PlayerPool({
         </div>
       </header>
 
-      {/* This is intentionally the only scroll container in the selection view. */}
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
         {filteredPlayers.map((player) => {
           const canSelect = canSelectPlayer(player);

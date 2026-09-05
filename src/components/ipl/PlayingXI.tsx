@@ -35,7 +35,7 @@ export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIP
         </span>
       </header>
 
-      <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.65fr)_minmax(170px,.7fr)]">
+      <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]">
         <div className="relative min-h-0 overflow-hidden p-2">
           <div className="relative h-full min-h-0 overflow-hidden rounded-[48%] border border-emerald-300/15 bg-emerald-950/50">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.14),transparent_60%)]" />
@@ -44,7 +44,7 @@ export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIP
             <div className="absolute left-1/2 top-1/2 h-[40%] w-[18%] -translate-x-1/2 -translate-y-1/2 rounded-[30%] border border-amber-200/20 bg-amber-100/[0.07]" />
             <div className="absolute left-1/2 top-1/2 h-[27%] w-[7%] -translate-x-1/2 -translate-y-1/2 rounded border border-amber-100/10 bg-amber-100/[0.04]" />
 
-            <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 px-2 py-4">
+            <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 overflow-hidden px-2 py-4">
               <RoleGroup label={ROLE_LABELS.WK} players={groupedPlayers.WK} onRemovePlayer={onRemovePlayer} />
               <RoleGroup label={ROLE_LABELS.BAT} players={groupedPlayers.BAT} onRemovePlayer={onRemovePlayer} />
               <RoleGroup label={ROLE_LABELS.AR} players={groupedPlayers.AR} onRemovePlayer={onRemovePlayer} />
