@@ -1,503 +1,266 @@
 "use client";
 
-import {
-  useMemo,
-  useState,
-} from "react";
-
+import { useMemo, useState } from "react";
 import ChallengeRandomizer from "./ChallengeRandomizer";
 import IPLGame from "./IPLGame";
 import PlayerPool from "./PlayerPool";
 import PlayingXI from "./PlayingXI";
-
-import {
-  getRandomPitch,
-} from "@/lib/ipl-challenge/pitches";
-
-import {
-  canAddPlayer,
-  validateXI,
-} from "@/lib/ipl-challenge/validate-xi";
-
-import type {
-  IPLChallenge,
-  IPLGameState,
-  IPLPlayer,
-  PitchProfile,
-  PlayerRole,
-} from "@/types/ipl";
+import { getRandomPitch } from "@/lib/ipl-challenge/pitches";
+import { canAddPlayer, validateXI } from "@/lib/ipl-challenge/validate-xi";
+import type { IPLChallenge, IPLGameState, IPLPlayer, PitchProfile, PlayerRole } from "@/types/ipl";
 
 const MAX_PLAYERS = 11;
+type RespinType = "team" | "season";
 
 export default function XISelectionGame() {
-  /*
-   * Persistent game context.
-   *
-   * This is never cleared after a player
-   * is selected.
-   */
-  const [
-    gameChallenge,
-    setGameChallenge,
-  ] =
-    useState<IPLChallenge | null>(
-      null
-    );
+  const [gameChallenge, setGameChallenge] = useState<IPLChallenge | null>(null);
+  const [currentChallenge, setCurrentChallenge] = useState<IPLChallenge | null>(null);
+  const [currentPlayers, setCurrentPlayers] = useState<IPLPlayer[]>([]);
+  const [selectedPlayers, setSelectedPlayers] = useState<IPLPlayer[]>([]);
+  const [pitch, setPitch] = useState<PitchProfile | null>(null);
+  const [gameState, setGameState] = useState<IPLGameState>("challenge");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState<"ALL" | PlayerRole>("ALL");
+  const [randomizerKey, setRandomizerKey] = useState(0);
+  const [respinLoading, setRespinLoading] = useState<RespinType | null>(null);
+  const [teamRespinUsed, setTeamRespinUsed] = useState(false);
+  const [seasonRespinUsed, setSeasonRespinUsed] = useState(false);
 
-  /*
-   * Current spin.
-   *
-   * This is cleared after selecting
-   * one player.
-   */
-  const [
-    currentChallenge,
-    setCurrentChallenge,
-  ] =
-    useState<IPLChallenge | null>(
-      null
-    );
-
-  const [
-    currentPlayers,
-    setCurrentPlayers,
-  ] =
-    useState<IPLPlayer[]>([]);
-
-  const [
-    selectedPlayers,
-    setSelectedPlayers,
-  ] =
-    useState<IPLPlayer[]>([]);
-
-  const [
-    pitch,
-    setPitch,
-  ] =
-    useState<PitchProfile | null>(
-      null
-    );
-
-  const [
-    gameState,
-    setGameState,
-  ] =
-    useState<IPLGameState>(
-      "challenge"
-    );
-
-  const [
-    searchQuery,
-    setSearchQuery,
-  ] =
-    useState("");
-
-  const [
-    roleFilter,
-    setRoleFilter,
-  ] =
-    useState<
-      "ALL" | PlayerRole
-    >("ALL");
-
-  const [
-    randomizerKey,
-    setRandomizerKey,
-  ] =
-    useState(0);
-
-  function handleChallengeReady(
-    challenge: IPLChallenge,
-    players: IPLPlayer[]
-  ) {
-    setCurrentChallenge(
-      challenge
-    );
-
-    setCurrentPlayers(
-      players
-    );
-
-    /*
-     * First spin defines the
-     * persistent game context.
-     */
-    if (!gameChallenge) {
-      setGameChallenge(
-        challenge
-      );
-
-      setPitch(
-        getRandomPitch()
-      );
-    }
-
+  function resetPlayerPool(challenge: IPLChallenge, players: IPLPlayer[]) {
+    setCurrentChallenge(challenge);
+    setCurrentPlayers(players);
     setSearchQuery("");
     setRoleFilter("ALL");
-
-    setGameState(
-      "selection"
-    );
+    setGameState("selection");
   }
 
-  function handleSelectPlayer(
-    player: IPLPlayer
-  ) {
-    const canSelect =
-      canAddPlayer(
-        selectedPlayers,
-        player
-      );
-
-    if (!canSelect) {
-      return;
+  function handleChallengeReady(challenge: IPLChallenge, players: IPLPlayer[]) {
+    const startingNewXI = selectedPlayers.length === 0;
+    setGameChallenge(challenge);
+    if (startingNewXI) {
+      setTeamRespinUsed(false);
+      setSeasonRespinUsed(false);
+      setPitch(getRandomPitch());
     }
+    resetPlayerPool(challenge, players);
+  }
 
-    setSelectedPlayers(
-      (
-        current
-      ) => [
-        ...current,
-        player,
-      ]
-    );
+  async function fetchPlayers(teamSeasonId: string): Promise<IPLPlayer[]> {
+    const response = await fetch(`/api/ipl/team-season/${encodeURIComponent(teamSeasonId)}/players`, {
+      method: "GET",
+      cache: "no-store",
+    });
+    if (!response.ok) throw new Error("Unable to load available players.");
+    const data = await response.json();
+    if (!Array.isArray(data?.players)) throw new Error("Invalid player data received.");
+    return data.players;
+  }
 
-    /*
-     * Current spin ends.
-     */
-    setCurrentChallenge(
-      null
-    );
+  async function respin(type: RespinType) {
+    if (!gameChallenge || respinLoading) return;
+    if (type === "team" && teamRespinUsed) return;
+    if (type === "season" && seasonRespinUsed) return;
 
+    setRespinLoading(type);
+    try {
+      const endpoint = type === "team"
+        ? `/api/ipl/random/team?seasonId=${encodeURIComponent(gameChallenge.season.id)}`
+        : `/api/ipl/random/season?teamId=${encodeURIComponent(gameChallenge.team.id)}`;
+      const response = await fetch(endpoint, { method: "GET", cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to respin the ${type}.`);
+
+      const data = await response.json();
+      let nextChallenge: IPLChallenge;
+
+      if (type === "team") {
+        if (!data?.team?.id || !data?.teamSeasonId) throw new Error("Invalid team data received.");
+        nextChallenge = {
+          teamSeasonId: data.teamSeasonId,
+          team: data.team,
+          season: gameChallenge.season,
+        };
+      } else {
+        if (!data?.season?.id || !data.season.teamSeasonId) throw new Error("Invalid season data received.");
+        nextChallenge = {
+          teamSeasonId: data.season.teamSeasonId,
+          team: gameChallenge.team,
+          season: {
+            id: data.season.id,
+            season: data.season.season,
+            startYear: data.season.startYear,
+          },
+        };
+      }
+
+      const players = await fetchPlayers(nextChallenge.teamSeasonId);
+      setGameChallenge(nextChallenge);
+      if (type === "team") setTeamRespinUsed(true);
+      if (type === "season") setSeasonRespinUsed(true);
+      resetPlayerPool(nextChallenge, players);
+    } catch (error) {
+      console.error(`IPL ${type} respin failed:`, error);
+    } finally {
+      setRespinLoading(null);
+    }
+  }
+
+  function handleSelectPlayer(player: IPLPlayer) {
+    if (!canAddPlayer(selectedPlayers, player)) return;
+    const nextPlayers = [...selectedPlayers, player];
+    setSelectedPlayers(nextPlayers);
+    setCurrentChallenge(null);
     setCurrentPlayers([]);
-
     setSearchQuery("");
     setRoleFilter("ALL");
+    setRandomizerKey((current) => current + 1);
 
-    setRandomizerKey(
-      (
-        current
-      ) =>
-        current + 1
-    );
-
-    setGameState(
-      "challenge"
-    );
-  }
-
-  function handleRemovePlayer(
-    playerId: string
-  ) {
-    setSelectedPlayers(
-      (
-        current
-      ) =>
-        current.filter(
-          (
-            player
-          ) =>
-            player.id !==
-            playerId
-        )
-    );
-  }
-
-  const validation =
-    useMemo(
-      () =>
-        validateXI(
-          selectedPlayers
-        ),
-      [
-        selectedPlayers,
-      ]
-    );
-
-  function handleContinue() {
-    if (
-      !validation.valid
-    ) {
+    if (nextPlayers.length === MAX_PLAYERS && validateXI(nextPlayers).valid) {
+      setGameState("playing");
       return;
     }
-
-    setGameState(
-      "ready"
-    );
+    setGameState("challenge");
   }
 
-  function handleStartGame() {
-    if (
-      !validation.valid ||
-      !gameChallenge
-    ) {
-      return;
+  function handleRemovePlayer(playerId: string) {
+    const nextPlayers = selectedPlayers.filter((player) => player.id !== playerId);
+    setSelectedPlayers(nextPlayers);
+    setCurrentChallenge(null);
+    setCurrentPlayers([]);
+    setSearchQuery("");
+    setRoleFilter("ALL");
+    setRandomizerKey((current) => current + 1);
+
+    if (nextPlayers.length === 0) {
+      setGameChallenge(null);
+      setTeamRespinUsed(false);
+      setSeasonRespinUsed(false);
+      setPitch(null);
     }
-
-    setGameState(
-      "playing"
-    );
+    setGameState("challenge");
   }
 
-  /*
-   * GAME
-   */
-  if (
-    gameState ===
-      "playing" &&
-    gameChallenge
-  ) {
+  const validation = useMemo(() => validateXI(selectedPlayers), [selectedPlayers]);
+
+  if (gameState === "playing") {
+    if (!gameChallenge) return null;
     return (
       <IPLGame
-        challenge={
-          gameChallenge
-        }
-        selectedPlayers={
-          selectedPlayers
-        }
-        onBackToSelection={() =>
-          setGameState(
-            "ready"
-          )
-        }
+        challenge={gameChallenge}
+        selectedPlayers={selectedPlayers}
+        onBackToSelection={() => setGameState("challenge")}
       />
     );
   }
 
-  /*
-   * READY
-   */
-  if (
-    gameState ===
-    "ready"
-  ) {
-    return (
-      <main className="w-full">
-        <section className="card mx-auto max-w-4xl p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-            Playing XI Ready
-          </p>
+  const building = selectedPlayers.length < MAX_PLAYERS;
+  const hasChallenge = Boolean(currentChallenge && gameState === "selection");
 
-          <h1 className="mt-2 text-2xl font-black">
-            Your XI is ready
-          </h1>
-
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            {
-              validation.counts.BAT
-            }{" "}
-            BAT ·{" "}
-            {
-              validation.counts.WK
-            }{" "}
-            WK ·{" "}
-            {
-              validation.counts.AR
-            }{" "}
-            AR ·{" "}
-            {
-              validation.counts.BOWL
-            }{" "}
-            BOWL
-          </p>
-
-          <div className="mt-5 grid gap-2 sm:grid-cols-2">
-            {selectedPlayers.map(
-              (
-                player,
-                index
-              ) => (
-                <div
-                  key={
-                    player.id
-                  }
-                  className="flex items-center gap-3 rounded-xl border border-[var(--line)] p-3"
-                >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-xs font-black text-[var(--accent)]">
-                    {
-                      index + 1
-                    }
-                  </span>
-
-                  <div>
-                    <p className="text-sm font-bold">
-                      {
-                        player.name
-                      }
-                    </p>
-
-                    <p className="text-xs text-[var(--muted)]">
-                      {
-                        player.role
-                      }
-                    </p>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() =>
-                setGameState(
-                  "challenge"
-                )
-              }
-              className="btn btn-secondary"
-            >
-              Edit XI
-            </button>
-
-            <button
-              type="button"
-              onClick={
-                handleStartGame
-              }
-              className="btn btn-primary"
-            >
-              Start Game
-            </button>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  /*
-   * MAIN SELECTION FLOW
-   */
   return (
-    <main className="flex min-h-0 w-full flex-1">
-      <section className="grid min-h-0 w-full gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-        {/* LEFT */}
-
-        <section className="flex min-h-0 flex-col">
-          {selectedPlayers.length <
-            MAX_PLAYERS && (
-            <>
-              {/* No player pool before spin */}
-
-              {!currentChallenge && (
-                <ChallengeRandomizer
-                  key={
-                    randomizerKey
-                  }
-                  onChallengeReady={
-                    handleChallengeReady
-                  }
+    <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
+      <section className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
+        <section className="min-h-0 overflow-hidden">
+          {currentChallenge && building ? (
+            <div className="flex h-full min-h-0 flex-col gap-3">
+              <div className="shrink-0">
+                <ChallengeBar
+                  challenge={currentChallenge}
+                  teamRespinUsed={teamRespinUsed}
+                  seasonRespinUsed={seasonRespinUsed}
+                  respinLoading={respinLoading}
+                  onRespinTeam={() => respin("team")}
+                  onRespinSeason={() => respin("season")}
                 />
+              </div>
+              <div className="min-h-0 flex-1 overflow-hidden">
+                {hasChallenge && (
+                  <PlayerPool
+  players={currentPlayers}
+  selectedPlayers={selectedPlayers}
+  searchQuery={searchQuery}
+  roleFilter={roleFilter}
+  onSearchChange={setSearchQuery}
+  onRoleFilterChange={setRoleFilter}
+  onSelectPlayer={handleSelectPlayer}
+ canSelectPlayer={(player) => canAddPlayer(selectedPlayers, player)}
+/>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="h-full min-h-0">
+              {building ? (
+                <ChallengeRandomizer key={randomizerKey} onChallengeReady={handleChallengeReady} />
+              ) : (
+                <div className="flex h-full items-center justify-center rounded-2xl border border-[var(--line)] bg-black/5 px-6 text-center">
+                  <p className="text-sm font-bold text-[var(--muted)]">XI complete</p>
+                </div>
               )}
-
-              {/* Player pool after spin */}
-
-              {currentChallenge && (
-                <PlayerPool
-                  players={
-                    currentPlayers
-                  }
-                  selectedPlayers={
-                    selectedPlayers
-                  }
-                  searchQuery={
-                    searchQuery
-                  }
-                  roleFilter={
-                    roleFilter
-                  }
-                  onSearchChange={
-                    setSearchQuery
-                  }
-                  onRoleFilterChange={
-                    setRoleFilter
-                  }
-                  onSelectPlayer={
-                    handleSelectPlayer
-                  }
-                  canSelectPlayer={(
-                    player
-                  ) =>
-                    canAddPlayer(
-                      selectedPlayers,
-                      player
-                    )
-                  }
-                />
-              )}
-            </>
+            </div>
           )}
 
-          {selectedPlayers.length ===
-            MAX_PLAYERS && (
-            <section className="card p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-                XI Complete
-              </p>
-
-              <h2 className="mt-2 text-xl font-black">
-                Validate your team
-              </h2>
-
-              {!validation.valid && (
-                <div className="mt-4 space-y-2">
-                  {validation.errors.map(
-                    (
-                      error
-                    ) => (
-                      <p
-                        key={
-                          error
-                        }
-                        className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400"
-                      >
-                        {
-                          error
-                        }
-                      </p>
-                    )
-                  )}
-                </div>
-              )}
-
-              {validation.valid && (
-                <p className="mt-3 text-sm text-emerald-400">
-                  Your XI satisfies all team composition rules.
-                </p>
-              )}
-
-              <button
-                type="button"
-                disabled={
-                  !validation.valid
-                }
-                onClick={
-                  handleContinue
-                }
-                className="btn btn-primary mt-5"
-              >
-                Continue
-              </button>
+          {selectedPlayers.length === MAX_PLAYERS && !validation.valid && (
+            <section className="card mt-3 p-4">
+              {validation.errors.map((error) => (
+                <p key={error} className="text-sm text-red-400">{error}</p>
+              ))}
             </section>
           )}
         </section>
 
-        {/* RIGHT */}
-
-        <div className="min-h-0">
+        <div className="min-h-0 overflow-hidden">
           <PlayingXI
-            players={
-              selectedPlayers
-            }
-            pitch={
-              pitch
-            }
-            onRemovePlayer={
-              handleRemovePlayer
-            }
+            players={selectedPlayers}
+            pitch={pitch}
+            onRemovePlayer={handleRemovePlayer}
           />
         </div>
       </section>
     </main>
+  );
+}
+
+function ChallengeBar({
+  challenge,
+  teamRespinUsed,
+  seasonRespinUsed,
+  respinLoading,
+  onRespinTeam,
+  onRespinSeason,
+}: {
+  challenge: IPLChallenge;
+  teamRespinUsed: boolean;
+  seasonRespinUsed: boolean;
+  respinLoading: RespinType | null;
+  onRespinTeam: () => void;
+  onRespinSeason: () => void;
+}) {
+  return (
+    <div className="rounded-xl border border-[var(--line)] bg-[var(--surface)]/80 px-2.5 py-2 shadow-sm backdrop-blur">
+      <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
+          <ChallengeValue label="Team" value={challenge.team.name} />
+          <ChallengeValue label="Season" value={challenge.season.season} />
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--line)] pt-2 sm:border-l sm:border-t-0 sm:pl-2 sm:pt-0">
+          <button type="button" onClick={onRespinTeam} disabled={respinLoading !== null || teamRespinUsed}
+            className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35">
+            {respinLoading === "team" ? "Rolling…" : teamRespinUsed ? "Team used" : "↻ Team"}
+          </button>
+          <button type="button" onClick={onRespinSeason} disabled={respinLoading !== null || seasonRespinUsed}
+            className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35">
+            {respinLoading === "season" ? "Rolling…" : seasonRespinUsed ? "Season used" : "↻ Season"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ChallengeValue({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-0 rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-1.5">
+      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">{label}</p>
+      <p className="mt-0.5 truncate text-xs font-black">{value}</p>
+    </div>
   );
 }

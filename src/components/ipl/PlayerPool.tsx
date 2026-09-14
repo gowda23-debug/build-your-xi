@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  Search,
-  Plus,
-} from "lucide-react";
+import { Plus, Search } from "lucide-react";
 
-import type {
-  IPLPlayer,
-  PlayerRole,
-} from "@/types/ipl";
-
+import type { IPLPlayer, PlayerRole } from "@/types/ipl";
 import {
   getBattingAverage,
   getBowlingAverage,
@@ -19,73 +12,34 @@ import {
 
 type PlayerPoolProps = {
   players: IPLPlayer[];
-
   selectedPlayers: IPLPlayer[];
-
   searchQuery: string;
-
-  roleFilter:
-    | "ALL"
-    | PlayerRole;
-
-  onSearchChange: (
-    value: string
-  ) => void;
-
-  onRoleFilterChange: (
-    role:
-      | "ALL"
-      | PlayerRole
-  ) => void;
-
-  onSelectPlayer: (
-    player: IPLPlayer
-  ) => void;
-
-  canSelectPlayer: (
-    player: IPLPlayer
-  ) => boolean;
+  roleFilter: "ALL" | PlayerRole;
+  onSearchChange: (value: string) => void;
+  onRoleFilterChange: (role: "ALL" | PlayerRole) => void;
+  onSelectPlayer: (player: IPLPlayer) => void;
+  canSelectPlayer: (player: IPLPlayer) => boolean;
 };
 
 const FILTERS = [
-  {
-    value: "ALL",
-    label: "All",
-  },
-  {
-    value: "BAT",
-    label: "Bat",
-  },
-  {
-    value: "WK",
-    label: "WK",
-  },
-  {
-    value: "AR",
-    label: "AR",
-  },
-  {
-    value: "BOWL",
-    label: "Bowl",
-  },
+  { value: "ALL", label: "All" },
+  { value: "BAT", label: "BAT" },
+  { value: "WK", label: "WK" },
+  { value: "AR", label: "AR" },
+  { value: "BOWL", label: "BOWL" },
 ] as const;
 
-function getRoleLabel(
-  role: PlayerRole
-) {
+function getRoleLabel(role: PlayerRole) {
   switch (role) {
-    case "BAT":
-      return "Batter";
-
-    case "WK":
-      return "Wicketkeeper";
-
-    case "AR":
-      return "All-Rounder";
-
-    case "BOWL":
-      return "Bowler";
+    case "BAT": return "Batter";
+    case "WK": return "Wicketkeeper";
+    case "AR": return "All-Rounder";
+    case "BOWL": return "Bowler";
   }
+}
+
+function formatStat(value: number | null) {
+  return value === null ? "—" : value.toFixed(2);
 }
 
 export default function PlayerPool({
@@ -97,268 +51,126 @@ export default function PlayerPool({
   onSelectPlayer,
   canSelectPlayer,
 }: PlayerPoolProps) {
-  const filteredPlayers =
-    players.filter(
-      (player) => {
-        const matchesSearch =
-          player.name
-            .toLowerCase()
-            .includes(
-              searchQuery
-                .toLowerCase()
-                .trim()
-            );
-
-        const matchesRole =
-          roleFilter === "ALL" ||
-          player.role ===
-            roleFilter;
-
-        return (
-          matchesSearch &&
-          matchesRole
-        );
-      }
-    );
+  const normalizedSearch = searchQuery.toLowerCase().trim();
+  const filteredPlayers = players.filter((player) => {
+    const matchesSearch = player.name.toLowerCase().includes(normalizedSearch);
+    const matchesRole = roleFilter === "ALL" || player.role === roleFilter;
+    return matchesSearch && matchesRole;
+  });
 
   return (
-    <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
-      <div className="border-b border-[var(--line)] px-4 py-3">
+    <section className="card flex h-full min-h-0 flex-col overflow-hidden">
+      <header className="shrink-0 border-b border-[var(--line)] px-3 py-2">
         <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+          <div className="min-w-0">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
               Available Players
             </p>
-
-            <p className="mt-1 text-xs text-[var(--muted)]">
-              Select exactly one player
+            <p className="mt-0.5 text-[10px] text-[var(--muted)]">
+              Choose 1 player · {filteredPlayers.length} available
             </p>
           </div>
-
-          <span className="text-sm font-black">
-            {
-              filteredPlayers.length
-            }
+          <span className="shrink-0 text-[10px] font-black text-[var(--muted)]">
+            {filteredPlayers.length}
           </span>
         </div>
 
-        <div className="relative mt-3">
-          <Search
-            size={15}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]"
-          />
-
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(event) =>
-              onSearchChange(
-                event.target.value
-              )
-            }
-            placeholder="Search players..."
-            className="w-full rounded-lg border border-[var(--line)] bg-transparent py-2 pl-9 pr-3 text-sm outline-none focus:border-[var(--accent)]"
-          />
-        </div>
-
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-          {FILTERS.map(
-            (filter) => (
+        <div className="mt-2 flex gap-2">
+          <div className="relative min-w-0 flex-1">
+            <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(event) => onSearchChange(event.target.value)}
+              placeholder="Search player..."
+              className="h-8 w-full rounded-lg border border-[var(--line)] bg-black/10 pl-8 pr-2.5 text-xs outline-none transition focus:border-[var(--accent)]"
+            />
+          </div>
+          <div className="flex shrink-0 gap-1 overflow-x-auto">
+            {FILTERS.map((filter) => (
               <button
-                key={
-                  filter.value
-                }
+                key={filter.value}
                 type="button"
-                onClick={() =>
-                  onRoleFilterChange(
-                    filter.value
-                  )
-                }
+                onClick={() => onRoleFilterChange(filter.value)}
                 className={[
-                  "shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition",
-                  roleFilter ===
-                  filter.value
-                    ? "bg-[var(--accent)] text-white"
-                    : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)]",
+                  "h-8 shrink-0 rounded-lg px-2.5 text-[10px] font-bold transition",
+                  roleFilter === filter.value
+                    ? "bg-[var(--accent)] text-[#112016]"
+                    : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]",
                 ].join(" ")}
               >
-                {
-                  filter.label
-                }
+                {filter.label}
               </button>
-            )
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
-        {filteredPlayers.map(
-          (player) => {
-            const canSelect =
-              canSelectPlayer(
-                player
-              );
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+        {filteredPlayers.map((player) => {
+          const canSelect = canSelectPlayer(player);
 
-            const battingAverage =
-              getBattingAverage(
-                player
-              );
-
-            const strikeRate =
-              getStrikeRate(
-                player
-              );
-
-            const bowlingAverage =
-              getBowlingAverage(
-                player
-              );
-
-            const economy =
-              getEconomyRate(
-                player
-              );
-
-            return (
-              <button
-                key={
-                  player.id
-                }
-                type="button"
-                disabled={
-                  !canSelect
-                }
-                onClick={() =>
-                  onSelectPlayer(
-                    player
-                  )
-                }
-                className={[
-                  "flex w-full items-center justify-between gap-4 border-b border-[var(--line)] px-4 py-3 text-left transition",
-                  canSelect
-                    ? "hover:bg-[var(--surface-hover)]"
-                    : "cursor-not-allowed opacity-40",
-                ].join(" ")}
-              >
+          return (
+            <button
+              key={player.id}
+              type="button"
+              disabled={!canSelect}
+              onClick={() => onSelectPlayer(player)}
+              className={[
+                "group w-full border-b border-[var(--line)] px-3 py-2 text-left transition-colors",
+                canSelect
+                  ? "hover:bg-[var(--surface-hover)]"
+                  : "cursor-not-allowed opacity-30",
+              ].join(" ")}
+            >
+              <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="truncate text-sm font-bold">
-                      {
-                        player.name
-                      }
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <p className="truncate text-xs font-bold group-hover:text-[var(--accent)]">
+                      {player.name}
                     </p>
-
-                    <span className="rounded-md bg-[var(--accent)]/10 px-2 py-0.5 text-[10px] font-black text-[var(--accent)]">
-                      {
-                        player.role
-                      }
+                    <span className="shrink-0 rounded-md bg-[var(--accent)]/10 px-1.5 py-0.5 text-[8px] font-black text-[var(--accent)]">
+                      {player.role}
                     </span>
                   </div>
-
-                  <p className="mt-1 text-xs text-[var(--muted)]">
-                    {
-                      getRoleLabel(
-                        player.role
-                      )
-                    }
-                    {" · "}
-                    {
-                      player.stats
-                        .matches
-                    } matches
-                  </p>
-
-                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-[var(--muted)]">
-                    <span>
-                      Runs{" "}
-                      <strong>
-                        {
-                          player.stats
-                            .runs
-                        }
-                      </strong>
-                    </span>
-
-                    {battingAverage !==
-                      null && (
-                      <span>
-                        Avg{" "}
-                        <strong>
-                          {
-                            battingAverage
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    {strikeRate !==
-                      null && (
-                      <span>
-                        SR{" "}
-                        <strong>
-                          {
-                            strikeRate
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    <span>
-                      Wkts{" "}
-                      <strong>
-                        {
-                          player.stats
-                            .wickets
-                        }
-                      </strong>
-                    </span>
-
-                    {bowlingAverage !==
-                      null && (
-                      <span>
-                        Bowl Avg{" "}
-                        <strong>
-                          {
-                            bowlingAverage
-                          }
-                        </strong>
-                      </span>
-                    )}
-
-                    {economy !==
-                      null && (
-                      <span>
-                        Econ{" "}
-                        <strong>
-                          {
-                            economy
-                          }
-                        </strong>
-                      </span>
-                    )}
-                  </div>
+                  <p className="mt-0.5 text-[9px] text-[var(--muted)]">{getRoleLabel(player.role)}</p>
                 </div>
 
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)]">
-                  <Plus
-                    size={16}
-                    className="text-[var(--accent)]"
-                  />
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--line)] group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]/10">
+                  <Plus size={12} className="text-[var(--accent)]" />
                 </span>
-              </button>
-            );
-          }
-        )}
+              </div>
 
-        {filteredPlayers.length ===
-          0 && (
-          <div className="p-8 text-center">
-            <p className="text-sm font-bold">
-              No players found
-            </p>
+              <div className="mt-1.5 grid grid-cols-4 gap-x-2 gap-y-1.5">
+                <Stat label="Role" value={getRoleLabel(player.role)} />
+                <Stat label="Matches" value={String(player.stats.matches)} />
+                <Stat label="Batting average" value={formatStat(getBattingAverage(player))} />
+                <Stat label="Strike rate" value={formatStat(getStrikeRate(player))} />
+                <Stat label="Highest score" value={String(player.stats.highestScore)} />
+                <Stat label="Wickets" value={String(player.stats.wickets)} />
+                <Stat label="Bowling average" value={formatStat(getBowlingAverage(player))} />
+                <Stat label="Economy rate" value={formatStat(getEconomyRate(player))} />
+              </div>
+            </button>
+          );
+        })}
+
+        {filteredPlayers.length === 0 && (
+          <div className="p-6 text-center">
+            <p className="text-xs font-bold">No players found</p>
+            <p className="mt-1 text-[10px] text-[var(--muted)]">Try another search or role.</p>
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-0">
+      <p className="truncate text-[7px] uppercase tracking-wide text-[var(--muted)]">{label}</p>
+      <p className="mt-0.5 truncate text-[9px] font-bold">{value}</p>
+    </div>
   );
 }
