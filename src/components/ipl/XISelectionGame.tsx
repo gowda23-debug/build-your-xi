@@ -157,10 +157,10 @@ export default function XISelectionGame() {
 
   return (
     <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
-      <section className="grid h-full min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
-        <section className="min-h-0 overflow-hidden">
+      <section className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)] gap-3 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
+        <section className="min-h-0 min-w-0 overflow-hidden">
           {currentChallenge && building ? (
-            <div className="flex h-full min-h-0 flex-col gap-3">
+            <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
               <div className="shrink-0">
                 <ChallengeBar
                   challenge={currentChallenge}
@@ -207,7 +207,7 @@ export default function XISelectionGame() {
           )}
         </section>
 
-        <div className="min-h-0 overflow-hidden">
+        <div className="min-h-0 min-w-0 overflow-hidden">
           <PlayingXI
             players={selectedPlayers}
             pitch={pitch}
