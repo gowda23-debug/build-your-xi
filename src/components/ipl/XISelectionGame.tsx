@@ -157,7 +157,7 @@ export default function XISelectionGame() {
 
   return (
     <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
-      <section className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
+      <section className="grid h-full min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
         <section className="min-h-0 overflow-hidden">
           {currentChallenge && building ? (
             <div className="flex h-full min-h-0 flex-col gap-3">
@@ -174,15 +174,15 @@ export default function XISelectionGame() {
               <div className="min-h-0 flex-1 overflow-hidden">
                 {hasChallenge && (
                   <PlayerPool
-  players={currentPlayers}
-  selectedPlayers={selectedPlayers}
-  searchQuery={searchQuery}
-  roleFilter={roleFilter}
-  onSearchChange={setSearchQuery}
-  onRoleFilterChange={setRoleFilter}
-  onSelectPlayer={handleSelectPlayer}
- canSelectPlayer={(player) => canAddPlayer(selectedPlayers, player)}
-/>
+                    players={currentPlayers}
+                    selectedPlayers={selectedPlayers}
+                    searchQuery={searchQuery}
+                    roleFilter={roleFilter}
+                    onSearchChange={setSearchQuery}
+                    onRoleFilterChange={setRoleFilter}
+                    onSelectPlayer={handleSelectPlayer}
+                    canSelectPlayer={(player) => canAddPlayer(selectedPlayers, player)}
+                  />
                 )}
               </div>
             </div>
