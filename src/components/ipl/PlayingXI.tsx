@@ -44,6 +44,10 @@ export default function PlayingXI({ players, pitch }: PlayingXIProps) {
             <div className="absolute left-1/2 top-1/2 h-[27%] w-[7%] -translate-x-1/2 -translate-y-1/2 rounded border border-amber-100/10 bg-amber-100/[0.04]" />
 
             <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 overflow-hidden px-2 py-4">
+              <RoleGroup label={ROLE_LABELS.WK} players={groupedPlayers.WK} />
+              <RoleGroup label={ROLE_LABELS.BAT} players={groupedPlayers.BAT} />
+              <RoleGroup label={ROLE_LABELS.AR} players={groupedPlayers.AR} />
+              <RoleGroup label={ROLE_LABELS.BOWL} players={groupedPlayers.BOWL} />
 
               {players.length === 0 && (
                 <div className="rounded-xl border border-dashed border-white/15 bg-black/20 px-5 py-4 text-center backdrop-blur-sm">
