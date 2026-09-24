@@ -121,33 +121,30 @@ export default function XISelectionGame() {
     setGameState("challenge");
   }
 
-  function handleRemovePlayer(playerId: string) {
-    const nextPlayers = selectedPlayers.filter((player) => player.id !== playerId);
-    setSelectedPlayers(nextPlayers);
+
+  const validation = useMemo(() => validateXI(selectedPlayers), [selectedPlayers]);
+  function handleBuildAnother() {
+    setGameChallenge(null);
     setCurrentChallenge(null);
     setCurrentPlayers([]);
+    setSelectedPlayers([]);
+    setPitch(null);
+    setGameState("challenge");
     setSearchQuery("");
     setRoleFilter("ALL");
     setRandomizerKey((current) => current + 1);
-
-    if (nextPlayers.length === 0) {
-      setGameChallenge(null);
-      setTeamRespinUsed(false);
-      setSeasonRespinUsed(false);
-      setPitch(null);
-    }
-    setGameState("challenge");
+    setRespinLoading(null);
+    setTeamRespinUsed(false);
+    setSeasonRespinUsed(false);
   }
-
-  const validation = useMemo(() => validateXI(selectedPlayers), [selectedPlayers]);
-
   if (gameState === "playing") {
     if (!gameChallenge) return null;
     return (
       <IPLGame
         challenge={gameChallenge}
         selectedPlayers={selectedPlayers}
-        onBackToSelection={() => setGameState("challenge")}
+        pitch={pitch}
+        onBuildAnother={handleBuildAnother}
       />
     );
   }
@@ -211,7 +208,6 @@ export default function XISelectionGame() {
           <PlayingXI
             players={selectedPlayers}
             pitch={pitch}
-            onRemovePlayer={handleRemovePlayer}
           />
         </div>
       </section>

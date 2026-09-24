@@ -5,7 +5,6 @@ import type { IPLPlayer, PitchProfile, PlayerRole } from "@/types/ipl";
 interface PlayingXIProps {
   players: IPLPlayer[];
   pitch: PitchProfile | null;
-  onRemovePlayer: (playerId: string) => void;
 }
 
 const ROLE_LABELS: Record<PlayerRole, string> = {
@@ -15,7 +14,7 @@ const ROLE_LABELS: Record<PlayerRole, string> = {
   BOWL: "Bowlers",
 };
 
-export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIProps) {
+export default function PlayingXI({ players, pitch }: PlayingXIProps) {
   const groupedPlayers: Record<PlayerRole, IPLPlayer[]> = {
     WK: players.filter((player) => player.role === "WK"),
     BAT: players.filter((player) => player.role === "BAT"),
@@ -45,10 +44,6 @@ export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIP
             <div className="absolute left-1/2 top-1/2 h-[27%] w-[7%] -translate-x-1/2 -translate-y-1/2 rounded border border-amber-100/10 bg-amber-100/[0.04]" />
 
             <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 overflow-hidden px-2 py-4">
-              <RoleGroup label={ROLE_LABELS.WK} players={groupedPlayers.WK} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.BAT} players={groupedPlayers.BAT} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.AR} players={groupedPlayers.AR} onRemovePlayer={onRemovePlayer} />
-              <RoleGroup label={ROLE_LABELS.BOWL} players={groupedPlayers.BOWL} onRemovePlayer={onRemovePlayer} />
 
               {players.length === 0 && (
                 <div className="rounded-xl border border-dashed border-white/15 bg-black/20 px-5 py-4 text-center backdrop-blur-sm">
@@ -97,11 +92,9 @@ export default function PlayingXI({ players, pitch, onRemovePlayer }: PlayingXIP
 function RoleGroup({
   label,
   players,
-  onRemovePlayer,
 }: {
   label: string;
   players: IPLPlayer[];
-  onRemovePlayer: (playerId: string) => void;
 }) {
   if (players.length === 0) return null;
 
@@ -110,16 +103,13 @@ function RoleGroup({
       <p className="mb-1 text-center text-[8px] font-black uppercase tracking-[0.16em] text-white/50">{label}</p>
       <div className="flex flex-wrap justify-center gap-1">
         {players.map((player) => (
-          <div key={player.id} className="flex items-center gap-1 rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5">
-            <span className="max-w-[135px] truncate text-[9px] font-semibold text-white/90">{player.name}</span>
-            <button
-              type="button"
-              onClick={() => onRemovePlayer(player.id)}
-              className="text-xs leading-none text-white/30 transition hover:text-red-400"
-              aria-label={`Remove ${player.name}`}
-            >
-              ×
-            </button>
+          <div
+            key={player.id}
+            className="rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5"
+          >
+            <span className="max-w-[135px] truncate text-[9px] font-semibold text-white/90">
+              {player.name}
+            </span>
           </div>
         ))}
       </div>
