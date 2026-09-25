@@ -15,14 +15,6 @@ export type PlayerRole =
   | "AR"
   | "BOWL";
 
-export type IPLChallenge = {
-  teamSeasonId: string;
-
-  team: IPLTeam;
-
-  season: IPLSeason;
-};
-
 export type RandomTeamResponse = {
   teamSeasonId?: string;
 
@@ -96,26 +88,6 @@ export type PitchType =
   | "SPIN"
   | "BALANCED";
 
-export type PitchProfile = {
-  id: string;
-
-  title: string;
-
-  type: PitchType;
-
-  summary: string;
-
-  batting: number;
-
-  pace: number;
-
-  spin: number;
-
-  dew: number;
-
-  strategy: string;
-};
-
 export type RoleCounts = {
   BAT: number;
   WK: number;
@@ -129,4 +101,31 @@ export type XIValidation = {
   errors: string[];
 
   counts: RoleCounts;
+};
+
+export type PitchProfile = {
+  id: string;
+  title: string;
+  type: PitchType;
+  summary: string;
+  batting: number;
+  pace: number;
+  spin: number;
+  dew: number;
+  strategy: string;
+};
+
+export type IPLVenue = {
+  id: string;
+  name: string;
+  city: string | null;
+  country: string;
+  pitch: PitchProfile;
+};
+
+export type IPLChallenge = {
+  teamSeasonId: string;
+  team: IPLTeam;
+  season: IPLSeason;
+  venue: IPLVenue;
 };
