@@ -82,7 +82,7 @@ export default function PlayerPool({
               type="search"
               value={searchQuery}
               onChange={(event) => onSearchChange(event.target.value)}
-              placeholder="Search player..."
+              placeholder="    Search player..."
               className="h-8 w-full rounded-lg border border-[var(--line)] bg-black/10 pl-8 pr-2.5 text-xs outline-none transition focus:border-[var(--accent)]"
             />
           </div>

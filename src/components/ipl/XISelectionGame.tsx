@@ -111,7 +111,7 @@ export default function XISelectionGame() {
     if (!response.ok) {
       throw new Error(
         data?.error ??
-          "Unable to load available players."
+        "Unable to load available players."
       );
     }
 
@@ -155,17 +155,31 @@ export default function XISelectionGame() {
     try {
       const endpoint =
         type === "team"
-          ? `/api/ipl/random/team?seasonId=${encodeURIComponent(
-              gameChallenge.season.id
-            )}`
-          : `/api/ipl/random/season?teamId=${encodeURIComponent(
-              gameChallenge.team.id
-            )}`;
+          ? "/api/ipl/random/team"
+          : "/api/ipl/random/season";
 
       const response =
         await fetch(endpoint, {
-          method: "GET",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           cache: "no-store",
+          body: JSON.stringify(
+            type === "team"
+              ? {
+                gameSessionId:
+                  gameChallenge.gameSessionId,
+                seasonId:
+                  gameChallenge.season.id,
+              }
+              : {
+                gameSessionId:
+                  gameChallenge.gameSessionId,
+                teamId:
+                  gameChallenge.team.id,
+              }
+          ),
         });
 
       const data =
@@ -176,7 +190,7 @@ export default function XISelectionGame() {
       if (!response.ok) {
         throw new Error(
           data?.error ??
-            `Unable to respin the ${type}.`
+          `Unable to respin the ${type}.`
         );
       }
 
@@ -206,17 +220,12 @@ export default function XISelectionGame() {
         }
 
         nextChallenge = {
-          teamSeasonId:
-            data.teamSeasonId,
-
-          team:
-            data.team,
-
-          season:
-            gameChallenge.season,
-
-          venue:
-            gameChallenge.venue,
+          teamSeasonId: data.teamSeasonId,
+          team: data.team,
+          season: gameChallenge.season,
+          venue: gameChallenge.venue,
+          gameSessionId:
+            gameChallenge.gameSessionId,
         };
       }
 
@@ -242,22 +251,18 @@ export default function XISelectionGame() {
           teamSeasonId:
             data.season.teamSeasonId,
 
-          team:
-            gameChallenge.team,
+          team: gameChallenge.team,
 
           season: {
-            id:
-              data.season.id,
-
-            season:
-              data.season.season,
-
-            startYear:
-              data.season.startYear,
+            id: data.season.id,
+            season: data.season.season,
+            startYear: data.season.startYear,
           },
 
-          venue:
-            gameChallenge.venue,
+          venue: gameChallenge.venue,
+
+          gameSessionId:
+            gameChallenge.gameSessionId,
         };
       }
 
@@ -334,7 +339,7 @@ export default function XISelectionGame() {
 
     if (
       nextPlayers.length ===
-        MAX_PLAYERS &&
+      MAX_PLAYERS &&
       validateXI(nextPlayers).valid
     ) {
       setGameState("playing");
@@ -401,8 +406,8 @@ export default function XISelectionGame() {
   const hasChallenge =
     Boolean(
       currentChallenge &&
-        gameState ===
-          "selection"
+      gameState ===
+      "selection"
     );
 
   return (
@@ -410,7 +415,7 @@ export default function XISelectionGame() {
       <section className="grid h-full min-h-0 flex-1 grid-rows-[minmax(0,1fr)] gap-3 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
         <section className="flex min-h-0 min-w-0 flex-col overflow-hidden">
           {currentChallenge &&
-          building ? (
+            building ? (
             <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
               <div className="shrink-0">
                 <ChallengeBar
@@ -540,8 +545,8 @@ function ChallengeBar({
   teamRespinUsed: boolean;
   seasonRespinUsed: boolean;
   respinLoading:
-    | RespinType
-    | null;
+  | RespinType
+  | null;
   onRespinTeam: () => void;
   onRespinSeason: () => void;
 }) {
@@ -572,13 +577,13 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-                null ||
+              null ||
               teamRespinUsed
             }
             className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-            "team"
+              "team"
               ? "Rolling…"
               : teamRespinUsed
                 ? "Team used"
@@ -592,13 +597,13 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-                null ||
+              null ||
               seasonRespinUsed
             }
             className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-            "season"
+              "season"
               ? "Rolling…"
               : seasonRespinUsed
                 ? "Season used"
@@ -610,11 +615,10 @@ function ChallengeBar({
       <div className="mt-2 border-t border-[var(--line)] pt-2">
         <ChallengeValue
           label="Venue"
-          value={`${challenge.venue.name}${
-            challenge.venue.city
-              ? ` • ${challenge.venue.city}`
-              : ""
-          }`}
+          value={`${challenge.venue.name}${challenge.venue.city
+            ? ` • ${challenge.venue.city}`
+            : ""
+            }`}
         />
       </div>
     </div>

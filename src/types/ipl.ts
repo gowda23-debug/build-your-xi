@@ -123,9 +123,11 @@ export type IPLVenue = {
   pitch: PitchProfile;
 };
 
+
 export type IPLChallenge = {
   teamSeasonId: string;
   team: IPLTeam;
   season: IPLSeason;
   venue: IPLVenue;
+  gameSessionId: string | null;
 };
