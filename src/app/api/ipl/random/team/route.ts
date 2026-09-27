@@ -3,16 +3,12 @@ import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
-export const dynamic =
-  "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request
 ) {
   try {
-    /*
-     * Authentication
-     */
     const { error: authError } =
       await requireUser();
 
@@ -24,9 +20,7 @@ export async function GET(
       new URL(request.url);
 
     const seasonId =
-      searchParams.get(
-        "seasonId"
-      );
+      searchParams.get("seasonId");
 
     if (!seasonId) {
       return NextResponse.json(
@@ -40,11 +34,6 @@ export async function GET(
       );
     }
 
-    /*
-     * Retrieve only teams that
-     * actually existed in the
-     * selected season.
-     */
     const {
       data: teamSeasons,
       error,
@@ -103,9 +92,7 @@ export async function GET(
       ];
 
     const team =
-      Array.isArray(
-        selected.team
-      )
+      Array.isArray(selected.team)
         ? selected.team[0]
         : selected.team;
 

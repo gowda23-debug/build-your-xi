@@ -1,32 +1,68 @@
 "use client";
 
 import { useMemo, useState } from "react";
+
 import ChallengeRandomizer from "./ChallengeRandomizer";
 import IPLGame from "./IPLGame";
 import PlayerPool from "./PlayerPool";
 import PlayingXI from "./PlayingXI";
-import { getRandomPitch } from "@/lib/ipl-challenge/pitches";
-import { canAddPlayer, validateXI } from "@/lib/ipl-challenge/validate-xi";
-import type { IPLChallenge, IPLGameState, IPLPlayer, PitchProfile, PlayerRole } from "@/types/ipl";
+
+import {
+  canAddPlayer,
+  validateXI,
+} from "@/lib/ipl-challenge/validate-xi";
+
+import type {
+  IPLChallenge,
+  IPLGameState,
+  IPLPlayer,
+  PlayerRole,
+} from "@/types/ipl";
 
 const MAX_PLAYERS = 11;
-type RespinType = "team" | "season";
+
+type RespinType =
+  | "team"
+  | "season";
 
 export default function XISelectionGame() {
-  const [gameChallenge, setGameChallenge] = useState<IPLChallenge | null>(null);
-  const [currentChallenge, setCurrentChallenge] = useState<IPLChallenge | null>(null);
-  const [currentPlayers, setCurrentPlayers] = useState<IPLPlayer[]>([]);
-  const [selectedPlayers, setSelectedPlayers] = useState<IPLPlayer[]>([]);
-  const [pitch, setPitch] = useState<PitchProfile | null>(null);
-  const [gameState, setGameState] = useState<IPLGameState>("challenge");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [roleFilter, setRoleFilter] = useState<"ALL" | PlayerRole>("ALL");
-  const [randomizerKey, setRandomizerKey] = useState(0);
-  const [respinLoading, setRespinLoading] = useState<RespinType | null>(null);
-  const [teamRespinUsed, setTeamRespinUsed] = useState(false);
-  const [seasonRespinUsed, setSeasonRespinUsed] = useState(false);
+  const [gameChallenge, setGameChallenge] =
+    useState<IPLChallenge | null>(null);
 
-  function resetPlayerPool(challenge: IPLChallenge, players: IPLPlayer[]) {
+  const [currentChallenge, setCurrentChallenge] =
+    useState<IPLChallenge | null>(null);
+
+  const [currentPlayers, setCurrentPlayers] =
+    useState<IPLPlayer[]>([]);
+
+  const [selectedPlayers, setSelectedPlayers] =
+    useState<IPLPlayer[]>([]);
+
+  const [gameState, setGameState] =
+    useState<IPLGameState>("challenge");
+
+  const [searchQuery, setSearchQuery] =
+    useState("");
+
+  const [roleFilter, setRoleFilter] =
+    useState<"ALL" | PlayerRole>("ALL");
+
+  const [randomizerKey, setRandomizerKey] =
+    useState(0);
+
+  const [respinLoading, setRespinLoading] =
+    useState<RespinType | null>(null);
+
+  const [teamRespinUsed, setTeamRespinUsed] =
+    useState(false);
+
+  const [seasonRespinUsed, setSeasonRespinUsed] =
+    useState(false);
+
+  function resetPlayerPool(
+    challenge: IPLChallenge,
+    players: IPLPlayer[]
+  ) {
     setCurrentChallenge(challenge);
     setCurrentPlayers(players);
     setSearchQuery("");
@@ -34,151 +70,403 @@ export default function XISelectionGame() {
     setGameState("selection");
   }
 
-  function handleChallengeReady(challenge: IPLChallenge, players: IPLPlayer[]) {
-    const startingNewXI = selectedPlayers.length === 0;
+  function handleChallengeReady(
+    challenge: IPLChallenge,
+    players: IPLPlayer[]
+  ) {
+    const startingNewXI =
+      selectedPlayers.length === 0;
+
     setGameChallenge(challenge);
+
     if (startingNewXI) {
       setTeamRespinUsed(false);
       setSeasonRespinUsed(false);
-      setPitch(getRandomPitch());
     }
-    resetPlayerPool(challenge, players);
+
+    resetPlayerPool(
+      challenge,
+      players
+    );
   }
 
-  async function fetchPlayers(teamSeasonId: string): Promise<IPLPlayer[]> {
-    const response = await fetch(`/api/ipl/team-season/${encodeURIComponent(teamSeasonId)}/players`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!response.ok) throw new Error("Unable to load available players.");
-    const data = await response.json();
-    if (!Array.isArray(data?.players)) throw new Error("Invalid player data received.");
+  async function fetchPlayers(
+    teamSeasonId: string
+  ): Promise<IPLPlayer[]> {
+    const response = await fetch(
+      `/api/ipl/team-season/${encodeURIComponent(
+        teamSeasonId
+      )}/players`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    const data =
+      await response.json().catch(
+        () => null
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error ??
+          "Unable to load available players."
+      );
+    }
+
+    if (
+      !Array.isArray(data?.players)
+    ) {
+      throw new Error(
+        "Invalid player data received."
+      );
+    }
+
     return data.players;
   }
 
-  async function respin(type: RespinType) {
-    if (!gameChallenge || respinLoading) return;
-    if (type === "team" && teamRespinUsed) return;
-    if (type === "season" && seasonRespinUsed) return;
+  async function respin(
+    type: RespinType
+  ) {
+    if (
+      !gameChallenge ||
+      respinLoading
+    ) {
+      return;
+    }
+
+    if (
+      type === "team" &&
+      teamRespinUsed
+    ) {
+      return;
+    }
+
+    if (
+      type === "season" &&
+      seasonRespinUsed
+    ) {
+      return;
+    }
 
     setRespinLoading(type);
-    try {
-      const endpoint = type === "team"
-        ? `/api/ipl/random/team?seasonId=${encodeURIComponent(gameChallenge.season.id)}`
-        : `/api/ipl/random/season?teamId=${encodeURIComponent(gameChallenge.team.id)}`;
-      const response = await fetch(endpoint, { method: "GET", cache: "no-store" });
-      if (!response.ok) throw new Error(`Unable to respin the ${type}.`);
 
-      const data = await response.json();
+    try {
+      const endpoint =
+        type === "team"
+          ? `/api/ipl/random/team?seasonId=${encodeURIComponent(
+              gameChallenge.season.id
+            )}`
+          : `/api/ipl/random/season?teamId=${encodeURIComponent(
+              gameChallenge.team.id
+            )}`;
+
+      const response =
+        await fetch(endpoint, {
+          method: "GET",
+          cache: "no-store",
+        });
+
+      const data =
+        await response.json().catch(
+          () => null
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ??
+            `Unable to respin the ${type}.`
+        );
+      }
+
       let nextChallenge: IPLChallenge;
 
+      /*
+       * IMPORTANT:
+       *
+       * The venue is deliberately preserved
+       * from the initial spin.
+       *
+       * Team respin changes:
+       *   - team
+       *   - teamSeasonId
+       *   - player pool
+       *
+       * It does NOT change the venue.
+       */
       if (type === "team") {
-        if (!data?.team?.id || !data?.teamSeasonId) throw new Error("Invalid team data received.");
+        if (
+          !data?.team?.id ||
+          !data?.teamSeasonId
+        ) {
+          throw new Error(
+            "Invalid team data received."
+          );
+        }
+
         nextChallenge = {
-          teamSeasonId: data.teamSeasonId,
-          team: data.team,
-          season: gameChallenge.season,
-        };
-      } else {
-        if (!data?.season?.id || !data.season.teamSeasonId) throw new Error("Invalid season data received.");
-        nextChallenge = {
-          teamSeasonId: data.season.teamSeasonId,
-          team: gameChallenge.team,
-          season: {
-            id: data.season.id,
-            season: data.season.season,
-            startYear: data.season.startYear,
-          },
+          teamSeasonId:
+            data.teamSeasonId,
+
+          team:
+            data.team,
+
+          season:
+            gameChallenge.season,
+
+          venue:
+            gameChallenge.venue,
         };
       }
 
-      const players = await fetchPlayers(nextChallenge.teamSeasonId);
-      setGameChallenge(nextChallenge);
-      if (type === "team") setTeamRespinUsed(true);
-      if (type === "season") setSeasonRespinUsed(true);
-      resetPlayerPool(nextChallenge, players);
+      /*
+       * Season respin changes:
+       *   - season
+       *   - teamSeasonId
+       *   - player pool
+       *
+       * The original venue remains locked.
+       */
+      else {
+        if (
+          !data?.season?.id ||
+          !data?.season?.teamSeasonId
+        ) {
+          throw new Error(
+            "Invalid season data received."
+          );
+        }
+
+        nextChallenge = {
+          teamSeasonId:
+            data.season.teamSeasonId,
+
+          team:
+            gameChallenge.team,
+
+          season: {
+            id:
+              data.season.id,
+
+            season:
+              data.season.season,
+
+            startYear:
+              data.season.startYear,
+          },
+
+          venue:
+            gameChallenge.venue,
+        };
+      }
+
+      /*
+       * Load players belonging to
+       * the new team-season.
+       */
+      const players =
+        await fetchPlayers(
+          nextChallenge.teamSeasonId
+        );
+
+      if (players.length === 0) {
+        throw new Error(
+          "No eligible players are available for this team and season."
+        );
+      }
+
+      setGameChallenge(
+        nextChallenge
+      );
+
+      if (type === "team") {
+        setTeamRespinUsed(true);
+      }
+
+      if (type === "season") {
+        setSeasonRespinUsed(true);
+      }
+
+      resetPlayerPool(
+        nextChallenge,
+        players
+      );
     } catch (error) {
-      console.error(`IPL ${type} respin failed:`, error);
+      console.error(
+        `IPL ${type} respin failed:`,
+        error
+      );
     } finally {
       setRespinLoading(null);
     }
   }
 
-  function handleSelectPlayer(player: IPLPlayer) {
-    if (!canAddPlayer(selectedPlayers, player)) return;
-    const nextPlayers = [...selectedPlayers, player];
-    setSelectedPlayers(nextPlayers);
+  function handleSelectPlayer(
+    player: IPLPlayer
+  ) {
+    if (
+      !canAddPlayer(
+        selectedPlayers,
+        player
+      )
+    ) {
+      return;
+    }
+
+    const nextPlayers = [
+      ...selectedPlayers,
+      player,
+    ];
+
+    setSelectedPlayers(
+      nextPlayers
+    );
+
     setCurrentChallenge(null);
     setCurrentPlayers([]);
     setSearchQuery("");
     setRoleFilter("ALL");
-    setRandomizerKey((current) => current + 1);
 
-    if (nextPlayers.length === MAX_PLAYERS && validateXI(nextPlayers).valid) {
+    setRandomizerKey(
+      (current) => current + 1
+    );
+
+    if (
+      nextPlayers.length ===
+        MAX_PLAYERS &&
+      validateXI(nextPlayers).valid
+    ) {
       setGameState("playing");
       return;
     }
+
     setGameState("challenge");
   }
 
+  const validation = useMemo(
+    () => validateXI(selectedPlayers),
+    [selectedPlayers]
+  );
 
-  const validation = useMemo(() => validateXI(selectedPlayers), [selectedPlayers]);
   function handleBuildAnother() {
     setGameChallenge(null);
     setCurrentChallenge(null);
     setCurrentPlayers([]);
     setSelectedPlayers([]);
-    setPitch(null);
+
     setGameState("challenge");
+
     setSearchQuery("");
     setRoleFilter("ALL");
-    setRandomizerKey((current) => current + 1);
+
+    setRandomizerKey(
+      (current) => current + 1
+    );
+
     setRespinLoading(null);
+
     setTeamRespinUsed(false);
     setSeasonRespinUsed(false);
   }
+
+  /*
+   * GAME
+   */
   if (gameState === "playing") {
-    if (!gameChallenge) return null;
+    if (!gameChallenge) {
+      return null;
+    }
+
     return (
       <IPLGame
         challenge={gameChallenge}
-        selectedPlayers={selectedPlayers}
-        pitch={pitch}
-        onBuildAnother={handleBuildAnother}
+        selectedPlayers={
+          selectedPlayers
+        }
+        pitch={
+          gameChallenge.venue.pitch
+        }
+        onBuildAnother={
+          handleBuildAnother
+        }
       />
     );
   }
 
-  const building = selectedPlayers.length < MAX_PLAYERS;
-  const hasChallenge = Boolean(currentChallenge && gameState === "selection");
+  const building =
+    selectedPlayers.length <
+    MAX_PLAYERS;
+
+  const hasChallenge =
+    Boolean(
+      currentChallenge &&
+        gameState ===
+          "selection"
+    );
 
   return (
     <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
       <section className="grid h-full min-h-0 flex-1 grid-rows-[minmax(0,1fr)] gap-3 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
         <section className="flex min-h-0 min-w-0 flex-col overflow-hidden">
-          {currentChallenge && building ? (
+          {currentChallenge &&
+          building ? (
             <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
               <div className="shrink-0">
                 <ChallengeBar
-                  challenge={currentChallenge}
-                  teamRespinUsed={teamRespinUsed}
-                  seasonRespinUsed={seasonRespinUsed}
-                  respinLoading={respinLoading}
-                  onRespinTeam={() => respin("team")}
-                  onRespinSeason={() => respin("season")}
+                  challenge={
+                    currentChallenge
+                  }
+                  teamRespinUsed={
+                    teamRespinUsed
+                  }
+                  seasonRespinUsed={
+                    seasonRespinUsed
+                  }
+                  respinLoading={
+                    respinLoading
+                  }
+                  onRespinTeam={() =>
+                    respin("team")
+                  }
+                  onRespinSeason={() =>
+                    respin("season")
+                  }
                 />
               </div>
+
               <div className="min-h-0 flex-1 overflow-hidden">
                 {hasChallenge && (
                   <PlayerPool
-                    players={currentPlayers}
-                    selectedPlayers={selectedPlayers}
-                    searchQuery={searchQuery}
-                    roleFilter={roleFilter}
-                    onSearchChange={setSearchQuery}
-                    onRoleFilterChange={setRoleFilter}
-                    onSelectPlayer={handleSelectPlayer}
-                    canSelectPlayer={(player) => canAddPlayer(selectedPlayers, player)}
+                    players={
+                      currentPlayers
+                    }
+                    selectedPlayers={
+                      selectedPlayers
+                    }
+                    searchQuery={
+                      searchQuery
+                    }
+                    roleFilter={
+                      roleFilter
+                    }
+                    onSearchChange={
+                      setSearchQuery
+                    }
+                    onRoleFilterChange={
+                      setRoleFilter
+                    }
+                    onSelectPlayer={
+                      handleSelectPlayer
+                    }
+                    canSelectPlayer={(
+                      player
+                    ) =>
+                      canAddPlayer(
+                        selectedPlayers,
+                        player
+                      )
+                    }
                   />
                 )}
               </div>
@@ -186,28 +474,53 @@ export default function XISelectionGame() {
           ) : (
             <div className="h-full min-h-0">
               {building ? (
-                <ChallengeRandomizer key={randomizerKey} onChallengeReady={handleChallengeReady} />
+                <ChallengeRandomizer
+                  key={randomizerKey}
+                  onChallengeReady={
+                    handleChallengeReady
+                  }
+                />
               ) : (
                 <div className="flex h-full items-center justify-center rounded-2xl border border-[var(--line)] bg-black/5 px-6 text-center">
-                  <p className="text-sm font-bold text-[var(--muted)]">XI complete</p>
+                  <p className="text-sm font-bold text-[var(--muted)]">
+                    XI complete
+                  </p>
                 </div>
               )}
             </div>
           )}
 
-          {selectedPlayers.length === MAX_PLAYERS && !validation.valid && (
-            <section className="card mt-3 p-4">
-              {validation.errors.map((error) => (
-                <p key={error} className="text-sm text-red-400">{error}</p>
-              ))}
-            </section>
-          )}
+          {selectedPlayers.length ===
+            MAX_PLAYERS &&
+            !validation.valid && (
+              <section className="card mt-3 p-4">
+                {validation.errors.map(
+                  (error) => (
+                    <p
+                      key={error}
+                      className="text-sm text-red-400"
+                    >
+                      {error}
+                    </p>
+                  )
+                )}
+              </section>
+            )}
         </section>
 
         <div className="min-h-0 min-w-0 overflow-hidden">
           <PlayingXI
-            players={selectedPlayers}
-            pitch={pitch}
+            players={
+              selectedPlayers
+            }
+            pitch={
+              gameChallenge?.venue
+                ?.pitch ?? null
+            }
+            venue={
+              gameChallenge?.venue ??
+              null
+            }
           />
         </div>
       </section>
@@ -226,7 +539,9 @@ function ChallengeBar({
   challenge: IPLChallenge;
   teamRespinUsed: boolean;
   seasonRespinUsed: boolean;
-  respinLoading: RespinType | null;
+  respinLoading:
+    | RespinType
+    | null;
   onRespinTeam: () => void;
   onRespinSeason: () => void;
 }) {
@@ -234,29 +549,94 @@ function ChallengeBar({
     <div className="rounded-xl border border-[var(--line)] bg-[var(--surface)]/80 px-2.5 py-2 shadow-sm backdrop-blur">
       <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
         <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
-          <ChallengeValue label="Team" value={challenge.team.name} />
-          <ChallengeValue label="Season" value={challenge.season.season} />
+          <ChallengeValue
+            label="Team"
+            value={
+              challenge.team.name
+            }
+          />
+
+          <ChallengeValue
+            label="Season"
+            value={
+              challenge.season.season
+            }
+          />
         </div>
+
         <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--line)] pt-2 sm:border-l sm:border-t-0 sm:pl-2 sm:pt-0">
-          <button type="button" onClick={onRespinTeam} disabled={respinLoading !== null || teamRespinUsed}
-            className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35">
-            {respinLoading === "team" ? "Rolling…" : teamRespinUsed ? "Team used" : "↻ Team"}
+          <button
+            type="button"
+            onClick={
+              onRespinTeam
+            }
+            disabled={
+              respinLoading !==
+                null ||
+              teamRespinUsed
+            }
+            className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            {respinLoading ===
+            "team"
+              ? "Rolling…"
+              : teamRespinUsed
+                ? "Team used"
+                : "↻ Team"}
           </button>
-          <button type="button" onClick={onRespinSeason} disabled={respinLoading !== null || seasonRespinUsed}
-            className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35">
-            {respinLoading === "season" ? "Rolling…" : seasonRespinUsed ? "Season used" : "↻ Season"}
+
+          <button
+            type="button"
+            onClick={
+              onRespinSeason
+            }
+            disabled={
+              respinLoading !==
+                null ||
+              seasonRespinUsed
+            }
+            className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            {respinLoading ===
+            "season"
+              ? "Rolling…"
+              : seasonRespinUsed
+                ? "Season used"
+                : "↻ Season"}
           </button>
         </div>
+      </div>
+
+      <div className="mt-2 border-t border-[var(--line)] pt-2">
+        <ChallengeValue
+          label="Venue"
+          value={`${challenge.venue.name}${
+            challenge.venue.city
+              ? ` • ${challenge.venue.city}`
+              : ""
+          }`}
+        />
       </div>
     </div>
   );
 }
 
-function ChallengeValue({ label, value }: { label: string; value: string }) {
+function ChallengeValue({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
   return (
     <div className="min-w-0 rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-1.5">
-      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">{label}</p>
-      <p className="mt-0.5 truncate text-xs font-black">{value}</p>
+      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+        {label}
+      </p>
+
+      <p className="mt-0.5 truncate text-xs font-black">
+        {value}
+      </p>
     </div>
   );
 }

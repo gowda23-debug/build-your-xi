@@ -2,32 +2,58 @@
 
 import { useState } from "react";
 
-import type { IPLChallenge, IPLPlayer } from "@/types/ipl";
+import type {
+  IPLChallenge,
+  IPLPlayer,
+} from "@/types/ipl";
 
 interface ChallengeRandomizerProps {
-  onChallengeReady: (challenge: IPLChallenge, players: IPLPlayer[]) => void;
+  onChallengeReady: (
+    challenge: IPLChallenge,
+    players: IPLPlayer[]
+  ) => void;
 }
 
 export default function ChallengeRandomizer({
   onChallengeReady,
 }: ChallengeRandomizerProps) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] =
+    useState(false);
 
-  async function fetchPlayers(teamSeasonId: string): Promise<IPLPlayer[]> {
+  const [error, setError] =
+    useState<string | null>(null);
+
+  async function fetchPlayers(
+    teamSeasonId: string
+  ): Promise<IPLPlayer[]> {
     const response = await fetch(
-      `/api/ipl/team-season/${encodeURIComponent(teamSeasonId)}/players`,
-      { method: "GET", cache: "no-store" },
+      `/api/ipl/team-season/${encodeURIComponent(
+        teamSeasonId
+      )}/players`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
     );
 
-    const data = await response.json().catch(() => null);
+    const data =
+      await response.json().catch(
+        () => null
+      );
 
     if (!response.ok) {
-      throw new Error(data?.error ?? "Unable to load available players.");
+      throw new Error(
+        data?.error ??
+          "Unable to load available players."
+      );
     }
 
-    if (!Array.isArray(data?.players)) {
-      throw new Error("Invalid player data received.");
+    if (
+      !Array.isArray(data?.players)
+    ) {
+      throw new Error(
+        "Invalid player data received."
+      );
     }
 
     return data.players;
@@ -40,44 +66,70 @@ export default function ChallengeRandomizer({
     setError(null);
 
     try {
-      const response = await fetch("/api/ipl/random/challenge", {
-        method: "GET",
-        cache: "no-store",
-      });
+      const response = await fetch(
+        "/api/ipl/random/challenge",
+        {
+          method: "GET",
+          cache: "no-store",
+        }
+      );
 
-      const data = await response.json().catch(() => null);
+      const data =
+        await response.json().catch(
+          () => null
+        );
 
       if (!response.ok) {
         throw new Error(
-          data?.error ?? "Unable to generate a challenge.",
+          data?.error ??
+            "Unable to generate a challenge."
         );
       }
 
-      const challenge = data as IPLChallenge;
+      /*
+       * The challenge now MUST include
+       * the database-backed venue.
+       */
+      const challenge =
+        data as IPLChallenge;
 
       if (
         !challenge?.team?.id ||
         !challenge?.season?.id ||
-        !challenge?.teamSeasonId
+        !challenge?.teamSeasonId ||
+        !challenge?.venue?.id ||
+        !challenge?.venue?.pitch
       ) {
-        throw new Error("Invalid challenge data received.");
-      }
-
-      const players = await fetchPlayers(challenge.teamSeasonId);
-
-      if (players.length === 0) {
         throw new Error(
-          "No eligible players are available for this team and season.",
+          "Invalid challenge data received."
         );
       }
 
-      onChallengeReady(challenge, players);
+      const players =
+        await fetchPlayers(
+          challenge.teamSeasonId
+        );
+
+      if (players.length === 0) {
+        throw new Error(
+          "No eligible players are available for this team and season."
+        );
+      }
+
+      onChallengeReady(
+        challenge,
+        players
+      );
     } catch (err) {
-      console.error("Initial IPL challenge randomization failed:", err);
+      console.error(
+        "Initial IPL challenge randomization failed:",
+        err
+      );
+
       setError(
         err instanceof Error
           ? err.message
-          : "Unable to generate a challenge. Please try again.",
+          : "Unable to generate a challenge. Please try again."
       );
     } finally {
       setLoading(false);
@@ -87,8 +139,8 @@ export default function ChallengeRandomizer({
   return (
     <section className="flex h-full min-h-0 items-center justify-center">
       <div className="w-full max-w-[430px] px-2 py-3 sm:px-4 sm:py-5">
-
         {/* Team + Season */}
+
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           <RandomValue
             label="Team"
@@ -102,6 +154,7 @@ export default function ChallengeRandomizer({
         </div>
 
         {/* Spin */}
+
         <button
           type="button"
           onClick={spin}
@@ -135,12 +188,18 @@ export default function ChallengeRandomizer({
             sm:text-lg
           "
         >
-          {loading ? "Spinning…" : "Spin"}
+          {loading
+            ? "Spinning…"
+            : "Spin"}
         </button>
 
         {error && (
           <p
-            className="mx-auto mt-3 max-w-md text-center text-[10px] leading-4 text-red-300"
+            className="
+              mx-auto mt-3 max-w-md
+              text-center text-[10px]
+              leading-4 text-red-300
+            "
             role="alert"
           >
             {error}

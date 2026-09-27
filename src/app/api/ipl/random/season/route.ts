@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -8,11 +9,6 @@ export async function GET(
   request: Request
 ) {
   try {
-    /*
-     * Registered users and guest users
-     * are both allowed to access the
-     * IPL game APIs.
-     */
     const { error: authError } =
       await requireUser();
 
@@ -38,14 +34,6 @@ export async function GET(
       );
     }
 
-    /*
-     * Get every valid season for this team.
-     *
-     * Querying through ipl_team_seasons
-     * guarantees that an invalid
-     * team-season combination cannot
-     * be returned.
-     */
     const {
       data: teamSeasons,
       error,
@@ -96,17 +84,11 @@ export async function GET(
       );
     }
 
-    /*
-     * Normalize Supabase relationship
-     * responses.
-     */
     const validSeasons =
       teamSeasons
         .map((record) => {
           const season =
-            Array.isArray(
-              record.season
-            )
+            Array.isArray(record.season)
               ? record.season[0]
               : record.season;
 
@@ -133,7 +115,8 @@ export async function GET(
             season
           ): season is NonNullable<
             typeof season
-          > => season !== null
+          > =>
+            season !== null
         );
 
     if (
@@ -157,9 +140,7 @@ export async function GET(
       );
 
     const season =
-      validSeasons[
-        randomIndex
-      ];
+      validSeasons[randomIndex];
 
     return NextResponse.json({
       season,
