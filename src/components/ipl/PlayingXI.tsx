@@ -13,7 +13,10 @@ interface PlayingXIProps {
   venue: IPLVenue | null;
 }
 
-const ROLE_LABELS: Record<PlayerRole, string> = {
+const ROLE_LABELS: Record<
+  PlayerRole,
+  string
+> = {
   WK: "Wicket Keepers",
   BAT: "Batters",
   AR: "All-Rounders",
@@ -30,21 +33,39 @@ export default function PlayingXI({
     IPLPlayer[]
   > = {
     WK: players.filter(
-      (player) => player.role === "WK"
+      (player) =>
+        player.role === "WK"
     ),
+
     BAT: players.filter(
-      (player) => player.role === "BAT"
+      (player) =>
+        player.role === "BAT"
     ),
+
     AR: players.filter(
-      (player) => player.role === "AR"
+      (player) =>
+        player.role === "AR"
     ),
+
     BOWL: players.filter(
-      (player) => player.role === "BOWL"
+      (player) =>
+        player.role === "BOWL"
     ),
   };
 
   return (
-    <section className="card flex h-full min-h-0 flex-col overflow-hidden">
+    /*
+     * IMPORTANT:
+     *
+     * Do NOT use h-full on mobile.
+     *
+     * Mobile needs the card to use its
+     * natural content height so it sits
+     * BELOW the ChallengeBar + PlayerPool.
+     *
+     * Desktop gets h-full through lg:h-full.
+     */
+    <section className="card flex min-h-0 flex-col overflow-hidden lg:h-full">
       <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] px-3 py-2">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -57,22 +78,39 @@ export default function PlayingXI({
         </div>
 
         <span className="rounded-full border border-[var(--line)] px-2 py-1 text-[8px] font-bold uppercase tracking-wider text-[var(--muted)]">
-          {players.length === 11
+          {players.length ===
+          11
             ? "XI Complete"
             : "Building XI"}
         </span>
       </header>
 
-<div
-  className="
-    grid
-    grid-rows-[340px_auto]
-    lg:min-h-0
-    lg:flex-1
-    lg:grid-rows-1
-    lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]
-  "
->
+      {/*
+       * MOBILE:
+       *
+       * Stadium = 340px
+       * Pitch Details = auto
+       *
+       * Therefore the entire PlayingXI
+       * has a natural height.
+       *
+       * DESKTOP:
+       *
+       * grid becomes one row with stadium
+       * and pitch details side-by-side.
+       */}
+      <div
+        className="
+          grid
+          grid-rows-[340px_auto]
+
+          lg:min-h-0
+          lg:flex-1
+          lg:grid-rows-1
+          lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]
+        "
+      >
+        {/* Stadium */}
         <div className="relative min-h-0 overflow-hidden p-2">
           <div className="relative h-full min-h-0 overflow-hidden rounded-[48%] border border-emerald-300/15 bg-emerald-950/50">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.14),transparent_60%)]" />
@@ -87,33 +125,52 @@ export default function PlayingXI({
 
             <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-1.5 overflow-hidden px-2 py-4">
               <RoleGroup
-                label={ROLE_LABELS.WK}
-                players={groupedPlayers.WK}
+                label={
+                  ROLE_LABELS.WK
+                }
+                players={
+                  groupedPlayers.WK
+                }
               />
 
               <RoleGroup
-                label={ROLE_LABELS.BAT}
-                players={groupedPlayers.BAT}
+                label={
+                  ROLE_LABELS.BAT
+                }
+                players={
+                  groupedPlayers.BAT
+                }
               />
 
               <RoleGroup
-                label={ROLE_LABELS.AR}
-                players={groupedPlayers.AR}
+                label={
+                  ROLE_LABELS.AR
+                }
+                players={
+                  groupedPlayers.AR
+                }
               />
 
               <RoleGroup
-                label={ROLE_LABELS.BOWL}
-                players={groupedPlayers.BOWL}
+                label={
+                  ROLE_LABELS.BOWL
+                }
+                players={
+                  groupedPlayers.BOWL
+                }
               />
 
-              {players.length === 0 && (
+              {players.length ===
+                0 && (
                 <div className="rounded-xl border border-dashed border-white/15 bg-black/20 px-5 py-4 text-center backdrop-blur-sm">
                   <p className="text-sm font-semibold text-white/70">
                     Your XI is empty
                   </p>
 
                   <p className="mt-1 text-xs text-white/40">
-                    Spin to select your first player
+                    Spin to select
+                    your first
+                    player
                   </p>
                 </div>
               )}
@@ -125,6 +182,7 @@ export default function PlayingXI({
           </div>
         </div>
 
+        {/* Pitch Details */}
         <aside className="border-t border-[var(--line)] bg-black/10 p-3 lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
             Pitch Details
@@ -164,22 +222,30 @@ export default function PlayingXI({
               <div className="mt-2 grid grid-cols-2 gap-1.5">
                 <PitchStat
                   label="Batting"
-                  value={pitch.batting}
+                  value={
+                    pitch.batting
+                  }
                 />
 
                 <PitchStat
                   label="Pace"
-                  value={pitch.pace}
+                  value={
+                    pitch.pace
+                  }
                 />
 
                 <PitchStat
                   label="Spin"
-                  value={pitch.spin}
+                  value={
+                    pitch.spin
+                  }
                 />
 
                 <PitchStat
                   label="Dew"
-                  value={pitch.dew}
+                  value={
+                    pitch.dew
+                  }
                 />
               </div>
 
@@ -207,7 +273,8 @@ function RoleGroup({
   label: string;
   players: IPLPlayer[];
 }) {
-  if (players.length === 0) {
+  if (players.length ===
+      0) {
     return null;
   }
 
@@ -218,16 +285,18 @@ function RoleGroup({
       </p>
 
       <div className="flex flex-wrap justify-center gap-1">
-        {players.map((player) => (
-          <div
-            key={player.id}
-            className="rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5"
-          >
-            <span className="max-w-[135px] truncate text-[9px] font-semibold text-white/90">
-              {player.name}
-            </span>
-          </div>
-        ))}
+        {players.map(
+          (player) => (
+            <div
+              key={player.id}
+              className="rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5"
+            >
+              <span className="max-w-[135px] truncate text-[9px] font-semibold text-white/90">
+                {player.name}
+              </span>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
