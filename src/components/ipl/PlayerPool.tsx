@@ -126,14 +126,14 @@ export default function PlayerPool({
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex min-w-0 items-center gap-1.5">
-                    <p className="truncate text-xs font-bold group-hover:text-[var(--accent)]">
+                    <p className="truncate text-sm font-bold group-hover:text-[var(--accent)]">
                       {player.name}
                     </p>
                     <span className="shrink-0 rounded-md bg-[var(--accent)]/10 px-1.5 py-0.5 text-[8px] font-black text-[var(--accent)]">
                       {player.role}
                     </span>
                   </div>
-                  <p className="mt-0.5 text-[9px] text-[var(--muted)]">{getRoleLabel(player.role)}</p>
+                  <p className="mt-0.5 text-[10px] text-[var(--muted)]">{getRoleLabel(player.role)}</p>
                 </div>
 
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--line)] group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]/10">
@@ -142,7 +142,7 @@ export default function PlayerPool({
               </div>
 
               <div className="mt-1.5 grid grid-cols-4 gap-x-2 gap-y-1.5">
-                <Stat label="Role" value={getRoleLabel(player.role)} />
+                {/* <Stat label="Role" value={getRoleLabel(player.role)} /> */}
                 <Stat label="Matches" value={String(player.stats.matches)} />
                 <Stat label="Batting average" value={formatStat(getBattingAverage(player))} />
                 <Stat label="Strike rate" value={formatStat(getStrikeRate(player))} />

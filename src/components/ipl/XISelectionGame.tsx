@@ -442,8 +442,8 @@ export default function XISelectionGame() {
 
               <div
                 className="
-    h-[460px]
-    min-h-[460px]
+    h-[520px]
+    min-h-[520px]
     shrink-0
     lg:h-full
     lg:min-h-0
@@ -522,10 +522,10 @@ export default function XISelectionGame() {
             )}
         </section>
 
-        <div
+<div
   className="
-    h-[620px]
-    min-h-[620px]
+    h-[500px]
+    min-h-[500px]
     shrink-0
     min-w-0
     lg:h-full

@@ -44,18 +44,7 @@ export default function PlayingXI({
   };
 
   return (
-    <section
-  className="
-    grid
-    w-full
-    min-h-0
-    grid-cols-1
-    gap-3
-    lg:h-full
-    lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]
-    lg:overflow-hidden
-  "
->
+    <section className="card flex h-full min-h-0 flex-col overflow-hidden">
       <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] px-3 py-2">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
