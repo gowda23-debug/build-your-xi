@@ -1,6 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import ChallengeRandomizer from "./ChallengeRandomizer";
 import IPLGame from "./IPLGame";
@@ -26,6 +31,9 @@ type RespinType =
   | "season";
 
 export default function XISelectionGame() {
+
+  const mobileScrollRef =
+    useRef<HTMLElement | null>(null);
   const [gameChallenge, setGameChallenge] =
     useState<IPLChallenge | null>(null);
 
@@ -58,7 +66,22 @@ export default function XISelectionGame() {
 
   const [seasonRespinUsed, setSeasonRespinUsed] =
     useState(false);
+  useEffect(() => {
+    if (
+      !currentChallenge ||
+      gameState !== "selection"
+    ) {
+      return;
+    }
 
+    mobileScrollRef.current?.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, [
+    currentChallenge?.teamSeasonId,
+    gameState,
+  ]);
   function resetPlayerPool(
     challenge: IPLChallenge,
     players: IPLPlayer[]
@@ -411,9 +434,12 @@ export default function XISelectionGame() {
     );
 
   return (
-    <main className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto lg:h-full lg:overflow-hidden">
-<section
-  className="
+    <main
+  ref={mobileScrollRef}
+  className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto lg:h-full lg:overflow-hidden"
+>
+      <section
+        className="
     flex
     min-h-0
     w-full
@@ -426,7 +452,7 @@ export default function XISelectionGame() {
     lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]
     lg:overflow-hidden
   "
->
+      >
         <section className="flex min-h-0 min-w-0 flex-col overflow-visible lg:overflow-hidden">
           {currentChallenge &&
             building ? (
@@ -536,15 +562,15 @@ export default function XISelectionGame() {
             )}
         </section>
 
-<div
-  className="
+        <div
+          className="
     min-w-0
     shrink-0
     lg:h-full
     lg:min-h-0
     lg:shrink
   "
->
+        >
           <PlayingXI
             players={
               selectedPlayers
