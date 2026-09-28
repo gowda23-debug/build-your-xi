@@ -63,12 +63,12 @@ export default function PlayingXI({
         </span>
       </header>
 
-      <div
+<div
   className="
     grid
-    min-h-0
-    flex-1
-    grid-rows-[340px_minmax(0,1fr)]
+    grid-rows-[340px_auto]
+    lg:min-h-0
+    lg:flex-1
     lg:grid-rows-1
     lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]
   "
@@ -125,7 +125,7 @@ export default function PlayingXI({
           </div>
         </div>
 
-        <aside className="min-h-0 overflow-hidden border-l border-[var(--line)] bg-black/10 p-3">
+        <aside className="border-t border-[var(--line)] bg-black/10 p-3 lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
             Pitch Details
           </p>

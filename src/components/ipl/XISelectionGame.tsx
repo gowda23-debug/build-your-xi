@@ -414,13 +414,14 @@ export default function XISelectionGame() {
     <main className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto lg:h-full lg:overflow-hidden">
 <section
   className="
-    grid
+    flex
     min-h-0
     w-full
     flex-1
-    grid-cols-1
+    flex-col
     gap-3
     overflow-visible
+    lg:grid
     lg:h-full
     lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]
     lg:overflow-hidden
@@ -537,10 +538,8 @@ export default function XISelectionGame() {
 
 <div
   className="
-    h-[500px]
-    min-h-[500px]
-    shrink-0
     min-w-0
+    shrink-0
     lg:h-full
     lg:min-h-0
     lg:shrink
