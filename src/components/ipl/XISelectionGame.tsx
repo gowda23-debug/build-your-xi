@@ -411,12 +411,25 @@ export default function XISelectionGame() {
     );
 
   return (
-    <main className="flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden">
-      <section className="grid h-full min-h-0 flex-1 grid-rows-[minmax(0,1fr)] gap-3 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]">
-        <section className="flex min-h-0 min-w-0 flex-col overflow-hidden">
+    <main className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto lg:h-full lg:overflow-hidden">
+<section
+  className="
+    grid
+    min-h-0
+    w-full
+    flex-1
+    grid-cols-1
+    gap-3
+    overflow-visible
+    lg:h-full
+    lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]
+    lg:overflow-hidden
+  "
+>
+        <section className="flex min-h-0 min-w-0 flex-col overflow-visible lg:overflow-hidden">
           {currentChallenge &&
             building ? (
-            <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
+            <div className="flex min-h-0 flex-col gap-3 overflow-visible lg:h-full lg:overflow-hidden">
               <div className="shrink-0">
                 <ChallengeBar
                   challenge={

@@ -125,7 +125,7 @@ export default function PlayingXI({
           </div>
         </div>
 
-        <aside className="min-h-0 overflow-y-auto border-l border-[var(--line)] bg-black/10 p-3">
+        <aside className="min-h-0 overflow-hidden border-l border-[var(--line)] bg-black/10 p-3">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
             Pitch Details
           </p>
