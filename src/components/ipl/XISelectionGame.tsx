@@ -440,7 +440,16 @@ export default function XISelectionGame() {
                 />
               </div>
 
-              <div className="min-h-0 flex-1 overflow-hidden">
+              <div
+                className="
+    h-[460px]
+    min-h-[460px]
+    shrink-0
+    lg:h-full
+    lg:min-h-0
+    lg:shrink
+  "
+              >
                 {hasChallenge && (
                   <PlayerPool
                     players={
@@ -513,7 +522,17 @@ export default function XISelectionGame() {
             )}
         </section>
 
-        <div className="min-h-0 min-w-0 overflow-hidden">
+        <div
+  className="
+    h-[620px]
+    min-h-[620px]
+    shrink-0
+    min-w-0
+    lg:h-full
+    lg:min-h-0
+    lg:shrink
+  "
+>
           <PlayingXI
             players={
               selectedPlayers

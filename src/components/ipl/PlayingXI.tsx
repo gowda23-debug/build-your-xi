@@ -44,7 +44,18 @@ export default function PlayingXI({
   };
 
   return (
-    <section className="card flex h-full min-h-0 flex-col overflow-hidden">
+    <section
+  className="
+    grid
+    w-full
+    min-h-0
+    grid-cols-1
+    gap-3
+    lg:h-full
+    lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)]
+    lg:overflow-hidden
+  "
+>
       <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] px-3 py-2">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -63,7 +74,16 @@ export default function PlayingXI({
         </span>
       </header>
 
-      <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]">
+      <div
+  className="
+    grid
+    min-h-0
+    flex-1
+    grid-rows-[340px_minmax(0,1fr)]
+    lg:grid-rows-1
+    lg:grid-cols-[minmax(0,1fr)_minmax(185px,0.42fr)]
+  "
+>
         <div className="relative min-h-0 overflow-hidden p-2">
           <div className="relative h-full min-h-0 overflow-hidden rounded-[48%] border border-emerald-300/15 bg-emerald-950/50">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.14),transparent_60%)]" />
@@ -203,8 +223,8 @@ function RoleGroup({
   }
 
   return (
-    <div className="w-full max-w-[420px] rounded-lg border border-white/10 bg-black/20 px-2.5 py-1.5 backdrop-blur-sm">
-      <p className="mb-1 text-center text-[8px] font-black uppercase tracking-[0.16em] text-white/50">
+    <div className="w-full max-w-[420px] rounded-lg border border-white/10 bg-black/20 px-2 py-1 backdrop-blur-sm">
+      <p className="mb-0.5 text-center text-[8px] font-black uppercase tracking-[0.16em] text-white/50">
         {label}
       </p>
 
