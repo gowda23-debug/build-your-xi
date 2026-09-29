@@ -6,23 +6,100 @@ import { getRandomVenueForTeamSeason } from "@/lib/ipl-challenge/server-venue";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+type DraftSelection = {
+  playerId: string;
+  teamSeasonId: string;
+};
+
+type SessionContext = {
+  version?: number;
+
+  venueId?: string;
+
+  venueSnapshot?: {
+    id?: string;
+    name?: string;
+    city?: string | null;
+    country?: string;
+    pitch?: unknown;
+  };
+
+  teamRespinUsed?: boolean;
+  seasonRespinUsed?: boolean;
+
+  initialTeamSeasonId?: string;
+  initialTeamId?: string;
+  initialSeasonId?: string;
+
+  draftSelections?: DraftSelection[];
+
+  currentRound?: number;
+
+  [key: string]: unknown;
+};
+
+export async function GET(
+  request: Request
+) {
   try {
     /*
-     * Authentication
+     * ============================================================
+     * AUTHENTICATION
+     * ============================================================
      */
+
     const {
       user,
       error: authError,
     } = await requireUser();
 
-    if (authError) {
-      return authError;
+    if (authError || !user) {
+      return (
+        authError ??
+        NextResponse.json(
+          {
+            error: "Unauthorized",
+          },
+          {
+            status: 401,
+          }
+        )
+      );
     }
 
     /*
-     * Retrieve valid team-season combinations.
+     * ============================================================
+     * EXISTING GAME SESSION
+     * ============================================================
+     *
+     * First spin:
+     *
+     *   no gameSessionId
+     *   -> create ONE new game session
+     *
+     * Subsequent spins:
+     *
+     *   gameSessionId present
+     *   -> reuse the SAME game session
+     *
+     * This is important because all 11 player selections
+     * must belong to the same game session.
      */
+
+    const url =
+      new URL(request.url);
+
+    const requestedGameSessionId =
+      url.searchParams.get(
+        "gameSessionId"
+      )?.trim() ?? "";
+
+    /*
+     * ============================================================
+     * RETRIEVE VALID TEAM-SEASON COMBINATIONS
+     * ============================================================
+     */
+
     const {
       data: teamSeasons,
       error,
@@ -74,8 +151,302 @@ export async function GET() {
     }
 
     /*
-     * Select a random team-season.
+     * ============================================================
+     * REGISTERED USER - EXISTING SESSION
+     * ============================================================
+     *
+     * If a session ID was supplied, we MUST reuse that session.
      */
+
+    if (
+      !user.is_anonymous &&
+      requestedGameSessionId
+    ) {
+      const {
+        data: session,
+        error: sessionError,
+      } = await supabaseAdmin
+        .from("game_sessions")
+        .select(
+          `
+          id,
+          user_id,
+          game_mode,
+          status,
+          team_season_id,
+          context
+          `
+        )
+        .eq(
+          "id",
+          requestedGameSessionId
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .eq(
+          "game_mode",
+          "ipl"
+        )
+        .maybeSingle();
+
+      if (sessionError) {
+        console.error(
+          "Existing game session query error:",
+          sessionError
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Unable to verify the game session.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      if (!session) {
+        return NextResponse.json(
+          {
+            error:
+              "Game session not found.",
+          },
+          {
+            status: 404,
+          }
+        );
+      }
+
+      if (
+        session.status !==
+        "started"
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "This game session is no longer active.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      /*
+       * The XI can contain at most 11 selections.
+       */
+      const context =
+        (session.context ??
+          {}) as SessionContext;
+
+      const draftSelections =
+        Array.isArray(
+          context.draftSelections
+        )
+          ? context.draftSelections
+          : [];
+
+      if (
+        draftSelections.length >=
+        11
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "The XI is already complete.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      /*
+       * Select the next random team-season.
+       *
+       * The current venue is NOT changed.
+       */
+      const selected =
+        teamSeasons[
+          Math.floor(
+            Math.random() *
+              teamSeasons.length
+          )
+        ];
+
+      const team =
+        Array.isArray(
+          selected.team
+        )
+          ? selected.team[0]
+          : selected.team;
+
+      const season =
+        Array.isArray(
+          selected.season
+        )
+          ? selected.season[0]
+          : selected.season;
+
+      if (
+        !team ||
+        !season
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Invalid challenge relationship.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      /*
+       * The venue MUST remain the original
+       * locked venue for the entire game.
+       */
+      const venue =
+        context.venueSnapshot;
+
+      if (
+        !venue?.id
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "The game session does not contain a valid locked venue.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      /*
+       * Preserve the entire existing context.
+       *
+       * IMPORTANT:
+       *
+       * Do not reset:
+       *
+       * - draftSelections
+       * - teamRespinUsed
+       * - seasonRespinUsed
+       * - venueSnapshot
+       *
+       * We only update the current round.
+       */
+      const nextContext: SessionContext = {
+        ...context,
+
+        currentRound:
+          draftSelections.length +
+          1,
+      };
+
+      const {
+        data: updatedSession,
+        error: updateError,
+      } = await supabaseAdmin
+        .from("game_sessions")
+        .update({
+          team_season_id:
+            selected.id,
+
+          context:
+            nextContext,
+        })
+        .eq(
+          "id",
+          session.id
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .eq(
+          "status",
+          "started"
+        )
+        .select("id")
+        .maybeSingle();
+
+      if (updateError) {
+        console.error(
+          "Existing game session update error:",
+          updateError
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Unable to update the IPL game session.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      if (!updatedSession) {
+        return NextResponse.json(
+          {
+            error:
+              "The game session could not be updated.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      return NextResponse.json({
+        teamSeasonId:
+          selected.id,
+
+        team: {
+          id:
+            team.id,
+
+          name:
+            team.name,
+        },
+
+        season: {
+          id:
+            season.id,
+
+          season:
+            season.season,
+
+          startYear:
+            season.start_year,
+        },
+
+        venue,
+
+        /*
+         * SAME session ID.
+         */
+        gameSessionId:
+          session.id,
+      });
+    }
+
+    /*
+     * ============================================================
+     * NEW GAME
+     * ============================================================
+     *
+     * This block runs only for the FIRST spin of a registered
+     * game, or for guests.
+     */
+
     const selected =
       teamSeasons[
         Math.floor(
@@ -85,16 +456,23 @@ export async function GET() {
       ];
 
     const team =
-      Array.isArray(selected.team)
+      Array.isArray(
+        selected.team
+      )
         ? selected.team[0]
         : selected.team;
 
     const season =
-      Array.isArray(selected.season)
+      Array.isArray(
+        selected.season
+      )
         ? selected.season[0]
         : selected.season;
 
-    if (!team || !season) {
+    if (
+      !team ||
+      !season
+    ) {
       return NextResponse.json(
         {
           error:
@@ -109,8 +487,8 @@ export async function GET() {
     /*
      * Resolve the venue from the database.
      *
-     * This is the venue that becomes
-     * locked for the entire game.
+     * This venue becomes locked for the
+     * entire game.
      */
     const venue =
       await getRandomVenueForTeamSeason(
@@ -130,40 +508,28 @@ export async function GET() {
     }
 
     /*
-     * Guest users can play without creating
-     * persistent game-session rows.
-     *
-     * Registered users get an authoritative
-     * server-side game session.
+     * Guests do not receive a persistent game session.
      */
     let gameSessionId:
       string | null = null;
 
     if (!user.is_anonymous) {
-      const sessionContext = {
+      const sessionContext:
+        SessionContext = {
         version: 1,
 
-        /*
-         * This venue is locked for the
-         * entire game.
-         */
-        venueId: venue.id,
+        venueId:
+          venue.id,
 
-        venueSnapshot: venue,
+        venueSnapshot:
+          venue,
 
-        /*
-         * Server-side respin state.
-         *
-         * These values will be updated
-         * by the team/season respin APIs.
-         */
-        teamRespinUsed: false,
-        seasonRespinUsed: false,
+        teamRespinUsed:
+          false,
 
-        /*
-         * Keep the original challenge
-         * information for auditability.
-         */
+        seasonRespinUsed:
+          false,
+
         initialTeamSeasonId:
           selected.id,
 
@@ -172,6 +538,16 @@ export async function GET() {
 
         initialSeasonId:
           season.id,
+
+        /*
+         * IMPORTANT:
+         *
+         * The ONE game session starts
+         * with an empty draft.
+         */
+        draftSelections: [],
+
+        currentRound: 1,
       };
 
       const {
@@ -180,11 +556,14 @@ export async function GET() {
       } = await supabaseAdmin
         .from("game_sessions")
         .insert({
-          user_id: user.id,
+          user_id:
+            user.id,
 
-          game_mode: "ipl",
+          game_mode:
+            "ipl",
 
-          status: "started",
+          status:
+            "started",
 
           team_season_id:
             selected.id,
@@ -241,12 +620,6 @@ export async function GET() {
 
       venue,
 
-      /*
-       * null for guests.
-       *
-       * A registered user's session ID
-       * is used only by our server APIs.
-       */
       gameSessionId,
     });
   } catch (error) {
