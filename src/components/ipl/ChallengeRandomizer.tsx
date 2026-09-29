@@ -8,6 +8,8 @@ import type {
 } from "@/types/ipl";
 
 interface ChallengeRandomizerProps {
+  gameSessionId?: string | null;
+
   onChallengeReady: (
     challenge: IPLChallenge,
     players: IPLPlayer[]
@@ -15,6 +17,7 @@ interface ChallengeRandomizerProps {
 }
 
 export default function ChallengeRandomizer({
+  gameSessionId,
   onChallengeReady,
 }: ChallengeRandomizerProps) {
   const [loading, setLoading] =
@@ -44,7 +47,7 @@ export default function ChallengeRandomizer({
     if (!response.ok) {
       throw new Error(
         data?.error ??
-          "Unable to load available players."
+        "Unable to load available players."
       );
     }
 
@@ -66,8 +69,15 @@ export default function ChallengeRandomizer({
     setError(null);
 
     try {
+      const challengeUrl =
+        gameSessionId
+          ? `/api/ipl/random/challenge?gameSessionId=${encodeURIComponent(
+            gameSessionId
+          )}`
+          : "/api/ipl/random/challenge";
+
       const response = await fetch(
-        "/api/ipl/random/challenge",
+        challengeUrl,
         {
           method: "GET",
           cache: "no-store",
@@ -82,7 +92,7 @@ export default function ChallengeRandomizer({
       if (!response.ok) {
         throw new Error(
           data?.error ??
-            "Unable to generate a challenge."
+          "Unable to generate a challenge."
         );
       }
 

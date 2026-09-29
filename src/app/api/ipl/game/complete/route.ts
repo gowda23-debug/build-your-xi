@@ -20,12 +20,16 @@ export const dynamic = "force-dynamic";
 
 type RequestBody = {
   gameSessionId?: string;
-  playerIds?: string[];
 };
 
 type SessionContext = {
   version?: number;
+  draftSelections?: {
+    playerId: string;
+    teamSeasonId: string;
+  }[];
 
+  currentRound?: number;
   venueId?: string;
 
   venueSnapshot?: {
@@ -107,19 +111,12 @@ export async function POST(
     const gameSessionId =
       typeof body.gameSessionId ===
         "string" &&
-      body.gameSessionId.trim()
-        .length > 0
+        body.gameSessionId.trim()
+          .length > 0
         ? body.gameSessionId.trim()
         : null;
 
-    const playerIds =
-      Array.isArray(body.playerIds)
-        ? body.playerIds.filter(
-            (id): id is string =>
-              typeof id === "string" &&
-              id.trim().length > 0
-          )
-        : [];
+
 
     if (!gameSessionId) {
       return NextResponse.json(
@@ -133,41 +130,6 @@ export async function POST(
       );
     }
 
-    /*
-     * Exactly 11 players are required.
-     */
-    if (playerIds.length !== 11) {
-      return NextResponse.json(
-        {
-          error:
-            "Exactly 11 players are required.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    /*
-     * Reject duplicate player IDs.
-     */
-    const uniquePlayerIds =
-      new Set(playerIds);
-
-    if (
-      uniquePlayerIds.size !==
-      11
-    ) {
-      return NextResponse.json(
-        {
-          error:
-            "The playing XI contains duplicate players.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
 
     /*
      * ============================================================
@@ -274,7 +236,50 @@ export async function POST(
 
     const venueSnapshot =
       context.venueSnapshot;
+    const draftSelections =
+      Array.isArray(
+        context.draftSelections
+      )
+        ? context.draftSelections
+        : [];
 
+    if (
+      draftSelections.length !==
+      11
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The game session does not contain a complete playing XI.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const uniqueDraftPlayerIds =
+      new Set(
+        draftSelections.map(
+          (selection) =>
+            selection.playerId
+        )
+      );
+
+    if (
+      uniqueDraftPlayerIds.size !==
+      11
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The game session contains duplicate player selections.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
     const pitch =
       venueSnapshot?.pitch ??
       null;
@@ -318,17 +323,52 @@ export async function POST(
      * ============================================================
      * LOAD AUTHORITATIVE PLAYER DATA
      * ============================================================
+     *
+     * Each player belongs to the team-season from the round
+     * in which that player was selected.
+     *
+     * We therefore verify every player/team-season pair
+     * independently on the server.
      */
 
-    const {
-      data: playerStats,
-      error: playerStatsError,
-    } = await supabaseAdmin
-      .from(
-        "ipl_team_season_player_stats"
-      )
-      .select(
-        `
+    const selectedPlayers: IPLPlayer[] = [];
+
+    for (
+      const selection of draftSelections
+    ) {
+      const playerId =
+        selection.playerId;
+
+      const teamSeasonId =
+        selection.teamSeasonId;
+
+      if (
+        typeof playerId !==
+        "string" ||
+        typeof teamSeasonId !==
+        "string"
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Invalid player selection data in the game session.",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      const {
+        data: playerStat,
+        error: playerStatError,
+      } =
+        await supabaseAdmin
+          .from(
+            "ipl_team_season_player_stats"
+          )
+          .select(
+            `
         player_id,
         matches,
         batting_innings,
@@ -348,51 +388,130 @@ export async function POST(
           role
         )
       `
-      )
-      .eq(
-        "team_season_id",
-        teamSeasonId
-      )
-      .in(
-        "player_id",
-        playerIds
-      );
+          )
+          .eq(
+            "team_season_id",
+            teamSeasonId
+          )
+          .eq(
+            "player_id",
+            playerId
+          )
+          .maybeSingle();
 
-    if (playerStatsError) {
-      console.error(
-        "Game completion player query error:",
-        playerStatsError
-      );
+      if (playerStatError) {
+        console.error(
+          "Game completion player query error:",
+          playerStatError
+        );
 
-      return NextResponse.json(
-        {
-          error:
-            "Unable to verify the selected players.",
+        return NextResponse.json(
+          {
+            error:
+              "Unable to verify one of the selected players.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      if (!playerStat) {
+        return NextResponse.json(
+          {
+            error:
+              "One or more selected players do not belong to their recorded team-season.",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      const player =
+        Array.isArray(
+          playerStat.player
+        )
+          ? playerStat.player[0]
+          : playerStat.player;
+
+      if (
+        !player ||
+        !player.id ||
+        !player.name ||
+        !player.role
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Invalid player data exists in one of the selected team-seasons.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      selectedPlayers.push({
+        id:
+          player.id,
+
+        name:
+          player.name,
+
+        role:
+          player.role,
+
+        stats: {
+          matches:
+            playerStat.matches ??
+            0,
+
+          battingInnings:
+            playerStat.batting_innings ??
+            0,
+
+          runs:
+            playerStat.runs ??
+            0,
+
+          ballsFaced:
+            playerStat.balls_faced ??
+            0,
+
+          fours:
+            playerStat.fours ??
+            0,
+
+          sixes:
+            playerStat.sixes ??
+            0,
+
+          highestScore:
+            playerStat.highest_score ??
+            0,
+
+          dismissals:
+            playerStat.dismissals ??
+            0,
+
+          bowlingInnings:
+            playerStat.bowling_innings ??
+            0,
+
+          ballsBowled:
+            playerStat.balls_bowled ??
+            0,
+
+          runsConceded:
+            playerStat.runs_conceded ??
+            0,
+
+          wickets:
+            playerStat.wickets ??
+            0,
         },
-        {
-          status: 500,
-        }
-      );
-    }
-
-    /*
-     * Every submitted player must exist in the
-     * authoritative team-season pool.
-     */
-    if (
-      !playerStats ||
-      playerStats.length !==
-        11
-    ) {
-      return NextResponse.json(
-        {
-          error:
-            "One or more selected players do not belong to the current team-season.",
-        },
-        {
-          status: 400,
-        }
-      );
+      });
     }
 
     /*
@@ -404,109 +523,84 @@ export async function POST(
     const players: IPLPlayer[] =
       [];
 
-    for (const stat of playerStats) {
-      const player =
-        Array.isArray(
-          stat.player
-        )
-          ? stat.player[0]
-          : stat.player;
+    // for (const stat of playerStats) {
+    //   const player =
+    //     Array.isArray(
+    //       stat.player
+    //     )
+    //       ? stat.player[0]
+    //       : stat.player;
 
-      if (
-        !player ||
-        !player.id ||
-        !player.name ||
-        !player.role
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid player data exists in the selected team-season.",
-          },
-          {
-            status: 500,
-          }
-        );
-      }
+    //   if (
+    //     !player ||
+    //     !player.id ||
+    //     !player.name ||
+    //     !player.role
+    //   ) {
+    //     return NextResponse.json(
+    //       {
+    //         error:
+    //           "Invalid player data exists in the selected team-season.",
+    //       },
+    //       {
+    //         status: 500,
+    //       }
+    //     );
+    //   }
 
-      players.push({
-        id: player.id,
+    //   players.push({
+    //     id: player.id,
 
-        name: player.name,
+    //     name: player.name,
 
-        role: player.role,
+    //     role: player.role,
 
-        stats: {
-          matches:
-            stat.matches ?? 0,
+    //     stats: {
+    //       matches:
+    //         stat.matches ?? 0,
 
-          battingInnings:
-            stat.batting_innings ??
-            0,
+    //       battingInnings:
+    //         stat.batting_innings ??
+    //         0,
 
-          runs:
-            stat.runs ?? 0,
+    //       runs:
+    //         stat.runs ?? 0,
 
-          ballsFaced:
-            stat.balls_faced ??
-            0,
+    //       ballsFaced:
+    //         stat.balls_faced ??
+    //         0,
 
-          fours:
-            stat.fours ?? 0,
+    //       fours:
+    //         stat.fours ?? 0,
 
-          sixes:
-            stat.sixes ?? 0,
+    //       sixes:
+    //         stat.sixes ?? 0,
 
-          highestScore:
-            stat.highest_score ??
-            0,
+    //       highestScore:
+    //         stat.highest_score ??
+    //         0,
 
-          dismissals:
-            stat.dismissals ??
-            0,
+    //       dismissals:
+    //         stat.dismissals ??
+    //         0,
 
-          bowlingInnings:
-            stat.bowling_innings ??
-            0,
+    //       bowlingInnings:
+    //         stat.bowling_innings ??
+    //         0,
 
-          ballsBowled:
-            stat.balls_bowled ??
-            0,
+    //       ballsBowled:
+    //         stat.balls_bowled ??
+    //         0,
 
-          runsConceded:
-            stat.runs_conceded ??
-            0,
+    //       runsConceded:
+    //         stat.runs_conceded ??
+    //         0,
 
-          wickets:
-            stat.wickets ?? 0,
-        },
-      });
-    }
-
-    /*
-     * Preserve the exact player order submitted by the client.
-     *
-     * The score engine itself does not depend on selection order,
-     * but keeping the order makes the stored result deterministic
-     * and useful later for challenge snapshots.
-     */
-    const playerMap =
-      new Map(
-        players.map(
-          (player) => [
-            player.id,
-            player,
-          ]
-        )
-      );
-
-    const selectedPlayers =
-      playerIds.map(
-        (playerId) =>
-          playerMap.get(
-            playerId
-          )!
-      );
+    //       wickets:
+    //         stat.wickets ?? 0,
+    //     },
+    //   });
+    // }
 
     /*
      * ============================================================
@@ -551,7 +645,7 @@ export async function POST(
          * the server session, not the client.
          */
         challengeId:
-          teamSeasonId,
+          gameSessionId,
       });
 
     /*
@@ -563,7 +657,25 @@ export async function POST(
     const storedResult = {
       version: 1,
 
-      teamSeasonId,
+      draftSelections:
+        draftSelections.map(
+          ({
+            playerId,
+            teamSeasonId,
+          }) => ({
+            playerId,
+            teamSeasonId,
+          })
+        ),
+
+      teamSeasonIds: [
+        ...new Set(
+          draftSelections.map(
+            (selection) =>
+              selection.teamSeasonId
+          )
+        ),
+      ],
 
       venue: {
         id:

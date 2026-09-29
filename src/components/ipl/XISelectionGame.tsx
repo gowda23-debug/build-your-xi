@@ -114,7 +114,7 @@ export default function XISelectionGame() {
     if (!response.ok) {
       throw new Error(
         data?.error ??
-          "Unable to load available players."
+        "Unable to load available players."
       );
     }
 
@@ -171,17 +171,17 @@ export default function XISelectionGame() {
           body: JSON.stringify(
             type === "team"
               ? {
-                  gameSessionId:
-                    gameChallenge.gameSessionId,
-                  seasonId:
-                    gameChallenge.season.id,
-                }
+                gameSessionId:
+                  gameChallenge.gameSessionId,
+                seasonId:
+                  gameChallenge.season.id,
+              }
               : {
-                  gameSessionId:
-                    gameChallenge.gameSessionId,
-                  teamId:
-                    gameChallenge.team.id,
-                }
+                gameSessionId:
+                  gameChallenge.gameSessionId,
+                teamId:
+                  gameChallenge.team.id,
+              }
           ),
         });
 
@@ -193,7 +193,7 @@ export default function XISelectionGame() {
       if (!response.ok) {
         throw new Error(
           data?.error ??
-            `Unable to respin the ${type}.`
+          `Unable to respin the ${type}.`
         );
       }
 
@@ -317,16 +317,115 @@ export default function XISelectionGame() {
     }
   }
 
-  function handleSelectPlayer(
-    player: IPLPlayer
+  // function handleSelectPlayer(
+  //   player: IPLPlayer
+  // ) {
+  //   if (
+  //     !canAddPlayer(
+  //       selectedPlayers,
+  //       player
+  //     )
+  //   ) {
+  //     return;
+  //   }
+
+  //   const nextPlayers = [
+  //     ...selectedPlayers,
+  //     player,
+  //   ];
+
+  //   setSelectedPlayers(
+  //     nextPlayers
+  //   );
+
+  //   /*
+  //    * Once a player is selected,
+  //    * the current player pool is closed.
+  //    */
+  //   setCurrentChallenge(null);
+  //   setCurrentPlayers([]);
+  //   setSearchQuery("");
+  //   setRoleFilter("ALL");
+
+  //   /*
+  //    * Force a fresh randomizer
+  //    * for the next selection.
+  //    */
+  //   setRandomizerKey(
+  //     (current) => current + 1
+  //   );
+
+  //   if (
+  //     nextPlayers.length ===
+  //     MAX_PLAYERS &&
+  //     validateXI(nextPlayers).valid
+  //   ) {
+  //     setGameState("playing");
+  //     return;
+  //   }
+
+  //   setGameState("challenge");
+  // }
+async function handleSelectPlayer(
+  player: IPLPlayer
+) {
+  if (
+    selectedPlayers.length >=
+    MAX_PLAYERS
   ) {
-    if (
-      !canAddPlayer(
-        selectedPlayers,
-        player
-      )
-    ) {
-      return;
+    return;
+  }
+
+  if (
+    !canAddPlayer(
+      selectedPlayers,
+      player
+    )
+  ) {
+    return;
+  }
+
+  if (
+    !gameChallenge?.gameSessionId
+  ) {
+    return;
+  }
+
+  try {
+    const response =
+      await fetch(
+        "/api/ipl/game/select-player",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          cache: "no-store",
+
+          body:
+            JSON.stringify({
+              gameSessionId:
+                gameChallenge.gameSessionId,
+
+              playerId:
+                player.id,
+            }),
+        }
+      );
+
+    const data =
+      await response
+        .json()
+        .catch(() => null);
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error ??
+          "Unable to save the selected player."
+      );
     }
 
     const nextPlayers = [
@@ -339,18 +438,18 @@ export default function XISelectionGame() {
     );
 
     /*
-     * Once a player is selected,
-     * the current player pool is closed.
+     * KEEP the original gameplay:
+     *
+     * One spin = one player.
+     *
+     * After selection, close this player pool
+     * and generate the next round.
      */
     setCurrentChallenge(null);
     setCurrentPlayers([]);
     setSearchQuery("");
     setRoleFilter("ALL");
 
-    /*
-     * Force a fresh randomizer
-     * for the next selection.
-     */
     setRandomizerKey(
       (current) => current + 1
     );
@@ -358,15 +457,21 @@ export default function XISelectionGame() {
     if (
       nextPlayers.length ===
         MAX_PLAYERS &&
-      validateXI(nextPlayers).valid
+      validateXI(nextPlayers)
+        .valid
     ) {
       setGameState("playing");
       return;
     }
 
     setGameState("challenge");
+  } catch (error) {
+    console.error(
+      "IPL player selection failed:",
+      error
+    );
   }
-
+}
   const validation = useMemo(
     () =>
       validateXI(
@@ -427,8 +532,8 @@ export default function XISelectionGame() {
   const hasChallenge =
     Boolean(
       currentChallenge &&
-        gameState ===
-          "selection"
+      gameState ===
+      "selection"
     );
 
   return (
@@ -476,7 +581,7 @@ export default function XISelectionGame() {
           "
         >
           {currentChallenge &&
-          building ? (
+            building ? (
             <div
               className="
                 flex
@@ -569,6 +674,9 @@ export default function XISelectionGame() {
               {building ? (
                 <ChallengeRandomizer
                   key={randomizerKey}
+                  gameSessionId={
+                    gameChallenge?.gameSessionId
+                  }
                   onChallengeReady={
                     handleChallengeReady
                   }
@@ -660,8 +768,8 @@ function ChallengeBar({
   seasonRespinUsed: boolean;
 
   respinLoading:
-    | RespinType
-    | null;
+  | RespinType
+  | null;
 
   onRespinTeam: () => void;
 
@@ -694,13 +802,13 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-                null ||
+              null ||
               teamRespinUsed
             }
             className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-            "team"
+              "team"
               ? "Rolling…"
               : teamRespinUsed
                 ? "Team used"
@@ -714,13 +822,13 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-                null ||
+              null ||
               seasonRespinUsed
             }
             className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-            "season"
+              "season"
               ? "Rolling…"
               : seasonRespinUsed
                 ? "Season used"
@@ -732,11 +840,10 @@ function ChallengeBar({
       <div className="mt-2 border-t border-[var(--line)] pt-2">
         <ChallengeValue
           label="Venue"
-          value={`${challenge.venue.name}${
-            challenge.venue.city
+          value={`${challenge.venue.name}${challenge.venue.city
               ? ` • ${challenge.venue.city}`
               : ""
-          }`}
+            }`}
         />
       </div>
     </div>

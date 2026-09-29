@@ -25,23 +25,23 @@ type IPLGameProps = {
   challenge: IPLChallenge;
 
   selectedPlayers:
-    IPLPlayer[];
+  IPLPlayer[];
 
   pitch:
-    PitchProfile | null;
+  PitchProfile | null;
 
   onBuildAnother:
-    () => void;
+  () => void;
 };
 
 type CompletionResponse = {
   result: XIEngineResult;
 
   gameScoreId:
-    string | null;
+  string | null;
 
   completedAt:
-    string | null;
+  string | null;
 };
 
 export default function IPLGame({
@@ -112,12 +112,6 @@ export default function IPLGame({
                 JSON.stringify({
                   gameSessionId:
                     challenge.gameSessionId,
-
-                  playerIds:
-                    selectedPlayers.map(
-                      (player) =>
-                        player.id
-                    ),
                 }),
             }
           );
@@ -132,7 +126,7 @@ export default function IPLGame({
         if (!response.ok) {
           throw new Error(
             data?.error ??
-              "Unable to complete the game."
+            "Unable to complete the game."
           );
         }
 
@@ -171,7 +165,7 @@ export default function IPLGame({
     };
   }, [
     challenge.gameSessionId,
-    selectedPlayers,
+    
   ]);
 
   async function handleShare() {
@@ -187,7 +181,7 @@ export default function IPLGame({
 
     const shareUrl =
       typeof window !==
-      "undefined"
+        "undefined"
         ? window.location.href
         : "";
 
@@ -412,10 +406,10 @@ export default function IPLGame({
                 />
 
                 {shareStatus ===
-                "shared"
+                  "shared"
                   ? "Shared"
                   : shareStatus ===
-                      "copied"
+                    "copied"
                     ? "Copied"
                     : "Share"}
               </button>
