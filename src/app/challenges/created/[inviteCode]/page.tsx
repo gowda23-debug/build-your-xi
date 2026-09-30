@@ -242,10 +242,10 @@ export default function CreatedChallengePage() {
         (current) =>
           current
             ? {
-                ...current,
-                title:
-                  updatedTitle,
-              }
+              ...current,
+              title:
+                updatedTitle,
+            }
             : current
       );
 
@@ -522,9 +522,8 @@ export default function CreatedChallengePage() {
 
             <p className="mt-3 text-sm text-[var(--muted)]">
               Your challenge is ready.
-              Share the invite code with
-              your friends and let them try
-              to beat your score.
+              Share it with your friends and let
+              them try to beat your score.
             </p>
           </div>
 
