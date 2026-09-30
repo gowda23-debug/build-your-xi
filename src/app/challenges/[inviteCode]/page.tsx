@@ -39,6 +39,9 @@ type LeaderboardEntry = {
     created_at: string;
 };
 
+const [currentUserId, setCurrentUserId] =
+    useState<string | null>(null);
+
 export default function ChallengePage() {
     const params = useParams();
     const router = useRouter();

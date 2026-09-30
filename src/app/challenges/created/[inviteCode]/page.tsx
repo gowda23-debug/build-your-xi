@@ -529,7 +529,7 @@ export default function CreatedChallengePage() {
           </div>
 
           <div className="px-5 py-6 sm:px-8">
-            <div className="rounded-2xl border border-[var(--line)] bg-black/10 p-5 text-center">
+            {/* <div className="rounded-2xl border border-[var(--line)] bg-black/10 p-5 text-center">
               <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--muted)]">
                 Invite Code
               </p>
@@ -542,7 +542,7 @@ export default function CreatedChallengePage() {
                 Friends can use this code to
                 join your challenge.
               </p>
-            </div>
+            </div> */}
 
             {error && (
               <div className="mt-4 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
