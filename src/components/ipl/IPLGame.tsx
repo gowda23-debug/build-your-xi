@@ -86,179 +86,184 @@ export default function IPLGame({
     setCreatingChallenge,
   ] = useState(false);
 
-useEffect(() => {
-  let cancelled = false;
+  
+  useEffect(() => {
+    let cancelled = false;
 
-  const gameSessionId =
-    challenge.gameSessionId;
+    const gameSessionId =
+      challenge.gameSessionId;
 
-  if (!gameSessionId) {
-    setError(
-      "A registered game session is required to submit this result."
-    );
-
-    setLoading(false);
-    return;
-  }
-
-  let request =
-    completionRequestRef.current;
-
-  if (
-    !request ||
-    request.gameSessionId !== gameSessionId
-  ) {
-    const promise =
-      fetch(
-        "/api/ipl/game/complete",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          cache: "no-store",
-
-          body:
-            JSON.stringify({
-              gameSessionId,
-            }),
-        }
-      ).then(async (response) => {
-        const data =
-          await response
-            .json()
-            .catch(
-              () => null
-            );
-
-        if (!response.ok) {
-          throw new Error(
-            data?.error ??
-            "Unable to complete the game."
-          );
-        }
-
-        if (
-          !data?.result
-        ) {
-          throw new Error(
-            "The server returned an invalid game result."
-          );
-        }
-
-        return data as CompletionResponse;
-      });
-
-    request = {
-      gameSessionId,
-      promise,
-    };
-
-    completionRequestRef.current =
-      request;
-  }
-
-  setLoading(true);
-  setError(null);
-
-  request.promise
-    .then((data) => {
-      if (cancelled) {
-        return;
-      }
-
-      setCompletion(data);
-    })
-    .catch((err) => {
-      if (cancelled) {
-        return;
-      }
-
+    if (!gameSessionId) {
       setError(
-        err instanceof Error
-          ? err.message
-          : "Unable to complete the game."
+        "A registered game session is required to submit this result."
       );
-    })
-    .finally(() => {
-      if (!cancelled) {
-        setLoading(false);
-      }
-    });
 
-  return () => {
-    cancelled = true;
-  };
-}, [
-  challenge.gameSessionId,
-]);
-  async function handleCreateChallenge() {
-    if (
-      !completion?.gameScoreId ||
-      creatingChallenge
-    ) {
+      setLoading(false);
       return;
     }
 
-    try {
-      setCreatingChallenge(true);
-      setError(null);
+    let request =
+      completionRequestRef.current;
 
-      const response = await fetch(
-        "/api/challenges/create-from-game",
-        {
-          method: "POST",
+    if (
+      !request ||
+      request.gameSessionId !== gameSessionId
+    ) {
+      const promise =
+        fetch(
+          "/api/ipl/game/complete",
+          {
+            method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
 
-          cache: "no-store",
+            cache: "no-store",
 
-          body: JSON.stringify({
-            gameScoreId:
-              completion.gameScoreId,
-          }),
-        }
-      );
+            body:
+              JSON.stringify({
+                gameSessionId,
+              }),
+          }
+        ).then(async (response) => {
+          const data =
+            await response
+              .json()
+              .catch(
+                () => null
+              );
 
-      const data =
-        await response
-          .json()
-          .catch(() => null);
+          if (!response.ok) {
+            throw new Error(
+              data?.error ??
+              "Unable to complete the game."
+            );
+          }
 
-      if (!response.ok) {
-        throw new Error(
-          data?.error ??
-          "Unable to create the challenge."
-        );
-      }
+          if (
+            !data?.result
+          ) {
+            throw new Error(
+              "The server returned an invalid game result."
+            );
+          }
 
-      if (!data?.inviteCode) {
-        throw new Error(
-          "The server did not return a challenge invite code."
-        );
-      }
+          return data as CompletionResponse;
+        });
 
-      window.location.assign(
-        `/challenges/${encodeURIComponent(
-          data.inviteCode
-        )}`
-      );
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Unable to create the challenge."
-      );
+      request = {
+        gameSessionId,
+        promise,
+      };
 
-      setCreatingChallenge(false);
+      completionRequestRef.current =
+        request;
     }
+
+    setLoading(true);
+    setError(null);
+
+    request.promise
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setCompletion(data);
+      })
+      .catch((err) => {
+        if (cancelled) {
+          return;
+        }
+
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Unable to complete the game."
+        );
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    challenge.gameSessionId,
+  ]);
+
+
+async function handleCreateChallenge() {
+  if (
+    !completion?.gameScoreId ||
+    creatingChallenge
+  ) {
+    return;
   }
+
+  try {
+    setCreatingChallenge(true);
+    setError(null);
+
+    const response = await fetch(
+      "/api/challenges/create-from-game",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+
+        cache: "no-store",
+
+        body: JSON.stringify({
+          gameScoreId:
+            completion.gameScoreId,
+        }),
+      }
+    );
+
+    const data =
+      await response
+        .json()
+        .catch(() => null);
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error ??
+        "Unable to create the challenge."
+      );
+    }
+
+    if (!data?.inviteCode) {
+      throw new Error(
+        "The server did not return a challenge invite code."
+      );
+    }
+
+    window.location.assign(
+      `/challenges/created/${encodeURIComponent(
+        data.inviteCode
+      )}`
+    );
+  } catch (err) {
+    setError(
+      err instanceof Error
+        ? err.message
+        : "Unable to create the challenge."
+    );
+
+    setCreatingChallenge(false);
+  }
+}
+
+  
   async function handleShare() {
     if (!completion) {
       return;
