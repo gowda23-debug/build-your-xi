@@ -109,7 +109,7 @@ export default function AppHeader() {
                 .from("profiles")
                 .select("display_name, gamer_tag")
                 .eq("id", user.id)
-                .single();
+                .maybeSingle();
 
             if (profileError) {
                 console.error(

@@ -60,9 +60,8 @@ export default function ChallengePage() {
 
     const [loading, setLoading] =
         useState(true);
-
     const [joining, setJoining] =
-        useState(false);
+    useState(false);
 
     const [error, setError] =
         useState("");
@@ -90,6 +89,7 @@ export default function ChallengePage() {
     async function loadChallenge() {
         setLoading(true);
         setError("");
+        setJoining(true);
 
         try {
             /*
@@ -111,7 +111,7 @@ export default function ChallengePage() {
                 setError(
                     "You must be logged in to view this challenge."
                 );
-                setLoading(false);
+
                 return;
             }
 
@@ -119,95 +119,82 @@ export default function ChallengePage() {
                 setError(
                     "Registered authentication is required for challenges."
                 );
-                setLoading(false);
+
                 return;
             }
 
-            setCurrentUserId(user.id);
+            setCurrentUserId(
+                user.id
+            );
 
             /*
              * ============================================================
-             * LOAD CHALLENGE
+             * LOAD CHALLENGE THROUGH SERVER
              * ============================================================
+             *
+             * Do NOT query the challenges table directly from the browser.
+             *
+             * The server endpoint uses the invite code and authenticated
+             * user to safely resolve and join the challenge.
              */
 
-            const {
-                data: challengeData,
-                error: challengeError,
-            } = await supabase
-                .from("challenges")
-                .select(
-                    "id, creator_id, title, game_mode, invite_code, status, created_at, updated_at"
-                )
-                .eq("invite_code", inviteCode)
-                .maybeSingle();
-
-            if (challengeError) {
-                throw challengeError;
-            }
-
-            if (!challengeData) {
-                setError(
-                    "No challenge was found with this invite code."
+            const challengeResponse =
+                await fetch(
+                    `/api/challenges/${encodeURIComponent(
+                        inviteCode
+                    )}`,
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                    }
                 );
-                setLoading(false);
-                return;
+
+            const challengeData =
+                await challengeResponse
+                    .json()
+                    .catch(
+                        () => null
+                    );
+
+            if (!challengeResponse.ok) {
+                throw new Error(
+                    challengeData?.error ??
+                    "Unable to load the challenge."
+                );
             }
 
             const loadedChallenge =
-                challengeData as Challenge;
+                challengeData?.challenge as
+                | Challenge
+                | undefined;
 
-            setChallenge(loadedChallenge);
-            setTitle(loadedChallenge.title);
+            if (!loadedChallenge) {
+                throw new Error(
+                    "Unable to load the challenge."
+                );
+            }
+
+            setChallenge(
+                loadedChallenge
+            );
+
+            setTitle(
+                loadedChallenge.title
+            );
 
             /*
              * ============================================================
-             * JOIN CHALLENGE
+             * PLAYER COUNT
              * ============================================================
-             *
-             * The creator is already a member.
-             *
-             * A registered invited player becomes a member when
-             * opening the challenge.
              */
 
-            setJoining(true);
-
-            const {
-                data: existingPlayer,
-                error: existingPlayerError,
-            } = await supabase
-                .from("challenge_players")
-                .select("challenge_id")
-                .eq(
-                    "challenge_id",
-                    loadedChallenge.id
-                )
-                .eq(
-                    "user_id",
-                    user.id
-                )
-                .maybeSingle();
-
-            if (existingPlayerError) {
-                throw existingPlayerError;
-            }
-
-            if (!existingPlayer) {
-                const {
-                    error: joinError,
-                } = await supabase
-                    .from("challenge_players")
-                    .insert({
-                        challenge_id:
-                            loadedChallenge.id,
-                        user_id:
-                            user.id,
-                    });
-
-                if (joinError) {
-                    throw joinError;
-                }
+            if (
+                typeof challengeData?.playerCount ===
+                "number"
+            ) {
+                setPlayerCount(
+                    challengeData.playerCount
+                );
             }
 
             /*
@@ -253,9 +240,7 @@ export default function ChallengePage() {
             );
 
             /*
-             * The leaderboard API returns playerCount.
-             *
-             * Fallback to the database query if it doesn't.
+             * Prefer the count returned by the leaderboard endpoint.
              */
 
             if (
@@ -264,31 +249,6 @@ export default function ChallengePage() {
             ) {
                 setPlayerCount(
                     leaderboardData.playerCount
-                );
-            } else {
-                const {
-                    count,
-                    error: countError,
-                } = await supabase
-                    .from("challenge_players")
-                    .select(
-                        "*",
-                        {
-                            count: "exact",
-                            head: true,
-                        }
-                    )
-                    .eq(
-                        "challenge_id",
-                        loadedChallenge.id
-                    );
-
-                if (countError) {
-                    throw countError;
-                }
-
-                setPlayerCount(
-                    count ?? 0
                 );
             }
         } catch (err) {
@@ -307,7 +267,6 @@ export default function ChallengePage() {
             setLoading(false);
         }
     }
-
     /*
      * ============================================================
      * RENAME CHALLENGE
@@ -385,10 +344,10 @@ export default function ChallengePage() {
                 (current) =>
                     current
                         ? {
-                              ...current,
-                              title:
-                                  updatedTitle,
-                          }
+                            ...current,
+                            title:
+                                updatedTitle,
+                        }
                         : current
             );
 
@@ -584,9 +543,9 @@ export default function ChallengePage() {
             creatorScore &&
             currentLeader &&
             currentLeader.user_id !==
-                challenge.creator_id &&
+            challenge.creator_id &&
             currentLeader.score >
-                creatorScore.score
+            creatorScore.score
         );
 
     /*
@@ -618,11 +577,10 @@ export default function ChallengePage() {
                 <section className="card mx-auto max-w-2xl p-7 text-center">
                     <div className="flex justify-center">
                         <div
-                            className={`grid h-14 w-14 place-items-center rounded-2xl ${
-                                isIpl
+                            className={`grid h-14 w-14 place-items-center rounded-2xl ${isIpl
                                     ? "bg-[var(--accent)]/15"
                                     : "bg-blue-500/15"
-                            }`}
+                                }`}
                         >
                             {isIpl ? (
                                 <span className="text-3xl">
@@ -766,7 +724,7 @@ export default function ChallengePage() {
 
                         {playerCount} player
                         {playerCount !==
-                        1
+                            1
                             ? "s"
                             : ""}
                     </div>
@@ -833,7 +791,7 @@ export default function ChallengePage() {
                                 <p className="mt-1 text-sm text-[var(--muted)]">
                                     {leaderboard.length} player
                                     {leaderboard.length !==
-                                    1
+                                        1
                                         ? "s"
                                         : ""}
                                 </p>
@@ -843,7 +801,7 @@ export default function ChallengePage() {
                         </div>
 
                         {leaderboard.length >
-                        0 ? (
+                            0 ? (
                             <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/10">
                                 <div className="grid grid-cols-[48px_minmax(0,1fr)_80px] border-b border-white/10 px-4 py-3 text-[9px] font-black uppercase tracking-[0.15em] text-[var(--muted)]">
                                     <span>
@@ -878,11 +836,10 @@ export default function ChallengePage() {
                                                     key={
                                                         entry.user_id
                                                     }
-                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${
-                                                        isCurrentUser
+                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
                                                             ? "bg-[var(--accent)]/10"
                                                             : ""
-                                                    }`}
+                                                        }`}
                                                 >
                                                     <span className="text-sm font-black text-[var(--muted)]">
                                                         {index +
