@@ -9,6 +9,7 @@ import {
     Globe2,
     Pencil,
     Plus,
+    Trash2,
     Share2,
     Trophy,
     Users,
@@ -52,7 +53,8 @@ function formatDate(date: string) {
 export default function ChallengesPage() {
     const router = useRouter();
     const supabase = createClient();
-
+    const [deletingChallengeId, setDeletingChallengeId] =
+    useState<string | null>(null);
     const [loading, setLoading] =
         useState(true);
 
@@ -213,7 +215,7 @@ export default function ChallengesPage() {
                         ] =
                             (
                                 counts[
-                                    player.challenge_id
+                                player.challenge_id
                                 ] ??
                                 0
                             ) + 1;
@@ -396,12 +398,12 @@ export default function ChallengesPage() {
                     current.map(
                         (item) =>
                             item.id ===
-                            challenge.id
+                                challenge.id
                                 ? {
-                                      ...item,
-                                      title:
-                                          updatedTitle,
-                                  }
+                                    ...item,
+                                    title:
+                                        updatedTitle,
+                                }
                                 : item
                     )
             );
@@ -425,7 +427,87 @@ export default function ChallengesPage() {
             );
         }
     }
+    async function deleteChallenge(
+        challenge: Challenge
+    ) {
+        const confirmed =
+            window.confirm(
+                `Delete "${challenge.title}"?\n\nThis will remove the challenge and its leaderboard data. This action cannot be undone.`
+            );
 
+        if (!confirmed) {
+            return;
+        }
+
+        setError("");
+        setDeletingChallengeId(
+            challenge.id
+        );
+
+        try {
+            const response =
+                await fetch(
+                    "/api/challenges/delete",
+                    {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+                        },
+                        cache: "no-store",
+                        body: JSON.stringify({
+                            challengeId:
+                                challenge.id,
+                        }),
+                    }
+                );
+
+            const data =
+                await response
+                    .json()
+                    .catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.error ??
+                    "Unable to delete the challenge."
+                );
+            }
+
+            setChallenges(
+                (current) =>
+                    current.filter(
+                        (item) =>
+                            item.id !==
+                            challenge.id
+                    )
+            );
+
+            setPlayerCounts(
+                (current) => {
+                    const next = {
+                        ...current,
+                    };
+
+                    delete next[
+                        challenge.id
+                    ];
+
+                    return next;
+                }
+            );
+        } catch (err) {
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : "Unable to delete the challenge."
+            );
+        } finally {
+            setDeletingChallengeId(
+                null
+            );
+        }
+    }
     /*
      * ============================================================
      * COPY LINK
@@ -485,11 +567,10 @@ export default function ChallengesPage() {
                         title:
                             challenge.title,
                         text:
-                            `Join my ${
-                                challenge.game_mode ===
+                            `Join my ${challenge.game_mode ===
                                 "ipl"
-                                    ? "IPL Challenge"
-                                    : "World Domination Challenge"
+                                ? "IPL Challenge"
+                                : "World Domination Challenge"
                             } on Build Your XI!`,
                         url:
                             link,
@@ -517,7 +598,7 @@ export default function ChallengesPage() {
         useMemo(
             () =>
                 view ===
-                "create"
+                    "create"
                     ? "Create a Challenge"
                     : "Challenges",
             [view]
@@ -598,26 +679,26 @@ export default function ChallengesPage() {
 
                     {view ===
                         "list" && (
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setView(
-                                    "create"
-                                )
-                            }
-                            className="btn btn-primary flex items-center gap-2"
-                        >
-                            <Plus className="h-4 w-4" />
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setView(
+                                        "create"
+                                    )
+                                }
+                                className="btn btn-primary flex items-center gap-2"
+                            >
+                                <Plus className="h-4 w-4" />
 
-                            <span className="hidden sm:inline">
-                                CREATE NEW CHALLENGE
-                            </span>
+                                <span className="hidden sm:inline">
+                                    CREATE NEW CHALLENGE
+                                </span>
 
-                            <span className="sm:hidden">
-                                CREATE
-                            </span>
-                        </button>
-                    )}
+                                <span className="sm:hidden">
+                                    CREATE
+                                </span>
+                            </button>
+                        )}
                 </div>
 
                 {/* Error */}
@@ -634,145 +715,143 @@ export default function ChallengesPage() {
 
                 {view ===
                     "create" && (
-                    <div className="mt-8">
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setView(
-                                    "list"
-                                );
-                                setError(
-                                    ""
-                                );
-                            }}
-                            className="flex items-center gap-2 text-sm font-bold text-[var(--muted)] transition hover:text-white"
-                        >
-                            <ArrowLeft className="h-4 w-4" />
-                            Back to Challenges
-                        </button>
-
-                        <div className="card mx-auto mt-5 max-w-2xl p-5 sm:p-8">
-                            <div>
-                                <label className="text-sm font-bold">
-                                    Challenge title
-                                </label>
-
-                                <input
-                                    value={
-                                        title
-                                    }
-                                    onChange={(
-                                        event
-                                    ) =>
-                                        setTitle(
-                                            event
-                                                .target
-                                                .value
-                                        )
-                                    }
-                                    placeholder="Challenge your friends!"
-                                    maxLength={
-                                        60
-                                    }
-                                    className="mt-2 w-full"
-                                />
-                            </div>
-
-                            <div className="mt-7">
-                                <p className="text-sm font-bold">
-                                    Select challenge
-                                </p>
-
-                                <div className="mt-3 grid gap-4 sm:grid-cols-2">
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setGameMode(
-                                                "ipl"
-                                            )
-                                        }
-                                        className={`rounded-2xl border p-5 text-left transition ${
-                                            gameMode ===
-                                            "ipl"
-                                                ? "border-[var(--accent)] bg-[var(--accent)]/10"
-                                                : "border-white/10 hover:border-white/25"
-                                        }`}
-                                    >
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-3xl">
-                                                🏏
-                                            </span>
-
-                                            <div>
-                                                <p className="font-black">
-                                                    IPL CHALLENGE
-                                                </p>
-
-                                                <p className="mt-1 text-xs text-[var(--muted)]">
-                                                    Build the ultimate IPL XI.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        {gameMode ===
-                                            "ipl" && (
-                                            <Check className="mt-4 h-5 w-5 text-[var(--accent)]" />
-                                        )}
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setGameMode(
-                                                "world"
-                                            )
-                                        }
-                                        className={`rounded-2xl border p-5 text-left transition ${
-                                            gameMode ===
-                                            "world"
-                                                ? "border-[var(--accent)] bg-[var(--accent)]/10"
-                                                : "border-white/10 hover:border-white/25"
-                                        }`}
-                                    >
-                                        <div className="flex items-center gap-3">
-                                            <Globe2 className="h-8 w-8 text-[var(--accent)]" />
-
-                                            <div>
-                                                <p className="font-black">
-                                                    WORLD DOMINATION
-                                                </p>
-
-                                                <p className="mt-1 text-xs text-[var(--muted)]">
-                                                    Take on the world.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        {gameMode ===
-                                            "world" && (
-                                            <Check className="mt-4 h-5 w-5 text-[var(--accent)]" />
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
-
+                        <div className="mt-8">
                             <button
                                 type="button"
-                                disabled={
-                                    creating
-                                }
-                                onClick={
-                                    handleCreateChallenge
-                                }
-                                className="btn btn-primary mt-8 w-full"
+                                onClick={() => {
+                                    setView(
+                                        "list"
+                                    );
+                                    setError(
+                                        ""
+                                    );
+                                }}
+                                className="flex items-center gap-2 text-sm font-bold text-[var(--muted)] transition hover:text-white"
                             >
-                                {creating
-                                    ? "CREATING CHALLENGE..."
-                                    : "CREATE CHALLENGE +"}
+                                <ArrowLeft className="h-4 w-4" />
+                                Back to Challenges
                             </button>
+
+                            <div className="card mx-auto mt-5 max-w-2xl p-5 sm:p-8">
+                                <div>
+                                    <label className="text-sm font-bold">
+                                        Challenge title
+                                    </label>
+
+                                    <input
+                                        value={
+                                            title
+                                        }
+                                        onChange={(
+                                            event
+                                        ) =>
+                                            setTitle(
+                                                event
+                                                    .target
+                                                    .value
+                                            )
+                                        }
+                                        placeholder="Challenge your friends!"
+                                        maxLength={
+                                            60
+                                        }
+                                        className="mt-2 w-full"
+                                    />
+                                </div>
+
+                                <div className="mt-7">
+                                    <p className="text-sm font-bold">
+                                        Select challenge
+                                    </p>
+
+                                    <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setGameMode(
+                                                    "ipl"
+                                                )
+                                            }
+                                            className={`rounded-2xl border p-5 text-left transition ${gameMode ===
+                                                    "ipl"
+                                                    ? "border-[var(--accent)] bg-[var(--accent)]/10"
+                                                    : "border-white/10 hover:border-white/25"
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-3xl">
+                                                    🏏
+                                                </span>
+
+                                                <div>
+                                                    <p className="font-black">
+                                                        IPL CHALLENGE
+                                                    </p>
+
+                                                    <p className="mt-1 text-xs text-[var(--muted)]">
+                                                        Build the ultimate IPL XI.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {gameMode ===
+                                                "ipl" && (
+                                                    <Check className="mt-4 h-5 w-5 text-[var(--accent)]" />
+                                                )}
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setGameMode(
+                                                    "world"
+                                                )
+                                            }
+                                            className={`rounded-2xl border p-5 text-left transition ${gameMode ===
+                                                    "world"
+                                                    ? "border-[var(--accent)] bg-[var(--accent)]/10"
+                                                    : "border-white/10 hover:border-white/25"
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <Globe2 className="h-8 w-8 text-[var(--accent)]" />
+
+                                                <div>
+                                                    <p className="font-black">
+                                                        WORLD DOMINATION
+                                                    </p>
+
+                                                    <p className="mt-1 text-xs text-[var(--muted)]">
+                                                        Take on the world.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {gameMode ===
+                                                "world" && (
+                                                    <Check className="mt-4 h-5 w-5 text-[var(--accent)]" />
+                                                )}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    disabled={
+                                        creating
+                                    }
+                                    onClick={
+                                        handleCreateChallenge
+                                    }
+                                    className="btn btn-primary mt-8 w-full"
+                                >
+                                    {creating
+                                        ? "CREATING CHALLENGE..."
+                                        : "CREATE CHALLENGE +"}
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
                 {/* ========================================================
                     EMPTY STATE
@@ -781,7 +860,7 @@ export default function ChallengesPage() {
                 {view ===
                     "list" &&
                     challenges.length ===
-                        0 && (
+                    0 && (
                         <section className="card mt-10 flex min-h-[360px] flex-col items-center justify-center p-8 text-center">
                             <Trophy className="h-14 w-14 text-[var(--accent)]" />
 
@@ -816,7 +895,7 @@ export default function ChallengesPage() {
                 {view ===
                     "list" &&
                     challenges.length >
-                        0 && (
+                    0 && (
                         <div className="mt-8 grid w-full min-w-0 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch lg:grid-cols-3">
                             {challenges.map(
                                 (
@@ -856,11 +935,10 @@ export default function ChallengesPage() {
                                         >
                                             <div className="flex items-start justify-between gap-3">
                                                 <div
-                                                    className={`grid h-12 w-12 place-items-center rounded-xl ${
-                                                        isIpl
+                                                    className={`grid h-12 w-12 place-items-center rounded-xl ${isIpl
                                                             ? "bg-[var(--accent)]/15"
                                                             : "bg-blue-500/15"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {isIpl ? (
                                                         <span className="text-2xl">
@@ -985,30 +1063,52 @@ export default function ChallengesPage() {
                                                         </h2>
 
                                                         {isCreator && (
-                                                            <button
-                                                                type="button"
-                                                                onClick={(
-                                                                    event
-                                                                ) => {
-                                                                    event.stopPropagation();
+                                                            <div className="flex shrink-0 items-center gap-1">
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={(event) => {
+                                                                        event.stopPropagation();
 
-                                                                    setEditingChallengeId(
+                                                                        setEditingChallengeId(
+                                                                            challenge.id
+                                                                        );
+
+                                                                        setEditingTitle(
+                                                                            challenge.title
+                                                                        );
+
+                                                                        setError("");
+                                                                    }}
+                                                                    aria-label="Rename challenge"
+                                                                    className="rounded-lg p-1.5 text-[var(--muted)] transition hover:bg-white/5 hover:text-white"
+                                                                >
+                                                                    <Pencil className="h-4 w-4" />
+                                                                </button>
+
+                                                                <button
+                                                                    type="button"
+                                                                    disabled={
+                                                                        deletingChallengeId ===
                                                                         challenge.id
-                                                                    );
+                                                                    }
+                                                                    onClick={(event) => {
+                                                                        event.stopPropagation();
 
-                                                                    setEditingTitle(
-                                                                        challenge.title
-                                                                    );
-
-                                                                    setError(
-                                                                        ""
-                                                                    );
-                                                                }}
-                                                                aria-label="Rename challenge"
-                                                                className="shrink-0 rounded-lg p-1.5 text-[var(--muted)] transition hover:bg-white/5 hover:text-white"
-                                                            >
-                                                                <Pencil className="h-4 w-4" />
-                                                            </button>
+                                                                        deleteChallenge(
+                                                                            challenge
+                                                                        );
+                                                                    }}
+                                                                    aria-label="Delete challenge"
+                                                                    className="rounded-lg p-1.5 text-[var(--muted)] transition hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                                                                >
+                                                                    {deletingChallengeId ===
+                                                                        challenge.id ? (
+                                                                        <span className="block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                                                    ) : (
+                                                                        <Trash2 className="h-4 w-4" />
+                                                                    )}
+                                                                </button>
+                                                            </div>
                                                         )}
                                                     </>
                                                 )}
@@ -1026,18 +1126,18 @@ export default function ChallengesPage() {
 
                                                 {
                                                     playerCounts[
-                                                        challenge.id
+                                                    challenge.id
                                                     ] ??
                                                     0
                                                 }{" "}
                                                 player
                                                 {(
                                                     playerCounts[
-                                                        challenge.id
+                                                    challenge.id
                                                     ] ??
                                                     0
                                                 ) !==
-                                                1
+                                                    1
                                                     ? "s"
                                                     : ""}
                                             </div>
@@ -1057,7 +1157,7 @@ export default function ChallengesPage() {
                                                     className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-bold tracking-wide text-[var(--muted)] transition hover:border-[var(--accent)]/50 hover:text-[var(--foreground)]"
                                                 >
                                                     {copied ===
-                                                    challenge.id ? (
+                                                        challenge.id ? (
                                                         <>
                                                             <Check className="h-3.5 w-3.5" />
                                                             COPIED
