@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
-
+import { ensureProfile } from "@/lib/profile/ensure-profile";
 import {
   evaluateXI,
 } from "@/lib/ipl-challenge/scoring";
@@ -99,7 +99,38 @@ export async function POST(
         }
       );
     }
+    /*
+     * ============================================================
+     * ENSURE PLAYER PROFILE
+     * ============================================================
+     *
+     * game_scores.user_id has a foreign key to profiles.id.
+     *
+     * Some older/authenticated users may have an auth.users
+     * record without a corresponding profiles row.
+     *
+     * Create the missing profile server-side before the
+     * authoritative completion RPC runs.
+     */
 
+    try {
+      await ensureProfile(user);
+    } catch (profileError) {
+      console.error(
+        "Game completion profile error:",
+        profileError
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "Unable to prepare your player profile. Please try again.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
     /*
      * ============================================================
      * REQUEST VALIDATION
@@ -233,25 +264,25 @@ export async function POST(
      * ============================================================
      */
 
-const context =
-  (session.context ??
-    {}) as SessionContext;
+    const context =
+      (session.context ??
+        {}) as SessionContext;
 
-const challengeId =
-  typeof context.challengeId ===
-    "string"
-    ? context.challengeId
-    : null;
+    const challengeId =
+      typeof context.challengeId ===
+        "string"
+        ? context.challengeId
+        : null;
 
-const venueSnapshot =
-  context.venueSnapshot;
+    const venueSnapshot =
+      context.venueSnapshot;
 
-const draftSelections =
-  Array.isArray(
-    context.draftSelections
-  )
-    ? context.draftSelections
-    : [];
+    const draftSelections =
+      Array.isArray(
+        context.draftSelections
+      )
+        ? context.draftSelections
+        : [];
 
     if (
       draftSelections.length !==
@@ -792,158 +823,158 @@ const draftSelections =
       );
     }
 
-const completionRow =
-  Array.isArray(
-    completion
-  )
-    ? completion[0]
-    : completion;
+    const completionRow =
+      Array.isArray(
+        completion
+      )
+        ? completion[0]
+        : completion;
 
-/*
- * ============================================================
- * ATTACH SCORE TO CHALLENGE
- * ============================================================
- *
- * If this game was started from a challenge,
- * attach the server-authoritative result to
- * that challenge.
- *
- * The score comes from result.score.
- * It is NEVER accepted from the browser.
- */
+    /*
+     * ============================================================
+     * ATTACH SCORE TO CHALLENGE
+     * ============================================================
+     *
+     * If this game was started from a challenge,
+     * attach the server-authoritative result to
+     * that challenge.
+     *
+     * The score comes from result.score.
+     * It is NEVER accepted from the browser.
+     */
 
-if (challengeId) {
-  /*
-   * Verify that the player is still a member
-   * of the challenge.
-   */
-  const {
-    data: membership,
-    error: membershipError,
-  } = await supabaseAdmin
-    .from("challenge_players")
-    .select("challenge_id")
-    .eq(
-      "challenge_id",
-      challengeId
-    )
-    .eq(
-      "user_id",
-      user.id
-    )
-    .maybeSingle();
+    if (challengeId) {
+      /*
+       * Verify that the player is still a member
+       * of the challenge.
+       */
+      const {
+        data: membership,
+        error: membershipError,
+      } = await supabaseAdmin
+        .from("challenge_players")
+        .select("challenge_id")
+        .eq(
+          "challenge_id",
+          challengeId
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .maybeSingle();
 
-  if (membershipError) {
-    console.error(
-      "Challenge membership verification error:",
-      membershipError
-    );
+      if (membershipError) {
+        console.error(
+          "Challenge membership verification error:",
+          membershipError
+        );
 
-    return NextResponse.json(
-      {
-        error:
-          "The game was completed, but the challenge membership could not be verified.",
-      },
-      {
-        status: 500,
+        return NextResponse.json(
+          {
+            error:
+              "The game was completed, but the challenge membership could not be verified.",
+          },
+          {
+            status: 500,
+          }
+        );
       }
-    );
-  }
 
-  if (!membership) {
-    return NextResponse.json(
-      {
-        error:
-          "The game was completed, but you are not a member of this challenge.",
-      },
-      {
-        status: 403,
+      if (!membership) {
+        return NextResponse.json(
+          {
+            error:
+              "The game was completed, but you are not a member of this challenge.",
+          },
+          {
+            status: 403,
+          }
+        );
       }
-    );
-  }
 
-  /*
-   * Check whether this player already has a score
-   * recorded for this challenge.
-   *
-   * We are intentionally NOT deciding replay/update
-   * behaviour yet.
-   */
-  const {
-    data: existingChallengeScore,
-    error: existingScoreError,
-  } = await supabaseAdmin
-    .from("challenge_scores")
-    .select(
-      "challenge_id, user_id, score"
-    )
-    .eq(
-      "challenge_id",
-      challengeId
-    )
-    .eq(
-      "user_id",
-      user.id
-    )
-    .maybeSingle();
+      /*
+       * Check whether this player already has a score
+       * recorded for this challenge.
+       *
+       * We are intentionally NOT deciding replay/update
+       * behaviour yet.
+       */
+      const {
+        data: existingChallengeScore,
+        error: existingScoreError,
+      } = await supabaseAdmin
+        .from("challenge_scores")
+        .select(
+          "challenge_id, user_id, score"
+        )
+        .eq(
+          "challenge_id",
+          challengeId
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .maybeSingle();
 
-  if (existingScoreError) {
-    console.error(
-      "Challenge score lookup error:",
-      existingScoreError
-    );
+      if (existingScoreError) {
+        console.error(
+          "Challenge score lookup error:",
+          existingScoreError
+        );
 
-    return NextResponse.json(
-      {
-        error:
-          "The game was completed, but the challenge score could not be checked.",
-      },
-      {
-        status: 500,
+        return NextResponse.json(
+          {
+            error:
+              "The game was completed, but the challenge score could not be checked.",
+          },
+          {
+            status: 500,
+          }
+        );
       }
-    );
-  }
 
-  /*
-   * Only insert when this player does not
-   * already have a score for the challenge.
-   */
-  if (!existingChallengeScore) {
-    const {
-      error: challengeScoreError,
-    } = await supabaseAdmin
-      .from("challenge_scores")
-      .insert({
-        challenge_id:
-          challengeId,
+      /*
+       * Only insert when this player does not
+       * already have a score for the challenge.
+       */
+      if (!existingChallengeScore) {
+        const {
+          error: challengeScoreError,
+        } = await supabaseAdmin
+          .from("challenge_scores")
+          .insert({
+            challenge_id:
+              challengeId,
 
-        user_id:
-          user.id,
+            user_id:
+              user.id,
 
-        score:
-          result.score,
-      });
+            score:
+              result.score,
+          });
 
-    if (challengeScoreError) {
-      console.error(
-        "Challenge score insert error:",
-        challengeScoreError
-      );
+        if (challengeScoreError) {
+          console.error(
+            "Challenge score insert error:",
+            challengeScoreError
+          );
 
-      return NextResponse.json(
-        {
-          error:
-            "The game was completed, but the challenge score could not be saved.",
-        },
-        {
-          status: 500,
+          return NextResponse.json(
+            {
+              error:
+                "The game was completed, but the challenge score could not be saved.",
+            },
+            {
+              status: 500,
+            }
+          );
         }
-      );
+      }
     }
-  }
-}
 
-return NextResponse.json({
+    return NextResponse.json({
       result: {
         score:
           result.score,
