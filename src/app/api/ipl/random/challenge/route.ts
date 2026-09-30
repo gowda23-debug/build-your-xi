@@ -14,6 +14,16 @@ type DraftSelection = {
 type SessionContext = {
   version?: number;
 
+  /*
+   * If this game was started from a challenge,
+   * the challenge ID is stored here.
+   *
+   * This becomes part of the authoritative
+   * game session and is NOT trusted later
+   * from the browser.
+   */
+  challengeId?: string;
+
   venueId?: string;
 
   venueSnapshot?: {
@@ -69,21 +79,8 @@ export async function GET(
 
     /*
      * ============================================================
-     * EXISTING GAME SESSION
+     * REQUEST PARAMETERS
      * ============================================================
-     *
-     * First spin:
-     *
-     *   no gameSessionId
-     *   -> create ONE new game session
-     *
-     * Subsequent spins:
-     *
-     *   gameSessionId present
-     *   -> reuse the SAME game session
-     *
-     * This is important because all 11 player selections
-     * must belong to the same game session.
      */
 
     const url =
@@ -93,6 +90,127 @@ export async function GET(
       url.searchParams.get(
         "gameSessionId"
       )?.trim() ?? "";
+
+    const requestedChallengeId =
+      url.searchParams.get(
+        "challengeId"
+      )?.trim() ?? "";
+
+    /*
+     * ============================================================
+     * CHALLENGE VALIDATION
+     * ============================================================
+     *
+     * If the player entered the game through a challenge,
+     * validate that challenge before creating the game session.
+     *
+     * IMPORTANT:
+     *
+     * We never trust the challengeId merely because it came
+     * from the browser.
+     */
+
+    if (
+      requestedChallengeId &&
+      !user.is_anonymous
+    ) {
+      const {
+        data: challenge,
+        error: challengeError,
+      } = await supabaseAdmin
+        .from("challenges")
+        .select(
+          "id, game_mode, status"
+        )
+        .eq(
+          "id",
+          requestedChallengeId
+        )
+        .eq(
+          "game_mode",
+          "ipl"
+        )
+        .maybeSingle();
+
+      if (challengeError) {
+        console.error(
+          "Challenge validation error:",
+          challengeError
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Unable to verify the challenge.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      if (!challenge) {
+        return NextResponse.json(
+          {
+            error:
+              "Challenge not found.",
+          },
+          {
+            status: 404,
+          }
+        );
+      }
+
+      /*
+       * The player must be a member of the challenge.
+       */
+      const {
+        data: membership,
+        error: membershipError,
+      } = await supabaseAdmin
+        .from("challenge_players")
+        .select(
+          "challenge_id"
+        )
+        .eq(
+          "challenge_id",
+          requestedChallengeId
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .maybeSingle();
+
+      if (membershipError) {
+        console.error(
+          "Challenge membership validation error:",
+          membershipError
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Unable to verify challenge membership.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      if (!membership) {
+        return NextResponse.json(
+          {
+            error:
+              "You must join this challenge before playing it.",
+          },
+          {
+            status: 403,
+          }
+        );
+      }
+    }
 
     /*
      * ============================================================
@@ -155,7 +273,18 @@ export async function GET(
      * REGISTERED USER - EXISTING SESSION
      * ============================================================
      *
-     * If a session ID was supplied, we MUST reuse that session.
+     * First spin:
+     *
+     *   no gameSessionId
+     *   -> create ONE new game session
+     *
+     * Subsequent spins:
+     *
+     *   gameSessionId present
+     *   -> reuse the SAME game session
+     *
+     * This is important because all 11 player selections
+     * must belong to the same game session.
      */
 
     if (
@@ -236,12 +365,38 @@ export async function GET(
       }
 
       /*
-       * The XI can contain at most 11 selections.
+       * Read the existing authoritative context.
        */
       const context =
         (session.context ??
           {}) as SessionContext;
 
+      /*
+       * If the session belongs to a challenge,
+       * the challenge identity is already stored
+       * inside the session.
+       *
+       * We do NOT allow the browser to change it.
+       */
+      if (
+        requestedChallengeId &&
+        context.challengeId !==
+          requestedChallengeId
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "The challenge does not match the game session.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      /*
+       * The XI can contain at most 11 selections.
+       */
       const draftSelections =
         Array.isArray(
           context.draftSelections
@@ -265,10 +420,13 @@ export async function GET(
       }
 
       /*
-       * Select the next random team-season.
+       * ==========================================================
+       * SELECT NEXT RANDOM TEAM-SEASON
+       * ==========================================================
        *
-       * The current venue is NOT changed.
+       * The venue does NOT change.
        */
+
       const selected =
         teamSeasons[
           Math.floor(
@@ -307,9 +465,11 @@ export async function GET(
       }
 
       /*
-       * The venue MUST remain the original
-       * locked venue for the entire game.
+       * ==========================================================
+       * KEEP THE ORIGINAL LOCKED VENUE
+       * ==========================================================
        */
+
       const venue =
         context.venueSnapshot;
 
@@ -328,12 +488,15 @@ export async function GET(
       }
 
       /*
-       * Preserve the entire existing context.
+       * ==========================================================
+       * PRESERVE EXISTING SESSION CONTEXT
+       * ==========================================================
        *
        * IMPORTANT:
        *
-       * Do not reset:
+       * We do NOT reset:
        *
+       * - challengeId
        * - draftSelections
        * - teamRespinUsed
        * - seasonRespinUsed
@@ -341,7 +504,9 @@ export async function GET(
        *
        * We only update the current round.
        */
-      const nextContext: SessionContext = {
+
+      const nextContext:
+        SessionContext = {
         ...context,
 
         currentRound:
@@ -443,8 +608,8 @@ export async function GET(
      * NEW GAME
      * ============================================================
      *
-     * This block runs only for the FIRST spin of a registered
-     * game, or for guests.
+     * This block runs for the FIRST spin of a registered game,
+     * or for guests.
      */
 
     const selected =
@@ -485,11 +650,11 @@ export async function GET(
     }
 
     /*
-     * Resolve the venue from the database.
-     *
-     * This venue becomes locked for the
-     * entire game.
+     * ============================================================
+     * RESOLVE AND LOCK VENUE
+     * ============================================================
      */
+
     const venue =
       await getRandomVenueForTeamSeason(
         selected.id
@@ -514,9 +679,31 @@ export async function GET(
       string | null = null;
 
     if (!user.is_anonymous) {
+      /*
+       * ==========================================================
+       * AUTHORITATIVE GAME SESSION CONTEXT
+       * ==========================================================
+       *
+       * This is where the challenge ID is stored.
+       *
+       * It will travel with the game session through all
+       * subsequent spins and finally be read by the completion API.
+       */
+
       const sessionContext:
         SessionContext = {
         version: 1,
+
+        /*
+         * Store challenge identity ONLY when this game
+         * was started from a challenge.
+         */
+        ...(requestedChallengeId
+          ? {
+              challengeId:
+                requestedChallengeId,
+            }
+          : {}),
 
         venueId:
           venue.id,
@@ -540,10 +727,8 @@ export async function GET(
           season.id,
 
         /*
-         * IMPORTANT:
-         *
-         * The ONE game session starts
-         * with an empty draft.
+         * ONE game session starts with
+         * an empty draft.
          */
         draftSelections: [],
 

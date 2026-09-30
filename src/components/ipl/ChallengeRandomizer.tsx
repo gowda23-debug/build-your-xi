@@ -10,6 +10,8 @@ import type {
 interface ChallengeRandomizerProps {
   gameSessionId?: string | null;
 
+  challengeId?: string | null;
+
   onChallengeReady: (
     challenge: IPLChallenge,
     players: IPLPlayer[]
@@ -18,6 +20,7 @@ interface ChallengeRandomizerProps {
 
 export default function ChallengeRandomizer({
   gameSessionId,
+  challengeId,
   onChallengeReady,
 }: ChallengeRandomizerProps) {
   const [loading, setLoading] =
@@ -69,11 +72,28 @@ export default function ChallengeRandomizer({
     setError(null);
 
     try {
+      const params = new URLSearchParams();
+
+      if (gameSessionId) {
+        params.set(
+          "gameSessionId",
+          gameSessionId
+        );
+      }
+
+      if (challengeId) {
+        params.set(
+          "challengeId",
+          challengeId
+        );
+      }
+
+      const queryString =
+        params.toString();
+
       const challengeUrl =
-        gameSessionId
-          ? `/api/ipl/random/challenge?gameSessionId=${encodeURIComponent(
-            gameSessionId
-          )}`
+        queryString
+          ? `/api/ipl/random/challenge?${queryString}`
           : "/api/ipl/random/challenge";
 
       const response = await fetch(

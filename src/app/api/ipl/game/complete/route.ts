@@ -24,6 +24,9 @@ type RequestBody = {
 
 type SessionContext = {
   version?: number;
+
+  challengeId?: string;
+
   draftSelections?: {
     playerId: string;
     teamSeasonId: string;
@@ -230,18 +233,25 @@ export async function POST(
      * ============================================================
      */
 
-    const context =
-      (session.context ??
-        {}) as SessionContext;
+const context =
+  (session.context ??
+    {}) as SessionContext;
 
-    const venueSnapshot =
-      context.venueSnapshot;
-    const draftSelections =
-      Array.isArray(
-        context.draftSelections
-      )
-        ? context.draftSelections
-        : [];
+const challengeId =
+  typeof context.challengeId ===
+    "string"
+    ? context.challengeId
+    : null;
+
+const venueSnapshot =
+  context.venueSnapshot;
+
+const draftSelections =
+  Array.isArray(
+    context.draftSelections
+  )
+    ? context.draftSelections
+    : [];
 
     if (
       draftSelections.length !==
@@ -782,14 +792,158 @@ export async function POST(
       );
     }
 
-    const completionRow =
-      Array.isArray(
-        completion
-      )
-        ? completion[0]
-        : completion;
+const completionRow =
+  Array.isArray(
+    completion
+  )
+    ? completion[0]
+    : completion;
 
-    return NextResponse.json({
+/*
+ * ============================================================
+ * ATTACH SCORE TO CHALLENGE
+ * ============================================================
+ *
+ * If this game was started from a challenge,
+ * attach the server-authoritative result to
+ * that challenge.
+ *
+ * The score comes from result.score.
+ * It is NEVER accepted from the browser.
+ */
+
+if (challengeId) {
+  /*
+   * Verify that the player is still a member
+   * of the challenge.
+   */
+  const {
+    data: membership,
+    error: membershipError,
+  } = await supabaseAdmin
+    .from("challenge_players")
+    .select("challenge_id")
+    .eq(
+      "challenge_id",
+      challengeId
+    )
+    .eq(
+      "user_id",
+      user.id
+    )
+    .maybeSingle();
+
+  if (membershipError) {
+    console.error(
+      "Challenge membership verification error:",
+      membershipError
+    );
+
+    return NextResponse.json(
+      {
+        error:
+          "The game was completed, but the challenge membership could not be verified.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  if (!membership) {
+    return NextResponse.json(
+      {
+        error:
+          "The game was completed, but you are not a member of this challenge.",
+      },
+      {
+        status: 403,
+      }
+    );
+  }
+
+  /*
+   * Check whether this player already has a score
+   * recorded for this challenge.
+   *
+   * We are intentionally NOT deciding replay/update
+   * behaviour yet.
+   */
+  const {
+    data: existingChallengeScore,
+    error: existingScoreError,
+  } = await supabaseAdmin
+    .from("challenge_scores")
+    .select(
+      "challenge_id, user_id, score"
+    )
+    .eq(
+      "challenge_id",
+      challengeId
+    )
+    .eq(
+      "user_id",
+      user.id
+    )
+    .maybeSingle();
+
+  if (existingScoreError) {
+    console.error(
+      "Challenge score lookup error:",
+      existingScoreError
+    );
+
+    return NextResponse.json(
+      {
+        error:
+          "The game was completed, but the challenge score could not be checked.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  /*
+   * Only insert when this player does not
+   * already have a score for the challenge.
+   */
+  if (!existingChallengeScore) {
+    const {
+      error: challengeScoreError,
+    } = await supabaseAdmin
+      .from("challenge_scores")
+      .insert({
+        challenge_id:
+          challengeId,
+
+        user_id:
+          user.id,
+
+        score:
+          result.score,
+      });
+
+    if (challengeScoreError) {
+      console.error(
+        "Challenge score insert error:",
+        challengeScoreError
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "The game was completed, but the challenge score could not be saved.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+  }
+}
+
+return NextResponse.json({
       result: {
         score:
           result.score,
