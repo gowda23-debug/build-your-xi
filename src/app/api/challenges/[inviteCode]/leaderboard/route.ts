@@ -331,7 +331,7 @@ export async function GET(
 
             for (
                 const profile of
-                    profileData ?? []
+                profileData ?? []
             ) {
                 profilesById.set(
                     profile.id,
@@ -379,13 +379,66 @@ export async function GET(
                 }
             );
 
+        /*
+         * ============================================================
+         * CHALLENGE STATUS
+         * ============================================================
+         *
+         * Determine whether somebody has beaten the creator's
+         * current challenge score.
+         */
+
+        const creatorEntry =
+            leaderboard.find(
+                (entry) =>
+                    entry.user_id ===
+                    challenge.creator_id
+            );
+
+        const highestOpponentScore =
+            leaderboard
+                .filter(
+                    (entry) =>
+                        entry.user_id !==
+                        challenge.creator_id
+                )
+                .reduce<number | null>(
+                    (highest, entry) => {
+                        if (
+                            highest === null ||
+                            entry.score > highest
+                        ) {
+                            return entry.score;
+                        }
+
+                        return highest;
+                    },
+                    null
+                );
+
+        const creatorHasBeenBeaten =
+            creatorEntry !== undefined &&
+            highestOpponentScore !== null &&
+            highestOpponentScore >
+            creatorEntry.score;
+
+        const reclaimScore =
+            creatorHasBeenBeaten
+                ? highestOpponentScore
+                : null;
+
         return NextResponse.json(
             {
                 challenge: {
                     id:
                         challenge.id,
+
+                    creatorId:
+                        challenge.creator_id,
+
                     title:
                         challenge.title,
+
                     gameMode:
                         challenge.game_mode,
                 },
@@ -394,6 +447,10 @@ export async function GET(
                     playerCount ?? 0,
 
                 leaderboard,
+
+                creatorHasBeenBeaten,
+
+                reclaimScore,
             },
             {
                 status: 200,

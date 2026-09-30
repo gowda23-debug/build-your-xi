@@ -61,7 +61,7 @@ export default function ChallengePage() {
     const [loading, setLoading] =
         useState(true);
     const [joining, setJoining] =
-    useState(false);
+        useState(false);
 
     const [error, setError] =
         useState("");
@@ -78,6 +78,10 @@ export default function ChallengePage() {
     const [savingTitle, setSavingTitle] =
         useState(false);
 
+    const [
+        reclaimScore,
+        setReclaimScore,
+    ] = useState<number | null>(null);
     useEffect(() => {
         if (inviteCode) {
             loadChallenge();
@@ -235,8 +239,12 @@ export default function ChallengePage() {
                     ? leaderboardData.leaderboard
                     : [];
 
-            setLeaderboard(
-                loadedLeaderboard
+
+            setReclaimScore(
+                typeof leaderboardData?.reclaimScore ===
+                    "number"
+                    ? leaderboardData.reclaimScore
+                    : null
             );
 
             /*
@@ -578,8 +586,8 @@ export default function ChallengePage() {
                     <div className="flex justify-center">
                         <div
                             className={`grid h-14 w-14 place-items-center rounded-2xl ${isIpl
-                                    ? "bg-[var(--accent)]/15"
-                                    : "bg-blue-500/15"
+                                ? "bg-[var(--accent)]/15"
+                                : "bg-blue-500/15"
                                 }`}
                         >
                             {isIpl ? (
@@ -775,7 +783,30 @@ export default function ChallengePage() {
                             </div>
                         </section>
                     )}
+                {creatorHasBeenBeaten &&
+                    reclaimScore !== null && (
+                        <div className="mt-6 rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4">
+                            <div className="flex items-center gap-3">
+                                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-amber-400/10 text-amber-300">
+                                    <Trophy className="h-5 w-5" />
+                                </div>
 
+                                <div>
+                                    <p className="text-sm font-black uppercase tracking-wide text-amber-300">
+                                        Your score has been beaten
+                                    </p>
+
+                                    <p className="mt-1 text-xs text-[var(--muted)]">
+                                        Another player has reached{" "}
+                                        <span className="font-black text-white">
+                                            {reclaimScore}
+                                        </span>
+                                        . Play again to reclaim the top spot.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 {/* ========================================================
                     LEADERBOARD
                 ======================================================== */}
@@ -837,8 +868,8 @@ export default function ChallengePage() {
                                                         entry.user_id
                                                     }
                                                     className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
-                                                            ? "bg-[var(--accent)]/10"
-                                                            : ""
+                                                        ? "bg-[var(--accent)]/10"
+                                                        : ""
                                                         }`}
                                                 >
                                                     <span className="text-sm font-black text-[var(--muted)]">

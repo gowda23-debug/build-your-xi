@@ -29,7 +29,10 @@ export async function POST(request: Request) {
      * ============================================================
      */
 
-    const { user, error: authError } = await requireUser();
+    const {
+      user,
+      error: authError,
+    } = await requireUser();
 
     if (authError || !user) {
       return (
@@ -44,6 +47,10 @@ export async function POST(request: Request) {
         )
       );
     }
+
+    /*
+     * Challenges require a registered user.
+     */
 
     if (user.is_anonymous) {
       return NextResponse.json(
@@ -63,7 +70,8 @@ export async function POST(request: Request) {
      * ============================================================
      */
 
-    const body = (await request.json().catch(() => ({}))) as RequestBody;
+    const body =
+      (await request.json().catch(() => ({}))) as RequestBody;
 
     const gameScoreId =
       typeof body.gameScoreId === "string"
@@ -73,7 +81,8 @@ export async function POST(request: Request) {
     if (!gameScoreId) {
       return NextResponse.json(
         {
-          error: "gameScoreId is required.",
+          error:
+            "gameScoreId is required.",
         },
         {
           status: 400,
@@ -83,27 +92,27 @@ export async function POST(request: Request) {
 
     /*
      * ============================================================
-     * VERIFY THE AUTHORITATIVE GAME SCORE
+     * VERIFY AUTHORITATIVE GAME SCORE
      * ============================================================
      *
-     * IMPORTANT:
+     * The browser sends only the gameScoreId.
      *
-     * The browser does NOT send:
+     * We NEVER trust a score sent by the browser.
      *
-     * - score
-     * - wins
-     * - losses
-     *
-     * We load the already-completed game score from the server.
+     * The server loads the completed game from game_scores.
      */
 
-    const { data: gameScore, error: gameScoreError } =
-      await supabaseAdmin
-        .from("game_scores")
-        .select("id, user_id, score")
-        .eq("id", gameScoreId)
-        .eq("user_id", user.id)
-        .maybeSingle();
+    const {
+      data: gameScore,
+      error: gameScoreError,
+    } = await supabaseAdmin
+      .from("game_scores")
+      .select(
+        "id, user_id, score"
+      )
+      .eq("id", gameScoreId)
+      .eq("user_id", user.id)
+      .maybeSingle();
 
     if (gameScoreError) {
       console.error(
@@ -113,7 +122,8 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "Unable to verify the completed game.",
+          error:
+            "Unable to verify the completed game.",
         },
         {
           status: 500,
@@ -133,12 +143,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const score = Number(gameScore.score);
+    /*
+     * Make sure the authoritative score is a valid number.
+     */
+
+    const score =
+      Number(gameScore.score);
 
     if (!Number.isFinite(score)) {
       return NextResponse.json(
         {
-          error: "The completed game contains an invalid score.",
+          error:
+            "The completed game contains an invalid score.",
         },
         {
           status: 500,
@@ -148,24 +164,31 @@ export async function POST(request: Request) {
 
     /*
      * ============================================================
-     * CREATE THE CHALLENGE
+     * CREATE CHALLENGE
      * ============================================================
      *
-     * We deliberately use the existing create_challenge RPC
-     * rather than recreating challenge creation logic here.
+     * Use the existing database RPC.
      *
-     * The server Supabase client carries the authenticated
-     * user's session, so auth.uid() remains available to the
-     * database function.
+     * The authenticated Supabase client is used here so the
+     * database function can use the authenticated user's identity.
      */
 
-    const supabase = await createClient();
+    const supabase =
+      await createClient();
 
-    const { data: challengeData, error: challengeError } =
-      await supabase.rpc("create_challenge", {
-        p_title: "My IPL Challenge",
-        p_game_mode: "ipl",
-      });
+    const {
+      data: challengeData,
+      error: challengeError,
+    } = await supabase.rpc(
+      "create_challenge",
+      {
+        p_title:
+          "My IPL Challenge",
+
+        p_game_mode:
+          "ipl",
+      }
+    );
 
     if (challengeError) {
       console.error(
@@ -175,7 +198,8 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "Unable to create the challenge.",
+          error:
+            "Unable to create the challenge.",
         },
         {
           status: 500,
@@ -183,11 +207,14 @@ export async function POST(request: Request) {
       );
     }
 
-    const challenge = (
-      Array.isArray(challengeData)
-        ? challengeData[0]
-        : challengeData
-    ) as Challenge | null;
+    const challenge =
+      (
+        Array.isArray(
+          challengeData
+        )
+          ? challengeData[0]
+          : challengeData
+      ) as Challenge | null;
 
     if (
       !challenge?.id ||
@@ -211,17 +238,27 @@ export async function POST(request: Request) {
 
     /*
      * ============================================================
-     * ADD CREATOR TO THE CHALLENGE
+     * ADD CREATOR TO CHALLENGE
      * ============================================================
      */
 
-    const { data: existingPlayer, error: playerLookupError } =
-      await supabaseAdmin
-        .from("challenge_players")
-        .select("challenge_id")
-        .eq("challenge_id", challenge.id)
-        .eq("user_id", user.id)
-        .maybeSingle();
+    const {
+      data: existingPlayer,
+      error: playerLookupError,
+    } = await supabaseAdmin
+      .from("challenge_players")
+      .select(
+        "challenge_id"
+      )
+      .eq(
+        "challenge_id",
+        challenge.id
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .maybeSingle();
 
     if (playerLookupError) {
       console.error(
@@ -229,10 +266,25 @@ export async function POST(request: Request) {
         playerLookupError
       );
 
+      /*
+       * Cleanup the challenge because creation was not completed.
+       */
+
+      await supabaseAdmin
+        .from("challenge_players")
+        .delete()
+        .eq(
+          "challenge_id",
+          challenge.id
+        );
+
       await supabaseAdmin
         .from("challenges")
         .delete()
-        .eq("id", challenge.id);
+        .eq(
+          "id",
+          challenge.id
+        );
 
       return NextResponse.json(
         {
@@ -246,13 +298,17 @@ export async function POST(request: Request) {
     }
 
     if (!existingPlayer) {
-      const { error: playerInsertError } =
-        await supabaseAdmin
-          .from("challenge_players")
-          .insert({
-            challenge_id: challenge.id,
-            user_id: user.id,
-          });
+      const {
+        error: playerInsertError,
+      } = await supabaseAdmin
+        .from("challenge_players")
+        .insert({
+          challenge_id:
+            challenge.id,
+
+          user_id:
+            user.id,
+        });
 
       if (playerInsertError) {
         console.error(
@@ -260,10 +316,25 @@ export async function POST(request: Request) {
           playerInsertError
         );
 
+        /*
+         * Cleanup both related records.
+         */
+
+        await supabaseAdmin
+          .from("challenge_players")
+          .delete()
+          .eq(
+            "challenge_id",
+            challenge.id
+          );
+
         await supabaseAdmin
           .from("challenges")
           .delete()
-          .eq("id", challenge.id);
+          .eq(
+            "id",
+            challenge.id
+          );
 
         return NextResponse.json(
           {
@@ -279,28 +350,35 @@ export async function POST(request: Request) {
 
     /*
      * ============================================================
-     * ADD THE AUTHORITATIVE GAME SCORE
+     * ATTACH AUTHORITATIVE SCORE
      * ============================================================
      *
-     * This is the critical connection:
+     * New challenge:
      *
-     * completed game
-     *       ↓
-     * game_scores
-     *       ↓
-     * challenge_scores
+     * game_scores.score
+     *        ↓
+     * challenge_scores.score
      *
-     * The score is taken from game_scores.
-     * It is NOT accepted from the browser.
+     * The browser never provides the score.
      */
 
-    const { data: existingScore, error: scoreLookupError } =
-      await supabaseAdmin
-        .from("challenge_scores")
-        .select("challenge_id")
-        .eq("challenge_id", challenge.id)
-        .eq("user_id", user.id)
-        .maybeSingle();
+    const {
+      data: existingScore,
+      error: scoreLookupError,
+    } = await supabaseAdmin
+      .from("challenge_scores")
+      .select(
+        "challenge_id, user_id, score"
+      )
+      .eq(
+        "challenge_id",
+        challenge.id
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .maybeSingle();
 
     if (scoreLookupError) {
       console.error(
@@ -308,10 +386,25 @@ export async function POST(request: Request) {
         scoreLookupError
       );
 
+      /*
+       * Cleanup the partially-created challenge.
+       */
+
+      await supabaseAdmin
+        .from("challenge_players")
+        .delete()
+        .eq(
+          "challenge_id",
+          challenge.id
+        );
+
       await supabaseAdmin
         .from("challenges")
         .delete()
-        .eq("id", challenge.id);
+        .eq(
+          "id",
+          challenge.id
+        );
 
       return NextResponse.json(
         {
@@ -319,20 +412,34 @@ export async function POST(request: Request) {
             "Unable to initialize the challenge score.",
         },
         {
-          status: 500,
+          status: 500
         }
       );
     }
 
+    /*
+     * Normally a brand-new challenge will not have a score yet.
+     */
+
     if (!existingScore) {
-      const { error: scoreInsertError } =
-        await supabaseAdmin
-          .from("challenge_scores")
-          .insert({
-            challenge_id: challenge.id,
-            user_id: user.id,
-            score,
-          });
+      const {
+        data: insertedScore,
+        error: scoreInsertError,
+      } = await supabaseAdmin
+        .from("challenge_scores")
+        .insert({
+          challenge_id:
+            challenge.id,
+
+          user_id:
+            user.id,
+
+          score,
+        })
+        .select(
+          "challenge_id, user_id, score"
+        )
+        .single();
 
       if (scoreInsertError) {
         console.error(
@@ -340,10 +447,25 @@ export async function POST(request: Request) {
           scoreInsertError
         );
 
+        /*
+         * Cleanup the partially-created challenge.
+         */
+
+        await supabaseAdmin
+          .from("challenge_players")
+          .delete()
+          .eq(
+            "challenge_id",
+            challenge.id
+          );
+
         await supabaseAdmin
           .from("challenges")
           .delete()
-          .eq("id", challenge.id);
+          .eq(
+            "id",
+            challenge.id
+          );
 
         return NextResponse.json(
           {
@@ -351,7 +473,74 @@ export async function POST(request: Request) {
               "Unable to attach your completed game score to the challenge.",
           },
           {
-            status: 500,
+            status: 500
+          }
+        );
+      }
+
+      /*
+       * ==========================================================
+       * VERIFY INSERTED SCORE
+       * ==========================================================
+       *
+       * Do not assume that a successful request means the
+       * expected row is actually available.
+       */
+
+      if (
+        !insertedScore ||
+        insertedScore.challenge_id !==
+          challenge.id ||
+        insertedScore.user_id !==
+          user.id ||
+        Number(
+          insertedScore.score
+        ) !== score
+      ) {
+        console.error(
+          "Challenge score insert verification failed:",
+          insertedScore
+        );
+
+        /*
+         * Cleanup the partially-created challenge.
+         */
+
+        await supabaseAdmin
+          .from("challenge_scores")
+          .delete()
+          .eq(
+            "challenge_id",
+            challenge.id
+          )
+          .eq(
+            "user_id",
+            user.id
+          );
+
+        await supabaseAdmin
+          .from("challenge_players")
+          .delete()
+          .eq(
+            "challenge_id",
+            challenge.id
+          );
+
+        await supabaseAdmin
+          .from("challenges")
+          .delete()
+          .eq(
+            "id",
+            challenge.id
+          );
+
+        return NextResponse.json(
+          {
+            error:
+              "The challenge was created, but your score could not be verified. Please try again.",
+          },
+          {
+            status: 500
           }
         );
       }
@@ -366,9 +555,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
 
-      challengeId: challenge.id,
+      challengeId:
+        challenge.id,
 
-      inviteCode: challenge.invite_code,
+      inviteCode:
+        challenge.invite_code,
 
       score,
     });

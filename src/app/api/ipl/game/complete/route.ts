@@ -3,13 +3,9 @@ import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { ensureProfile } from "@/lib/profile/ensure-profile";
-import {
-  evaluateXI,
-} from "@/lib/ipl-challenge/scoring";
 
-import {
-  validateXI,
-} from "@/lib/ipl-challenge/validate-xi";
+import { evaluateXI } from "@/lib/ipl-challenge/scoring";
+import { validateXI } from "@/lib/ipl-challenge/validate-xi";
 
 import type {
   IPLPlayer,
@@ -33,6 +29,7 @@ type SessionContext = {
   }[];
 
   currentRound?: number;
+
   venueId?: string;
 
   venueSnapshot?: {
@@ -53,9 +50,7 @@ type SessionContext = {
   [key: string]: unknown;
 };
 
-export async function POST(
-  request: Request
-) {
+export async function POST(request: Request) {
   try {
     /*
      * ============================================================
@@ -85,9 +80,10 @@ export async function POST(
     /*
      * Guests are intentionally not persisted.
      *
-     * The server-authoritative registered-game flow
-     * requires a real game session.
+     * The authoritative game completion flow requires
+     * a registered authenticated user.
      */
+
     if (user.is_anonymous) {
       return NextResponse.json(
         {
@@ -99,18 +95,15 @@ export async function POST(
         }
       );
     }
+
     /*
      * ============================================================
      * ENSURE PLAYER PROFILE
      * ============================================================
      *
-     * game_scores.user_id has a foreign key to profiles.id.
+     * game_scores.user_id references profiles.id.
      *
-     * Some older/authenticated users may have an auth.users
-     * record without a corresponding profiles row.
-     *
-     * Create the missing profile server-side before the
-     * authoritative completion RPC runs.
+     * Make sure the profile exists before completing the game.
      */
 
     try {
@@ -131,6 +124,7 @@ export async function POST(
         }
       );
     }
+
     /*
      * ============================================================
      * REQUEST VALIDATION
@@ -138,25 +132,18 @@ export async function POST(
      */
 
     const body =
-      (await request
-        .json()
-        .catch(() => ({}))) as RequestBody;
+      (await request.json().catch(() => ({}))) as RequestBody;
 
     const gameSessionId =
-      typeof body.gameSessionId ===
-        "string" &&
-        body.gameSessionId.trim()
-          .length > 0
+      typeof body.gameSessionId === "string" &&
+      body.gameSessionId.trim().length > 0
         ? body.gameSessionId.trim()
         : null;
-
-
 
     if (!gameSessionId) {
       return NextResponse.json(
         {
-          error:
-            "gameSessionId is required.",
+          error: "gameSessionId is required.",
         },
         {
           status: 400,
@@ -164,11 +151,24 @@ export async function POST(
       );
     }
 
-
     /*
      * ============================================================
      * LOAD AUTHORITATIVE GAME SESSION
      * ============================================================
+     *
+     * IMPORTANT:
+     *
+     * The browser is NOT trusted for:
+     *
+     * - score
+     * - team
+     * - season
+     * - venue
+     * - pitch
+     * - selected-player statistics
+     *
+     * Everything important is reconstructed from the
+     * server-side game session.
      */
 
     const {
@@ -186,18 +186,9 @@ export async function POST(
         context
       `
       )
-      .eq(
-        "id",
-        gameSessionId
-      )
-      .eq(
-        "user_id",
-        user.id
-      )
-      .eq(
-        "game_mode",
-        "ipl"
-      )
+      .eq("id", gameSessionId)
+      .eq("user_id", user.id)
+      .eq("game_mode", "ipl")
       .maybeSingle();
 
     if (sessionError) {
@@ -220,8 +211,7 @@ export async function POST(
     if (!session) {
       return NextResponse.json(
         {
-          error:
-            "Game session not found.",
+          error: "Game session not found.",
         },
         {
           status: 404,
@@ -229,10 +219,11 @@ export async function POST(
       );
     }
 
-    if (
-      session.status !==
-      "started"
-    ) {
+    /*
+     * A game session may only be completed once.
+     */
+
+    if (session.status !== "started") {
       return NextResponse.json(
         {
           error:
@@ -244,9 +235,7 @@ export async function POST(
       );
     }
 
-    if (
-      !session.team_season_id
-    ) {
+    if (!session.team_season_id) {
       return NextResponse.json(
         {
           error:
@@ -265,12 +254,17 @@ export async function POST(
      */
 
     const context =
-      (session.context ??
-        {}) as SessionContext;
+      (session.context ?? {}) as SessionContext;
+
+    /*
+     * If this game came from a challenge, challengeId is
+     * taken ONLY from the authoritative session context.
+     *
+     * The browser does not send the challengeId here.
+     */
 
     const challengeId =
-      typeof context.challengeId ===
-        "string"
+      typeof context.challengeId === "string"
         ? context.challengeId
         : null;
 
@@ -278,16 +272,15 @@ export async function POST(
       context.venueSnapshot;
 
     const draftSelections =
-      Array.isArray(
-        context.draftSelections
-      )
+      Array.isArray(context.draftSelections)
         ? context.draftSelections
         : [];
 
-    if (
-      draftSelections.length !==
-      11
-    ) {
+    /*
+     * A completed XI must contain exactly 11 players.
+     */
+
+    if (draftSelections.length !== 11) {
       return NextResponse.json(
         {
           error:
@@ -299,18 +292,18 @@ export async function POST(
       );
     }
 
+    /*
+     * No duplicate players.
+     */
+
     const uniqueDraftPlayerIds =
       new Set(
         draftSelections.map(
-          (selection) =>
-            selection.playerId
+          (selection) => selection.playerId
         )
       );
 
-    if (
-      uniqueDraftPlayerIds.size !==
-      11
-    ) {
+    if (uniqueDraftPlayerIds.size !== 11) {
       return NextResponse.json(
         {
           error:
@@ -321,14 +314,17 @@ export async function POST(
         }
       );
     }
-    const pitch =
-      venueSnapshot?.pitch ??
-      null;
 
-    if (
-      !venueSnapshot?.id ||
-      !pitch
-    ) {
+    /*
+     * ============================================================
+     * LOCKED VENUE / PITCH
+     * ============================================================
+     */
+
+    const pitch =
+      venueSnapshot?.pitch ?? null;
+
+    if (!venueSnapshot?.id || !pitch) {
       return NextResponse.json(
         {
           error:
@@ -341,42 +337,20 @@ export async function POST(
     }
 
     /*
-     * IMPORTANT:
-     *
-     * We do NOT accept:
-     *
-     * - teamSeasonId
-     * - venue
-     * - pitch
-     * - score
-     * - wins
-     * - losses
-     *
-     * from the client.
-     *
-     * The session is the authority.
-     */
-
-    const teamSeasonId =
-      session.team_season_id;
-
-    /*
      * ============================================================
      * LOAD AUTHORITATIVE PLAYER DATA
      * ============================================================
      *
-     * Each player belongs to the team-season from the round
-     * in which that player was selected.
+     * Every selected player is verified against the exact
+     * team-season recorded when that player was selected.
      *
-     * We therefore verify every player/team-season pair
-     * independently on the server.
+     * This is important because every round can have a different
+     * team-season.
      */
 
     const selectedPlayers: IPLPlayer[] = [];
 
-    for (
-      const selection of draftSelections
-    ) {
+    for (const selection of draftSelections) {
       const playerId =
         selection.playerId;
 
@@ -384,10 +358,8 @@ export async function POST(
         selection.teamSeasonId;
 
       if (
-        typeof playerId !==
-        "string" ||
-        typeof teamSeasonId !==
-        "string"
+        typeof playerId !== "string" ||
+        typeof teamSeasonId !== "string"
       ) {
         return NextResponse.json(
           {
@@ -403,42 +375,33 @@ export async function POST(
       const {
         data: playerStat,
         error: playerStatError,
-      } =
-        await supabaseAdmin
-          .from(
-            "ipl_team_season_player_stats"
+      } = await supabaseAdmin
+        .from("ipl_team_season_player_stats")
+        .select(
+          `
+          player_id,
+          matches,
+          batting_innings,
+          runs,
+          balls_faced,
+          fours,
+          sixes,
+          highest_score,
+          dismissals,
+          bowling_innings,
+          balls_bowled,
+          runs_conceded,
+          wickets,
+          player:ipl_players (
+            id,
+            name,
+            role
           )
-          .select(
-            `
-        player_id,
-        matches,
-        batting_innings,
-        runs,
-        balls_faced,
-        fours,
-        sixes,
-        highest_score,
-        dismissals,
-        bowling_innings,
-        balls_bowled,
-        runs_conceded,
-        wickets,
-        player:ipl_players (
-          id,
-          name,
-          role
+        `
         )
-      `
-          )
-          .eq(
-            "team_season_id",
-            teamSeasonId
-          )
-          .eq(
-            "player_id",
-            playerId
-          )
-          .maybeSingle();
+        .eq("team_season_id", teamSeasonId)
+        .eq("player_id", playerId)
+        .maybeSingle();
 
       if (playerStatError) {
         console.error(
@@ -470,9 +433,7 @@ export async function POST(
       }
 
       const player =
-        Array.isArray(
-          playerStat.player
-        )
+        Array.isArray(playerStat.player)
           ? playerStat.player[0]
           : playerStat.player;
 
@@ -494,154 +455,49 @@ export async function POST(
       }
 
       selectedPlayers.push({
-        id:
-          player.id,
-
-        name:
-          player.name,
-
-        role:
-          player.role,
+        id: player.id,
+        name: player.name,
+        role: player.role,
 
         stats: {
           matches:
-            playerStat.matches ??
-            0,
+            playerStat.matches ?? 0,
 
           battingInnings:
-            playerStat.batting_innings ??
-            0,
+            playerStat.batting_innings ?? 0,
 
           runs:
-            playerStat.runs ??
-            0,
+            playerStat.runs ?? 0,
 
           ballsFaced:
-            playerStat.balls_faced ??
-            0,
+            playerStat.balls_faced ?? 0,
 
           fours:
-            playerStat.fours ??
-            0,
+            playerStat.fours ?? 0,
 
           sixes:
-            playerStat.sixes ??
-            0,
+            playerStat.sixes ?? 0,
 
           highestScore:
-            playerStat.highest_score ??
-            0,
+            playerStat.highest_score ?? 0,
 
           dismissals:
-            playerStat.dismissals ??
-            0,
+            playerStat.dismissals ?? 0,
 
           bowlingInnings:
-            playerStat.bowling_innings ??
-            0,
+            playerStat.bowling_innings ?? 0,
 
           ballsBowled:
-            playerStat.balls_bowled ??
-            0,
+            playerStat.balls_bowled ?? 0,
 
           runsConceded:
-            playerStat.runs_conceded ??
-            0,
+            playerStat.runs_conceded ?? 0,
 
           wickets:
-            playerStat.wickets ??
-            0,
+            playerStat.wickets ?? 0,
         },
       });
     }
-
-    /*
-     * ============================================================
-     * NORMALIZE SERVER PLAYER DATA
-     * ============================================================
-     */
-
-    const players: IPLPlayer[] =
-      [];
-
-    // for (const stat of playerStats) {
-    //   const player =
-    //     Array.isArray(
-    //       stat.player
-    //     )
-    //       ? stat.player[0]
-    //       : stat.player;
-
-    //   if (
-    //     !player ||
-    //     !player.id ||
-    //     !player.name ||
-    //     !player.role
-    //   ) {
-    //     return NextResponse.json(
-    //       {
-    //         error:
-    //           "Invalid player data exists in the selected team-season.",
-    //       },
-    //       {
-    //         status: 500,
-    //       }
-    //     );
-    //   }
-
-    //   players.push({
-    //     id: player.id,
-
-    //     name: player.name,
-
-    //     role: player.role,
-
-    //     stats: {
-    //       matches:
-    //         stat.matches ?? 0,
-
-    //       battingInnings:
-    //         stat.batting_innings ??
-    //         0,
-
-    //       runs:
-    //         stat.runs ?? 0,
-
-    //       ballsFaced:
-    //         stat.balls_faced ??
-    //         0,
-
-    //       fours:
-    //         stat.fours ?? 0,
-
-    //       sixes:
-    //         stat.sixes ?? 0,
-
-    //       highestScore:
-    //         stat.highest_score ??
-    //         0,
-
-    //       dismissals:
-    //         stat.dismissals ??
-    //         0,
-
-    //       bowlingInnings:
-    //         stat.bowling_innings ??
-    //         0,
-
-    //       ballsBowled:
-    //         stat.balls_bowled ??
-    //         0,
-
-    //       runsConceded:
-    //         stat.runs_conceded ??
-    //         0,
-
-    //       wickets:
-    //         stat.wickets ?? 0,
-    //     },
-    //   });
-    // }
 
     /*
      * ============================================================
@@ -650,9 +506,7 @@ export async function POST(
      */
 
     const validation =
-      validateXI(
-        selectedPlayers
-      );
+      validateXI(selectedPlayers);
 
     if (!validation.valid) {
       return NextResponse.json(
@@ -672,26 +526,27 @@ export async function POST(
      * ============================================================
      * SERVER-AUTHORITATIVE SCORE
      * ============================================================
+     *
+     * The score is calculated on the server.
+     *
+     * The browser never supplies the score.
      */
 
     const result =
       evaluateXI({
-        players:
-          selectedPlayers,
-
+        players: selectedPlayers,
         pitch,
 
         /*
-         * The challenge identity comes from
-         * the server session, not the client.
+         * The game session is used as the authoritative
+         * evaluation identity.
          */
-        challengeId:
-          gameSessionId,
+        challengeId: gameSessionId,
       });
 
     /*
      * ============================================================
-     * PERSIST AUTHORITATIVE RESULT
+     * BUILD STORED RESULT
      * ============================================================
      */
 
@@ -719,8 +574,7 @@ export async function POST(
       ],
 
       venue: {
-        id:
-          venueSnapshot.id,
+        id: venueSnapshot.id,
 
         name:
           venueSnapshot.name ??
@@ -740,25 +594,17 @@ export async function POST(
       players:
         selectedPlayers.map(
           (player) => ({
-            id:
-              player.id,
-
-            name:
-              player.name,
-
-            role:
-              player.role,
+            id: player.id,
+            name: player.name,
+            role: player.role,
           })
         ),
 
-      score:
-        result.score,
+      score: result.score,
 
-      wins:
-        result.wins,
+      wins: result.wins,
 
-      losses:
-        result.losses,
+      losses: result.losses,
 
       teamStrength:
         result.teamStrength,
@@ -769,6 +615,14 @@ export async function POST(
       matches:
         result.matches,
     };
+
+    /*
+     * ============================================================
+     * COMPLETE GAME
+     * ============================================================
+     *
+     * This RPC persists the authoritative game result.
+     */
 
     const {
       data: completion,
@@ -824,9 +678,7 @@ export async function POST(
     }
 
     const completionRow =
-      Array.isArray(
-        completion
-      )
+      Array.isArray(completion)
         ? completion[0]
         : completion;
 
@@ -835,33 +687,33 @@ export async function POST(
      * ATTACH SCORE TO CHALLENGE
      * ============================================================
      *
-     * If this game was started from a challenge,
-     * attach the server-authoritative result to
-     * that challenge.
+     * If the game belongs to a challenge:
      *
-     * The score comes from result.score.
-     * It is NEVER accepted from the browser.
+     * 1. Verify the user is a member.
+     * 2. Check whether the user already has a challenge score.
+     * 3. Insert if there is no score.
+     * 4. Update only if the new score is higher.
+     * 5. Never replace a higher score with a lower score.
+     *
+     * The score always comes from result.score calculated
+     * by the server.
      */
 
     if (challengeId) {
       /*
-       * Verify that the player is still a member
-       * of the challenge.
+       * ----------------------------------------------------------
+       * VERIFY CHALLENGE MEMBERSHIP
+       * ----------------------------------------------------------
        */
+
       const {
         data: membership,
         error: membershipError,
       } = await supabaseAdmin
         .from("challenge_players")
         .select("challenge_id")
-        .eq(
-          "challenge_id",
-          challengeId
-        )
-        .eq(
-          "user_id",
-          user.id
-        )
+        .eq("challenge_id", challengeId)
+        .eq("user_id", user.id)
         .maybeSingle();
 
       if (membershipError) {
@@ -894,12 +746,11 @@ export async function POST(
       }
 
       /*
-       * Check whether this player already has a score
-       * recorded for this challenge.
-       *
-       * We are intentionally NOT deciding replay/update
-       * behaviour yet.
+       * ----------------------------------------------------------
+       * LOAD EXISTING CHALLENGE SCORE
+       * ----------------------------------------------------------
        */
+
       const {
         data: existingChallengeScore,
         error: existingScoreError,
@@ -908,14 +759,8 @@ export async function POST(
         .select(
           "challenge_id, user_id, score"
         )
-        .eq(
-          "challenge_id",
-          challengeId
-        )
-        .eq(
-          "user_id",
-          user.id
-        )
+        .eq("challenge_id", challengeId)
+        .eq("user_id", user.id)
         .maybeSingle();
 
       if (existingScoreError) {
@@ -936,12 +781,17 @@ export async function POST(
       }
 
       /*
-       * Only insert when this player does not
-       * already have a score for the challenge.
+       * ----------------------------------------------------------
+       * FIRST PLAY
+       * ----------------------------------------------------------
+       *
+       * No score exists yet.
        */
+
       if (!existingChallengeScore) {
         const {
-          error: challengeScoreError,
+          data: insertedChallengeScore,
+          error: challengeScoreInsertError,
         } = await supabaseAdmin
           .from("challenge_scores")
           .insert({
@@ -953,12 +803,18 @@ export async function POST(
 
             score:
               result.score,
-          });
+          })
+          .select(
+            "challenge_id, user_id, score"
+          )
+          .single();
 
-        if (challengeScoreError) {
+        if (
+          challengeScoreInsertError
+        ) {
           console.error(
             "Challenge score insert error:",
-            challengeScoreError
+            challengeScoreInsertError
           );
 
           return NextResponse.json(
@@ -971,8 +827,150 @@ export async function POST(
             }
           );
         }
+
+        /*
+         * Verify that the database actually returned the
+         * inserted score.
+         */
+
+        if (
+          !insertedChallengeScore ||
+          insertedChallengeScore.challenge_id !==
+            challengeId ||
+          insertedChallengeScore.user_id !==
+            user.id ||
+          Number(
+            insertedChallengeScore.score
+          ) !==
+            Number(result.score)
+        ) {
+          console.error(
+            "Challenge score insert verification failed:",
+            insertedChallengeScore
+          );
+
+          return NextResponse.json(
+            {
+              error:
+                "The game was completed, but the challenge score could not be verified.",
+            },
+            {
+              status: 500,
+            }
+          );
+        }
+      }
+
+      /*
+       * ----------------------------------------------------------
+       * REPLAY
+       * ----------------------------------------------------------
+       *
+       * The player already has a score for this challenge.
+       */
+
+      else {
+        const existingScore =
+          Number(
+            existingChallengeScore.score
+          );
+
+        /*
+         * Only replace the challenge score when the
+         * new score is strictly higher.
+         */
+
+        if (
+          Number.isFinite(
+            existingScore
+          ) &&
+          result.score >
+            existingScore
+        ) {
+          const {
+            data: updatedChallengeScore,
+            error: challengeScoreUpdateError,
+          } = await supabaseAdmin
+            .from("challenge_scores")
+            .update({
+              score:
+                result.score,
+            })
+            .eq(
+              "challenge_id",
+              challengeId
+            )
+            .eq(
+              "user_id",
+              user.id
+            )
+            .select(
+              "challenge_id, user_id, score"
+            )
+            .single();
+
+          if (
+            challengeScoreUpdateError
+          ) {
+            console.error(
+              "Challenge score update error:",
+              challengeScoreUpdateError
+            );
+
+            return NextResponse.json(
+              {
+                error:
+                  "The game was completed, but the improved challenge score could not be saved.",
+              },
+              {
+                status: 500,
+              }
+            );
+          }
+
+          if (
+            !updatedChallengeScore ||
+            updatedChallengeScore.challenge_id !==
+              challengeId ||
+            updatedChallengeScore.user_id !==
+              user.id ||
+            Number(
+              updatedChallengeScore.score
+            ) !==
+              Number(result.score)
+          ) {
+            console.error(
+              "Challenge score update verification failed:",
+              updatedChallengeScore
+            );
+
+            return NextResponse.json(
+              {
+                error:
+                  "The improved challenge score could not be verified.",
+              },
+              {
+                status: 500,
+              }
+            );
+          }
+        }
+
+        /*
+         * If the new score is equal to or lower than the
+         * existing score, keep the existing challenge score.
+         *
+         * The game itself has still been completed and saved
+         * in game_scores.
+         */
       }
     }
+
+    /*
+     * ============================================================
+     * SUCCESS
+     * ============================================================
+     */
 
     return NextResponse.json({
       result: {
