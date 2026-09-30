@@ -8,6 +8,7 @@ import {
 
 import {
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -75,47 +76,57 @@ export default function IPLGame({
   ] = useState<
     "idle" | "shared" | "copied"
   >("idle");
+  const completionRequestRef =
+    useRef<{
+      gameSessionId: string;
+      promise: Promise<CompletionResponse>;
+    } | null>(null);
+  const [
+    creatingChallenge,
+    setCreatingChallenge,
+  ] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
+useEffect(() => {
+  let cancelled = false;
 
-    async function completeGame() {
-      if (
-        !challenge.gameSessionId
-      ) {
-        setError(
-          "A registered game session is required to submit this result."
-        );
+  const gameSessionId =
+    challenge.gameSessionId;
 
-        setLoading(false);
-        return;
-      }
+  if (!gameSessionId) {
+    setError(
+      "A registered game session is required to submit this result."
+    );
 
-      try {
-        setLoading(true);
-        setError(null);
+    setLoading(false);
+    return;
+  }
 
-        const response =
-          await fetch(
-            "/api/ipl/game/complete",
-            {
-              method: "POST",
+  let request =
+    completionRequestRef.current;
 
-              headers: {
-                "Content-Type":
-                  "application/json",
-              },
+  if (
+    !request ||
+    request.gameSessionId !== gameSessionId
+  ) {
+    const promise =
+      fetch(
+        "/api/ipl/game/complete",
+        {
+          method: "POST",
 
-              cache: "no-store",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
 
-              body:
-                JSON.stringify({
-                  gameSessionId:
-                    challenge.gameSessionId,
-                }),
-            }
-          );
+          cache: "no-store",
 
+          body:
+            JSON.stringify({
+              gameSessionId,
+            }),
+        }
+      ).then(async (response) => {
         const data =
           await response
             .json()
@@ -138,36 +149,116 @@ export default function IPLGame({
           );
         }
 
-        if (!cancelled) {
-          setCompletion(
-            data as CompletionResponse
-          );
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : "Unable to complete the game."
-          );
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        return data as CompletionResponse;
+      });
+
+    request = {
+      gameSessionId,
+      promise,
+    };
+
+    completionRequestRef.current =
+      request;
+  }
+
+  setLoading(true);
+  setError(null);
+
+  request.promise
+    .then((data) => {
+      if (cancelled) {
+        return;
       }
+
+      setCompletion(data);
+    })
+    .catch((err) => {
+      if (cancelled) {
+        return;
+      }
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to complete the game."
+      );
+    })
+    .finally(() => {
+      if (!cancelled) {
+        setLoading(false);
+      }
+    });
+
+  return () => {
+    cancelled = true;
+  };
+}, [
+  challenge.gameSessionId,
+]);
+  async function handleCreateChallenge() {
+    if (
+      !completion?.gameScoreId ||
+      creatingChallenge
+    ) {
+      return;
     }
 
-    void completeGame();
+    try {
+      setCreatingChallenge(true);
+      setError(null);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    challenge.gameSessionId,
-    
-  ]);
+      const response = await fetch(
+        "/api/challenges/create-from-game",
+        {
+          method: "POST",
 
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          cache: "no-store",
+
+          body: JSON.stringify({
+            gameScoreId:
+              completion.gameScoreId,
+          }),
+        }
+      );
+
+      const data =
+        await response
+          .json()
+          .catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ??
+          "Unable to create the challenge."
+        );
+      }
+
+      if (!data?.inviteCode) {
+        throw new Error(
+          "The server did not return a challenge invite code."
+        );
+      }
+
+      window.location.assign(
+        `/challenges/${encodeURIComponent(
+          data.inviteCode
+        )}`
+      );
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to create the challenge."
+      );
+
+      setCreatingChallenge(false);
+    }
+  }
   async function handleShare() {
     if (!completion) {
       return;
@@ -414,16 +505,20 @@ export default function IPLGame({
                     : "Share"}
               </button>
 
-              <a
-                href="/challenges"
-                className="btn btn-secondary col-span-2 min-h-10 text-xs font-black sm:col-span-1"
+              <button
+                type="button"
+                onClick={handleCreateChallenge}
+                disabled={creatingChallenge}
+                className="btn btn-secondary col-span-2 min-h-10 text-xs font-black sm:col-span-1 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Swords
                   size={14}
                 />
 
-                Create Challenge
-              </a>
+                {creatingChallenge
+                  ? "Creating…"
+                  : "Create Challenge"}
+              </button>
             </div>
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[8px] font-black uppercase tracking-[0.12em] text-[var(--muted)]">
