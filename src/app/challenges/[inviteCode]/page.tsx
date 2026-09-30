@@ -25,8 +25,16 @@ type Challenge = {
     updated_at: string;
 };
 
-type Leader = {
+type LeaderboardScore = {
     user_id: string;
+    score: number;
+    created_at: string;
+};
+
+type LeaderboardEntry = {
+    user_id: string;
+    gamer_tag: string;
+    display_name: string;
     score: number;
     created_at: string;
 };
@@ -39,7 +47,8 @@ export default function ChallengePage() {
     const inviteCode = params.inviteCode as string;
 
     const [challenge, setChallenge] = useState<Challenge | null>(null);
-    const [leader, setLeader] = useState<Leader | null>(null);
+    const [leaderboard, setLeaderboard] =
+        useState<LeaderboardEntry[]>([]);
 
     const [loading, setLoading] = useState(true);
     const [joining, setJoining] = useState(false);
@@ -48,6 +57,7 @@ export default function ChallengePage() {
     const [copied, setCopied] = useState(false);
 
     const [playerCount, setPlayerCount] = useState(0);
+    const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
     useEffect(() => {
         if (inviteCode) {
@@ -75,6 +85,7 @@ export default function ChallengePage() {
                 setLoading(false);
                 return;
             }
+            setCurrentUserId(user.id);
 
             // 2. Find challenge using invite code
             const { data: challengeData, error: challengeError } =
@@ -151,22 +162,115 @@ export default function ChallengePage() {
             setPlayerCount(count ?? 0);
 
             // 5. Get the current highest score
-            const { data: scoreData, error: scoreError } =
-                await supabase
-                    .from("challenge_scores")
-                    .select("user_id, score, created_at")
-                    .eq("challenge_id", challengeData.id)
-                    .order("score", {
-                        ascending: false,
-                    })
-                    .limit(1);
+            // 5. Get the complete challenge leaderboard
+            const {
+                data: scoreData,
+                error: scoreError,
+            } = await supabase
+                .from("challenge_scores")
+                .select("user_id, score, created_at")
+                .eq(
+                    "challenge_id",
+                    challengeData.id
+                )
+                .order("score", {
+                    ascending: false,
+                })
+                .order("created_at", {
+                    ascending: true,
+                });
 
             if (scoreError) {
                 throw scoreError;
             }
 
-            if (scoreData && scoreData.length > 0) {
-                setLeader(scoreData[0]);
+            const scores =
+                (scoreData ?? []) as LeaderboardScore[];
+
+            if (scores.length === 0) {
+                setLeaderboard([]);
+            } else {
+                const userIds = [
+                    ...new Set(
+                        scores.map(
+                            (entry) => entry.user_id
+                        )
+                    ),
+                ];
+
+                const {
+                    data: profileData,
+                    error: profileError,
+                } = await supabase
+                    .from("profiles")
+                    .select(
+                        "id, gamer_tag, display_name"
+                    )
+                    .in(
+                        "id",
+                        userIds
+                    );
+
+                if (profileError) {
+                    throw profileError;
+                }
+
+                const profilesById =
+                    new Map<
+                        string,
+                        {
+                            gamer_tag: string | null;
+                            display_name: string | null;
+                        }
+                    >();
+
+                for (
+                    const profile of
+                    profileData ?? []
+                ) {
+                    profilesById.set(
+                        profile.id,
+                        {
+                            gamer_tag:
+                                profile.gamer_tag,
+                            display_name:
+                                profile.display_name,
+                        }
+                    );
+                }
+
+                const entries =
+                    scores.map(
+                        (entry) => {
+                            const profile =
+                                profilesById.get(
+                                    entry.user_id
+                                );
+
+                            return {
+                                user_id:
+                                    entry.user_id,
+
+                                gamer_tag:
+                                    profile?.gamer_tag ||
+                                    "PLAYER",
+
+                                display_name:
+                                    profile?.display_name ||
+                                    "PLAYER",
+
+                                score:
+                                    Number(
+                                        entry.score
+                                    ),
+
+                                created_at:
+                                    entry.created_at,
+                            };
+                        }
+                    );
+
+                setLeaderboard(entries);
             }
         } catch (err) {
             console.error(err);
@@ -321,44 +425,101 @@ export default function ChallengePage() {
 
                 {/* Score to beat */}
 
-                <section className="mt-8 text-center">
-                    {leader ? (
-                        <>
-                            <div className="flex justify-center">
-                                <div className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-4 py-2">
-                                    <span className="flex items-center gap-2 text-sm font-bold">
-                                        <Trophy className="h-4 w-4 text-[var(--accent)]" />
+                {/* Leaderboard */}
 
-                                        Beat the current leader:{" "}
-                                        <span className="text-[var(--accent)]">
-                                            {leader.score}
-                                        </span>
-                                    </span>
-                                </div>
+                <section className="mt-8">
+                    <div className="mx-auto max-w-2xl">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-xs font-black uppercase tracking-[0.2em] text-[var(--accent)]">
+                                    Challenge Leaderboard
+                                </p>
+
+                                <p className="mt-1 text-sm text-[var(--muted)]">
+                                    {leaderboard.length === 0
+                                        ? "Be the first to set a score."
+                                        : `${leaderboard.length} player${leaderboard.length !== 1
+                                            ? "s"
+                                            : ""
+                                        }`}
+                                </p>
                             </div>
 
-                            <p className="mt-5 text-sm text-[var(--muted)]">
-                                A player has already set the score to beat.
-                            </p>
-                        </>
-                    ) : (
-                        <>
-                            <div className="flex justify-center">
-                                <div className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-4 py-2">
-                                    <span className="flex items-center gap-2 text-sm font-bold">
-                                        <Trophy className="h-4 w-4 text-[var(--accent)]" />
+                            <Trophy
+                                className="h-5 w-5 text-[var(--accent)]"
+                            />
+                        </div>
 
-                                        Be the first to play!
+                        {leaderboard.length > 0 ? (
+                            <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/10">
+                                <div className="grid grid-cols-[48px_minmax(0,1fr)_80px] border-b border-white/10 px-4 py-3 text-[9px] font-black uppercase tracking-[0.15em] text-[var(--muted)]">
+                                    <span>#</span>
+                                    <span>Player</span>
+                                    <span className="text-right">
+                                        Score
                                     </span>
                                 </div>
-                            </div>
 
-                            <p className="mt-5 text-sm text-[var(--muted)]">
-                                No one has played this challenge yet.
-                                Set the score everyone else has to beat.
-                            </p>
-                        </>
-                    )}
+                                <div className="divide-y divide-white/10">
+                                    {leaderboard.map(
+                                        (
+                                            entry,
+                                            index
+                                        ) => {
+                                            const isCurrentUser =
+                                                entry.user_id ===
+                                                currentUserId;
+
+                                            return (
+                                                <div
+                                                    key={
+                                                        entry.user_id
+                                                    }
+                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
+                                                        ? "bg-[var(--accent)]/10"
+                                                        : ""
+                                                        }`}
+                                                >
+                                                    <span className="text-sm font-black text-[var(--muted)]">
+                                                        {index +
+                                                            1}
+                                                    </span>
+
+                                                    <div className="min-w-0">
+                                                        <p className="truncate text-sm font-black">
+                                                            {entry.gamer_tag}
+                                                        </p>
+
+                                                        {isCurrentUser && (
+                                                            <p className="mt-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-[var(--accent)]">
+                                                                You
+                                                            </p>
+                                                        )}
+                                                    </div>
+
+                                                    <span className="text-right text-base font-black text-[var(--accent)]">
+                                                        {entry.score}
+                                                    </span>
+                                                </div>
+                                            );
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="mt-4 rounded-2xl border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-6 text-center">
+                                <Trophy className="mx-auto h-7 w-7 text-[var(--accent)]" />
+
+                                <p className="mt-3 text-sm font-black">
+                                    Be the first to play
+                                </p>
+
+                                <p className="mt-1 text-xs text-[var(--muted)]">
+                                    Your score will appear here after you complete the challenge.
+                                </p>
+                            </div>
+                        )}
+                    </div>
                 </section>
 
                 {/* Play button */}
@@ -372,7 +533,7 @@ export default function ChallengePage() {
                     >
                         {joining
                             ? "JOINING..."
-                            : leader
+                            : leaderboard.length > 0
                                 ? "ACCEPT & PLAY ›"
                                 : "PLAY FIRST ›"}
                     </button>
