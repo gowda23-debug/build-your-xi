@@ -54,7 +54,7 @@ export default function ChallengesPage() {
     const router = useRouter();
     const supabase = createClient();
     const [deletingChallengeId, setDeletingChallengeId] =
-    useState<string | null>(null);
+        useState<string | null>(null);
     const [loading, setLoading] =
         useState(true);
 
@@ -106,7 +106,8 @@ export default function ChallengesPage() {
 
     const [savingChallengeId, setSavingChallengeId] =
         useState<string | null>(null);
-
+    const [deleteTarget, setDeleteTarget] =
+        useState<Challenge | null>(null);
     /*
      * ============================================================
      * LOAD CHALLENGES
@@ -430,16 +431,8 @@ export default function ChallengesPage() {
     async function deleteChallenge(
         challenge: Challenge
     ) {
-        const confirmed =
-            window.confirm(
-                `Delete "${challenge.title}"?\n\nThis will remove the challenge and its leaderboard data. This action cannot be undone.`
-            );
-
-        if (!confirmed) {
-            return;
-        }
-
         setError("");
+
         setDeletingChallengeId(
             challenge.id
         );
@@ -465,7 +458,9 @@ export default function ChallengesPage() {
             const data =
                 await response
                     .json()
-                    .catch(() => null);
+                    .catch(
+                        () => null
+                    );
 
             if (!response.ok) {
                 throw new Error(
@@ -495,6 +490,10 @@ export default function ChallengesPage() {
 
                     return next;
                 }
+            );
+
+            setDeleteTarget(
+                null
             );
         } catch (err) {
             setError(
@@ -773,9 +772,9 @@ export default function ChallengesPage() {
                                                 )
                                             }
                                             className={`rounded-2xl border p-5 text-left transition ${gameMode ===
-                                                    "ipl"
-                                                    ? "border-[var(--accent)] bg-[var(--accent)]/10"
-                                                    : "border-white/10 hover:border-white/25"
+                                                "ipl"
+                                                ? "border-[var(--accent)] bg-[var(--accent)]/10"
+                                                : "border-white/10 hover:border-white/25"
                                                 }`}
                                         >
                                             <div className="flex items-center gap-3">
@@ -808,9 +807,9 @@ export default function ChallengesPage() {
                                                 )
                                             }
                                             className={`rounded-2xl border p-5 text-left transition ${gameMode ===
-                                                    "world"
-                                                    ? "border-[var(--accent)] bg-[var(--accent)]/10"
-                                                    : "border-white/10 hover:border-white/25"
+                                                "world"
+                                                ? "border-[var(--accent)] bg-[var(--accent)]/10"
+                                                : "border-white/10 hover:border-white/25"
                                                 }`}
                                         >
                                             <div className="flex items-center gap-3">
@@ -936,8 +935,8 @@ export default function ChallengesPage() {
                                             <div className="flex items-start justify-between gap-3">
                                                 <div
                                                     className={`grid h-12 w-12 place-items-center rounded-xl ${isIpl
-                                                            ? "bg-[var(--accent)]/15"
-                                                            : "bg-blue-500/15"
+                                                        ? "bg-[var(--accent)]/15"
+                                                        : "bg-blue-500/15"
                                                         }`}
                                                 >
                                                     {isIpl ? (
@@ -1094,9 +1093,11 @@ export default function ChallengesPage() {
                                                                     onClick={(event) => {
                                                                         event.stopPropagation();
 
-                                                                        deleteChallenge(
+                                                                        setDeleteTarget(
                                                                             challenge
                                                                         );
+
+                                                                        setError("");
                                                                     }}
                                                                     aria-label="Delete challenge"
                                                                     className="rounded-lg p-1.5 text-[var(--muted)] transition hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
@@ -1194,6 +1195,105 @@ export default function ChallengesPage() {
                         </div>
                     )}
             </section>
+            {deleteTarget && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="delete-challenge-title"
+                    onMouseDown={(event) => {
+                        if (
+                            event.target ===
+                            event.currentTarget
+                        ) {
+                            setDeleteTarget(
+                                null
+                            );
+                        }
+                    }}
+                >
+                    <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#081b15] p-6 shadow-2xl">
+                        <div className="flex items-start justify-between gap-4">
+                            <div>
+                                <div className="grid h-11 w-11 place-items-center rounded-xl bg-red-500/10 text-red-400">
+                                    <Trash2 className="h-5 w-5" />
+                                </div>
+
+                                <h2
+                                    id="delete-challenge-title"
+                                    className="mt-5 text-xl font-black"
+                                >
+                                    Delete challenge?
+                                </h2>
+
+                                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                                    You are about to delete{" "}
+                                    <span className="font-bold text-white">
+                                        "{deleteTarget.title}"
+                                    </span>
+                                    .
+                                </p>
+
+                                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                                    This will remove the challenge,
+                                    its players and its leaderboard
+                                    data. This action cannot be undone.
+                                </p>
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setDeleteTarget(
+                                        null
+                                    )
+                                }
+                                className="rounded-lg p-2 text-[var(--muted)] transition hover:bg-white/5 hover:text-white"
+                                aria-label="Close"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </div>
+
+                        <div className="mt-7 grid grid-cols-2 gap-3">
+                            <button
+                                type="button"
+                                disabled={
+                                    deletingChallengeId ===
+                                    deleteTarget.id
+                                }
+                                onClick={() =>
+                                    setDeleteTarget(
+                                        null
+                                    )
+                                }
+                                className="rounded-xl border border-white/10 px-4 py-3 text-sm font-black text-[var(--muted)] transition hover:border-white/20 hover:text-white disabled:opacity-50"
+                            >
+                                CANCEL
+                            </button>
+
+                            <button
+                                type="button"
+                                disabled={
+                                    deletingChallengeId ===
+                                    deleteTarget.id
+                                }
+                                onClick={() =>
+                                    deleteChallenge(
+                                        deleteTarget
+                                    )
+                                }
+                                className="rounded-xl bg-red-500 px-4 py-3 text-sm font-black text-white transition hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-60"
+                            >
+                                {deletingChallengeId ===
+                                    deleteTarget.id
+                                    ? "DELETING..."
+                                    : "DELETE CHALLENGE"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
