@@ -68,9 +68,9 @@ export async function GET(
 
         let user:
             | {
-                  id: string;
-                  is_anonymous?: boolean;
-              }
+                id: string;
+                is_anonymous?: boolean;
+            }
             | null = null;
 
         let authState: AuthState =
@@ -153,7 +153,9 @@ export async function GET(
             return NextResponse.json(
                 {
                     error:
-                        "No challenge was found with this invite code.",
+                        "This challenge is no longer available.",
+                    code:
+                        "CHALLENGE_NOT_FOUND",
                 },
                 {
                     status: 404,
@@ -229,7 +231,7 @@ export async function GET(
                     const {
                         data: concurrentPlayer,
                         error:
-                            concurrentCheckError,
+                        concurrentCheckError,
                     } = await supabaseAdmin
                         .from("challenge_players")
                         .select(

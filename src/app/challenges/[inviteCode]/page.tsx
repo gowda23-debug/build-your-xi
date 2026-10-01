@@ -35,7 +35,10 @@ type LeaderboardEntry = {
     score: number;
     created_at: string;
 };
-
+const [
+    challengeUnavailable,
+    setChallengeUnavailable,
+] = useState(false);
 function getChallengePath(
     inviteCode: string
 ) {
@@ -89,7 +92,10 @@ export default function ChallengePage() {
 
     const [reclaimScore, setReclaimScore] =
         useState<number | null>(null);
-
+    const [
+        challengeUnavailable,
+        setChallengeUnavailable,
+    ] = useState(false);
     useEffect(() => {
         if (inviteCode) {
             loadChallenge();
@@ -211,6 +217,15 @@ export default function ChallengePage() {
                     );
 
             if (!challengeResponse.ok) {
+                if (
+                    challengeResponse.status === 404 &&
+                    challengeData?.code ===
+                    "CHALLENGE_NOT_FOUND"
+                ) {
+                    setChallengeUnavailable(true);
+                    return;
+                }
+
                 throw new Error(
                     challengeData?.error ??
                     "Unable to load the challenge."
@@ -543,6 +558,57 @@ export default function ChallengePage() {
      * ============================================================
      */
 
+    if (challengeUnavailable) {
+        return (
+            <main className="min-h-screen px-4 py-8 sm:px-6">
+                <div className="mx-auto max-w-3xl">
+                    <button
+                        type="button"
+                        onClick={() =>
+                            router.push(
+                                "/challenges"
+                            )
+                        }
+                        className="mb-8 flex items-center gap-2 text-sm font-bold text-[var(--muted)] transition hover:text-white"
+                    >
+                        <ArrowLeft className="h-4 w-4" />
+
+                        Back to Challenges
+                    </button>
+
+                    <div className="rounded-2xl border border-amber-400/30 bg-amber-400/5 p-8 text-center">
+                        <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-400/10">
+                            <Trophy className="h-7 w-7 text-amber-300" />
+                        </div>
+
+                        <h1 className="mt-5 text-2xl font-black">
+                            Challenge unavailable
+                        </h1>
+
+                        <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-[var(--muted)]">
+                            This challenge has
+                            expired or was deleted.
+                            The invite link is no
+                            longer active.
+                        </p>
+
+                        <button
+                            type="button"
+                            onClick={() =>
+                                router.push(
+                                    "/challenges"
+                                )
+                            }
+                            className="btn btn-primary mt-6"
+                        >
+                            BACK TO CHALLENGES
+                        </button>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
     if (
         error ||
         !challenge
@@ -643,8 +709,8 @@ export default function ChallengePage() {
                     <div className="flex justify-center">
                         <div
                             className={`grid h-14 w-14 place-items-center rounded-2xl ${isIpl
-                                    ? "bg-[var(--accent)]/15"
-                                    : "bg-blue-500/15"
+                                ? "bg-[var(--accent)]/15"
+                                : "bg-blue-500/15"
                                 }`}
                         >
                             {isIpl ? (
@@ -932,8 +998,8 @@ export default function ChallengePage() {
                                                         entry.user_id
                                                     }
                                                     className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
-                                                            ? "bg-[var(--accent)]/10"
-                                                            : ""
+                                                        ? "bg-[var(--accent)]/10"
+                                                        : ""
                                                         }`}
                                                 >
                                                     <span className="text-sm font-black text-[var(--muted)]">
