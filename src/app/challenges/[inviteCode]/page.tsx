@@ -60,6 +60,7 @@ export default function ChallengePage() {
 
     const [loading, setLoading] =
         useState(true);
+
     const [joining, setJoining] =
         useState(false);
 
@@ -82,6 +83,7 @@ export default function ChallengePage() {
         reclaimScore,
         setReclaimScore,
     ] = useState<number | null>(null);
+
     useEffect(() => {
         if (inviteCode) {
             loadChallenge();
@@ -239,6 +241,29 @@ export default function ChallengePage() {
                     ? leaderboardData.leaderboard
                     : [];
 
+            /*
+             * ============================================================
+             * IMPORTANT FIX
+             * ============================================================
+             *
+             * The leaderboard API was already returning the correct data,
+             * but the previous code never copied that data into React state.
+             *
+             * Without this:
+             *
+             * loadedLeaderboard -> [score]
+             * leaderboard       -> []
+             *
+             * Therefore the UI always displayed:
+             *
+             * "0 players"
+             *
+             * even when challenge_scores contained the score.
+             */
+
+            setLeaderboard(
+                loadedLeaderboard
+            );
 
             setReclaimScore(
                 typeof leaderboardData?.reclaimScore ===
@@ -275,6 +300,7 @@ export default function ChallengePage() {
             setLoading(false);
         }
     }
+
     /*
      * ============================================================
      * RENAME CHALLENGE
@@ -316,14 +342,18 @@ export default function ChallengePage() {
                     "/api/challenges/rename",
                     {
                         method: "POST",
+
                         headers: {
                             "Content-Type":
                                 "application/json",
                         },
+
                         cache: "no-store",
+
                         body: JSON.stringify({
                             challengeId:
                                 challenge.id,
+
                             title:
                                 cleanedTitle,
                         }),
@@ -429,8 +459,10 @@ export default function ChallengePage() {
                     title:
                         challenge?.title ??
                         "Build Your XI Challenge",
+
                     text:
                         "Join my Build Your XI challenge!",
+
                     url:
                         link,
                 });
@@ -505,6 +537,7 @@ export default function ChallengePage() {
                         className="mb-8 flex items-center gap-2 text-sm font-bold text-[var(--muted)] transition hover:text-white"
                     >
                         <ArrowLeft className="h-4 w-4" />
+
                         Back to Challenges
                     </button>
 
@@ -577,6 +610,7 @@ export default function ChallengePage() {
                     className="mb-10 flex items-center gap-2 text-sm font-bold text-[var(--muted)] transition hover:text-white"
                 >
                     <ArrowLeft className="h-4 w-4" />
+
                     Back to Challenges
                 </button>
 
@@ -585,10 +619,11 @@ export default function ChallengePage() {
                 <section className="card mx-auto max-w-2xl p-7 text-center">
                     <div className="flex justify-center">
                         <div
-                            className={`grid h-14 w-14 place-items-center rounded-2xl ${isIpl
-                                ? "bg-[var(--accent)]/15"
-                                : "bg-blue-500/15"
-                                }`}
+                            className={`grid h-14 w-14 place-items-center rounded-2xl ${
+                                isIpl
+                                    ? "bg-[var(--accent)]/15"
+                                    : "bg-blue-500/15"
+                            }`}
                         >
                             {isIpl ? (
                                 <span className="text-3xl">
@@ -705,9 +740,11 @@ export default function ChallengePage() {
                                             setTitle(
                                                 challenge.title
                                             );
+
                                             setEditingTitle(
                                                 true
                                             );
+
                                             setError(
                                                 ""
                                             );
@@ -770,7 +807,9 @@ export default function ChallengePage() {
                                             {
                                                 creatorScore.score
                                             }
+
                                             {" · "}
+
                                             Current score:{" "}
                                             {
                                                 currentLeader.score
@@ -783,6 +822,7 @@ export default function ChallengePage() {
                             </div>
                         </section>
                     )}
+
                 {creatorHasBeenBeaten &&
                     reclaimScore !== null && (
                         <div className="mt-6 rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4">
@@ -801,12 +841,14 @@ export default function ChallengePage() {
                                         <span className="font-black text-white">
                                             {reclaimScore}
                                         </span>
+
                                         . Play again to reclaim the top spot.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     )}
+
                 {/* ========================================================
                     LEADERBOARD
                 ======================================================== */}
@@ -867,10 +909,11 @@ export default function ChallengePage() {
                                                     key={
                                                         entry.user_id
                                                     }
-                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
-                                                        ? "bg-[var(--accent)]/10"
-                                                        : ""
-                                                        }`}
+                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${
+                                                        isCurrentUser
+                                                            ? "bg-[var(--accent)]/10"
+                                                            : ""
+                                                    }`}
                                                 >
                                                     <span className="text-sm font-black text-[var(--muted)]">
                                                         {index +
@@ -978,6 +1021,7 @@ export default function ChallengePage() {
                         className="flex items-center justify-center gap-2 rounded-xl border border-white/10 px-4 py-3 text-xs font-bold text-[var(--muted)] transition hover:border-[var(--accent)]/50 hover:text-white"
                     >
                         <Share2 className="h-4 w-4" />
+
                         INVITE FRIENDS
                     </button>
                 </div>
