@@ -1,42 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  FormEvent,
+  Suspense,
+  useState,
+} from "react";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Users } from "lucide-react";
 
-function getLoginErrorMessage(message: string) {
-  const error = message.toLowerCase();
+function getLoginErrorMessage(
+  message: string
+) {
+  const error =
+    message.toLowerCase();
 
   if (
-    error.includes("invalid login credentials") ||
-    error.includes("invalid credentials")
+    error.includes(
+      "invalid login credentials"
+    ) ||
+    error.includes(
+      "invalid credentials"
+    )
   ) {
     return "We couldn't find an account with that email and password.";
   }
 
-  if (error.includes("email not confirmed")) {
+  if (
+    error.includes(
+      "email not confirmed"
+    )
+  ) {
     return "Please confirm your email before logging in. Check your inbox for the confirmation link.";
   }
 
-  if (error.includes("too many requests")) {
+  if (
+    error.includes(
+      "too many requests"
+    )
+  ) {
     return "Too many login attempts. Please wait a moment and try again.";
   }
 
-  if (error.includes("network")) {
+  if (
+    error.includes("network")
+  ) {
     return "Connection problem. Please check your internet connection and try again.";
   }
 
   return "We couldn't log you in right now. Please check your details and try again.";
 }
 
-function getSafeNextPath(next: string | null) {
+function getSafeNextPath(
+  next: string | null
+) {
   /*
    * Only allow internal paths.
    *
-   * This prevents an attacker from turning ?next=
-   * into an external redirect such as:
+   * This prevents an attacker from turning
+   * ?next= into an external redirect such as:
    *
    * https://malicious-site.com
    */
@@ -52,29 +78,54 @@ function getSafeNextPath(next: string | null) {
   return "/home";
 }
 
-export default function Login() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const supabase = createClient();
+/*
+ * ============================================================
+ * LOGIN CONTENT
+ * ============================================================
+ *
+ * This component is intentionally rendered inside Suspense
+ * because it uses useSearchParams().
+ */
 
-  const nextPath = getSafeNextPath(
-    searchParams.get("next")
-  );
+function LoginContent() {
+  const router =
+    useRouter();
+
+  const searchParams =
+    useSearchParams();
+
+  const supabase =
+    createClient();
+
+  const nextPath =
+    getSafeNextPath(
+      searchParams.get(
+        "next"
+      )
+    );
 
   const isChallengeLogin =
-    nextPath.startsWith("/challenges/");
+    nextPath.startsWith(
+      "/challenges/"
+    );
 
   const [email, setEmail] =
     useState("");
 
-  const [password, setPassword] =
-    useState("");
+  const [
+    password,
+    setPassword,
+  ] = useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+  const [
+    loading,
+    setLoading,
+  ] = useState(false);
 
-  const [guestLoading, setGuestLoading] =
-    useState(false);
+  const [
+    guestLoading,
+    setGuestLoading,
+  ] = useState(false);
 
   const [error, setError] =
     useState("");
@@ -87,11 +138,15 @@ export default function Login() {
     setError("");
     setLoading(true);
 
-    const { error: loginError } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    const {
+      error: loginError,
+    } =
+      await supabase.auth.signInWithPassword(
+        {
+          email,
+          password,
+        }
+      );
 
     if (loginError) {
       setError(
@@ -108,7 +163,7 @@ export default function Login() {
      * Return the user to the page that
      * originally required authentication.
      *
-     * For a challenge:
+     * Example:
      *
      * /login?next=/challenges/251348BA
      *
@@ -117,7 +172,10 @@ export default function Login() {
      * /challenges/251348BA
      */
 
-    router.push(nextPath);
+    router.push(
+      nextPath
+    );
+
     router.refresh();
   }
 
@@ -125,7 +183,9 @@ export default function Login() {
     setError("");
     setGuestLoading(true);
 
-    const { error: guestError } =
+    const {
+      error: guestError,
+    } =
       await supabase.auth.signInAnonymously();
 
     if (guestError) {
@@ -140,9 +200,8 @@ export default function Login() {
     /*
      * Guest mode is not allowed for challenges.
      *
-     * This button is hidden when the user
-     * arrived here through a challenge, but
-     * keeping this redirect safe means the
+     * The button is hidden for challenge login,
+     * but keeping this redirect safe means the
      * behavior remains correct if this function
      * is ever called from another flow.
      */
@@ -158,7 +217,10 @@ export default function Login() {
       return;
     }
 
-    router.push("/home");
+    router.push(
+      "/home"
+    );
+
     router.refresh();
   }
 
@@ -358,5 +420,34 @@ export default function Login() {
         </div>
       </section>
     </main>
+  );
+}
+
+/*
+ * ============================================================
+ * PAGE
+ * ============================================================
+ *
+ * useSearchParams() is inside LoginContent, which is now
+ * safely wrapped by Suspense.
+ */
+
+export default function Login() {
+  return (
+    <Suspense
+      fallback={
+        <main className="grid min-h-screen place-items-center grid-bg px-6">
+          <section className="card w-full max-w-md p-8 text-center">
+            <div className="mx-auto h-9 w-9 animate-spin rounded-full border-2 border-[var(--line)] border-t-[var(--accent)]" />
+
+            <p className="mt-4 text-sm font-bold">
+              Loading login...
+            </p>
+          </section>
+        </main>
+      }
+    >
+      <LoginContent />
+    </Suspense>
   );
 }
