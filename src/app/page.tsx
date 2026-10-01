@@ -217,7 +217,7 @@ export default function LandingPage() {
 
               <Mini
                 label="Respins"
-                value="3 Total"
+                value="2 Total"
               />
 
               <Mini

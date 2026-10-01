@@ -35,10 +35,7 @@ type LeaderboardEntry = {
     score: number;
     created_at: string;
 };
-const [
-    challengeUnavailable,
-    setChallengeUnavailable,
-] = useState(false);
+
 function getChallengePath(
     inviteCode: string
 ) {
