@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { requireUser } from "@/lib/auth/require-user";
+import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +16,11 @@ type Challenge = {
     updated_at: string;
 };
 
+type AuthState =
+    | "logged_out"
+    | "guest"
+    | "registered";
+
 export async function GET(
     request: Request,
     context: {
@@ -25,40 +30,6 @@ export async function GET(
     }
 ) {
     try {
-        const {
-            user,
-            error: authError,
-        } = await requireUser();
-
-        if (authError || !user) {
-            return (
-                authError ??
-                NextResponse.json(
-                    {
-                        error: "Unauthorized",
-                    },
-                    {
-                        status: 401,
-                    }
-                )
-            );
-        }
-
-        /*
-         * Challenge participation requires a registered account.
-         */
-        if (user.is_anonymous) {
-            return NextResponse.json(
-                {
-                    error:
-                        "Registered authentication is required for challenges.",
-                },
-                {
-                    status: 403,
-                }
-            );
-        }
-
         const {
             inviteCode,
         } = await context.params;
@@ -82,17 +53,69 @@ export async function GET(
 
         /*
          * ============================================================
-         * LOAD CHALLENGE
+         * OPTIONAL AUTHENTICATION
          * ============================================================
          *
-         * Use the admin client here.
+         * Viewing a challenge is public.
          *
-         * This is intentional:
-         * the invite code is the access mechanism for the challenge
-         * page, so an invited player must be able to resolve the
-         * challenge before they become a challenge member.
+         * We only use the authenticated user, when available, to:
          *
-         * We do NOT weaken the challenges table RLS policy.
+         * - identify the visitor
+         * - automatically join registered users
+         *
+         * Guests are deliberately NOT added to challenge_players.
+         */
+
+        let user:
+            | {
+                  id: string;
+                  is_anonymous?: boolean;
+              }
+            | null = null;
+
+        let authState: AuthState =
+            "logged_out";
+
+        try {
+            const supabase =
+                await createClient();
+
+            const {
+                data: {
+                    user: authenticatedUser,
+                },
+                error: authError,
+            } =
+                await supabase.auth.getUser();
+
+            if (
+                !authError &&
+                authenticatedUser
+            ) {
+                user = authenticatedUser;
+
+                authState =
+                    authenticatedUser.is_anonymous
+                        ? "guest"
+                        : "registered";
+            }
+        } catch (authError) {
+            /*
+             * A missing/invalid browser session must not prevent
+             * somebody from viewing a public challenge.
+             *
+             * The visitor simply remains logged out.
+             */
+            console.warn(
+                "Optional challenge authentication unavailable:",
+                authError
+            );
+        }
+
+        /*
+         * ============================================================
+         * LOAD CHALLENGE
+         * ============================================================
          */
 
         const {
@@ -140,105 +163,107 @@ export async function GET(
 
         /*
          * ============================================================
-         * JOIN CHALLENGE
+         * JOIN REGISTERED USER
          * ============================================================
          *
-         * The creator is normally already a member.
+         * Registered users become challenge members automatically.
          *
-         * For an invited registered player, add them here.
-         *
-         * This is done server-side so the operation does not depend
-         * on client-side RLS INSERT permissions.
+         * Guests and logged-out visitors only view the challenge.
          */
 
-        const {
-            data: existingPlayer,
-            error: existingPlayerError,
-        } = await supabaseAdmin
-            .from("challenge_players")
-            .select("challenge_id")
-            .eq(
-                "challenge_id",
-                challenge.id
-            )
-            .eq(
-                "user_id",
-                user.id
-            )
-            .maybeSingle();
-
-        if (existingPlayerError) {
-            console.error(
-                "Challenge membership lookup error:",
-                existingPlayerError
-            );
-
-            return NextResponse.json(
-                {
-                    error:
-                        "Unable to verify challenge membership.",
-                },
-                {
-                    status: 500,
-                }
-            );
-        }
-
-        if (!existingPlayer) {
+        if (
+            user &&
+            !user.is_anonymous
+        ) {
             const {
-                error: joinError,
+                data: existingPlayer,
+                error: existingPlayerError,
             } = await supabaseAdmin
                 .from("challenge_players")
-                .insert({
-                    challenge_id:
-                        challenge.id,
-                    user_id:
-                        user.id,
-                });
+                .select("challenge_id")
+                .eq(
+                    "challenge_id",
+                    challenge.id
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .maybeSingle();
 
-            if (joinError) {
-                /*
-                 * If the row was inserted by a concurrent request,
-                 * verify membership one more time before failing.
-                 */
+            if (existingPlayerError) {
+                console.error(
+                    "Challenge membership lookup error:",
+                    existingPlayerError
+                );
 
+                return NextResponse.json(
+                    {
+                        error:
+                            "Unable to verify challenge membership.",
+                    },
+                    {
+                        status: 500,
+                    }
+                );
+            }
+
+            if (!existingPlayer) {
                 const {
-                    data: concurrentPlayer,
-                    error:
-                        concurrentCheckError,
+                    error: joinError,
                 } = await supabaseAdmin
                     .from("challenge_players")
-                    .select(
-                        "challenge_id"
-                    )
-                    .eq(
-                        "challenge_id",
-                        challenge.id
-                    )
-                    .eq(
-                        "user_id",
-                        user.id
-                    )
-                    .maybeSingle();
+                    .insert({
+                        challenge_id:
+                            challenge.id,
+                        user_id:
+                            user.id,
+                    });
 
-                if (
-                    concurrentCheckError ||
-                    !concurrentPlayer
-                ) {
-                    console.error(
-                        "Challenge membership insert error:",
-                        joinError
-                    );
+                if (joinError) {
+                    /*
+                     * A concurrent request may have inserted the
+                     * membership already. Verify before failing.
+                     */
 
-                    return NextResponse.json(
-                        {
-                            error:
-                                "Unable to join the challenge.",
-                        },
-                        {
-                            status: 500,
-                        }
-                    );
+                    const {
+                        data: concurrentPlayer,
+                        error:
+                            concurrentCheckError,
+                    } = await supabaseAdmin
+                        .from("challenge_players")
+                        .select(
+                            "challenge_id"
+                        )
+                        .eq(
+                            "challenge_id",
+                            challenge.id
+                        )
+                        .eq(
+                            "user_id",
+                            user.id
+                        )
+                        .maybeSingle();
+
+                    if (
+                        concurrentCheckError ||
+                        !concurrentPlayer
+                    ) {
+                        console.error(
+                            "Challenge membership insert error:",
+                            joinError
+                        );
+
+                        return NextResponse.json(
+                            {
+                                error:
+                                    "Unable to join the challenge.",
+                            },
+                            {
+                                status: 500,
+                            }
+                        );
+                    }
                 }
             }
         }
@@ -247,6 +272,9 @@ export async function GET(
          * ============================================================
          * PLAYER COUNT
          * ============================================================
+         *
+         * This counts registered challenge members only.
+         * Anonymous guests are intentionally not members.
          */
 
         const {
@@ -254,13 +282,10 @@ export async function GET(
             error: playerCountError,
         } = await supabaseAdmin
             .from("challenge_players")
-            .select(
-                "*",
-                {
-                    count: "exact",
-                    head: true,
-                }
-            )
+            .select("*", {
+                count: "exact",
+                head: true,
+            })
             .eq(
                 "challenge_id",
                 challenge.id
@@ -278,7 +303,7 @@ export async function GET(
                         "Unable to load challenge players.",
                 },
                 {
-                    status: 500
+                    status: 500,
                 }
             );
         }
@@ -290,6 +315,8 @@ export async function GET(
 
                 playerCount:
                     playerCount ?? 0,
+
+                authState,
             },
             {
                 status: 200,

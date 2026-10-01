@@ -1,51 +1,123 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import {
+  FormEvent,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-function getRegisterErrorMessage(message: string) {
-  const error = message.toLowerCase();
+function getRegisterErrorMessage(
+  message: string
+) {
+  const error =
+    message.toLowerCase();
 
   if (
-    error.includes("already registered") ||
-    error.includes("user already registered")
+    error.includes(
+      "already registered"
+    ) ||
+    error.includes(
+      "user already registered"
+    )
   ) {
     return "An account with this email already exists. Try logging in instead.";
   }
 
-  if (error.includes("too many requests")) {
+  if (
+    error.includes(
+      "too many requests"
+    )
+  ) {
     return "Too many attempts. Please wait a moment before trying again.";
   }
 
-  if (error.includes("password")) {
+  if (
+    error.includes("password")
+  ) {
     return "Your password doesn't meet the required security requirements. Please choose a stronger password.";
   }
 
-  if (error.includes("email")) {
+  if (
+    error.includes("email")
+  ) {
     return "Please enter a valid email address.";
   }
 
-  if (error.includes("network")) {
+  if (
+    error.includes("network")
+  ) {
     return "Connection problem. Please check your internet connection and try again.";
   }
 
   return "We couldn't create your account right now. Please try again.";
 }
 
+function getSafeNextPath() {
+  if (
+    typeof window ===
+    "undefined"
+  ) {
+    return "/home";
+  }
+
+  const next =
+    new URLSearchParams(
+      window.location.search
+    ).get("next");
+
+  /*
+   * Only allow internal paths.
+   */
+
+  if (
+    next &&
+    next.startsWith("/") &&
+    !next.startsWith("//")
+  ) {
+    return next;
+  }
+
+  return "/home";
+}
+
+function getEmailRedirectTo() {
+  const next =
+    getSafeNextPath();
+
+  return (
+    `${window.location.origin}` +
+    `/auth/callback?next=${encodeURIComponent(
+      next
+    )}`
+  );
+}
+
 export default function Register() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [displayName, setDisplayName] = useState("");
-  const [gamerTag, setGamerTag] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] =
+    useState("");
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [gamerTag, setGamerTag] =
+    useState("");
+
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  const [message, setMessage] =
+    useState("");
 
   async function handleRegister(
     event: FormEvent<HTMLFormElement>
@@ -58,73 +130,63 @@ export default function Register() {
 
     try {
       /*
-       * ==========================================
+       * ============================================================
        * GET CURRENT USER
-       * ==========================================
-       *
-       * A visitor may be:
-       *
-       * 1. A logged-out visitor
-       * 2. An anonymous guest
-       * 3. A registered user
-       *
-       * getUser() can return AuthSessionMissingError
-       * when there is no current session.
-       *
-       * That is NOT a registration failure.
+       * ============================================================
        */
+
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } =
+        await supabase.auth.getUser();
 
-      /*
-       * Ignore missing-session errors.
-       *
-       * A visitor without a session is simply
-       * registering as a normal new user.
-       */
       const hasMissingSession =
-        userError?.name === "AuthSessionMissingError";
+        userError?.name ===
+        "AuthSessionMissingError";
 
-      if (userError && !hasMissingSession) {
+      if (
+        userError &&
+        !hasMissingSession
+      ) {
         throw userError;
       }
 
       /*
-       * Build the confirmation callback URL.
-       *
-       * Automatically works for:
-       *
-       * Local:
-       * http://localhost:3000
-       *
-       * Production:
-       * https://build-your-xi.vercel.app
+       * Preserve the challenge path
+       * through email confirmation.
        */
+
       const emailRedirectTo =
-        `${window.location.origin}` +
-        "/auth/callback?next=/email-confirmed";
+        getEmailRedirectTo();
 
       /*
-       * ==========================================
+       * ============================================================
        * ANONYMOUS GUEST → REGISTERED ACCOUNT
-       * ==========================================
+       * ============================================================
        *
-       * Upgrade the existing Supabase user.
-       *
-       * This preserves the user's ID and any
-       * gameplay/stat relationships.
+       * This keeps the existing anonymous
+       * user's Supabase ID.
        */
-      if (user?.is_anonymous) {
-        const { data, error: updateError } =
+
+      if (
+        user?.is_anonymous
+      ) {
+        const {
+          data,
+          error: updateError,
+        } =
           await supabase.auth.updateUser(
             {
               email,
               password,
+
               data: {
-                display_name: displayName,
-                gamer_tag: gamerTag,
+                display_name:
+                  displayName,
+
+                gamer_tag:
+                  gamerTag,
               },
             },
             {
@@ -144,22 +206,33 @@ export default function Register() {
         }
 
         /*
-         * Save the user's public profile.
+         * Save public profile information.
          */
-        const { error: profileError } =
+
+        const {
+          error: profileError,
+        } =
           await supabase
             .from("profiles")
             .upsert(
               {
-                id: user.id,
-                display_name: displayName,
-                gamer_tag: gamerTag,
+                id:
+                  user.id,
+
+                display_name:
+                  displayName,
+
+                gamer_tag:
+                  gamerTag,
+
                 email,
+
                 updated_at:
                   new Date().toISOString(),
               },
               {
-                onConflict: "id",
+                onConflict:
+                  "id",
               }
             );
 
@@ -178,10 +251,13 @@ export default function Register() {
         }
 
         /*
-         * If email confirmation is required,
-         * Supabase may not have a confirmed email yet.
+         * Email confirmation may still be required.
          */
-        if (!data.user?.email_confirmed_at) {
+
+        if (
+          !data.user
+            ?.email_confirmed_at
+        ) {
           setMessage(
             "Your account has been upgraded! Please check your email and confirm your address."
           );
@@ -190,46 +266,43 @@ export default function Register() {
           return;
         }
 
-        /*
-         * If immediately authenticated,
-         * send the user home.
-         */
-        router.push("/home");
+        router.push(
+          getSafeNextPath()
+        );
+
         router.refresh();
 
         return;
       }
 
       /*
-       * ==========================================
+       * ============================================================
        * NORMAL NEW USER
-       * ==========================================
+       * ============================================================
        */
 
-      const { data, error: signUpError } =
-        await supabase.auth.signUp({
-          email,
-          password,
+      const {
+        data,
+        error: signUpError,
+      } =
+        await supabase.auth.signUp(
+          {
+            email,
+            password,
 
-          options: {
-            data: {
-              display_name: displayName,
-              gamer_tag: gamerTag,
+            options: {
+              data: {
+                display_name:
+                  displayName,
+
+                gamer_tag:
+                  gamerTag,
+              },
+
+              emailRedirectTo,
             },
-
-            /*
-             * After the user clicks the
-             * confirmation email, Supabase
-             * sends them to our callback.
-             *
-             * The callback exchanges the code
-             * for a session and redirects to:
-             *
-             * /email-confirmed
-             */
-            emailRedirectTo,
-          },
-        });
+          }
+        );
 
       if (signUpError) {
         setError(
@@ -252,31 +325,33 @@ export default function Register() {
       }
 
       /*
-       * Create the public profile.
-       *
-       * If email confirmation is enabled,
-       * there may not yet be a browser
-       * session depending on the Supabase
-       * authentication configuration.
-       *
-       * The profile RLS policy must allow
-       * this insert only when auth.uid()
-       * matches the user's ID.
+       * Create public profile.
        */
-      const { error: profileError } =
+
+      const {
+        error: profileError,
+      } =
         await supabase
           .from("profiles")
           .upsert(
             {
-              id: data.user.id,
-              display_name: displayName,
-              gamer_tag: gamerTag,
+              id:
+                data.user.id,
+
+              display_name:
+                displayName,
+
+              gamer_tag:
+                gamerTag,
+
               email,
+
               updated_at:
                 new Date().toISOString(),
             },
             {
-              onConflict: "id",
+              onConflict:
+                "id",
             }
           );
 
@@ -295,15 +370,14 @@ export default function Register() {
       }
 
       /*
-       * Email confirmation is enabled.
-       *
-       * Supabase does not provide an active
-       * session until the user confirms their
-       * email.
+       * ============================================================
+       * EMAIL CONFIRMATION
+       * ============================================================
        */
+
       if (!data.session) {
         setMessage(
-          "Account created! Please check your email and confirm your account before logging in."
+          "Account created! Please check your email and confirm your account. After confirmation, you'll be returned to your challenge."
         );
 
         setLoading(false);
@@ -311,11 +385,15 @@ export default function Register() {
       }
 
       /*
-       * Email confirmation is disabled.
-       *
-       * User is immediately authenticated.
+       * ============================================================
+       * ALREADY AUTHENTICATED
+       * ============================================================
        */
-      router.push("/home");
+
+      router.push(
+        getSafeNextPath()
+      );
+
       router.refresh();
     } catch (err) {
       console.error(
@@ -330,6 +408,9 @@ export default function Register() {
       setLoading(false);
     }
   }
+
+  const nextPath =
+    getSafeNextPath();
 
   return (
     <main className="grid min-h-screen place-items-center grid-bg px-6">
@@ -346,19 +427,26 @@ export default function Register() {
         </h1>
 
         <p className="mt-2 text-[var(--muted)]">
-          Save your progress, compete and build your record.
+          Save your progress, compete and
+          build your record.
         </p>
 
         <form
-          onSubmit={handleRegister}
+          onSubmit={
+            handleRegister
+          }
           className="mt-8 space-y-4"
         >
           <input
             type="text"
             placeholder="Display name"
-            value={displayName}
+            value={
+              displayName
+            }
             onChange={(event) =>
-              setDisplayName(event.target.value)
+              setDisplayName(
+                event.target.value
+              )
             }
             disabled={loading}
             required
@@ -367,9 +455,13 @@ export default function Register() {
           <input
             type="text"
             placeholder="Gamer tag"
-            value={gamerTag}
+            value={
+              gamerTag
+            }
             onChange={(event) =>
-              setGamerTag(event.target.value)
+              setGamerTag(
+                event.target.value
+              )
             }
             disabled={loading}
             required
@@ -378,9 +470,13 @@ export default function Register() {
           <input
             type="email"
             placeholder="Email address"
-            value={email}
+            value={
+              email
+            }
             onChange={(event) =>
-              setEmail(event.target.value)
+              setEmail(
+                event.target.value
+              )
             }
             disabled={loading}
             required
@@ -389,9 +485,13 @@ export default function Register() {
           <input
             type="password"
             placeholder="Password"
-            value={password}
+            value={
+              password
+            }
             onChange={(event) =>
-              setPassword(event.target.value)
+              setPassword(
+                event.target.value
+              )
             }
             disabled={loading}
             minLength={6}
@@ -427,10 +527,21 @@ export default function Register() {
           </button>
         </form>
 
+        {nextPath !==
+          "/home" && (
+          <p className="mt-4 text-center text-xs text-[var(--muted)]">
+            After registration, you'll
+            return to your challenge.
+          </p>
+        )}
+
         <p className="mt-6 text-center text-sm text-[var(--muted)]">
           Already playing?{" "}
+
           <Link
-            href="/login"
+            href={`/login?next=${encodeURIComponent(
+              nextPath
+            )}`}
             className="font-bold text-[var(--accent)]"
           >
             Log in

@@ -36,6 +36,14 @@ type LeaderboardEntry = {
     created_at: string;
 };
 
+function getChallengePath(
+    inviteCode: string
+) {
+    return `/challenges/${encodeURIComponent(
+        inviteCode
+    )}`;
+}
+
 export default function ChallengePage() {
     const params = useParams();
     const router = useRouter();
@@ -79,10 +87,8 @@ export default function ChallengePage() {
     const [savingTitle, setSavingTitle] =
         useState(false);
 
-    const [
-        reclaimScore,
-        setReclaimScore,
-    ] = useState<number | null>(null);
+    const [reclaimScore, setReclaimScore] =
+        useState<number | null>(null);
 
     useEffect(() => {
         if (inviteCode) {
@@ -95,39 +101,86 @@ export default function ChallengePage() {
     async function loadChallenge() {
         setLoading(true);
         setError("");
-        setJoining(true);
 
         try {
             /*
              * ============================================================
              * AUTHENTICATION
              * ============================================================
+             *
+             * Challenges require a registered account.
+             *
+             * Logged-out users are sent to login.
+             * Anonymous users are sent to registration.
+             *
+             * The original challenge URL is preserved through ?next=.
              */
 
             const {
-                data: { user },
-                error: userError,
-            } = await supabase.auth.getUser();
+                data: { session },
+                error: sessionError,
+            } = await supabase.auth.getSession();
 
-            if (userError) {
-                throw userError;
+            if (sessionError) {
+                throw sessionError;
             }
+
+            const user = session?.user ?? null;
+
+            const challengePath =
+                `/challenges/${encodeURIComponent(
+                    inviteCode
+                )}`;
+
+            /*
+             * ============================================================
+             * LOGGED OUT
+             * ============================================================
+             *
+             * There is no Supabase session at all.
+             *
+             * Send the player to login and preserve the
+             * challenge URL so they return here after
+             * successful authentication.
+             */
 
             if (!user) {
-                setError(
-                    "You must be logged in to view this challenge."
+                router.replace(
+                    `/login?next=${encodeURIComponent(
+                        challengePath
+                    )}`
                 );
 
                 return;
             }
+
+            /*
+             * ============================================================
+             * GUEST
+             * ============================================================
+             *
+             * Guests can play normal games, but challenges
+             * require a registered account.
+             *
+             * Send the guest to registration while
+             * preserving the challenge URL.
+             */
 
             if (user.is_anonymous) {
-                setError(
-                    "Registered authentication is required for challenges."
+                router.replace(
+                    `/register?next=${encodeURIComponent(
+                        challengePath
+                    )}`
                 );
 
                 return;
             }
+
+            /*
+             * ============================================================
+             * REGISTERED USER
+             * ============================================================
+             */
 
             setCurrentUserId(
                 user.id
@@ -137,11 +190,6 @@ export default function ChallengePage() {
              * ============================================================
              * LOAD CHALLENGE THROUGH SERVER
              * ============================================================
-             *
-             * Do NOT query the challenges table directly from the browser.
-             *
-             * The server endpoint uses the invite code and authenticated
-             * user to safely resolve and join the challenge.
              */
 
             const challengeResponse =
@@ -241,26 +289,6 @@ export default function ChallengePage() {
                     ? leaderboardData.leaderboard
                     : [];
 
-            /*
-             * ============================================================
-             * IMPORTANT FIX
-             * ============================================================
-             *
-             * The leaderboard API was already returning the correct data,
-             * but the previous code never copied that data into React state.
-             *
-             * Without this:
-             *
-             * loadedLeaderboard -> [score]
-             * leaderboard       -> []
-             *
-             * Therefore the UI always displayed:
-             *
-             * "0 players"
-             *
-             * even when challenge_scores contained the score.
-             */
-
             setLeaderboard(
                 loadedLeaderboard
             );
@@ -271,10 +299,6 @@ export default function ChallengePage() {
                     ? leaderboardData.reclaimScore
                     : null
             );
-
-            /*
-             * Prefer the count returned by the leaderboard endpoint.
-             */
 
             if (
                 typeof leaderboardData?.playerCount ===
@@ -296,7 +320,6 @@ export default function ChallengePage() {
                     : "Something went wrong while loading the challenge."
             );
         } finally {
-            setJoining(false);
             setLoading(false);
         }
     }
@@ -619,11 +642,10 @@ export default function ChallengePage() {
                 <section className="card mx-auto max-w-2xl p-7 text-center">
                     <div className="flex justify-center">
                         <div
-                            className={`grid h-14 w-14 place-items-center rounded-2xl ${
-                                isIpl
+                            className={`grid h-14 w-14 place-items-center rounded-2xl ${isIpl
                                     ? "bg-[var(--accent)]/15"
                                     : "bg-blue-500/15"
-                            }`}
+                                }`}
                         >
                             {isIpl ? (
                                 <span className="text-3xl">
@@ -909,11 +931,10 @@ export default function ChallengePage() {
                                                     key={
                                                         entry.user_id
                                                     }
-                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${
-                                                        isCurrentUser
+                                                    className={`grid grid-cols-[48px_minmax(0,1fr)_80px] items-center px-4 py-3 ${isCurrentUser
                                                             ? "bg-[var(--accent)]/10"
                                                             : ""
-                                                    }`}
+                                                        }`}
                                                 >
                                                     <span className="text-sm font-black text-[var(--muted)]">
                                                         {index +

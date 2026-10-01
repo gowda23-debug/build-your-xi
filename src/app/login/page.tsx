@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { Users } from "lucide-react";
 
 function getLoginErrorMessage(message: string) {
   const error = message.toLowerCase();
@@ -30,34 +31,93 @@ function getLoginErrorMessage(message: string) {
   return "We couldn't log you in right now. Please check your details and try again.";
 }
 
+function getSafeNextPath(next: string | null) {
+  /*
+   * Only allow internal paths.
+   *
+   * This prevents an attacker from turning ?next=
+   * into an external redirect such as:
+   *
+   * https://malicious-site.com
+   */
+
+  if (
+    next &&
+    next.startsWith("/") &&
+    !next.startsWith("//")
+  ) {
+    return next;
+  }
+
+  return "/home";
+}
+
 export default function Login() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [guestLoading, setGuestLoading] = useState(false);
-  const [error, setError] = useState("");
+  const nextPath = getSafeNextPath(
+    searchParams.get("next")
+  );
 
-  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+  const isChallengeLogin =
+    nextPath.startsWith("/challenges/");
+
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [guestLoading, setGuestLoading] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  async function handleLogin(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     setError("");
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error: loginError } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-  setError(getLoginErrorMessage(error.message));
-  setLoading(false);
-  return;
-}
+    if (loginError) {
+      setError(
+        getLoginErrorMessage(
+          loginError.message
+        )
+      );
 
-    router.push("/home");
+      setLoading(false);
+      return;
+    }
+
+    /*
+     * Return the user to the page that
+     * originally required authentication.
+     *
+     * For a challenge:
+     *
+     * /login?next=/challenges/251348BA
+     *
+     * becomes:
+     *
+     * /challenges/251348BA
+     */
+
+    router.push(nextPath);
     router.refresh();
   }
 
@@ -65,16 +125,38 @@ export default function Login() {
     setError("");
     setGuestLoading(true);
 
-    const { error } = await supabase.auth.signInAnonymously();
+    const { error: guestError } =
+      await supabase.auth.signInAnonymously();
 
-    if (error) {
-  setError(
-    "We couldn't start a guest session right now. Please check your connection and try again."
-  );
+    if (guestError) {
+      setError(
+        "We couldn't start a guest session right now. Please check your connection and try again."
+      );
 
-  setGuestLoading(false);
-  return;
-}
+      setGuestLoading(false);
+      return;
+    }
+
+    /*
+     * Guest mode is not allowed for challenges.
+     *
+     * This button is hidden when the user
+     * arrived here through a challenge, but
+     * keeping this redirect safe means the
+     * behavior remains correct if this function
+     * is ever called from another flow.
+     */
+
+    if (isChallengeLogin) {
+      router.push(
+        `/register?next=${encodeURIComponent(
+          nextPath
+        )}`
+      );
+
+      router.refresh();
+      return;
+    }
 
     router.push("/home");
     router.refresh();
@@ -90,18 +172,68 @@ export default function Login() {
           ← BUILD YOUR XI
         </Link>
 
-        <h1 className="mt-8 text-3xl font-black">Welcome back</h1>
+        {/*
+         * ============================================================
+         * CHALLENGE CONTEXT
+         * ============================================================
+         */}
+
+        {isChallengeLogin && (
+          <div className="mt-8 rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-5">
+            <div className="flex items-start gap-3">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--accent)]/10">
+                <Users className="h-5 w-5 text-[var(--accent)]" />
+              </div>
+
+              <div>
+                <p className="text-sm font-black text-[var(--accent)]">
+                  You&apos;ve been challenged!
+                </p>
+
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
+                  Challenges are for registered
+                  players. Log in to continue
+                  playing, or create an account
+                  to join the challenge.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <h1
+          className={`text-3xl font-black ${
+            isChallengeLogin
+              ? "mt-7"
+              : "mt-8"
+          }`}
+        >
+          Welcome back
+        </h1>
 
         <p className="mt-2 text-[var(--muted)]">
-          Continue your challenge run.
+          {isChallengeLogin
+            ? "Log in to continue to your challenge."
+            : "Continue your Build Your XI journey."}
         </p>
 
-        <form onSubmit={handleLogin} className="mt-8 space-y-4">
+        <form
+          onSubmit={handleLogin}
+          className="mt-8 space-y-4"
+        >
           <input
             type="email"
             placeholder="Email address"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) =>
+              setEmail(
+                event.target.value
+              )
+            }
+            disabled={
+              loading ||
+              guestLoading
+            }
             required
           />
 
@@ -109,57 +241,121 @@ export default function Login() {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) =>
+              setPassword(
+                event.target.value
+              )
+            }
+            disabled={
+              loading ||
+              guestLoading
+            }
             required
           />
+
           <div className="flex justify-end">
-  <Link
-    href="/forgot-password"
-    className="text-sm font-medium text-[var(--accent)] hover:underline"
-  >
-    Forgot password?
-  </Link>
-</div>
+            <Link
+              href="/forgot-password"
+              className="text-sm font-medium text-[var(--accent)] hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
 
           {error && (
-            <p className="text-sm text-red-400">
+            <p
+              role="alert"
+              className="text-sm text-red-400"
+            >
               {error}
             </p>
           )}
 
           <button
             type="submit"
-            disabled={loading || guestLoading}
+            disabled={
+              loading ||
+              guestLoading
+            }
             className="btn btn-primary w-full"
           >
-            {loading ? "Logging in..." : "Log in"}
+            {loading
+              ? "Logging in..."
+              : "Log in"}
           </button>
         </form>
 
-        <div className="my-6 flex items-center gap-3 text-xs text-[var(--muted)]">
-          <span className="h-px flex-1 bg-white/10" />
-          OR
-          <span className="h-px flex-1 bg-white/10" />
-        </div>
+        {/*
+         * ============================================================
+         * GUEST LOGIN
+         * ============================================================
+         *
+         * Guest mode remains available for normal
+         * Build Your XI gameplay.
+         *
+         * It is intentionally hidden for challenge
+         * authentication because challenges require
+         * a registered account.
+         */}
 
-        <button
-          type="button"
-          onClick={handleGuestLogin}
-          disabled={loading || guestLoading}
-          className="btn btn-secondary w-full"
+        {!isChallengeLogin && (
+          <>
+            <div className="my-6 flex items-center gap-3 text-xs text-[var(--muted)]">
+              <span className="h-px flex-1 bg-white/10" />
+
+              OR
+
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+
+            <button
+              type="button"
+              onClick={
+                handleGuestLogin
+              }
+              disabled={
+                loading ||
+                guestLoading
+              }
+              className="btn btn-secondary w-full"
+            >
+              {guestLoading
+                ? "Starting game..."
+                : "Continue as Guest"}
+            </button>
+          </>
+        )}
+
+        {/*
+         * ============================================================
+         * REGISTRATION
+         * ============================================================
+         */}
+
+        <div
+          className={`text-center ${
+            isChallengeLogin
+              ? "mt-8"
+              : "mt-6"
+          }`}
         >
-          {guestLoading ? "Starting game..." : "Continue as Guest"}
-        </button>
+          {isChallengeLogin && (
+            <p className="mb-3 text-sm text-[var(--muted)]">
+              Don&apos;t have an account yet?
+            </p>
+          )}
 
-        <p className="mt-6 text-center text-sm text-[var(--muted)]">
-          New to Build Your XI?{" "}
           <Link
-            href="/register"
-            className="font-bold text-[var(--accent)]"
+            href={`/register?next=${encodeURIComponent(
+              nextPath
+            )}`}
+            className="font-bold text-[var(--accent)] hover:underline"
           >
-            Create an account
+            {isChallengeLogin
+              ? "Create an account to play"
+              : "Create an account"}
           </Link>
-        </p>
+        </div>
       </section>
     </main>
   );

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -35,37 +34,6 @@ export async function GET(
 ) {
     try {
         const {
-            user,
-            error: authError,
-        } = await requireUser();
-
-        if (authError || !user) {
-            return (
-                authError ??
-                NextResponse.json(
-                    {
-                        error: "Unauthorized",
-                    },
-                    {
-                        status: 401,
-                    }
-                )
-            );
-        }
-
-        if (user.is_anonymous) {
-            return NextResponse.json(
-                {
-                    error:
-                        "Registered authentication is required for challenge leaderboards.",
-                },
-                {
-                    status: 403,
-                }
-            );
-        }
-
-        const {
             inviteCode,
         } = await context.params;
 
@@ -87,9 +55,12 @@ export async function GET(
         }
 
         /*
-         * ------------------------------------------------------------
+         * ============================================================
          * LOAD CHALLENGE
-         * ------------------------------------------------------------
+         * ============================================================
+         *
+         * Leaderboards are intentionally public because the challenge
+         * link itself is shareable.
          */
 
         const {
@@ -136,60 +107,11 @@ export async function GET(
         }
 
         /*
-         * ------------------------------------------------------------
-         * VERIFY MEMBERSHIP
-         * ------------------------------------------------------------
-         */
-
-        const {
-            data: membership,
-            error: membershipError,
-        } = await supabaseAdmin
-            .from("challenge_players")
-            .select("challenge_id")
-            .eq(
-                "challenge_id",
-                challenge.id
-            )
-            .eq(
-                "user_id",
-                user.id
-            )
-            .maybeSingle();
-
-        if (membershipError) {
-            console.error(
-                "Leaderboard membership lookup error:",
-                membershipError
-            );
-
-            return NextResponse.json(
-                {
-                    error:
-                        "Unable to verify challenge membership.",
-                },
-                {
-                    status: 500,
-                }
-            );
-        }
-
-        if (!membership) {
-            return NextResponse.json(
-                {
-                    error:
-                        "You are not a member of this challenge.",
-                },
-                {
-                    status: 403,
-                }
-            );
-        }
-
-        /*
-         * ------------------------------------------------------------
+         * ============================================================
          * PLAYER COUNT
-         * ------------------------------------------------------------
+         * ============================================================
+         *
+         * Only registered challenge members are counted.
          */
 
         const {
@@ -224,9 +146,9 @@ export async function GET(
         }
 
         /*
-         * ------------------------------------------------------------
+         * ============================================================
          * LOAD SCORES
-         * ------------------------------------------------------------
+         * ============================================================
          */
 
         const {
@@ -276,11 +198,11 @@ export async function GET(
                 []) as LeaderboardScore[];
 
         /*
-         * ------------------------------------------------------------
+         * ============================================================
          * LOAD PLAYER PROFILES
-         * ------------------------------------------------------------
+         * ============================================================
          *
-         * Only retrieve the fields the leaderboard needs.
+         * Only the public fields needed by the leaderboard are exposed.
          */
 
         const userIds = [
@@ -341,9 +263,9 @@ export async function GET(
         }
 
         /*
-         * ------------------------------------------------------------
+         * ============================================================
          * BUILD SAFE RESPONSE
-         * ------------------------------------------------------------
+         * ============================================================
          */
 
         const leaderboard: LeaderboardEntry[] =
@@ -381,11 +303,8 @@ export async function GET(
 
         /*
          * ============================================================
-         * CHALLENGE STATUS
+         * CREATOR STATUS
          * ============================================================
-         *
-         * Determine whether somebody has beaten the creator's
-         * current challenge score.
          */
 
         const creatorEntry =
@@ -403,10 +322,15 @@ export async function GET(
                         challenge.creator_id
                 )
                 .reduce<number | null>(
-                    (highest, entry) => {
+                    (
+                        highest,
+                        entry
+                    ) => {
                         if (
-                            highest === null ||
-                            entry.score > highest
+                            highest ===
+                                null ||
+                            entry.score >
+                                highest
                         ) {
                             return entry.score;
                         }
@@ -417,10 +341,12 @@ export async function GET(
                 );
 
         const creatorHasBeenBeaten =
-            creatorEntry !== undefined &&
-            highestOpponentScore !== null &&
+            creatorEntry !==
+                undefined &&
+            highestOpponentScore !==
+                null &&
             highestOpponentScore >
-            creatorEntry.score;
+                creatorEntry.score;
 
         const reclaimScore =
             creatorHasBeenBeaten
