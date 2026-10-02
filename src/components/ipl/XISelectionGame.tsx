@@ -28,6 +28,11 @@ type RespinType =
   | "team"
   | "season";
 
+type DraftSelection = {
+  playerId: string;
+  teamSeasonId: string;
+};
+
 type XISelectionGameProps = {
   challengeId?: string | null;
 };
@@ -36,13 +41,32 @@ export default function XISelectionGame({
   challengeId = null,
 }: XISelectionGameProps) {
   const [gameChallenge, setGameChallenge] =
-    useState<IPLChallenge | null>(null);
+    useState<IPLChallenge | null>(
+      null
+    );
+
   const [lockedVenue, setLockedVenue] =
-  useState<IPLChallenge["venue"] | null>(
+    useState<
+      IPLChallenge["venue"] | null
+    >(null);
+
+  /*
+   * This is the team-season from the ORIGINAL
+   * random challenge that produced lockedVenue.
+   *
+   * It must not change when team/season is respun.
+   */
+  const [
+    lockedVenueTeamSeasonId,
+    setLockedVenueTeamSeasonId,
+  ] = useState<string | null>(
     null
   );
+
   const [currentChallenge, setCurrentChallenge] =
-    useState<IPLChallenge | null>(null);
+    useState<IPLChallenge | null>(
+      null
+    );
 
   const [currentPlayers, setCurrentPlayers] =
     useState<IPLPlayer[]>([]);
@@ -50,20 +74,33 @@ export default function XISelectionGame({
   const [selectedPlayers, setSelectedPlayers] =
     useState<IPLPlayer[]>([]);
 
+  /*
+   * Guest games keep their authoritative identifiers
+   * locally instead of writing them to game_sessions.
+   */
+  const [draftSelections, setDraftSelections] =
+    useState<DraftSelection[]>([]);
+
   const [gameState, setGameState] =
-    useState<IPLGameState>("challenge");
+    useState<IPLGameState>(
+      "challenge"
+    );
 
   const [searchQuery, setSearchQuery] =
     useState("");
 
   const [roleFilter, setRoleFilter] =
-    useState<"ALL" | PlayerRole>("ALL");
+    useState<
+      "ALL" | PlayerRole
+    >("ALL");
 
   const [randomizerKey, setRandomizerKey] =
     useState(0);
 
   const [respinLoading, setRespinLoading] =
-    useState<RespinType | null>(null);
+    useState<
+      RespinType | null
+    >(null);
 
   const [teamRespinUsed, setTeamRespinUsed] =
     useState(false);
@@ -75,183 +112,236 @@ export default function XISelectionGame({
     challenge: IPLChallenge,
     players: IPLPlayer[]
   ) {
-    setCurrentChallenge(challenge);
-    setCurrentPlayers(players);
+    setCurrentChallenge(
+      challenge
+    );
+
+    setCurrentPlayers(
+      players
+    );
+
     setSearchQuery("");
     setRoleFilter("ALL");
     setGameState("selection");
   }
 
   function handleChallengeReady(
-  challenge: IPLChallenge,
-  players: IPLPlayer[]
-) {
-  const startingNewXI =
-    selectedPlayers.length === 0;
+    challenge: IPLChallenge,
+    players: IPLPlayer[]
+  ) {
+    const startingNewXI =
+      selectedPlayers.length ===
+      0;
 
-  setGameChallenge(challenge);
-
-  if (startingNewXI) {
-    setTeamRespinUsed(false);
-    setSeasonRespinUsed(false);
-
-    setLockedVenue(
-      challenge.venue
+    setGameChallenge(
+      challenge
     );
-  }
 
-  resetPlayerPool(
-    challenge,
-    players
-  );
-}
+    if (startingNewXI) {
+      setTeamRespinUsed(false);
+      setSeasonRespinUsed(false);
 
-async function handleSelectPlayer(
-  player: IPLPlayer
-) {
-  if (
-    selectedPlayers.length >=
-    MAX_PLAYERS
-  ) {
-    return;
-  }
+      /*
+       * Lock the ORIGINAL venue and the
+       * team-season that produced it.
+       */
+      setLockedVenue(
+        challenge.venue
+      );
 
-  if (
-    !canAddPlayer(
-      selectedPlayers,
-      player
-    )
-  ) {
-    return;
-  }
-
-  try {
-    /*
-     * Registered players:
-     *
-     * Save the selection to the authoritative
-     * game session.
-     *
-     * Guests:
-     *
-     * No database write is performed.
-     * Their selection is maintained locally.
-     */
-    if (
-      gameChallenge?.gameSessionId
-    ) {
-      const response =
-        await fetch(
-          "/api/ipl/game/select-player",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            cache: "no-store",
-
-            body:
-              JSON.stringify({
-                gameSessionId:
-                  gameChallenge.gameSessionId,
-
-                playerId:
-                  player.id,
-              }),
-          }
-        );
-
-      const data =
-        await response
-          .json()
-          .catch(() => null);
-
-      if (!response.ok) {
-        throw new Error(
-          data?.error ??
-          "Unable to save the selected player."
-        );
-      }
+      setLockedVenueTeamSeasonId(
+        challenge.teamSeasonId
+      );
     }
 
-    /*
-     * Add the player locally.
-     *
-     * This is used by both registered users
-     * and guests for the UI.
-     */
-    const nextPlayers = [
-      ...selectedPlayers,
-      player,
-    ];
-
-    setSelectedPlayers(
-      nextPlayers
+    resetPlayerPool(
+      challenge,
+      players
     );
+  }
 
-    /*
-     * One spin = one player.
-     *
-     * Close the current player pool and
-     * generate the next round.
-     */
-    setCurrentChallenge(null);
-    setCurrentPlayers([]);
-    setSearchQuery("");
-    setRoleFilter("ALL");
-
-    setRandomizerKey(
-      (current) => current + 1
-    );
-
+  async function handleSelectPlayer(
+    player: IPLPlayer
+  ) {
     if (
-      nextPlayers.length ===
-        MAX_PLAYERS &&
-      validateXI(nextPlayers).valid
+      selectedPlayers.length >=
+      MAX_PLAYERS
     ) {
-      setGameState("playing");
       return;
     }
 
-    setGameState("challenge");
-  } catch (error) {
-    console.error(
-      "IPL player selection failed:",
-      error
-    );
+    if (
+      !canAddPlayer(
+        selectedPlayers,
+        player
+      )
+    ) {
+      return;
+    }
+
+    try {
+      /*
+       * REGISTERED PLAYER
+       *
+       * Persist selection to the authoritative
+       * game session.
+       */
+      if (
+        gameChallenge?.gameSessionId
+      ) {
+        const response =
+          await fetch(
+            "/api/ipl/game/select-player",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
+
+              cache: "no-store",
+
+              body:
+                JSON.stringify({
+                  gameSessionId:
+                    gameChallenge.gameSessionId,
+
+                  playerId:
+                    player.id,
+                }),
+            }
+          );
+
+        const data =
+          await response
+            .json()
+            .catch(
+              () => null
+            );
+
+        if (!response.ok) {
+          throw new Error(
+            data?.error ??
+              "Unable to save the selected player."
+          );
+        }
+      }
+
+      /*
+       * Add player locally for BOTH registered
+       * and guest gameplay.
+       */
+      const nextPlayers = [
+        ...selectedPlayers,
+        player,
+      ];
+
+      setSelectedPlayers(
+        nextPlayers
+      );
+
+      /*
+       * Store the exact team-season from which
+       * this player was selected.
+       */
+      if (
+        gameChallenge?.teamSeasonId
+      ) {
+        setDraftSelections(
+          (current) => [
+            ...current,
+            {
+              playerId:
+                player.id,
+
+              teamSeasonId:
+                gameChallenge.teamSeasonId,
+            },
+          ]
+        );
+      }
+
+      /*
+       * Close the current player pool.
+       */
+      setCurrentChallenge(
+        null
+      );
+
+      setCurrentPlayers(
+        []
+      );
+
+      setSearchQuery("");
+      setRoleFilter("ALL");
+
+      setRandomizerKey(
+        (current) =>
+          current + 1
+      );
+
+      /*
+       * Once 11 valid players are selected,
+       * move directly to the result calculation.
+       */
+      if (
+        nextPlayers.length ===
+          MAX_PLAYERS &&
+        validateXI(
+          nextPlayers
+        ).valid
+      ) {
+        setGameState(
+          "playing"
+        );
+
+        return;
+      }
+
+      setGameState(
+        "challenge"
+      );
+    } catch (error) {
+      console.error(
+        "IPL player selection failed:",
+        error
+      );
+    }
   }
-}
 
   async function fetchPlayers(
     teamSeasonId: string
   ): Promise<IPLPlayer[]> {
-    const response = await fetch(
-      `/api/ipl/team-season/${encodeURIComponent(
-        teamSeasonId
-      )}/players`,
-      {
-        method: "GET",
-        cache: "no-store",
-      }
-    );
+    const response =
+      await fetch(
+        `/api/ipl/team-season/${encodeURIComponent(
+          teamSeasonId
+        )}/players`,
+        {
+          method: "GET",
+          cache: "no-store",
+        }
+      );
 
     const data =
-      await response.json().catch(
-        () => null
-      );
+      await response
+        .json()
+        .catch(
+          () => null
+        );
 
     if (!response.ok) {
       throw new Error(
         data?.error ??
-        "Unable to load available players."
+          "Unable to load available players."
       );
     }
 
     if (
-      !Array.isArray(data?.players)
+      !Array.isArray(
+        data?.players
+      )
     ) {
       throw new Error(
         "Invalid player data received."
@@ -285,7 +375,9 @@ async function handleSelectPlayer(
       return;
     }
 
-    setRespinLoading(type);
+    setRespinLoading(
+      type
+    );
 
     try {
       const endpoint =
@@ -294,51 +386,69 @@ async function handleSelectPlayer(
           : "/api/ipl/random/season";
 
       const response =
-        await fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          cache: "no-store",
-          body: JSON.stringify(
-            type === "team"
-              ? {
-                gameSessionId:
-                  gameChallenge.gameSessionId,
-                seasonId:
-                  gameChallenge.season.id,
-              }
-              : {
-                gameSessionId:
-                  gameChallenge.gameSessionId,
-                teamId:
-                  gameChallenge.team.id,
-              }
-          ),
-        });
+        await fetch(
+          endpoint,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            cache: "no-store",
+
+            body:
+              JSON.stringify(
+                type === "team"
+                  ? {
+                      gameSessionId:
+                        gameChallenge.gameSessionId,
+
+                      seasonId:
+                        gameChallenge
+                          .season
+                          .id,
+                    }
+                  : {
+                      gameSessionId:
+                        gameChallenge.gameSessionId,
+
+                      teamId:
+                        gameChallenge
+                          .team
+                          .id,
+                    }
+              ),
+          }
+        );
 
       const data =
-        await response.json().catch(
-          () => null
-        );
+        await response
+          .json()
+          .catch(
+            () => null
+          );
 
       if (!response.ok) {
         throw new Error(
           data?.error ??
-          `Unable to respin the ${type}.`
+            `Unable to respin the ${type}.`
         );
       }
 
-      let nextChallenge: IPLChallenge;
+      let nextChallenge:
+        IPLChallenge;
 
       /*
-       * Team respin:
-       * - changes team
-       * - changes team-season
-       * - changes player pool
-       * - keeps the original venue
+       * Team respin.
+       *
+       * IMPORTANT:
+       * venue remains the ORIGINAL locked venue.
        */
-      if (type === "team") {
+      if (
+        type === "team"
+      ) {
         if (
           !data?.team?.id ||
           !data?.teamSeasonId
@@ -352,7 +462,8 @@ async function handleSelectPlayer(
           teamSeasonId:
             data.teamSeasonId,
 
-          team: data.team,
+          team:
+            data.team,
 
           season:
             gameChallenge.season,
@@ -363,19 +474,17 @@ async function handleSelectPlayer(
           gameSessionId:
             gameChallenge.gameSessionId,
         };
-      }
-
-      /*
-       * Season respin:
-       * - changes season
-       * - changes team-season
-       * - changes player pool
-       * - keeps the original venue
-       */
-      else {
+      } else {
+        /*
+         * Season respin.
+         *
+         * IMPORTANT:
+         * venue remains the ORIGINAL locked venue.
+         */
         if (
           !data?.season?.id ||
-          !data?.season?.teamSeasonId
+          !data?.season
+            ?.teamSeasonId
         ) {
           throw new Error(
             "Invalid season data received."
@@ -384,7 +493,8 @@ async function handleSelectPlayer(
 
         nextChallenge = {
           teamSeasonId:
-            data.season.teamSeasonId,
+            data.season
+              .teamSeasonId,
 
           team:
             gameChallenge.team,
@@ -394,10 +504,12 @@ async function handleSelectPlayer(
               data.season.id,
 
             season:
-              data.season.season,
+              data.season
+                .season,
 
             startYear:
-              data.season.startYear,
+              data.season
+                .startYear,
           },
 
           venue:
@@ -408,16 +520,15 @@ async function handleSelectPlayer(
         };
       }
 
-      /*
-       * Load players belonging to
-       * the new team-season.
-       */
       const players =
         await fetchPlayers(
           nextChallenge.teamSeasonId
         );
 
-      if (players.length === 0) {
+      if (
+        players.length ===
+        0
+      ) {
         throw new Error(
           "No eligible players are available for this team and season."
         );
@@ -427,12 +538,20 @@ async function handleSelectPlayer(
         nextChallenge
       );
 
-      if (type === "team") {
-        setTeamRespinUsed(true);
+      if (
+        type === "team"
+      ) {
+        setTeamRespinUsed(
+          true
+        );
       }
 
-      if (type === "season") {
-        setSeasonRespinUsed(true);
+      if (
+        type === "season"
+      ) {
+        setSeasonRespinUsed(
+          true
+        );
       }
 
       resetPlayerPool(
@@ -445,56 +564,113 @@ async function handleSelectPlayer(
         error
       );
     } finally {
-      setRespinLoading(null);
+      setRespinLoading(
+        null
+      );
     }
   }
 
-  const validation = useMemo(
-    () =>
-      validateXI(
-        selectedPlayers
-      ),
-    [selectedPlayers]
-  );
+  const validation =
+    useMemo(
+      () =>
+        validateXI(
+          selectedPlayers
+        ),
+      [selectedPlayers]
+    );
 
   function handleBuildAnother() {
-    setGameChallenge(null);
-    setCurrentChallenge(null);
-    setCurrentPlayers([]);
-    setSelectedPlayers([]);
-    setLockedVenue(null);
-    setGameState("challenge");
+    setGameChallenge(
+      null
+    );
+
+    setCurrentChallenge(
+      null
+    );
+
+    setCurrentPlayers(
+      []
+    );
+
+    setSelectedPlayers(
+      []
+    );
+
+    setDraftSelections(
+      []
+    );
+
+    setLockedVenue(
+      null
+    );
+
+    setLockedVenueTeamSeasonId(
+      null
+    );
+
+    setGameState(
+      "challenge"
+    );
 
     setSearchQuery("");
     setRoleFilter("ALL");
 
     setRandomizerKey(
-      (current) => current + 1
+      (current) =>
+        current + 1
     );
 
-    setRespinLoading(null);
+    setRespinLoading(
+      null
+    );
 
-    setTeamRespinUsed(false);
-    setSeasonRespinUsed(false);
+    setTeamRespinUsed(
+      false
+    );
+
+    setSeasonRespinUsed(
+      false
+    );
   }
 
   /*
-   * GAME
+   * ============================================================
+   * GAME RESULT
+   * ============================================================
    */
-  if (gameState === "playing") {
+
+  if (
+    gameState ===
+    "playing"
+  ) {
     if (!gameChallenge) {
       return null;
     }
 
     return (
       <IPLGame
-        challenge={gameChallenge}
+        challenge={
+          gameChallenge
+        }
+
         selectedPlayers={
           selectedPlayers
         }
-        pitch={
-          gameChallenge.venue.pitch
+
+        draftSelections={
+          draftSelections
         }
+
+        venueOriginTeamSeasonId={
+          lockedVenueTeamSeasonId
+        }
+
+        pitch={
+          gameChallenge
+            .venue
+            .pitch
+        }
+
         onBuildAnother={
           handleBuildAnother
         }
@@ -509,8 +685,8 @@ async function handleSelectPlayer(
   const hasChallenge =
     Boolean(
       currentChallenge &&
-      gameState ===
-      "selection"
+        gameState ===
+          "selection"
     );
 
   return (
@@ -531,18 +707,6 @@ async function handleSelectPlayer(
           lg:overflow-hidden
         "
       >
-        {/*
-         * LEFT SIDE
-         *
-         * Mobile:
-         *   - shrink-0
-         *   - natural height
-         *   - ChallengeBar + PlayerPool remain visible
-         *
-         * Desktop:
-         *   - becomes the left grid column
-         *   - fills available height
-         */}
         <section
           className="
             flex
@@ -558,7 +722,7 @@ async function handleSelectPlayer(
           "
         >
           {currentChallenge &&
-            building ? (
+          building ? (
             <div
               className="
                 flex
@@ -571,7 +735,6 @@ async function handleSelectPlayer(
                 lg:overflow-hidden
               "
             >
-              {/* Challenge information */}
               <div className="shrink-0">
                 <ChallengeBar
                   challenge={
@@ -587,19 +750,18 @@ async function handleSelectPlayer(
                     respinLoading
                   }
                   onRespinTeam={() =>
-                    respin("team")
+                    respin(
+                      "team"
+                    )
                   }
                   onRespinSeason={() =>
-                    respin("season")
+                    respin(
+                      "season"
+                    )
                   }
                 />
               </div>
 
-              {/*
-               * PlayerPool has a fixed mobile
-               * height and its own internal
-               * vertical scroll.
-               */}
               <div
                 className="
                   h-[520px]
@@ -650,12 +812,18 @@ async function handleSelectPlayer(
             <div className="h-full min-h-0">
               {building ? (
                 <ChallengeRandomizer
-                  key={randomizerKey}
+                  key={
+                    randomizerKey
+                  }
                   gameSessionId={
                     gameChallenge?.gameSessionId
                   }
-                  challengeId={challengeId}
-                  lockedVenue={lockedVenue}
+                  challengeId={
+                    challengeId
+                  }
+                  lockedVenue={
+                    lockedVenue
+                  }
                   onChallengeReady={
                     handleChallengeReady
                   }
@@ -670,21 +838,21 @@ async function handleSelectPlayer(
             </div>
           )}
 
-          {/*
-           * Validation is only displayed
-           * after 11 players have been selected.
-           */}
           {selectedPlayers.length ===
             MAX_PLAYERS &&
             !validation.valid && (
               <section className="card mt-3 p-4">
                 {validation.errors.map(
-                  (error) => (
+                  (
+                    error
+                  ) => (
                     <p
                       key={error}
                       className="text-sm text-red-400"
                     >
-                      {error}
+                      {
+                        error
+                      }
                     </p>
                   )
                 )}
@@ -692,16 +860,6 @@ async function handleSelectPlayer(
             )}
         </section>
 
-        {/*
-         * PLAYING XI
-         *
-         * Mobile:
-         *   natural height
-         *   never uses h-full
-         *
-         * Desktop:
-         *   fills the right column
-         */}
         <div
           className="
             w-full
@@ -719,7 +877,8 @@ async function handleSelectPlayer(
             }
             pitch={
               gameChallenge?.venue
-                ?.pitch ?? null
+                ?.pitch ??
+              null
             }
             venue={
               gameChallenge?.venue ??
@@ -747,8 +906,8 @@ function ChallengeBar({
   seasonRespinUsed: boolean;
 
   respinLoading:
-  | RespinType
-  | null;
+    | RespinType
+    | null;
 
   onRespinTeam: () => void;
 
@@ -781,17 +940,17 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-              null ||
+                null ||
               teamRespinUsed
             }
             className="h-8 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-              "team"
+            "team"
               ? "Rolling…"
               : teamRespinUsed
-                ? "Team used"
-                : "↻ Team"}
+              ? "Team used"
+              : "↻ Team"}
           </button>
 
           <button
@@ -801,17 +960,17 @@ function ChallengeBar({
             }
             disabled={
               respinLoading !==
-              null ||
+                null ||
               seasonRespinUsed
             }
             className="h-8 rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-2.5 text-[10px] font-black uppercase tracking-wide text-fuchsia-300 transition hover:bg-fuchsia-400/15 disabled:cursor-not-allowed disabled:opacity-35"
           >
             {respinLoading ===
-              "season"
+            "season"
               ? "Rolling…"
               : seasonRespinUsed
-                ? "Season used"
-                : "↻ Season"}
+              ? "Season used"
+              : "↻ Season"}
           </button>
         </div>
       </div>
@@ -819,10 +978,11 @@ function ChallengeBar({
       <div className="mt-2 border-t border-[var(--line)] pt-2">
         <ChallengeValue
           label="Venue"
-          value={`${challenge.venue.name}${challenge.venue.city
-            ? ` • ${challenge.venue.city}`
-            : ""
-            }`}
+          value={`${challenge.venue.name}${
+            challenge.venue.city
+              ? ` • ${challenge.venue.city}`
+              : ""
+          }`}
         />
       </div>
     </div>

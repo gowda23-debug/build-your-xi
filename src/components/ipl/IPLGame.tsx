@@ -22,32 +22,45 @@ import type {
   XIEngineResult,
 } from "@/lib/ipl-challenge/game-types";
 
+type DraftSelection = {
+  playerId: string;
+  teamSeasonId: string;
+};
+
 type IPLGameProps = {
   challenge: IPLChallenge;
 
   selectedPlayers:
-  IPLPlayer[];
+    IPLPlayer[];
+
+  draftSelections:
+    DraftSelection[];
+
+  venueOriginTeamSeasonId:
+    string | null;
 
   pitch:
-  PitchProfile | null;
+    PitchProfile | null;
 
   onBuildAnother:
-  () => void;
+    () => void;
 };
 
 type CompletionResponse = {
   result: XIEngineResult;
 
   gameScoreId:
-  string | null;
+    string | null;
 
   completedAt:
-  string | null;
+    string | null;
 };
 
 export default function IPLGame({
   challenge,
   selectedPlayers,
+  draftSelections,
+  venueOriginTeamSeasonId,
   pitch,
   onBuildAnother,
 }: IPLGameProps) {
@@ -76,39 +89,73 @@ export default function IPLGame({
   ] = useState<
     "idle" | "shared" | "copied"
   >("idle");
+
   const completionRequestRef =
     useRef<{
-      gameSessionId: string;
+      requestKey: string;
       promise: Promise<CompletionResponse>;
     } | null>(null);
+
   const [
     creatingChallenge,
     setCreatingChallenge,
   ] = useState(false);
 
-  
+  const isGuest =
+    !challenge.gameSessionId;
+
   useEffect(() => {
-    let cancelled = false;
+    let cancelled =
+      false;
 
     const gameSessionId =
       challenge.gameSessionId;
 
-    if (!gameSessionId) {
-      setError(
-        "A registered game session is required to submit this result."
-      );
-
-      setLoading(false);
-      return;
-    }
+    /*
+     * Prevent duplicate completion calls
+     * caused by React development rendering.
+     */
+    const requestKey =
+      isGuest
+        ? [
+            "guest",
+            challenge.venue.id,
+            venueOriginTeamSeasonId ??
+              "no-origin",
+            ...draftSelections.map(
+              (selection) =>
+                `${selection.playerId}:${selection.teamSeasonId}`
+            ),
+          ].join("|")
+        : `registered:${gameSessionId}`;
 
     let request =
       completionRequestRef.current;
 
     if (
       !request ||
-      request.gameSessionId !== gameSessionId
+      request.requestKey !==
+        requestKey
     ) {
+      const requestBody =
+        isGuest
+          ? {
+              gameSessionId:
+                null,
+
+              selectedPlayers:
+                draftSelections,
+
+              venueId:
+                challenge.venue.id,
+
+              venueOriginTeamSeasonId:
+                venueOriginTeamSeasonId,
+            }
+          : {
+              gameSessionId,
+            };
+
       const promise =
         fetch(
           "/api/ipl/game/complete",
@@ -123,38 +170,44 @@ export default function IPLGame({
             cache: "no-store",
 
             body:
-              JSON.stringify({
-                gameSessionId,
-              }),
+              JSON.stringify(
+                requestBody
+              ),
           }
-        ).then(async (response) => {
-          const data =
-            await response
-              .json()
-              .catch(
-                () => null
+        ).then(
+          async (
+            response
+          ) => {
+            const data =
+              await response
+                .json()
+                .catch(
+                  () => null
+                );
+
+            if (
+              !response.ok
+            ) {
+              throw new Error(
+                data?.error ??
+                  "Unable to complete the game."
               );
+            }
 
-          if (!response.ok) {
-            throw new Error(
-              data?.error ??
-              "Unable to complete the game."
-            );
+            if (
+              !data?.result
+            ) {
+              throw new Error(
+                "The server returned an invalid game result."
+              );
+            }
+
+            return data as CompletionResponse;
           }
-
-          if (
-            !data?.result
-          ) {
-            throw new Error(
-              "The server returned an invalid game result."
-            );
-          }
-
-          return data as CompletionResponse;
-        });
+        );
 
       request = {
-        gameSessionId,
+        requestKey,
         promise,
       };
 
@@ -162,110 +215,158 @@ export default function IPLGame({
         request;
     }
 
-    setLoading(true);
-    setError(null);
+    setLoading(
+      true
+    );
+
+    setError(
+      null
+    );
 
     request.promise
-      .then((data) => {
-        if (cancelled) {
-          return;
-        }
+      .then(
+        (data) => {
+          if (
+            cancelled
+          ) {
+            return;
+          }
 
-        setCompletion(data);
-      })
-      .catch((err) => {
-        if (cancelled) {
-          return;
+          setCompletion(
+            data
+          );
         }
+      )
+      .catch(
+        (err) => {
+          if (
+            cancelled
+          ) {
+            return;
+          }
 
-        setError(
-          err instanceof Error
-            ? err.message
-            : "Unable to complete the game."
-        );
-      })
-      .finally(() => {
-        if (!cancelled) {
-          setLoading(false);
+          setError(
+            err instanceof
+              Error
+              ? err.message
+              : "Unable to complete the game."
+          );
         }
-      });
+      )
+      .finally(
+        () => {
+          if (
+            !cancelled
+          ) {
+            setLoading(
+              false
+            );
+          }
+        }
+      );
 
     return () => {
-      cancelled = true;
+      cancelled =
+        true;
     };
   }, [
     challenge.gameSessionId,
+    challenge.venue.id,
+    draftSelections,
+    isGuest,
+    venueOriginTeamSeasonId,
   ]);
 
+  async function handleCreateChallenge() {
+    /*
+     * Guests cannot create persistent challenges
+     * because they have no gameScoreId.
+     */
+    if (
+      isGuest ||
+      !completion?.gameScoreId ||
+      creatingChallenge
+    ) {
+      return;
+    }
 
-async function handleCreateChallenge() {
-  if (
-    !completion?.gameScoreId ||
-    creatingChallenge
-  ) {
-    return;
-  }
+    try {
+      setCreatingChallenge(
+        true
+      );
 
-  try {
-    setCreatingChallenge(true);
-    setError(null);
+      setError(
+        null
+      );
 
-    const response = await fetch(
-      "/api/challenges/create-from-game",
-      {
-        method: "POST",
+      const response =
+        await fetch(
+          "/api/challenges/create-from-game",
+          {
+            method: "POST",
 
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
 
-        cache: "no-store",
+            cache: "no-store",
 
-        body: JSON.stringify({
-          gameScoreId:
-            completion.gameScoreId,
-        }),
+            body:
+              JSON.stringify({
+                gameScoreId:
+                  completion.gameScoreId,
+              }),
+          }
+        );
+
+      const data =
+        await response
+          .json()
+          .catch(
+            () => null
+          );
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ??
+            "Unable to create the challenge."
+        );
       }
-    );
 
-    const data =
-      await response
-        .json()
-        .catch(() => null);
+      if (
+        !data?.inviteCode
+      ) {
+        throw new Error(
+          "The server did not return a challenge invite code."
+        );
+      }
 
-    if (!response.ok) {
-      throw new Error(
-        data?.error ??
-        "Unable to create the challenge."
+      window.location.assign(
+        `/challenges/created/${encodeURIComponent(
+          data.inviteCode
+        )}`
+      );
+    } catch (
+      err
+    ) {
+      setError(
+        err instanceof
+          Error
+          ? err.message
+          : "Unable to create the challenge."
+      );
+
+      setCreatingChallenge(
+        false
       );
     }
-
-    if (!data?.inviteCode) {
-      throw new Error(
-        "The server did not return a challenge invite code."
-      );
-    }
-
-    window.location.assign(
-      `/challenges/created/${encodeURIComponent(
-        data.inviteCode
-      )}`
-    );
-  } catch (err) {
-    setError(
-      err instanceof Error
-        ? err.message
-        : "Unable to create the challenge."
-    );
-
-    setCreatingChallenge(false);
   }
-}
 
-  
   async function handleShare() {
-    if (!completion) {
+    if (
+      !completion
+    ) {
       return;
     }
 
@@ -277,7 +378,7 @@ async function handleCreateChallenge() {
 
     const shareUrl =
       typeof window !==
-        "undefined"
+      "undefined"
         ? window.location.href
         : "";
 
@@ -323,13 +424,9 @@ async function handleCreateChallenge() {
     }
   }
 
-  /*
-   * ============================================================
-   * LOADING
-   * ============================================================
-   */
-
-  if (loading) {
+  if (
+    loading
+  ) {
     return (
       <main className="flex min-h-0 w-full flex-1 items-center justify-center overflow-auto px-3 py-6">
         <section className="card w-full max-w-md p-6 text-center">
@@ -347,12 +444,6 @@ async function handleCreateChallenge() {
       </main>
     );
   }
-
-  /*
-   * ============================================================
-   * ERROR
-   * ============================================================
-   */
 
   if (
     error ||
@@ -502,34 +593,41 @@ async function handleCreateChallenge() {
                 />
 
                 {shareStatus ===
-                  "shared"
+                "shared"
                   ? "Shared"
                   : shareStatus ===
                     "copied"
-                    ? "Copied"
-                    : "Share"}
+                  ? "Copied"
+                  : "Share"}
               </button>
 
-              <button
-                type="button"
-                onClick={handleCreateChallenge}
-                disabled={creatingChallenge}
-                className="btn btn-secondary col-span-2 min-h-10 text-xs font-black sm:col-span-1 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <Swords
-                  size={14}
-                />
+              {!isGuest && (
+                <button
+                  type="button"
+                  onClick={
+                    handleCreateChallenge
+                  }
+                  disabled={
+                    creatingChallenge
+                  }
+                  className="btn btn-secondary col-span-2 min-h-10 text-xs font-black sm:col-span-1 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  <Swords
+                    size={14}
+                  />
 
-                {creatingChallenge
-                  ? "Creating…"
-                  : "Create Challenge"}
-              </button>
+                  {creatingChallenge
+                    ? "Creating…"
+                    : "Create Challenge"}
+                </button>
+              )}
             </div>
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[8px] font-black uppercase tracking-[0.12em] text-[var(--muted)]">
               <span>
                 {
-                  result.breakdown
+                  result
+                    .breakdown
                     .batting
                 }{" "}
                 Batting
@@ -539,7 +637,8 @@ async function handleCreateChallenge() {
 
               <span>
                 {
-                  result.breakdown
+                  result
+                    .breakdown
                     .bowling
                 }{" "}
                 Bowling
@@ -549,7 +648,8 @@ async function handleCreateChallenge() {
 
               <span>
                 {
-                  result.breakdown
+                  result
+                    .breakdown
                     .balance
                 }{" "}
                 Balance
@@ -559,7 +659,8 @@ async function handleCreateChallenge() {
 
               <span>
                 {
-                  result.breakdown
+                  result
+                    .breakdown
                     .conditions
                 }{" "}
                 Conditions
@@ -587,7 +688,9 @@ async function handleCreateChallenge() {
 
           <div className="grid grid-cols-4 divide-x divide-[var(--line)]">
             {roleGroups.map(
-              (group) => (
+              (
+                group
+              ) => (
                 <RoleColumn
                   key={
                     group.label
@@ -625,7 +728,9 @@ function RoleColumn({
         {players.map(
           (player) => (
             <div
-              key={player.id}
+              key={
+                player.id
+              }
               className="rounded-lg border border-[var(--line)] bg-black/10 px-2.5 py-2"
             >
               <p className="truncate text-[10px] font-bold">
