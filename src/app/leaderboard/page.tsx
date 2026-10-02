@@ -560,7 +560,7 @@ export default function LeaderboardPage() {
             {!loading &&
                 !error &&
                 data?.currentPlayer && (
-                    <div className="fixed bottom-[118px] left-1/2 z-40 w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 sm:bottom-[82px]">
+                    <div className="fixed bottom-[150px] left-1/2 z-40 w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 sm:bottom-[82px]">
                         <div className="grid grid-cols-[60px_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-[var(--accent)]/40 bg-[#07130f]/95 px-4 py-3 shadow-2xl backdrop-blur-xl">
                             <div className="text-center text-xs font-black text-[var(--muted)]">
                                 #{data.currentPlayer.rank}
