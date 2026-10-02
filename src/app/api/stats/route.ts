@@ -6,598 +6,619 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 export const dynamic = "force-dynamic";
 
 type GameMode =
-  | "ipl"
-  | "world";
+    | "ipl"
+    | "world";
 
 type ProfileRow = {
-  id: string;
-  display_name: string | null;
-  gamer_tag: string | null;
+    id: string;
+    display_name: string | null;
+    gamer_tag: string | null;
 };
 
 type StoredResult = {
-  score?: number;
+    score?: number;
 
-  wins?: number;
-  losses?: number;
+    wins?: number;
+    losses?: number;
 
-  teamStrength?: number;
+    teamStrength?: number;
 
-  venue?: {
-    id?: string;
-    name?: string | null;
-    city?: string | null;
-    country?: string | null;
-  };
+    venue?: {
+        id?: string;
+        name?: string | null;
+        city?: string | null;
+        country?: string | null;
+    };
 
-  pitch?: {
-    id?: string;
-    title?: string;
-    type?: string;
-    summary?: string;
-  };
+    pitch?: {
+        id?: string;
+        title?: string;
+        type?: string;
+        summary?: string;
+    };
 
-  breakdown?: {
-    batting?: number;
-    bowling?: number;
-    balance?: number;
-    conditions?: number;
-  };
+    breakdown?: {
+        batting?: number;
+        bowling?: number;
+        balance?: number;
+        conditions?: number;
+    };
 
-  matches?: number;
+    matches?: number;
 
-  [key: string]: unknown;
+    [key: string]: unknown;
 };
 
 type GameScoreRow = {
-  id: string;
-  game_mode: string;
-  score: number | string;
-  created_at: string;
-  result: StoredResult | null;
+    id: string;
+    game_mode: string;
+    score: number | string;
+    created_at: string;
+    result: StoredResult | null;
 };
 
 type RecentGame = {
-  id: string;
-  gameType:
+    id: string;
+    gameType:
     | "IPL Challenge"
     | "World Domination";
-  score: number;
-  record: string;
-  date: string;
-  details: string[];
+    score: number;
+    record: string;
+    date: string;
+    details: string[];
 };
 
 function getGameType(
-  gameMode: string
+    gameMode: string
 ):
-  | "IPL Challenge"
-  | "World Domination" {
-  if (gameMode === "world") {
-    return "World Domination";
-  }
+    | "IPL Challenge"
+    | "World Domination" {
+    if (gameMode === "world") {
+        return "World Domination";
+    }
 
-  return "IPL Challenge";
+    return "IPL Challenge";
 }
 
 function getRecord(
-  result: StoredResult | null
+    result: StoredResult | null
 ): string {
-  if (
-    typeof result?.wins !==
-      "number" ||
-    typeof result?.losses !==
-      "number"
-  ) {
-    return "—";
-  }
+    if (
+        typeof result?.wins !==
+        "number" ||
+        typeof result?.losses !==
+        "number"
+    ) {
+        return "—";
+    }
 
-  return `${result.wins}-${result.losses}`;
+    return `${result.wins}-${result.losses}`;
+}
+
+function getAuthoritativeScore(
+    row: GameScoreRow
+) {
+    const resultScore =
+        Number(row.result?.score);
+
+    if (
+        Number.isFinite(resultScore)
+    ) {
+        return resultScore;
+    }
+
+    const storedScore =
+        Number(row.score);
+
+    return Number.isFinite(
+        storedScore
+    )
+        ? storedScore
+        : null;
 }
 
 function getDetails(
-  row: GameScoreRow
+    row: GameScoreRow
 ): string[] {
-  const result =
-    row.result;
+    const result =
+        row.result;
 
-  if (!result) {
-    return [];
-  }
+    if (!result) {
+        return [];
+    }
 
-  const details: string[] =
-    [];
+    const details: string[] =
+        [];
 
-  const record =
-    getRecord(result);
+    const record =
+        getRecord(result);
 
-  if (record !== "—") {
-    details.push(
-      `Record: ${record}`
-    );
-  }
+    if (record !== "—") {
+        details.push(
+            `Record: ${record}`
+        );
+    }
 
-  if (
-    result.venue?.name
-  ) {
-    const location =
-      [
-        result.venue.city,
-        result.venue.country,
-      ]
-        .filter(Boolean)
-        .join(", ");
+    if (
+        result.venue?.name
+    ) {
+        const location =
+            [
+                result.venue.city,
+                result.venue.country,
+            ]
+                .filter(Boolean)
+                .join(", ");
 
-    details.push(
-      location
-        ? `Venue: ${result.venue.name}, ${location}`
-        : `Venue: ${result.venue.name}`
-    );
-  }
+        details.push(
+            location
+                ? `Venue: ${result.venue.name}, ${location}`
+                : `Venue: ${result.venue.name}`
+        );
+    }
 
-  if (
-    result.pitch?.title
-  ) {
-    details.push(
-      `Pitch: ${result.pitch.title}`
-    );
-  }
+    if (
+        result.pitch?.title
+    ) {
+        details.push(
+            `Pitch: ${result.pitch.title}`
+        );
+    }
 
-  if (
-    typeof result.teamStrength ===
-    "number"
-  ) {
-    details.push(
-      `Team Strength: ${result.teamStrength}`
-    );
-  }
+    if (
+        typeof result.teamStrength ===
+        "number"
+    ) {
+        details.push(
+            `Team Strength: ${result.teamStrength}`
+        );
+    }
 
-  if (
-    result.breakdown &&
-    typeof result.breakdown.batting ===
-      "number"
-  ) {
-    details.push(
-      `Batting: ${result.breakdown.batting}`
-    );
-  }
+    if (
+        result.breakdown &&
+        typeof result.breakdown.batting ===
+        "number"
+    ) {
+        details.push(
+            `Batting: ${result.breakdown.batting}`
+        );
+    }
 
-  if (
-    result.breakdown &&
-    typeof result.breakdown.bowling ===
-      "number"
-  ) {
-    details.push(
-      `Bowling: ${result.breakdown.bowling}`
-    );
-  }
+    if (
+        result.breakdown &&
+        typeof result.breakdown.bowling ===
+        "number"
+    ) {
+        details.push(
+            `Bowling: ${result.breakdown.bowling}`
+        );
+    }
 
-  if (
-    result.breakdown &&
-    typeof result.breakdown.balance ===
-      "number"
-  ) {
-    details.push(
-      `Balance: ${result.breakdown.balance}`
-    );
-  }
+    if (
+        result.breakdown &&
+        typeof result.breakdown.balance ===
+        "number"
+    ) {
+        details.push(
+            `Balance: ${result.breakdown.balance}`
+        );
+    }
 
-  if (
-    result.breakdown &&
-    typeof result.breakdown.conditions ===
-      "number"
-  ) {
-    details.push(
-      `Conditions: ${result.breakdown.conditions}`
-    );
-  }
+    if (
+        result.breakdown &&
+        typeof result.breakdown.conditions ===
+        "number"
+    ) {
+        details.push(
+            `Conditions: ${result.breakdown.conditions}`
+        );
+    }
 
-  if (
-    typeof result.matches ===
-    "number"
-  ) {
-    details.push(
-      `Matches: ${result.matches}`
-    );
-  }
+    if (
+        typeof result.matches ===
+        "number"
+    ) {
+        details.push(
+            `Matches: ${result.matches}`
+        );
+    }
 
-  return details;
+    return details;
 }
 
 async function loadPlayerScores(
-  userId: string
+    userId: string
 ): Promise<GameScoreRow[]> {
-  const rows: GameScoreRow[] =
-    [];
+    const rows: GameScoreRow[] =
+        [];
 
-  const PAGE_SIZE = 1000;
+    const PAGE_SIZE = 1000;
 
-  let from = 0;
+    let from = 0;
 
-  while (true) {
-    const {
-      data,
-      error,
-    } = await supabaseAdmin
-      .from("game_scores")
-      .select(
-        `
+    while (true) {
+        const {
+            data,
+            error,
+        } = await supabaseAdmin
+            .from("game_scores")
+            .select(
+                `
         id,
         game_mode,
         score,
         created_at,
         result
       `
-      )
-      .eq(
-        "user_id",
-        userId
-      )
-      .order(
-        "created_at",
-        {
-          ascending: false,
+            )
+            .eq(
+                "user_id",
+                userId
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false,
+                }
+            )
+            .range(
+                from,
+                from + PAGE_SIZE - 1
+            );
+
+        if (error) {
+            throw error;
         }
-      )
-      .range(
-        from,
-        from + PAGE_SIZE - 1
-      );
 
-    if (error) {
-      throw error;
+        const page =
+            (data ??
+                []) as GameScoreRow[];
+
+        rows.push(...page);
+
+        if (
+            page.length <
+            PAGE_SIZE
+        ) {
+            break;
+        }
+
+        from += PAGE_SIZE;
     }
 
-    const page =
-      (data ??
-        []) as GameScoreRow[];
-
-    rows.push(...page);
-
-    if (
-      page.length <
-      PAGE_SIZE
-    ) {
-      break;
-    }
-
-    from += PAGE_SIZE;
-  }
-
-  return rows;
+    return rows;
 }
 
 export async function GET() {
-  try {
-    /*
-     * ============================================================
-     * AUTHENTICATION
-     * ============================================================
-     */
+    try {
+        /*
+         * ============================================================
+         * AUTHENTICATION
+         * ============================================================
+         */
 
-    const {
-      user,
-      error: authError,
-    } = await requireUser();
+        const {
+            user,
+            error: authError,
+        } = await requireUser();
 
-    if (authError || !user) {
-      return (
-        authError ??
-        NextResponse.json(
-          {
-            error: "Unauthorized",
-          },
-          {
-            status: 401,
-          }
-        )
-      );
-    }
-
-    /*
-     * ============================================================
-     * GUEST
-     * ============================================================
-     *
-     * Guest games are intentionally not persisted by the
-     * authoritative completion flow.
-     */
-
-    if (user.is_anonymous) {
-      return NextResponse.json(
-        {
-          player: {
-            id: user.id,
-            displayName:
-              "Guest Player",
-            gamerTag:
-              `GUEST-${user.id
-                .slice(0, 6)
-                .toUpperCase()}`,
-            isGuest: true,
-          },
-
-          stats: {
-            gamesPlayed: 0,
-            bestScore: null,
-            bestRecord: null,
-          },
-
-          recentGames: [],
-        },
-        {
-          headers: {
-            "Cache-Control":
-              "private, no-store",
-          },
+        if (authError || !user) {
+            return (
+                authError ??
+                NextResponse.json(
+                    {
+                        error: "Unauthorized",
+                    },
+                    {
+                        status: 401,
+                    }
+                )
+            );
         }
-      );
-    }
 
-    /*
-     * ============================================================
-     * LOAD PROFILE
-     * ============================================================
-     */
+        /*
+         * ============================================================
+         * GUEST
+         * ============================================================
+         *
+         * Guest games are intentionally not persisted by the
+         * authoritative completion flow.
+         */
 
-    const {
-      data: profileData,
-      error: profileError,
-    } = await supabaseAdmin
-      .from("profiles")
-      .select(
-        `
+        if (user.is_anonymous) {
+            return NextResponse.json(
+                {
+                    player: {
+                        id: user.id,
+                        displayName:
+                            "Guest Player",
+                        gamerTag:
+                            `GUEST-${user.id
+                                .slice(0, 6)
+                                .toUpperCase()}`,
+                        isGuest: true,
+                    },
+
+                    stats: {
+                        gamesPlayed: 0,
+                        bestScore: null,
+                        bestRecord: null,
+                    },
+
+                    recentGames: [],
+                },
+                {
+                    headers: {
+                        "Cache-Control":
+                            "private, no-store",
+                    },
+                }
+            );
+        }
+
+        /*
+         * ============================================================
+         * LOAD PROFILE
+         * ============================================================
+         */
+
+        const {
+            data: profileData,
+            error: profileError,
+        } = await supabaseAdmin
+            .from("profiles")
+            .select(
+                `
         id,
         display_name,
         gamer_tag
       `
-      )
-      .eq(
-        "id",
-        user.id
-      )
-      .maybeSingle();
-
-    if (profileError) {
-      throw profileError;
-    }
-
-    const profile =
-      profileData as
-        | ProfileRow
-        | null;
-
-    /*
-     * ============================================================
-     * LOAD AUTHORITATIVE GAME SCORES
-     * ============================================================
-     */
-
-    const gameScores =
-      await loadPlayerScores(
-        user.id
-      );
-
-    /*
-     * ============================================================
-     * BASIC STATISTICS
-     * ============================================================
-     */
-
-    const validScores =
-      gameScores
-        .map((row) =>
-          Number(row.score)
-        )
-        .filter(
-          (score) =>
-            Number.isFinite(score)
-        );
-
-    const gamesPlayed =
-      gameScores.length;
-
-    const bestScore =
-      validScores.length > 0
-        ? Math.max(
-            ...validScores
-          )
-        : null;
-
-    /*
-     * ============================================================
-     * BEST RECORD
-     * ============================================================
-     *
-     * Record is compared using:
-     *
-     * 1. Most wins
-     * 2. Fewest losses
-     * 3. Highest score
-     *
-     * This gives us a deterministic all-time record.
-     */
-
-    const recordCandidates =
-      gameScores
-        .map((row) => {
-          const result =
-            row.result;
-
-          if (
-            typeof result?.wins !==
-              "number" ||
-            typeof result?.losses !==
-              "number"
-          ) {
-            return null;
-          }
-
-          return {
-            wins:
-              result.wins,
-
-            losses:
-              result.losses,
-
-            score:
-              Number(row.score),
-
-            createdAt:
-              row.created_at,
-          };
-        })
-        .filter(
-          (
-            value
-          ): value is {
-            wins: number;
-            losses: number;
-            score: number;
-            createdAt: string;
-          } =>
-            value !== null &&
-            Number.isFinite(
-              value.score
             )
-        );
+            .eq(
+                "id",
+                user.id
+            )
+            .maybeSingle();
 
-    recordCandidates.sort(
-      (a, b) => {
-        if (
-          b.wins !==
-          a.wins
-        ) {
-          return (
-            b.wins -
-            a.wins
-          );
+        if (profileError) {
+            throw profileError;
         }
 
-        if (
-          a.losses !==
-          b.losses
-        ) {
-          return (
-            a.losses -
-            b.losses
-          );
-        }
+        const profile =
+            profileData as
+            | ProfileRow
+            | null;
 
-        if (
-          b.score !==
-          a.score
-        ) {
-          return (
-            b.score -
-            a.score
-          );
-        }
+        /*
+         * ============================================================
+         * LOAD AUTHORITATIVE GAME SCORES
+         * ============================================================
+         */
 
-        return (
-          new Date(
-            b.createdAt
-          ).getTime() -
-          new Date(
-            a.createdAt
-          ).getTime()
+        const gameScores =
+            await loadPlayerScores(
+                user.id
+            );
+
+        /*
+         * ============================================================
+         * BASIC STATISTICS
+         * ============================================================
+         */
+
+        const validScores =
+            gameScores
+                .map(getAuthoritativeScore)
+                .filter(
+                    (
+                        score
+                    ): score is number =>
+                        score !== null
+                );
+
+        const gamesPlayed =
+            gameScores.length;
+
+        const bestScore =
+            validScores.length > 0
+                ? Math.max(
+                    ...validScores
+                )
+                : null;
+
+        /*
+         * ============================================================
+         * BEST RECORD
+         * ============================================================
+         *
+         * Record is compared using:
+         *
+         * 1. Most wins
+         * 2. Fewest losses
+         * 3. Highest score
+         *
+         * This gives us a deterministic all-time record.
+         */
+
+        const recordCandidates =
+            gameScores
+                .map((row) => {
+                    const result =
+                        row.result;
+
+                    if (
+                        typeof result?.wins !==
+                        "number" ||
+                        typeof result?.losses !==
+                        "number"
+                    ) {
+                        return null;
+                    }
+
+                    return {
+                        wins:
+                            result.wins,
+
+                        losses:
+                            result.losses,
+
+                        score:
+                            getAuthoritativeScore(row) ?? 0,
+                        createdAt:
+                            row.created_at,
+                    };
+                })
+                .filter(
+                    (
+                        value
+                    ): value is {
+                        wins: number;
+                        losses: number;
+                        score: number;
+                        createdAt: string;
+                    } =>
+                        value !== null &&
+                        Number.isFinite(
+                            value.score
+                        )
+                );
+
+        recordCandidates.sort(
+            (a, b) => {
+                if (
+                    b.wins !==
+                    a.wins
+                ) {
+                    return (
+                        b.wins -
+                        a.wins
+                    );
+                }
+
+                if (
+                    a.losses !==
+                    b.losses
+                ) {
+                    return (
+                        a.losses -
+                        b.losses
+                    );
+                }
+
+                if (
+                    b.score !==
+                    a.score
+                ) {
+                    return (
+                        b.score -
+                        a.score
+                    );
+                }
+
+                return (
+                    new Date(
+                        b.createdAt
+                    ).getTime() -
+                    new Date(
+                        a.createdAt
+                    ).getTime()
+                );
+            }
         );
-      }
-    );
 
-    const bestRecord =
-      recordCandidates.length >
-      0
-        ? `${recordCandidates[0].wins}-${recordCandidates[0].losses}`
-        : null;
+        const bestRecord =
+            recordCandidates.length >
+                0
+                ? `${recordCandidates[0].wins}-${recordCandidates[0].losses}`
+                : null;
 
-    /*
-     * ============================================================
-     * RECENT 10 GAMES
-     * ============================================================
-     */
+        /*
+         * ============================================================
+         * RECENT 10 GAMES
+         * ============================================================
+         */
 
-    const recentGames =
-      gameScores
-        .slice(0, 10)
-        .map(
-          (
-            row
-          ): RecentGame => ({
-            id: row.id,
+        const recentGames =
+            gameScores
+                .slice(0, 10)
+                .map(
+                    (
+                        row
+                    ): RecentGame => ({
+                        id: row.id,
 
-            gameType:
-              getGameType(
-                row.game_mode
-              ),
+                        gameType:
+                            getGameType(
+                                row.game_mode
+                            ),
 
-            score:
-              Number(row.score),
+                        score:
+                            getAuthoritativeScore(row) ?? 0,
 
-            record:
-              getRecord(
-                row.result
-              ),
+                        record:
+                            getRecord(
+                                row.result
+                            ),
 
-            date:
-              row.created_at,
+                        date:
+                            row.created_at,
 
-            details:
-              getDetails(row),
-          })
+                        details:
+                            getDetails(row),
+                    })
+                );
+
+        return NextResponse.json(
+            {
+                player: {
+                    id: user.id,
+
+                    displayName:
+                        profile?.display_name ||
+                        user.user_metadata
+                            ?.display_name ||
+                        "Player",
+
+                    gamerTag:
+                        profile?.gamer_tag ||
+                        user.user_metadata
+                            ?.gamer_tag ||
+                        "",
+
+                    isGuest: false,
+                },
+
+                stats: {
+                    gamesPlayed,
+
+                    bestScore,
+
+                    bestRecord,
+                },
+
+                recentGames,
+            },
+            {
+                headers: {
+                    "Cache-Control":
+                        "private, no-store",
+                },
+            }
+        );
+    } catch (error) {
+        console.error(
+            "Stats API error:",
+            error
         );
 
-    return NextResponse.json(
-      {
-        player: {
-          id: user.id,
-
-          displayName:
-            profile?.display_name ||
-            user.user_metadata
-              ?.display_name ||
-            "Player",
-
-          gamerTag:
-            profile?.gamer_tag ||
-            user.user_metadata
-              ?.gamer_tag ||
-            "",
-
-          isGuest: false,
-        },
-
-        stats: {
-          gamesPlayed,
-
-          bestScore,
-
-          bestRecord,
-        },
-
-        recentGames,
-      },
-      {
-        headers: {
-          "Cache-Control":
-            "private, no-store",
-        },
-      }
-    );
-  } catch (error) {
-    console.error(
-      "Stats API error:",
-      error
-    );
-
-    return NextResponse.json(
-      {
-        error:
-          "Unable to load your statistics.",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+        return NextResponse.json(
+            {
+                error:
+                    "Unable to load your statistics.",
+            },
+            {
+                status: 500,
+            }
+        );
+    }
 }

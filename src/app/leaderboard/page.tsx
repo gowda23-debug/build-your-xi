@@ -1,411 +1,607 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Trophy, Medal, Crown, Users } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import {
+  Crown,
+  Medal,
+  Trophy,
+  Users,
+} from "lucide-react";
 
-import { createClient } from "@/lib/supabase/client";
+type LeaderboardMode =
+  | "ipl"
+  | "world";
 
-type ScoreRow = {
-    user_id: string;
-    score: number | string;
-    created_at: string;
+type LeaderboardPeriod =
+  | "all"
+  | "weekly"
+  | "daily";
+
+type LeaderboardPlayer = {
+  userId: string;
+  name: string;
+  totalScore: number;
+  gamesPlayed: number;
+  latestGameAt: string;
+  rank: number;
 };
 
-type Profile = {
-    id: string;
-    gamer_tag: string | null;
-    display_name: string | null;
+type CurrentPlayer = LeaderboardPlayer & {
+  percentage: number;
 };
 
-type TopPlayer = {
-    userId: string;
-    name: string;
-    score: number;
-    playedAt: string;
-    rank: number;
+type LeaderboardResponse = {
+  mode: LeaderboardMode;
+  period: LeaderboardPeriod;
+  totalPlayers: number;
+  leaderboard: LeaderboardPlayer[];
+  currentPlayer: CurrentPlayer | null;
 };
 
-function getPlayerName(profile?: Profile) {
-    if (!profile) {
-        return "Unknown Player";
-    }
+const MODE_OPTIONS: {
+  value: LeaderboardMode;
+  label: string;
+}[] = [
+  {
+    value: "ipl",
+    label: "IPL Challenge",
+  },
+  {
+    value: "world",
+    label: "International World Domination",
+  },
+];
 
-    return (
-        profile.display_name ||
-        profile.gamer_tag ||
-        "Unknown Player"
-    );
+const PERIOD_OPTIONS: {
+  value: LeaderboardPeriod;
+  label: string;
+}[] = [
+  {
+    value: "all",
+    label: "All Time",
+  },
+  {
+    value: "weekly",
+    label: "Weekly",
+  },
+  {
+    value: "daily",
+    label: "Daily",
+  },
+];
+
+function formatPoints(value: number) {
+  return value.toLocaleString("en-IN");
 }
 
-function getRankIcon(rank: number) {
-    if (rank === 1) {
-        return <Crown className="h-5 w-5" />;
-    }
+function getInitials(name: string) {
+  const cleanName = name.trim();
 
-    if (rank === 2) {
-        return <Medal className="h-5 w-5" />;
-    }
+  if (!cleanName) {
+    return "P";
+  }
 
-    if (rank === 3) {
-        return <Medal className="h-5 w-5" />;
-    }
+  const parts = cleanName
+    .split(/\s+/)
+    .filter(Boolean);
 
-    return (
-        <span className="text-sm font-black text-[var(--muted)]">
-            #{rank}
-        </span>
-    );
+  if (parts.length === 1) {
+    return parts[0]
+      .slice(0, 2)
+      .toUpperCase();
+  }
+
+  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+}
+
+function getPodiumPlayer(
+  players: LeaderboardPlayer[],
+  rank: number
+) {
+  return (
+    players.find(
+      (player) => player.rank === rank
+    ) ?? null
+  );
+}
+
+function PodiumPlayer({
+  player,
+  position,
+}: {
+  player: LeaderboardPlayer;
+  position: 1 | 2 | 3;
+}) {
+  const initials = getInitials(
+    player.name
+  );
+
+  const isFirst = position === 1;
+
+  return (
+    <div
+      className={`flex min-w-0 flex-col items-center text-center ${
+        isFirst
+          ? "order-2"
+          : position === 2
+            ? "order-1"
+            : "order-3"
+      }`}
+    >
+      <div
+        className={`flex items-center justify-center rounded-full border-2 ${
+          isFirst
+            ? "h-20 w-20 border-[var(--accent)] bg-[var(--accent)]/15 text-xl"
+            : "h-14 w-14 border-white/15 bg-white/[0.04] text-sm"
+        } font-black`}
+      >
+        {initials}
+      </div>
+
+      <p
+        className={`mt-2 max-w-[120px] truncate font-black ${
+          isFirst
+            ? "text-sm"
+            : "text-xs"
+        }`}
+      >
+        {player.name}
+      </p>
+
+      <p
+        className={`mt-1 font-bold text-[var(--accent)] ${
+          isFirst
+            ? "text-xs"
+            : "text-[10px]"
+        }`}
+      >
+        {formatPoints(
+          player.totalScore
+        )}{" "}
+        pts
+      </p>
+
+      <div
+        className={`mt-2 flex items-center justify-center font-black ${
+          isFirst
+            ? "h-10 w-20 bg-[var(--accent)]/20 text-lg text-[var(--accent)]"
+            : "h-8 w-14 bg-white/[0.05] text-sm text-[var(--muted)]"
+        } rounded-t-lg`}
+      >
+        {position}
+      </div>
+    </div>
+  );
+}
+
+function RankedPlayer({
+  player,
+}: {
+  player: LeaderboardPlayer;
+}) {
+  return (
+    <div className="grid grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-3 border-t border-white/[0.07] px-4 py-3 sm:grid-cols-[56px_minmax(0,1fr)_auto] sm:px-5">
+      <div className="text-center text-xs font-black text-[var(--muted)]">
+        {player.rank}
+      </div>
+
+      <div className="flex min-w-0 items-center gap-3">
+        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/[0.08] text-[10px] font-black text-[var(--accent)]">
+          {getInitials(player.name)}
+        </div>
+
+        <div className="min-w-0">
+          <p className="truncate text-sm font-black">
+            {player.name}
+          </p>
+
+          <p className="mt-0.5 text-[10px] text-[var(--muted)]">
+            {player.gamesPlayed}{" "}
+            {player.gamesPlayed === 1
+              ? "game"
+              : "games"}
+          </p>
+        </div>
+      </div>
+
+      <div className="text-right">
+        <p className="text-sm font-black text-[var(--accent)]">
+          {formatPoints(
+            player.totalScore
+          )}
+        </p>
+
+        <p className="text-[9px] font-bold uppercase tracking-wider text-[var(--muted)]">
+          pts
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default function LeaderboardPage() {
-    const [players, setPlayers] = useState<TopPlayer[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+  const [mode, setMode] =
+    useState<LeaderboardMode>(
+      "ipl"
+    );
 
-    useEffect(() => {
-        async function loadLeaderboard() {
-            setLoading(true);
-            setError("");
+  const [period, setPeriod] =
+    useState<LeaderboardPeriod>(
+      "all"
+    );
 
-            try {
-                const supabase = createClient();
+  const [data, setData] =
+    useState<LeaderboardResponse | null>(
+      null
+    );
 
-                /*
-                 * Get all submitted challenge scores.
-                 */
-                const {
-                    data: scoreData,
-                    error: scoreError,
-                } = await supabase
-                    .from("challenge_scores")
-                    .select(`
-                        user_id,
-                        score,
-                        created_at
-                    `)
-                    .order("score", {
-                        ascending: false,
-                    });
+  const [loading, setLoading] =
+    useState(true);
 
-                if (scoreError) {
-                    throw scoreError;
-                }
+  const [error, setError] =
+    useState("");
 
-                /*
-                 * If nobody has played yet,
-                 * show an empty leaderboard.
-                 */
-                if (!scoreData || scoreData.length === 0) {
-                    setPlayers([]);
-                    return;
-                }
+  useEffect(() => {
+    let cancelled = false;
 
-                const scores = scoreData as ScoreRow[];
+    async function loadLeaderboard() {
+      setLoading(true);
+      setError("");
 
-                /*
-                 * Keep only the best score for each user.
-                 */
-                const bestScores = new Map<
-                    string,
-                    {
-                        score: number;
-                        created_at: string;
-                    }
-                >();
-
-                for (const scoreRow of scores) {
-                    const numericScore = Number(scoreRow.score);
-
-                    const existing = bestScores.get(
-                        scoreRow.user_id
-                    );
-
-                    if (
-                        !existing ||
-                        numericScore > existing.score
-                    ) {
-                        bestScores.set(
-                            scoreRow.user_id,
-                            {
-                                score: numericScore,
-                                created_at:
-                                    scoreRow.created_at,
-                            }
-                        );
-                    }
-                }
-
-                /*
-                 * Get the unique user IDs.
-                 */
-                const userIds = Array.from(
-                    bestScores.keys()
-                );
-
-                /*
-                 * Get player profile information.
-                 */
-                const {
-                    data: profileData,
-                    error: profileError,
-                } = await supabase
-                    .from("profiles")
-                    .select(`
-                        id,
-                        gamer_tag,
-                        display_name
-                    `)
-                    .in("id", userIds);
-
-                if (profileError) {
-                    throw profileError;
-                }
-
-                const profiles = (
-                    profileData ?? []
-                ) as Profile[];
-
-                /*
-                 * Create a quick lookup table.
-                 */
-                const profileMap = new Map<
-                    string,
-                    Profile
-                >();
-
-                for (const profile of profiles) {
-                    profileMap.set(
-                        profile.id,
-                        profile
-                    );
-                }
-
-                /*
-                 * Convert the best scores into leaderboard players.
-                 */
-                const leaderboardPlayers =
-                    Array.from(
-                        bestScores.entries()
-                    )
-                        .map(
-                            ([
-                                userId,
-                                scoreInfo,
-                            ]) => {
-                                const profile =
-                                    profileMap.get(
-                                        userId
-                                    );
-
-                                return {
-                                    userId,
-                                    name: getPlayerName(
-                                        profile
-                                    ),
-                                    score:
-                                        scoreInfo.score,
-                                    playedAt:
-                                        scoreInfo.created_at,
-                                    rank: 0,
-                                };
-                            }
-                        )
-                        .sort(
-                            (a, b) =>
-                                b.score - a.score
-                        );
-
-                /*
-                 * Assign ranks.
-                 */
-                const rankedPlayers =
-                    leaderboardPlayers.map(
-                        (player, index) => ({
-                            ...player,
-                            rank: index + 1,
-                        })
-                    );
-
-                setPlayers(rankedPlayers);
-            } catch (err) {
-                console.error(
-                    "Leaderboard loading error:",
-                    err
-                );
-
-                if (err instanceof Error) {
-                    setError(err.message);
-                } else {
-                    setError(
-                        "Something went wrong while loading the leaderboard."
-                    );
-                }
-            } finally {
-                setLoading(false);
+      try {
+        const response =
+          await fetch(
+            `/api/leaderboard?mode=${mode}&period=${period}`,
+            {
+              method: "GET",
+              cache: "no-store",
             }
+          );
+
+        const body =
+          await response
+            .json()
+            .catch(() => null);
+
+        if (!response.ok) {
+          throw new Error(
+            body?.error ??
+              "Unable to load the leaderboard."
+          );
         }
 
-        loadLeaderboard();
-    }, []);
+        if (cancelled) {
+          return;
+        }
 
-    return (
-        <main className="min-h-screen">
-            <section className="mx-auto max-w-6xl px-6 py-12">
-                {/* HEADER */}
+        setData(
+          body as LeaderboardResponse
+        );
+      } catch (err) {
+        if (cancelled) {
+          return;
+        }
 
-                <div className="mb-10">
-                    <div className="flex items-center gap-3">
-                        <div className="grid h-12 w-12 place-items-center rounded-xl bg-[var(--accent)]/15">
-                            <Trophy className="h-6 w-6 text-[var(--accent)]" />
-                        </div>
+        setData(null);
 
-                        <div>
-                            <h1 className="text-3xl font-black">
-                                Leaderboard
-                            </h1>
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Unable to load the leaderboard."
+        );
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
 
-                            <p className="mt-1 text-sm text-[var(--muted)]">
-                                See who's at the top.
-                            </p>
-                        </div>
+    loadLeaderboard();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [mode, period]);
+
+  const topThree = useMemo(() => {
+    if (!data) {
+      return {
+        first: null,
+        second: null,
+        third: null,
+      };
+    }
+
+    return {
+      first: getPodiumPlayer(
+        data.leaderboard,
+        1
+      ),
+      second: getPodiumPlayer(
+        data.leaderboard,
+        2
+      ),
+      third: getPodiumPlayer(
+        data.leaderboard,
+        3
+      ),
+    };
+  }, [data]);
+
+  const rankedPlayers =
+    useMemo(() => {
+      return (
+        data?.leaderboard.filter(
+          (player) =>
+            player.rank > 3
+        ) ?? []
+      );
+    }, [data]);
+
+  return (
+    <main className="relative min-h-screen overflow-x-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-48 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[var(--accent)]/[0.035] blur-3xl" />
+      </div>
+
+      <section className="relative mx-auto w-full max-w-3xl px-4 pb-32 pt-8 sm:px-6 sm:pt-10">
+        <div className="text-center">
+          <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-[var(--accent)]/10">
+            <Trophy className="h-5 w-5 text-[var(--accent)]" />
+          </div>
+
+          <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
+            Leaderboard
+          </h1>
+
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Compete across Build Your XI.
+          </p>
+        </div>
+
+        {/* MODE */}
+
+        <div className="mt-8 rounded-xl border border-white/10 bg-black/10 p-1">
+          <div className="grid grid-cols-2 gap-1">
+            {MODE_OPTIONS.map(
+              (option) => {
+                const active =
+                  mode ===
+                  option.value;
+
+                return (
+                  <button
+                    key={
+                      option.value
+                    }
+                    type="button"
+                    onClick={() =>
+                      setMode(
+                        option.value
+                      )
+                    }
+                    className={`rounded-lg px-3 py-3 text-xs font-black transition ${
+                      active
+                        ? "bg-[var(--accent)] text-black"
+                        : "text-[var(--muted)] hover:bg-white/[0.04] hover:text-white"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              }
+            )}
+          </div>
+        </div>
+
+        {/* PERIOD */}
+
+        <div className="mt-3 flex justify-center gap-2">
+          {PERIOD_OPTIONS.map(
+            (option) => {
+              const active =
+                period ===
+                option.value;
+
+              return (
+                <button
+                  key={
+                    option.value
+                  }
+                  type="button"
+                  onClick={() =>
+                    setPeriod(
+                      option.value
+                    )
+                  }
+                  className={`rounded-lg border px-4 py-2 text-xs font-black transition ${
+                    active
+                      ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
+                      : "border-white/10 text-[var(--muted)] hover:border-white/20 hover:text-white"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            }
+          )}
+        </div>
+
+        {/* LOADING */}
+
+        {loading && (
+          <div className="card mt-8 flex min-h-[320px] items-center justify-center">
+            <div className="text-center">
+              <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-[var(--accent)]" />
+
+              <p className="mt-4 text-sm font-bold text-[var(--muted)]">
+                Loading leaderboard...
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* ERROR */}
+
+        {!loading && error && (
+          <div className="card mt-8 p-8 text-center">
+            <Trophy className="mx-auto h-8 w-8 text-red-300" />
+
+            <h2 className="mt-4 text-lg font-black">
+              Unable to load leaderboard
+            </h2>
+
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              {error}
+            </p>
+          </div>
+        )}
+
+        {/* EMPTY */}
+
+        {!loading &&
+          !error &&
+          data &&
+          data.leaderboard.length ===
+            0 && (
+            <div className="card mt-8 p-10 text-center">
+              <Users className="mx-auto h-9 w-9 text-[var(--accent)]" />
+
+              <h2 className="mt-4 text-lg font-black">
+                No scores yet
+              </h2>
+
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Complete a game to appear on the leaderboard.
+              </p>
+            </div>
+          )}
+
+        {/* LEADERBOARD */}
+
+        {!loading &&
+          !error &&
+          data &&
+          data.leaderboard.length >
+            0 && (
+            <>
+              {/* PODIUM */}
+
+              {topThree.first &&
+                topThree.second &&
+                topThree.third && (
+                  <section className="card mt-8 overflow-hidden">
+                    <div className="flex items-end justify-center gap-4 px-4 pb-0 pt-8 sm:gap-8">
+                      <PodiumPlayer
+                        player={
+                          topThree.second
+                        }
+                        position={2}
+                      />
+
+                      <PodiumPlayer
+                        player={
+                          topThree.first
+                        }
+                        position={1}
+                      />
+
+                      <PodiumPlayer
+                        player={
+                          topThree.third
+                        }
+                        position={3}
+                      />
                     </div>
+                  </section>
+                )}
+
+              {/* RANKED LIST */}
+
+              <section className="card mt-4 overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)]">
+                    Top 20
+                  </p>
+
+                  <p className="text-[10px] font-bold text-[var(--muted)]">
+                    Cumulative Points
+                  </p>
                 </div>
 
-                {/* LOADING */}
-
-                {loading && (
-                    <div className="card flex min-h-[300px] items-center justify-center">
-                        <p className="text-sm text-[var(--muted)]">
-                            Loading leaderboard...
-                        </p>
-                    </div>
+                {rankedPlayers.length >
+                0 ? (
+                  rankedPlayers.map(
+                    (player) => (
+                      <RankedPlayer
+                        key={
+                          player.userId
+                        }
+                        player={
+                          player
+                        }
+                      />
+                    )
+                  )
+                ) : (
+                  <div className="px-5 py-6 text-center text-xs text-[var(--muted)]">
+                    The top three are currently the only ranked players.
+                  </div>
                 )}
+              </section>
+            </>
+          )}
+      </section>
 
-                {/* ERROR */}
+      {/* CURRENT PLAYER */}
 
-                {!loading && error && (
-                    <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
-                        <h2 className="text-lg font-black text-red-300">
-                            Unable to load leaderboard
-                        </h2>
+      {!loading &&
+        !error &&
+        data?.currentPlayer && (
+          <div className="fixed bottom-4 left-1/2 z-40 w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2">
+            <div className="grid grid-cols-[60px_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-[var(--accent)]/40 bg-[#07130f]/95 px-4 py-3 shadow-2xl backdrop-blur-xl">
+              <div className="text-center text-xs font-black text-[var(--muted)]">
+                #{data.currentPlayer.rank}
+              </div>
 
-                        <p className="mt-2 text-sm text-red-200/80">
-                            {error}
-                        </p>
-                    </div>
-                )}
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[10px] font-black text-[var(--accent)]">
+                  {getInitials(
+                    data.currentPlayer.name
+                  )}
+                </div>
 
-                {/* EMPTY STATE */}
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-black">
+                    You
+                  </p>
 
-                {!loading &&
-                    !error &&
-                    players.length === 0 && (
-                        <div className="card flex min-h-[350px] flex-col items-center justify-center p-8 text-center">
-                            <div className="grid h-16 w-16 place-items-center rounded-2xl bg-[var(--accent)]/10">
-                                <Trophy className="h-8 w-8 text-[var(--accent)]" />
-                            </div>
+                  <p className="text-[10px] text-[var(--muted)]">
+                    Top{" "}
+                    {
+                      data
+                        .currentPlayer
+                        .percentage
+                    }%
+                  </p>
+                </div>
+              </div>
 
-                            <h2 className="mt-6 text-xl font-black">
-                                No scores yet
-                            </h2>
+              <div className="text-right">
+                <p className="text-sm font-black text-[var(--accent)]">
+                  {formatPoints(
+                    data.currentPlayer
+                      .totalScore
+                  )}
+                </p>
 
-                            <p className="mt-2 max-w-md text-sm text-[var(--muted)]">
-                                No one has completed a
-                                challenge yet. Play a game
-                                and set the first score!
-                            </p>
-                        </div>
-                    )}
-
-                {/* LEADERBOARD */}
-
-                {!loading &&
-                    !error &&
-                    players.length > 0 && (
-                        <div className="card overflow-hidden">
-                            {/* TABLE HEADER */}
-
-                            <div className="grid grid-cols-[70px_1fr_auto] items-center gap-4 border-b border-white/10 px-6 py-4 text-xs font-black uppercase tracking-wider text-[var(--muted)]">
-                                <div>Rank</div>
-
-                                <div>Player</div>
-
-                                <div>Score</div>
-                            </div>
-
-                            {/* PLAYERS */}
-
-                            <div>
-                                {players.map(
-                                    (player) => (
-                                        <div
-                                            key={
-                                                player.userId
-                                            }
-                                            className="grid grid-cols-[70px_1fr_auto] items-center gap-4 border-b border-white/5 px-6 py-5 last:border-b-0 transition hover:bg-white/[0.02]"
-                                        >
-                                            {/* RANK */}
-
-                                            <div className="flex items-center">
-                                                <div
-                                                    className={`grid h-10 w-10 place-items-center rounded-xl ${
-                                                        player.rank ===
-                                                        1
-                                                            ? "bg-[var(--accent)]/20 text-[var(--accent)]"
-                                                            : player.rank ===
-                                                                2
-                                                              ? "bg-white/10 text-white"
-                                                              : player.rank ===
-                                                                  3
-                                                                ? "bg-orange-400/10 text-orange-300"
-                                                                : "bg-white/5"
-                                                    }`}
-                                                >
-                                                    {getRankIcon(
-                                                        player.rank
-                                                    )}
-                                                </div>
-                                            </div>
-
-                                            {/* PLAYER */}
-
-                                            <div className="flex min-w-0 items-center gap-3">
-                                                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--accent)]/10">
-                                                    <Users className="h-4 w-4 text-[var(--accent)]" />
-                                                </div>
-
-                                                <div className="min-w-0">
-                                                    <p className="truncate font-black">
-                                                        {
-                                                            player.name
-                                                        }
-                                                    </p>
-
-                                                    <p className="mt-1 text-xs text-[var(--muted)]">
-                                                        Challenge
-                                                        player
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            {/* SCORE */}
-
-                                            <div className="text-right">
-                                                <p className="text-lg font-black text-[var(--accent)]">
-                                                    {player.score}
-                                                </p>
-
-                                                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
-                                                    points
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )
-                                )}
-                            </div>
-                        </div>
-                    )}
-            </section>
-        </main>
-    );
+                <p className="text-[9px] font-bold uppercase tracking-wider text-[var(--muted)]">
+                  pts
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+    </main>
+  );
 }
