@@ -100,13 +100,13 @@ function isValidDraftSelection(
 
   return (
     typeof selection.playerId ===
-      "string" &&
+    "string" &&
     selection.playerId.trim().length >
-      0 &&
+    0 &&
     typeof selection.teamSeasonId ===
-      "string" &&
+    "string" &&
     selection.teamSeasonId.trim().length >
-      0
+    0
   );
 }
 
@@ -189,15 +189,15 @@ export async function POST(
       const venueId =
         typeof body.venueId ===
           "string" &&
-        body.venueId.trim().length > 0
+          body.venueId.trim().length > 0
           ? body.venueId.trim()
           : null;
 
       const venueOriginTeamSeasonId =
         typeof body.venueOriginTeamSeasonId ===
           "string" &&
-        body.venueOriginTeamSeasonId
-          .trim().length > 0
+          body.venueOriginTeamSeasonId
+            .trim().length > 0
           ? body.venueOriginTeamSeasonId.trim()
           : null;
 
@@ -369,7 +369,7 @@ export async function POST(
             venueId
           );
       } catch (
-        venueError
+      venueError
       ) {
         console.error(
           "Guest venue lookup error:",
@@ -410,7 +410,7 @@ export async function POST(
 
       for (
         const selection of
-          draftSelections
+        draftSelections
       ) {
         const playerId =
           selection.playerId;
@@ -421,7 +421,7 @@ export async function POST(
         const {
           data: playerStat,
           error:
-            playerStatError,
+          playerStatError,
         } =
           await supabaseAdmin
             .from(
@@ -676,7 +676,7 @@ export async function POST(
         user
       );
     } catch (
-      profileError
+    profileError
     ) {
       console.error(
         "Game completion profile error:",
@@ -703,8 +703,8 @@ export async function POST(
     const gameSessionId =
       typeof body.gameSessionId ===
         "string" &&
-      body.gameSessionId.trim()
-        .length > 0
+        body.gameSessionId.trim()
+          .length > 0
         ? body.gameSessionId.trim()
         : null;
 
@@ -830,7 +830,7 @@ export async function POST(
 
     const challengeId =
       typeof context.challengeId ===
-      "string"
+        "string"
         ? context.challengeId
         : null;
 
@@ -918,7 +918,7 @@ export async function POST(
 
     for (
       const selection of
-        draftSelections
+      draftSelections
     ) {
       const playerId =
         selection.playerId;
@@ -928,9 +928,9 @@ export async function POST(
 
       if (
         typeof playerId !==
-          "string" ||
+        "string" ||
         typeof teamSeasonId !==
-          "string"
+        "string"
       ) {
         return NextResponse.json(
           {
@@ -946,7 +946,7 @@ export async function POST(
       const {
         data: playerStat,
         error:
-          playerStatError,
+        playerStatError,
       } =
         await supabaseAdmin
           .from(
@@ -1152,6 +1152,26 @@ export async function POST(
     const storedResult = {
       version: 1,
 
+      /*
+       * ============================================================
+       * CHALLENGE MARKER
+       * ============================================================
+       *
+       * Normal game:
+       *   challengeId = null
+       *
+       * Challenge game:
+       *   challengeId = actual challenge UUID
+       *
+       * This is written by the SERVER from the authoritative
+       * game-session context. The client does not supply it.
+       *
+       * Global leaderboard uses this marker to exclude
+       * challenge games from the global tally.
+       */
+      challengeId:
+        challengeId ?? null,
+
       draftSelections:
         draftSelections.map(
           ({
@@ -1233,7 +1253,7 @@ export async function POST(
     const {
       data: completion,
       error:
-        completionError,
+      completionError,
     } =
       await supabaseAdmin.rpc(
         "complete_ipl_game",
@@ -1306,7 +1326,7 @@ export async function POST(
       const {
         data: membership,
         error:
-          membershipError,
+        membershipError,
       } =
         await supabaseAdmin
           .from(
@@ -1358,9 +1378,9 @@ export async function POST(
 
       const {
         data:
-          existingChallengeScore,
+        existingChallengeScore,
         error:
-          existingScoreError,
+        existingScoreError,
       } =
         await supabaseAdmin
           .from(
@@ -1403,9 +1423,9 @@ export async function POST(
       ) {
         const {
           data:
-            insertedChallengeScore,
+          insertedChallengeScore,
           error:
-            challengeScoreInsertError,
+          challengeScoreInsertError,
         } =
           await supabaseAdmin
             .from(
@@ -1448,15 +1468,15 @@ export async function POST(
         if (
           !insertedChallengeScore ||
           insertedChallengeScore.challenge_id !==
-            challengeId ||
+          challengeId ||
           insertedChallengeScore.user_id !==
-            user.id ||
+          user.id ||
           Number(
             insertedChallengeScore.score
           ) !==
-            Number(
-              result.score
-            )
+          Number(
+            result.score
+          )
         ) {
           console.error(
             "Challenge score insert verification failed:",
@@ -1484,13 +1504,13 @@ export async function POST(
             existingScore
           ) &&
           result.score >
-            existingScore
+          existingScore
         ) {
           const {
             data:
-              updatedChallengeScore,
+            updatedChallengeScore,
             error:
-              challengeScoreUpdateError,
+            challengeScoreUpdateError,
           } =
             await supabaseAdmin
               .from(
@@ -1535,15 +1555,15 @@ export async function POST(
           if (
             !updatedChallengeScore ||
             updatedChallengeScore.challenge_id !==
-              challengeId ||
+            challengeId ||
             updatedChallengeScore.user_id !==
-              user.id ||
+            user.id ||
             Number(
               updatedChallengeScore.score
             ) !==
-              Number(
-                result.score
-              )
+            Number(
+              result.score
+            )
           ) {
             console.error(
               "Challenge score update verification failed:",
@@ -1602,7 +1622,7 @@ export async function POST(
         null,
     });
   } catch (
-    error
+  error
   ) {
     console.error(
       "IPL game completion endpoint error:",

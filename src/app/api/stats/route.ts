@@ -17,7 +17,7 @@ type ProfileRow = {
 
 type StoredResult = {
     score?: number;
-
+    challengeId?: string | null;
     wins?: number;
     losses?: number;
 
@@ -59,13 +59,26 @@ type GameScoreRow = {
 
 type RecentGame = {
     id: string;
+
     gameType:
     | "IPL Challenge"
     | "World Domination";
+
     score: number;
+
     record: string;
+
     date: string;
+
     details: string[];
+
+    /*
+     * Challenge metadata for the Recent Games UI.
+     */
+    isChallenge: boolean;
+
+    challengeTitle:
+    string | null;
 };
 
 function getGameType(
@@ -407,6 +420,99 @@ export async function GET() {
             );
 
         /*
+* ============================================================
+* LOAD CHALLENGE INFORMATION FOR RECENT GAMES
+* ============================================================
+*
+* Challenge games remain part of My Stats.
+*
+* We only need challenge metadata for the recent
+* games being displayed.
+*/
+
+        const recentGameRows =
+            gameScores.slice(
+                0,
+                10
+            );
+
+        const challengeIds =
+            [
+                ...new Set(
+                    recentGameRows
+                        .map(
+                            (row) =>
+                                row.result
+                                    ?.challengeId
+                        )
+                        .filter(
+                            (
+                                value
+                            ): value is string =>
+                                typeof value ===
+                                "string" &&
+                                value.trim()
+                                    .length > 0
+                        )
+                ),
+            ];
+
+        const challengeTitles =
+            new Map<
+                string,
+                string
+            >();
+
+        if (
+            challengeIds.length >
+            0
+        ) {
+            const {
+                data:
+                challengeRows,
+                error:
+                challengeLookupError,
+            } =
+                await supabaseAdmin
+                    .from(
+                        "challenges"
+                    )
+                    .select(
+                        "id, title"
+                    )
+                    .in(
+                        "id",
+                        challengeIds
+                    );
+
+            if (
+                challengeLookupError
+            ) {
+                throw challengeLookupError;
+            }
+
+            (
+                challengeRows ??
+                []
+            ).forEach(
+                (
+                    challenge
+                ) => {
+                    if (
+                        typeof challenge.id ===
+                        "string" &&
+                        typeof challenge.title ===
+                        "string"
+                    ) {
+                        challengeTitles.set(
+                            challenge.id,
+                            challenge.title
+                        );
+                    }
+                }
+            );
+        }
+        /*
          * ============================================================
          * BASIC STATISTICS
          * ============================================================
@@ -557,28 +663,68 @@ export async function GET() {
                 .map(
                     (
                         row
-                    ): RecentGame => ({
-                        id: row.id,
+                    ): RecentGame => {
+                        const challengeId =
+                            row.result
+                                ?.challengeId ??
+                            null;
 
-                        gameType:
-                            getGameType(
-                                row.game_mode
-                            ),
+                        const isChallenge =
+                            typeof challengeId ===
+                            "string" &&
+                            challengeId.trim()
+                                .length > 0;
 
-                        score:
-                            getAuthoritativeScore(row)!,
+                        const challengeTitle =
+                            isChallenge
+                                ? challengeTitles.get(
+                                    challengeId
+                                ) ??
+                                null
+                                : null;
 
-                        record:
-                            getRecord(
-                                row.result
-                            ),
+                        const baseDetails =
+                            getDetails(row);
 
-                        date:
-                            row.created_at,
+                        const details =
+                            isChallenge
+                                ? [
+                                    `Played in challenge${challengeTitle
+                                        ? `: ${challengeTitle}`
+                                        : ""
+                                    }`,
+                                    ...baseDetails,
+                                ]
+                                : baseDetails;
 
-                        details:
-                            getDetails(row),
-                    })
+                        return {
+                            id: row.id,
+
+                            gameType:
+                                getGameType(
+                                    row.game_mode
+                                ),
+
+                            score:
+                                getAuthoritativeScore(
+                                    row
+                                )!,
+
+                            record:
+                                getRecord(
+                                    row.result
+                                ),
+
+                            date:
+                                row.created_at,
+
+                            details,
+
+                            isChallenge,
+
+                            challengeTitle,
+                        };
+                    }
                 );
 
         return NextResponse.json(

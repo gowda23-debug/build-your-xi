@@ -26,11 +26,21 @@ type GameType =
 
 type RecentGame = {
   id: string;
+
   gameType: GameType;
+
   score: number;
+
   record: string;
+
   date: string;
+
   details?: string[];
+
+  isChallenge: boolean;
+
+  challengeTitle:
+  string | null;
 };
 
 type StatsResponse = {
@@ -172,7 +182,7 @@ export default function StatsPage() {
         if (!response.ok) {
           throw new Error(
             data?.error ??
-              "Unable to load your statistics."
+            "Unable to load your statistics."
           );
         }
 
@@ -450,7 +460,7 @@ export default function StatsPage() {
           </div>
 
           {recentGames.length ===
-          0 ? (
+            0 ? (
             <div className="card mt-5 flex flex-col items-center justify-center px-6 py-14 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-[var(--muted)]">
                 <Gamepad2 size={24} />
@@ -515,11 +525,29 @@ export default function StatsPage() {
                         {/* GAME */}
 
                         <div className="min-w-0">
-                          <p className="truncate text-sm font-bold">
-                            {
-                              game.gameType
-                            }
-                          </p>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="truncate text-sm font-bold">
+                              {
+                                game.gameType
+                              }
+                            </p>
+
+                            {game.isChallenge && (
+                              <span className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.12em] text-[var(--accent)]">
+                                Played in Challenge
+                              </span>
+                            )}
+                          </div>
+
+                          {game.isChallenge &&
+                            game.challengeTitle && (
+                              <p className="mt-1 truncate text-[10px] font-semibold text-[var(--muted)]">
+                                Challenge:{" "}
+                                {
+                                  game.challengeTitle
+                                }
+                              </p>
+                            )}
 
                           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                             <span className="text-xs font-black text-[var(--accent)]">
@@ -578,7 +606,7 @@ export default function StatsPage() {
                           </p>
 
                           {game.details &&
-                          game.details.length >
+                            game.details.length >
                             0 ? (
                             <div className="mt-4 space-y-2">
                               {game.details.map(
