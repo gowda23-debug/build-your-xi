@@ -37,6 +37,21 @@ type Player = {
     joined_at: string;
 };
 
+type ChallengeStatus =
+    | "your_turn"
+    | "leading"
+    | "tied"
+    | "behind"
+    | "reclaim";
+
+type ChallengeStatusDetails = {
+    status: ChallengeStatus;
+    score: number | null;
+    leaderScore: number | null;
+    rank: number | null;
+    pointsBehind: number;
+};
+
 function formatDate(date: string) {
     return new Intl.DateTimeFormat(
         "en-IN",
@@ -108,6 +123,15 @@ export default function ChallengesPage() {
         new Set()
     );
 
+    const [
+        challengeStatuses,
+        setChallengeStatuses,
+    ] = useState<
+        Record<
+            string,
+            ChallengeStatusDetails
+        >
+    >({});
     /*
      * ============================================================
      * INLINE RENAME STATE
@@ -129,262 +153,291 @@ export default function ChallengesPage() {
      * ============================================================
      */
 
-async function loadChallenges() {
-    setLoading(true);
-    setError("");
+    async function loadChallenges() {
+        setLoading(true);
+        setError("");
 
-    /*
-     * Reset reclaim state before refreshing.
-     */
-    setReclaimChallengeIds(
-        new Set()
-    );
-
-    const {
-        data: { user },
-        error: userError,
-    } = await supabase.auth.getUser();
-
-    if (
-        userError ||
-        !user
-    ) {
-        router.replace(
-            "/login"
-        );
-        return;
-    }
-
-    /*
-     * ============================================================
-     * GUEST
-     * ============================================================
-     *
-     * Guests can play normal games, but they do not have
-     * registered challenge participation.
-     */
-    if (
-        user.is_anonymous
-    ) {
-        setGuest(true);
-        setLoading(false);
-        return;
-    }
-
-    setGuest(false);
-
-    setCurrentUserId(
-        user.id
-    );
-
-    /*
-     * ============================================================
-     * LOAD CHALLENGES
-     * ============================================================
-     */
-
-    const {
-        data,
-        error: challengesError,
-    } = await supabase
-        .from("challenges")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending: false,
-            }
-        );
-
-    if (
-        challengesError
-    ) {
-        setError(
-            challengesError.message
-        );
-
-        setLoading(false);
-
-        return;
-    }
-
-    const challengeData =
-        (data ??
-            []) as Challenge[];
-
-    setChallenges(
-        challengeData
-    );
-
-    /*
-     * No challenges.
-     */
-    if (
-        challengeData.length ===
-        0
-    ) {
-        setPlayerCounts(
-            {}
-        );
-
+        /*
+         * Reset reclaim state before refreshing.
+         */
         setReclaimChallengeIds(
             new Set()
         );
+        setChallengeStatuses(
+            {}
+        );
+        const {
+            data: { user },
+            error: userError,
+        } = await supabase.auth.getUser();
 
-        setLoading(false);
+        if (
+            userError ||
+            !user
+        ) {
+            router.replace(
+                "/login"
+            );
+            return;
+        }
 
-        return;
-    }
+        /*
+         * ============================================================
+         * GUEST
+         * ============================================================
+         *
+         * Guests can play normal games, but they do not have
+         * registered challenge participation.
+         */
+        if (
+            user.is_anonymous
+        ) {
+            setGuest(true);
+            setLoading(false);
+            return;
+        }
 
-    const ids =
-        challengeData.map(
-            (challenge) =>
-                challenge.id
+        setGuest(false);
+
+        setCurrentUserId(
+            user.id
         );
 
-    /*
-     * ============================================================
-     * LOAD PLAYER COUNTS
-     * ============================================================
-     *
-     * Keep this exactly as a normal client-side query because
-     * challenge_players already belongs to the challenge-list
-     * UI and we only need the count.
-     */
+        /*
+         * ============================================================
+         * LOAD CHALLENGES
+         * ============================================================
+         */
 
-    const {
-        data: players,
-        error: playersError,
-    } = await supabase
-        .from(
-            "challenge_players"
-        )
-        .select(
-            "id, challenge_id, user_id, joined_at"
-        )
-        .in(
-            "challenge_id",
-            ids
-        );
-
-    if (
-        playersError
-    ) {
-        setError(
-            playersError.message
-        );
-    } else {
-        const counts: Record<
-            string,
-            number
-        > = {};
-
-        (
-            (players ??
-                []) as Player[]
-        ).forEach(
-            (player) => {
-                counts[
-                    player.challenge_id
-                ] =
-                    (
-                        counts[
-                            player.challenge_id
-                        ] ??
-                        0
-                    ) + 1;
-            }
-        );
-
-        setPlayerCounts(
-            counts
-        );
-    }
-
-    /*
-     * ============================================================
-     * LOAD RECLAIM STATUS
-     * ============================================================
-     *
-     * IMPORTANT:
-     *
-     * Do NOT query challenge_scores directly from the browser.
-     *
-     * The server-side reclaim endpoint uses supabaseAdmin and
-     * calculates RECLAIM for challenges created by the current
-     * registered user.
-     */
-
-    try {
-        const reclaimResponse =
-            await fetch(
-                "/api/challenges/reclaim-status",
+        const {
+            data,
+            error: challengesError,
+        } = await supabase
+            .from("challenges")
+            .select("*")
+            .order(
+                "created_at",
                 {
-                    method: "GET",
-                    cache: "no-store",
+                    ascending: false,
                 }
             );
 
-        const reclaimData =
-            await reclaimResponse
-                .json()
-                .catch(
-                    () => null
-                );
+        if (
+            challengesError
+        ) {
+            setError(
+                challengesError.message
+            );
+
+            setLoading(false);
+
+            return;
+        }
+
+        const challengeData =
+            (data ??
+                []) as Challenge[];
+
+        setChallenges(
+            challengeData
+        );
+
+        /*
+         * No challenges.
+         */
+        if (
+            challengeData.length ===
+            0
+        ) {
+            setChallengeStatuses(
+                {}
+            );
+            setPlayerCounts(
+                {}
+            );
+
+            setReclaimChallengeIds(
+                new Set()
+            );
+
+            setLoading(false);
+
+            return;
+        }
+
+        const ids =
+            challengeData.map(
+                (challenge) =>
+                    challenge.id
+            );
+
+        /*
+         * ============================================================
+         * LOAD PLAYER COUNTS
+         * ============================================================
+         *
+         * Keep this exactly as a normal client-side query because
+         * challenge_players already belongs to the challenge-list
+         * UI and we only need the count.
+         */
+
+        const {
+            data: players,
+            error: playersError,
+        } = await supabase
+            .from(
+                "challenge_players"
+            )
+            .select(
+                "id, challenge_id, user_id, joined_at"
+            )
+            .in(
+                "challenge_id",
+                ids
+            );
 
         if (
-            !reclaimResponse.ok
+            playersError
         ) {
-            throw new Error(
-                reclaimData?.error ??
-                    "Unable to load challenge reclaim status."
+            setError(
+                playersError.message
+            );
+        } else {
+            const counts: Record<
+                string,
+                number
+            > = {};
+
+            (
+                (players ??
+                    []) as Player[]
+            ).forEach(
+                (player) => {
+                    counts[
+                        player.challenge_id
+                    ] =
+                        (
+                            counts[
+                            player.challenge_id
+                            ] ??
+                            0
+                        ) + 1;
+                }
+            );
+
+            setPlayerCounts(
+                counts
             );
         }
 
-        const reclaimIds =
-            Array.isArray(
-                reclaimData?.reclaimChallengeIds
-            )
-                ? reclaimData.reclaimChallengeIds.filter(
-                    (
-                        value: unknown
-                    ): value is string =>
-                        typeof value ===
-                            "string" &&
-                        value.trim()
-                            .length >
-                            0
-                )
-                : [];
-
-        setReclaimChallengeIds(
-            new Set(
-                reclaimIds
-            )
-        );
-    } catch (
-        reclaimError
-    ) {
         /*
-         * RECLAIM is supplementary UI.
+         * ============================================================
+         * LOAD RECLAIM STATUS
+         * ============================================================
          *
-         * A failure here should NOT prevent the user's
-         * challenge list from loading.
+         * IMPORTANT:
+         *
+         * Do NOT query challenge_scores directly from the browser.
+         *
+         * The server-side reclaim endpoint uses supabaseAdmin and
+         * calculates RECLAIM for challenges created by the current
+         * registered user.
          */
-        console.error(
-            "Unable to load challenge reclaim status:",
-            reclaimError
-        );
 
-        setReclaimChallengeIds(
-            new Set()
+        try {
+            const reclaimResponse =
+                await fetch(
+                    "/api/challenges/reclaim-status",
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                    }
+                );
+
+            const reclaimData =
+                await reclaimResponse
+                    .json()
+                    .catch(
+                        () => null
+                    );
+
+            if (
+                !reclaimResponse.ok
+            ) {
+                throw new Error(
+                    reclaimData?.error ??
+                    "Unable to load challenge reclaim status."
+                );
+            }
+
+            const reclaimIds =
+                Array.isArray(
+                    reclaimData?.reclaimChallengeIds
+                )
+                    ? reclaimData.reclaimChallengeIds.filter(
+                        (
+                            value: unknown
+                        ): value is string =>
+                            typeof value ===
+                            "string" &&
+                            value.trim()
+                                .length >
+                            0
+                    )
+                    : [];
+
+            setReclaimChallengeIds(
+                new Set(
+                    reclaimIds
+                )
+            );
+
+            const statuses =
+                reclaimData?.challengeStatuses;
+
+            if (
+                statuses &&
+                typeof statuses ===
+                "object"
+            ) {
+                setChallengeStatuses(
+                    statuses as Record<
+                        string,
+                        ChallengeStatusDetails
+                    >
+                );
+            } else {
+                setChallengeStatuses(
+                    {}
+                );
+            }
+        } catch (
+        reclaimError
+        ) {
+            /*
+             * RECLAIM is supplementary UI.
+             *
+             * A failure here should NOT prevent the user's
+             * challenge list from loading.
+             */
+            console.error(
+                "Unable to load challenge reclaim status:",
+                reclaimError
+            );
+
+            setReclaimChallengeIds(
+                new Set()
+            );
+
+            setChallengeStatuses(
+                {}
+            );
+        }
+
+        setLoading(
+            false
         );
     }
-
-    setLoading(
-        false
-    );
-}
 
     useEffect(() => {
         loadChallenges();
@@ -1061,7 +1114,10 @@ async function loadChallenges() {
                                     const isCreator =
                                         currentUserId ===
                                         challenge.creator_id;
-
+                                    const challengeStatus =
+                                        challengeStatuses[
+                                        challenge.id
+                                        ] ?? null;
                                     const isEditing =
                                         editingChallengeId ===
                                         challenge.id;
@@ -1275,16 +1331,44 @@ async function loadChallenges() {
                                                     challenge.created_at
                                                 )}
                                             </p>
-                                            {isCreator &&
-                                                reclaimChallengeIds.has(
-                                                    challenge.id
-                                                ) && (
-                                                    <div className="mt-3">
-                                                        <span className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-amber-300">
-                                                            RECLAIM
-                                                        </span>
-                                                    </div>
-                                                )}
+                                            {challengeStatus && (
+                                                <div className="mt-3">
+                                                    {challengeStatus.status ===
+                                                        "reclaim" && (
+                                                            <span className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-amber-300">
+                                                                RECLAIM
+                                                            </span>
+                                                        )}
+
+                                                    {challengeStatus.status ===
+                                                        "leading" && (
+                                                            <span className="inline-flex items-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[var(--accent)]">
+                                                                LEADING
+                                                            </span>
+                                                        )}
+
+                                                    {challengeStatus.status ===
+                                                        "tied" && (
+                                                            <span className="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-400/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-sky-300">
+                                                                TIED
+                                                            </span>
+                                                        )}
+
+                                                    {challengeStatus.status ===
+                                                        "behind" && (
+                                                            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[var(--muted)]">
+                                                                BEHIND
+                                                            </span>
+                                                        )}
+
+                                                    {challengeStatus.status ===
+                                                        "your_turn" && (
+                                                            <span className="inline-flex items-center rounded-full border border-[var(--accent)]/20 bg-[var(--accent)]/5 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[var(--accent)]">
+                                                                YOUR TURN
+                                                            </span>
+                                                        )}
+                                                </div>
+                                            )}
                                             <div className="mt-5 flex items-center gap-2 text-sm text-[var(--muted)]">
                                                 <Users className="h-4 w-4" />
 

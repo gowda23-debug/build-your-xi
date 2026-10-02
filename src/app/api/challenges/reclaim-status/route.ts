@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 type ChallengeRow = {
     id: string;
+    creator_id: string;
 };
 
 type ChallengeScoreRow = {
@@ -15,14 +16,32 @@ type ChallengeScoreRow = {
     score: number | string;
 };
 
+type ChallengePlayerRow = {
+    challenge_id: string;
+    user_id: string;
+};
+
+type ChallengeStatus =
+    | "your_turn"
+    | "leading"
+    | "tied"
+    | "behind"
+    | "reclaim";
+
+type StatusDetails = {
+    status: ChallengeStatus;
+    score: number | null;
+    leaderScore: number | null;
+    rank: number | null;
+    pointsBehind: number;
+};
+
 export async function GET() {
     try {
         /*
          * ============================================================
          * AUTHENTICATION
          * ============================================================
-         *
-         * Only a registered player can have created challenges.
          */
 
         const {
@@ -35,8 +54,7 @@ export async function GET() {
                 authError ??
                 NextResponse.json(
                     {
-                        error:
-                            "Unauthorized",
+                        error: "Unauthorized",
                     },
                     {
                         status: 401,
@@ -46,12 +64,13 @@ export async function GET() {
         }
 
         /*
-         * Guests cannot own usable challenge lists.
+         * Guests do not participate in challenges.
          */
         if (user.is_anonymous) {
             return NextResponse.json(
                 {
                     reclaimChallengeIds: [],
+                    challengeStatuses: {},
                 },
                 {
                     status: 200,
@@ -65,12 +84,13 @@ export async function GET() {
 
         /*
          * ============================================================
-         * LOAD CHALLENGES CREATED BY CURRENT USER
+         * LOAD CHALLENGES
          * ============================================================
          *
-         * Do this server-side with the admin client.
-         * This avoids depending on client-side RLS visibility
-         * for challenge_scores.
+         * We need the creator ID for every challenge because:
+         *
+         * - creators can have YOUR TURN before their first score
+         * - creators can receive RECLAIM
          */
 
         const {
@@ -78,22 +98,18 @@ export async function GET() {
             error: challengeError,
         } = await supabaseAdmin
             .from("challenges")
-            .select("id")
-            .eq(
-                "creator_id",
-                user.id
-            );
+            .select("id, creator_id");
 
         if (challengeError) {
             console.error(
-                "Reclaim challenge lookup error:",
+                "Challenge status lookup error:",
                 challengeError
             );
 
             return NextResponse.json(
                 {
                     error:
-                        "Unable to load your challenges.",
+                        "Unable to load challenge status.",
                 },
                 {
                     status: 500,
@@ -105,13 +121,11 @@ export async function GET() {
             (challengeData ??
                 []) as ChallengeRow[];
 
-        if (
-            challenges.length ===
-            0
-        ) {
+        if (challenges.length === 0) {
             return NextResponse.json(
                 {
                     reclaimChallengeIds: [],
+                    challengeStatuses: {},
                 },
                 {
                     status: 200,
@@ -123,23 +137,164 @@ export async function GET() {
             );
         }
 
-        const challengeIds =
-            challenges.map(
-                (
-                    challenge
-                ) =>
-                    challenge.id
+        /*
+         * ============================================================
+         * FIND CHALLENGES RELEVANT TO CURRENT USER
+         * ============================================================
+         *
+         * A challenge is relevant when:
+         *
+         * 1. Current user created it
+         * 2. Current user has joined it
+         * 3. Current user has a score in it
+         *
+         * This prevents us from calculating status for every
+         * challenge for every user.
+         */
+
+        const creatorChallengeIds =
+            new Set<string>(
+                challenges
+                    .filter(
+                        (challenge) =>
+                            challenge.creator_id ===
+                            user.id
+                    )
+                    .map(
+                        (challenge) =>
+                            challenge.id
+                    )
             );
+
+        const {
+            data: playerData,
+            error: playerError,
+        } = await supabaseAdmin
+            .from("challenge_players")
+            .select(
+                "challenge_id, user_id"
+            )
+            .eq(
+                "user_id",
+                user.id
+            );
+
+        if (playerError) {
+            console.error(
+                "Challenge player status lookup error:",
+                playerError
+            );
+
+            return NextResponse.json(
+                {
+                    error:
+                        "Unable to load your challenge participation.",
+                },
+                {
+                    status: 500,
+                }
+            );
+        }
+
+        const playerRows =
+            (playerData ??
+                []) as ChallengePlayerRow[];
+
+        const relevantChallengeIds =
+            new Set<string>(
+                creatorChallengeIds
+            );
+
+        playerRows.forEach(
+            (row) => {
+                relevantChallengeIds.add(
+                    String(
+                        row.challenge_id
+                    )
+                );
+            }
+        );
 
         /*
          * ============================================================
-         * LOAD CHALLENGE SCORES
+         * LOAD CURRENT USER SCORES
          * ============================================================
-         *
-         * Use the admin client instead of the browser client.
-         *
-         * This is the important part of the fix.
          */
+
+        const {
+            data: currentUserScoreData,
+            error:
+                currentUserScoreError,
+        } = await supabaseAdmin
+            .from("challenge_scores")
+            .select(
+                "challenge_id, user_id, score"
+            )
+            .eq(
+                "user_id",
+                user.id
+            );
+
+        if (currentUserScoreError) {
+            console.error(
+                "Current user challenge score lookup error:",
+                currentUserScoreError
+            );
+
+            return NextResponse.json(
+                {
+                    error:
+                        "Unable to load your challenge scores.",
+                },
+                {
+                    status: 500,
+                }
+            );
+        }
+
+        const currentUserScores =
+            (currentUserScoreData ??
+                []) as ChallengeScoreRow[];
+
+        currentUserScores.forEach(
+            (row) => {
+                relevantChallengeIds.add(
+                    String(
+                        row.challenge_id
+                    )
+                );
+            }
+        );
+
+        if (
+            relevantChallengeIds.size ===
+            0
+        ) {
+            return NextResponse.json(
+                {
+                    reclaimChallengeIds: [],
+                    challengeStatuses: {},
+                },
+                {
+                    status: 200,
+                    headers: {
+                        "Cache-Control":
+                            "private, no-store",
+                    },
+                }
+            );
+        }
+
+        /*
+         * ============================================================
+         * LOAD ALL SCORES FOR RELEVANT CHALLENGES
+         * ============================================================
+         */
+
+        const challengeIds =
+            Array.from(
+                relevantChallengeIds
+            );
 
         const {
             data: scoreData,
@@ -156,7 +311,7 @@ export async function GET() {
 
         if (scoreError) {
             console.error(
-                "Reclaim score lookup error:",
+                "Challenge score lookup error:",
                 scoreError
             );
 
@@ -177,16 +332,10 @@ export async function GET() {
 
         /*
          * ============================================================
-         * CALCULATE RECLAIM STATUS
+         * BUILD SCORE MAP
          * ============================================================
          *
-         * RECLAIM means:
-         *
-         *   creator has a score
-         *   AND
-         *   another player has a higher score
-         *
-         * Only the creator's own challenges are considered.
+         * Keep the best score for every player in every challenge.
          */
 
         const scoresByChallenge =
@@ -196,22 +345,21 @@ export async function GET() {
             >();
 
         for (
-            const scoreRow of
-                scores
+            const row of scores
         ) {
             const challengeId =
                 String(
-                    scoreRow.challenge_id
+                    row.challenge_id
                 );
 
             const userId =
                 String(
-                    scoreRow.user_id
+                    row.user_id
                 );
 
             const score =
                 Number(
-                    scoreRow.score
+                    row.score
                 );
 
             if (
@@ -241,10 +389,6 @@ export async function GET() {
                     challengeId
                 )!;
 
-            /*
-             * Be defensive about duplicates.
-             * Keep the best score for each player.
-             */
             const previous =
                 players.get(
                     userId
@@ -262,6 +406,17 @@ export async function GET() {
             );
         }
 
+        /*
+         * ============================================================
+         * CALCULATE STATUS
+         * ============================================================
+         */
+
+        const challengeStatuses: Record<
+            string,
+            StatusDetails
+        > = {};
+
         const reclaimChallengeIds =
             new Set<string>();
 
@@ -269,60 +424,208 @@ export async function GET() {
             const challenge of
                 challenges
         ) {
-            const players =
-                scoresByChallenge.get(
+            if (
+                !relevantChallengeIds.has(
                     challenge.id
-                );
-
-            if (!players) {
+                )
+            ) {
                 continue;
             }
 
-            const creatorScore =
+            const players =
+                scoresByChallenge.get(
+                    challenge.id
+                ) ??
+                new Map<
+                    string,
+                    number
+                >();
+
+            const currentUserScore =
                 players.get(
                     user.id
                 );
 
             /*
-             * Creator has not played yet.
+             * --------------------------------------------------------
+             * CURRENT USER HAS NOT PLAYED
+             * --------------------------------------------------------
+             *
+             * This applies to:
+             *
+             * - challenge creator
+             * - joined player
+             *
+             * A completely unrelated user does not get a card status.
              */
+
             if (
-                creatorScore ===
+                currentUserScore ===
                 undefined
             ) {
+                challengeStatuses[
+                    challenge.id
+                ] = {
+                    status:
+                        "your_turn",
+                    score:
+                        null,
+                    leaderScore:
+                        players.size >
+                        0
+                            ? Math.max(
+                                ...Array.from(
+                                    players.values()
+                                )
+                            )
+                            : null,
+                    rank:
+                        null,
+                    pointsBehind:
+                        0,
+                };
+
                 continue;
             }
 
-            let highestOpponentScore =
-                Number.NEGATIVE_INFINITY;
+            /*
+             * --------------------------------------------------------
+             * LEADER INFORMATION
+             * --------------------------------------------------------
+             */
 
-            players.forEach(
-                (
-                    score,
-                    playerId
-                ) => {
-                    if (
-                        playerId ===
-                        user.id
-                    ) {
-                        return;
-                    }
+            const scoresList =
+                Array.from(
+                    players.values()
+                );
 
-                    highestOpponentScore =
-                        Math.max(
-                            highestOpponentScore,
-                            score
-                        );
-                }
-            );
+            const leaderScore =
+                scoresList.length >
+                0
+                    ? Math.max(
+                        ...scoresList
+                    )
+                    : currentUserScore;
+
+            const playersAtLeader =
+                scoresList.filter(
+                    (score) =>
+                        score ===
+                        leaderScore
+                ).length;
+
+            const rank =
+                1 +
+                scoresList.filter(
+                    (score) =>
+                        score >
+                        currentUserScore
+                ).length;
+
+            const pointsBehind =
+                Math.max(
+                    0,
+                    leaderScore -
+                        currentUserScore
+                );
+
+            /*
+             * --------------------------------------------------------
+             * CURRENT USER IS LEADING
+             * --------------------------------------------------------
+             */
 
             if (
-                highestOpponentScore >
-                creatorScore
+                currentUserScore ===
+                    leaderScore &&
+                playersAtLeader ===
+                    1
+            ) {
+                challengeStatuses[
+                    challenge.id
+                ] = {
+                    status:
+                        "leading",
+                    score:
+                        currentUserScore,
+                    leaderScore,
+                    rank,
+                    pointsBehind: 0,
+                };
+
+                continue;
+            }
+
+            /*
+             * --------------------------------------------------------
+             * CURRENT USER IS TIED
+             * --------------------------------------------------------
+             */
+
+            if (
+                currentUserScore ===
+                    leaderScore &&
+                playersAtLeader >
+                    1
+            ) {
+                challengeStatuses[
+                    challenge.id
+                ] = {
+                    status:
+                        "tied",
+                    score:
+                        currentUserScore,
+                    leaderScore,
+                    rank,
+                    pointsBehind: 0,
+                };
+
+                continue;
+            }
+
+            /*
+             * --------------------------------------------------------
+             * CURRENT USER IS BEHIND
+             * --------------------------------------------------------
+             */
+
+            const isCreator =
+                challenge.creator_id ===
+                user.id;
+
+            /*
+             * RECLAIM is ONLY for the creator.
+             */
+            if (
+                isCreator
             ) {
                 reclaimChallengeIds.add(
                     challenge.id
                 );
+
+                challengeStatuses[
+                    challenge.id
+                ] = {
+                    status:
+                        "reclaim",
+                    score:
+                        currentUserScore,
+                    leaderScore,
+                    rank,
+                    pointsBehind,
+                };
+            } else {
+                challengeStatuses[
+                    challenge.id
+                ] = {
+                    status:
+                        "behind",
+                    score:
+                        currentUserScore,
+                    leaderScore,
+                    rank,
+                    pointsBehind,
+                };
             }
         }
 
@@ -332,6 +635,8 @@ export async function GET() {
                     Array.from(
                         reclaimChallengeIds
                     ),
+
+                challengeStatuses,
             },
             {
                 status: 200,
@@ -343,14 +648,14 @@ export async function GET() {
         );
     } catch (error) {
         console.error(
-            "Reclaim status API error:",
+            "Challenge status API error:",
             error
         );
 
         return NextResponse.json(
             {
                 error:
-                    "Unable to calculate challenge reclaim status.",
+                    "Unable to calculate challenge status.",
             },
             {
                 status: 500,
