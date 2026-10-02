@@ -9,13 +9,11 @@ type LeaderboardMode = "ipl" | "world";
 type LeaderboardPeriod = "all" | "weekly" | "daily";
 
 type GameScoreRow = {
-    user_id: string;
-    game_mode: string;
-    score: number | string;
-    created_at: string;
-    result: {
-        score?: number;
-    } | null;
+  user_id: string;
+  game_mode: string;
+  score: number | string;
+  created_at: string;
+  result: StoredResult | null;
 };
 
 type ProfileRow = {
@@ -34,6 +32,14 @@ type AggregatePlayer = {
 type RankedPlayer = AggregatePlayer & {
     name: string;
     rank: number;
+};
+
+type StoredResult = {
+  version?: number;
+  score?: number;
+  wins?: number;
+  losses?: number;
+  [key: string]: unknown;
 };
 
 function isLeaderboardMode(

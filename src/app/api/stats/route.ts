@@ -97,24 +97,30 @@ function getRecord(
 
 function getAuthoritativeScore(
     row: GameScoreRow
-) {
+): number | null {
+    /*
+     * The IPL scoring engine has a hard maximum of 100.
+     *
+     * Only a valid server-generated result.score is allowed
+     * to contribute to player statistics.
+     */
+
     const resultScore =
         Number(row.result?.score);
 
     if (
-        Number.isFinite(resultScore)
+        Number.isFinite(resultScore) &&
+        resultScore >= 0 &&
+        resultScore <= 100
     ) {
         return resultScore;
     }
 
-    const storedScore =
-        Number(row.score);
+    /*
+     * Never use an invalid legacy/top-level score.
+     */
 
-    return Number.isFinite(
-        storedScore
-    )
-        ? storedScore
-        : null;
+    return null;
 }
 
 function getDetails(
@@ -406,8 +412,15 @@ export async function GET() {
          * ============================================================
          */
 
+        const validGames =
+            gameScores.filter(
+                (row) =>
+                    getAuthoritativeScore(row) !==
+                    null
+            );
+
         const validScores =
-            gameScores
+            validGames
                 .map(getAuthoritativeScore)
                 .filter(
                     (
@@ -417,7 +430,7 @@ export async function GET() {
                 );
 
         const gamesPlayed =
-            gameScores.length;
+            validGames.length;
 
         const bestScore =
             validScores.length > 0
@@ -539,7 +552,7 @@ export async function GET() {
          */
 
         const recentGames =
-            gameScores
+            validGames
                 .slice(0, 10)
                 .map(
                     (
@@ -553,7 +566,7 @@ export async function GET() {
                             ),
 
                         score:
-                            getAuthoritativeScore(row) ?? 0,
+                            getAuthoritativeScore(row)!,
 
                         record:
                             getRecord(
