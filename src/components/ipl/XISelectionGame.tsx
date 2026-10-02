@@ -37,7 +37,10 @@ export default function XISelectionGame({
 }: XISelectionGameProps) {
   const [gameChallenge, setGameChallenge] =
     useState<IPLChallenge | null>(null);
-
+  const [lockedVenue, setLockedVenue] =
+  useState<IPLChallenge["venue"] | null>(
+    null
+  );
   const [currentChallenge, setCurrentChallenge] =
     useState<IPLChallenge | null>(null);
 
@@ -80,24 +83,147 @@ export default function XISelectionGame({
   }
 
   function handleChallengeReady(
-    challenge: IPLChallenge,
-    players: IPLPlayer[]
-  ) {
-    const startingNewXI =
-      selectedPlayers.length === 0;
+  challenge: IPLChallenge,
+  players: IPLPlayer[]
+) {
+  const startingNewXI =
+    selectedPlayers.length === 0;
 
-    setGameChallenge(challenge);
+  setGameChallenge(challenge);
 
-    if (startingNewXI) {
-      setTeamRespinUsed(false);
-      setSeasonRespinUsed(false);
-    }
+  if (startingNewXI) {
+    setTeamRespinUsed(false);
+    setSeasonRespinUsed(false);
 
-    resetPlayerPool(
-      challenge,
-      players
+    setLockedVenue(
+      challenge.venue
     );
   }
+
+  resetPlayerPool(
+    challenge,
+    players
+  );
+}
+
+async function handleSelectPlayer(
+  player: IPLPlayer
+) {
+  if (
+    selectedPlayers.length >=
+    MAX_PLAYERS
+  ) {
+    return;
+  }
+
+  if (
+    !canAddPlayer(
+      selectedPlayers,
+      player
+    )
+  ) {
+    return;
+  }
+
+  try {
+    /*
+     * Registered players:
+     *
+     * Save the selection to the authoritative
+     * game session.
+     *
+     * Guests:
+     *
+     * No database write is performed.
+     * Their selection is maintained locally.
+     */
+    if (
+      gameChallenge?.gameSessionId
+    ) {
+      const response =
+        await fetch(
+          "/api/ipl/game/select-player",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            cache: "no-store",
+
+            body:
+              JSON.stringify({
+                gameSessionId:
+                  gameChallenge.gameSessionId,
+
+                playerId:
+                  player.id,
+              }),
+          }
+        );
+
+      const data =
+        await response
+          .json()
+          .catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ??
+          "Unable to save the selected player."
+        );
+      }
+    }
+
+    /*
+     * Add the player locally.
+     *
+     * This is used by both registered users
+     * and guests for the UI.
+     */
+    const nextPlayers = [
+      ...selectedPlayers,
+      player,
+    ];
+
+    setSelectedPlayers(
+      nextPlayers
+    );
+
+    /*
+     * One spin = one player.
+     *
+     * Close the current player pool and
+     * generate the next round.
+     */
+    setCurrentChallenge(null);
+    setCurrentPlayers([]);
+    setSearchQuery("");
+    setRoleFilter("ALL");
+
+    setRandomizerKey(
+      (current) => current + 1
+    );
+
+    if (
+      nextPlayers.length ===
+        MAX_PLAYERS &&
+      validateXI(nextPlayers).valid
+    ) {
+      setGameState("playing");
+      return;
+    }
+
+    setGameState("challenge");
+  } catch (error) {
+    console.error(
+      "IPL player selection failed:",
+      error
+    );
+  }
+}
 
   async function fetchPlayers(
     teamSeasonId: string
@@ -323,161 +449,6 @@ export default function XISelectionGame({
     }
   }
 
-  // function handleSelectPlayer(
-  //   player: IPLPlayer
-  // ) {
-  //   if (
-  //     !canAddPlayer(
-  //       selectedPlayers,
-  //       player
-  //     )
-  //   ) {
-  //     return;
-  //   }
-
-  //   const nextPlayers = [
-  //     ...selectedPlayers,
-  //     player,
-  //   ];
-
-  //   setSelectedPlayers(
-  //     nextPlayers
-  //   );
-
-  //   /*
-  //    * Once a player is selected,
-  //    * the current player pool is closed.
-  //    */
-  //   setCurrentChallenge(null);
-  //   setCurrentPlayers([]);
-  //   setSearchQuery("");
-  //   setRoleFilter("ALL");
-
-  //   /*
-  //    * Force a fresh randomizer
-  //    * for the next selection.
-  //    */
-  //   setRandomizerKey(
-  //     (current) => current + 1
-  //   );
-
-  //   if (
-  //     nextPlayers.length ===
-  //     MAX_PLAYERS &&
-  //     validateXI(nextPlayers).valid
-  //   ) {
-  //     setGameState("playing");
-  //     return;
-  //   }
-
-  //   setGameState("challenge");
-  // }
-  async function handleSelectPlayer(
-    player: IPLPlayer
-  ) {
-    if (
-      selectedPlayers.length >=
-      MAX_PLAYERS
-    ) {
-      return;
-    }
-
-    if (
-      !canAddPlayer(
-        selectedPlayers,
-        player
-      )
-    ) {
-      return;
-    }
-
-    if (
-      !gameChallenge?.gameSessionId
-    ) {
-      return;
-    }
-
-    try {
-      const response =
-        await fetch(
-          "/api/ipl/game/select-player",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            cache: "no-store",
-
-            body:
-              JSON.stringify({
-                gameSessionId:
-                  gameChallenge.gameSessionId,
-
-                playerId:
-                  player.id,
-              }),
-          }
-        );
-
-      const data =
-        await response
-          .json()
-          .catch(() => null);
-
-      if (!response.ok) {
-        throw new Error(
-          data?.error ??
-          "Unable to save the selected player."
-        );
-      }
-
-      const nextPlayers = [
-        ...selectedPlayers,
-        player,
-      ];
-
-      setSelectedPlayers(
-        nextPlayers
-      );
-
-      /*
-       * KEEP the original gameplay:
-       *
-       * One spin = one player.
-       *
-       * After selection, close this player pool
-       * and generate the next round.
-       */
-      setCurrentChallenge(null);
-      setCurrentPlayers([]);
-      setSearchQuery("");
-      setRoleFilter("ALL");
-
-      setRandomizerKey(
-        (current) => current + 1
-      );
-
-      if (
-        nextPlayers.length ===
-        MAX_PLAYERS &&
-        validateXI(nextPlayers)
-          .valid
-      ) {
-        setGameState("playing");
-        return;
-      }
-
-      setGameState("challenge");
-    } catch (error) {
-      console.error(
-        "IPL player selection failed:",
-        error
-      );
-    }
-  }
   const validation = useMemo(
     () =>
       validateXI(
@@ -491,7 +462,7 @@ export default function XISelectionGame({
     setCurrentChallenge(null);
     setCurrentPlayers([]);
     setSelectedPlayers([]);
-
+    setLockedVenue(null);
     setGameState("challenge");
 
     setSearchQuery("");
@@ -684,6 +655,7 @@ export default function XISelectionGame({
                     gameChallenge?.gameSessionId
                   }
                   challengeId={challengeId}
+                  lockedVenue={lockedVenue}
                   onChallengeReady={
                     handleChallengeReady
                   }

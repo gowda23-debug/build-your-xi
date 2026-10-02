@@ -9,7 +9,7 @@ import type {
 
 interface ChallengeRandomizerProps {
   gameSessionId?: string | null;
-
+  lockedVenue?: IPLChallenge["venue"] | null;
   challengeId?: string | null;
 
   onChallengeReady: (
@@ -21,6 +21,7 @@ interface ChallengeRandomizerProps {
 export default function ChallengeRandomizer({
   gameSessionId,
   challengeId,
+  lockedVenue,
   onChallengeReady,
 }: ChallengeRandomizerProps) {
   const [loading, setLoading] =
@@ -146,8 +147,18 @@ export default function ChallengeRandomizer({
         );
       }
 
+      const resolvedChallenge: IPLChallenge =
+        !gameSessionId &&
+          lockedVenue
+          ? {
+            ...challenge,
+            venue: lockedVenue,
+            gameSessionId: null,
+          }
+          : challenge;
+
       onChallengeReady(
-        challenge,
+        resolvedChallenge,
         players
       );
     } catch (err) {
