@@ -533,9 +533,23 @@ export default function StatsPage() {
                             </p>
 
                             {game.isChallenge && (
-                              <span className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.12em] text-[var(--accent)]">
-                                Played in Challenge
-                              </span>
+                              <div className="mt-1 flex min-w-0 items-center gap-2">
+                                <span className="shrink-0 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.12em] text-[var(--accent)]">
+                                  Played in Challenge
+                                </span>
+
+                                {game.challengeTitle && (
+                                  <>
+                                    <span className="shrink-0 text-[var(--muted)]">
+                                      •
+                                    </span>
+
+                                    <span className="min-w-0 truncate text-[10px] font-semibold text-[var(--muted)]">
+                                      {game.challengeTitle}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
                             )}
                           </div>
 

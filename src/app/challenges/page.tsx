@@ -129,309 +129,262 @@ export default function ChallengesPage() {
      * ============================================================
      */
 
-    async function loadChallenges() {
-        setLoading(true);
-        setError("");
+async function loadChallenges() {
+    setLoading(true);
+    setError("");
+
+    /*
+     * Reset reclaim state before refreshing.
+     */
+    setReclaimChallengeIds(
+        new Set()
+    );
+
+    const {
+        data: { user },
+        error: userError,
+    } = await supabase.auth.getUser();
+
+    if (
+        userError ||
+        !user
+    ) {
+        router.replace(
+            "/login"
+        );
+        return;
+    }
+
+    /*
+     * ============================================================
+     * GUEST
+     * ============================================================
+     *
+     * Guests can play normal games, but they do not have
+     * registered challenge participation.
+     */
+    if (
+        user.is_anonymous
+    ) {
+        setGuest(true);
+        setLoading(false);
+        return;
+    }
+
+    setGuest(false);
+
+    setCurrentUserId(
+        user.id
+    );
+
+    /*
+     * ============================================================
+     * LOAD CHALLENGES
+     * ============================================================
+     */
+
+    const {
+        data,
+        error: challengesError,
+    } = await supabase
+        .from("challenges")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending: false,
+            }
+        );
+
+    if (
+        challengesError
+    ) {
+        setError(
+            challengesError.message
+        );
+
+        setLoading(false);
+
+        return;
+    }
+
+    const challengeData =
+        (data ??
+            []) as Challenge[];
+
+    setChallenges(
+        challengeData
+    );
+
+    /*
+     * No challenges.
+     */
+    if (
+        challengeData.length ===
+        0
+    ) {
+        setPlayerCounts(
+            {}
+        );
+
         setReclaimChallengeIds(
             new Set()
         );
-        const {
-            data: { user },
-            error: userError,
-        } = await supabase.auth.getUser();
 
-        if (
-            userError ||
-            !user
-        ) {
-            router.replace(
-                "/login"
-            );
-            return;
-        }
+        setLoading(false);
 
-        if (user.is_anonymous) {
-            setGuest(true);
-            setLoading(false);
-            return;
-        }
+        return;
+    }
 
-        setGuest(false);
-        setCurrentUserId(
-            user.id
+    const ids =
+        challengeData.map(
+            (challenge) =>
+                challenge.id
         );
 
-        const {
-            data,
-            error: challengesError,
-        } = await supabase
-            .from("challenges")
-            .select("*")
-            .order(
-                "created_at",
+    /*
+     * ============================================================
+     * LOAD PLAYER COUNTS
+     * ============================================================
+     *
+     * Keep this exactly as a normal client-side query because
+     * challenge_players already belongs to the challenge-list
+     * UI and we only need the count.
+     */
+
+    const {
+        data: players,
+        error: playersError,
+    } = await supabase
+        .from(
+            "challenge_players"
+        )
+        .select(
+            "id, challenge_id, user_id, joined_at"
+        )
+        .in(
+            "challenge_id",
+            ids
+        );
+
+    if (
+        playersError
+    ) {
+        setError(
+            playersError.message
+        );
+    } else {
+        const counts: Record<
+            string,
+            number
+        > = {};
+
+        (
+            (players ??
+                []) as Player[]
+        ).forEach(
+            (player) => {
+                counts[
+                    player.challenge_id
+                ] =
+                    (
+                        counts[
+                            player.challenge_id
+                        ] ??
+                        0
+                    ) + 1;
+            }
+        );
+
+        setPlayerCounts(
+            counts
+        );
+    }
+
+    /*
+     * ============================================================
+     * LOAD RECLAIM STATUS
+     * ============================================================
+     *
+     * IMPORTANT:
+     *
+     * Do NOT query challenge_scores directly from the browser.
+     *
+     * The server-side reclaim endpoint uses supabaseAdmin and
+     * calculates RECLAIM for challenges created by the current
+     * registered user.
+     */
+
+    try {
+        const reclaimResponse =
+            await fetch(
+                "/api/challenges/reclaim-status",
                 {
-                    ascending: false,
+                    method: "GET",
+                    cache: "no-store",
                 }
             );
 
-        if (challengesError) {
-            setError(
-                challengesError.message
-            );
-            setLoading(false);
-            return;
-        }
-
-        const challengeData =
-            (data ??
-                []) as Challenge[];
-
-        setChallenges(
-            challengeData
-        );
+        const reclaimData =
+            await reclaimResponse
+                .json()
+                .catch(
+                    () => null
+                );
 
         if (
-            challengeData.length >
-            0
+            !reclaimResponse.ok
         ) {
-            const ids =
-                challengeData.map(
-                    (challenge) =>
-                        challenge.id
-                );
-
-            const {
-                data: players,
-                error: playersError,
-            } = await supabase
-                .from("challenge_players")
-                .select(
-                    "id, challenge_id, user_id, joined_at"
-                )
-                .in(
-                    "challenge_id",
-                    ids
-                );
-            /*
-             * ============================================================
-             * RECLAIM STATUS
-             * ============================================================
-             *
-             * A challenge is marked RECLAIM only when:
-             *
-             * 1. The currently logged-in player is the creator.
-             * 2. The creator has a score.
-             * 3. At least one other player has a higher score.
-             *
-             * This lets the creator see the status directly from
-             * the challenge list without opening the challenge.
-             */
-
-            const {
-                data: challengeScores,
-                error: challengeScoresError,
-            } = await supabase
-                .from("challenge_scores")
-                .select(
-                    "challenge_id, user_id, score"
-                )
-                .in(
-                    "challenge_id",
-                    ids
-                );
-
-            if (challengeScoresError) {
-                setError(
-                    challengeScoresError.message
-                );
-            } else {
-                const scoreMap =
-                    new Map<
-                        string,
-                        Map<string, number>
-                    >();
-
-                (
-                    challengeScores ??
-                    []
-                ).forEach(
-                    (scoreRow) => {
-                        const challengeId =
-                            String(
-                                scoreRow.challenge_id
-                            );
-
-                        const userId =
-                            String(
-                                scoreRow.user_id
-                            );
-
-                        const score =
-                            Number(
-                                scoreRow.score
-                            );
-
-                        if (
-                            !Number.isFinite(
-                                score
-                            )
-                        ) {
-                            return;
-                        }
-
-                        if (
-                            !scoreMap.has(
-                                challengeId
-                            )
-                        ) {
-                            scoreMap.set(
-                                challengeId,
-                                new Map<
-                                    string,
-                                    number
-                                >()
-                            );
-                        }
-
-                        const challengeScoresForUsers =
-                            scoreMap.get(
-                                challengeId
-                            )!;
-
-                        const previous =
-                            challengeScoresForUsers.get(
-                                userId
-                            );
-
-                        /*
-                         * Be defensive in case duplicate rows
-                         * ever exist for a challenge/player.
-                         */
-                        challengeScoresForUsers.set(
-                            userId,
-                            previous ===
-                                undefined
-                                ? score
-                                : Math.max(
-                                    previous,
-                                    score
-                                )
-                        );
-                    }
-                );
-
-                const reclaimIds =
-                    new Set<string>();
-
-                challengeData.forEach(
-                    (challenge) => {
-                        /*
-                         * RECLAIM is a creator state.
-                         *
-                         * A player who is not the creator should
-                         * never get the RECLAIM badge.
-                         */
-                        if (
-                            challenge.creator_id !==
-                            user.id
-                        ) {
-                            return;
-                        }
-
-                        const users =
-                            scoreMap.get(
-                                challenge.id
-                            );
-
-                        if (!users) {
-                            return;
-                        }
-
-                        const creatorScore =
-                            users.get(
-                                challenge.creator_id
-                            );
-
-                        if (
-                            creatorScore ===
-                            undefined
-                        ) {
-                            return;
-                        }
-
-                        let highestOpponentScore =
-                            Number.NEGATIVE_INFINITY;
-
-                        users.forEach(
-                            (
-                                score,
-                                playerId
-                            ) => {
-                                if (
-                                    playerId ===
-                                    challenge.creator_id
-                                ) {
-                                    return;
-                                }
-
-                                highestOpponentScore =
-                                    Math.max(
-                                        highestOpponentScore,
-                                        score
-                                    );
-                            }
-                        );
-
-                        if (
-                            highestOpponentScore >
-                            creatorScore
-                        ) {
-                            reclaimIds.add(
-                                challenge.id
-                            );
-                        }
-                    }
-                );
-
-                setReclaimChallengeIds(
-                    reclaimIds
-                );
-            }
-            if (playersError) {
-                setError(
-                    playersError.message
-                );
-            } else {
-                const counts: Record<
-                    string,
-                    number
-                > = {};
-
-                (
-                    (players ??
-                        []) as Player[]
-                ).forEach(
-                    (player) => {
-                        counts[
-                            player.challenge_id
-                        ] =
-                            (
-                                counts[
-                                player.challenge_id
-                                ] ??
-                                0
-                            ) + 1;
-                    }
-                );
-
-                setPlayerCounts(
-                    counts
-                );
-            }
+            throw new Error(
+                reclaimData?.error ??
+                    "Unable to load challenge reclaim status."
+            );
         }
 
-        setLoading(false);
+        const reclaimIds =
+            Array.isArray(
+                reclaimData?.reclaimChallengeIds
+            )
+                ? reclaimData.reclaimChallengeIds.filter(
+                    (
+                        value: unknown
+                    ): value is string =>
+                        typeof value ===
+                            "string" &&
+                        value.trim()
+                            .length >
+                            0
+                )
+                : [];
+
+        setReclaimChallengeIds(
+            new Set(
+                reclaimIds
+            )
+        );
+    } catch (
+        reclaimError
+    ) {
+        /*
+         * RECLAIM is supplementary UI.
+         *
+         * A failure here should NOT prevent the user's
+         * challenge list from loading.
+         */
+        console.error(
+            "Unable to load challenge reclaim status:",
+            reclaimError
+        );
+
+        setReclaimChallengeIds(
+            new Set()
+        );
     }
+
+    setLoading(
+        false
+    );
+}
 
     useEffect(() => {
         loadChallenges();
