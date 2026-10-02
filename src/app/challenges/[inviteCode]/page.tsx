@@ -105,11 +105,6 @@ export default function ChallengePage() {
   const [savingTitle, setSavingTitle] =
     useState(false);
 
-  const [reclaimScore, setReclaimScore] =
-    useState<number | null>(
-      null
-    );
-
   const [
     challengeUnavailable,
     setChallengeUnavailable,
@@ -119,6 +114,12 @@ export default function ChallengePage() {
     guestChallenge,
     setGuestChallenge,
   ] = useState(false);
+
+  /*
+   * ============================================================
+   * LOAD
+   * ============================================================
+   */
 
   useEffect(() => {
     if (inviteCode) {
@@ -139,6 +140,12 @@ export default function ChallengePage() {
     );
 
     try {
+      /*
+       * ============================================================
+       * AUTHENTICATION
+       * ============================================================
+       */
+
       const {
         data: {
           session,
@@ -165,9 +172,8 @@ export default function ChallengePage() {
 
       /*
        * LOGGED OUT
-       *
-       * Login first.
        */
+
       if (!user) {
         router.replace(
           `/login?next=${encodeURIComponent(
@@ -181,9 +187,7 @@ export default function ChallengePage() {
       /*
        * GUEST
        *
-       * Stay on the challenge URL.
-       *
-       * Do NOT silently redirect.
+       * Guests are not allowed to play challenges.
        */
       if (
         user.is_anonymous
@@ -198,9 +202,16 @@ export default function ChallengePage() {
       /*
        * REGISTERED USER
        */
+
       setCurrentUserId(
         user.id
       );
+
+      /*
+       * ============================================================
+       * LOAD CHALLENGE
+       * ============================================================
+       */
 
       const challengeResponse =
         await fetch(
@@ -272,6 +283,12 @@ export default function ChallengePage() {
         );
       }
 
+      /*
+       * ============================================================
+       * LOAD LEADERBOARD
+       * ============================================================
+       */
+
       const leaderboardResponse =
         await fetch(
           `/api/challenges/${encodeURIComponent(
@@ -307,13 +324,6 @@ export default function ChallengePage() {
           : []
       );
 
-      setReclaimScore(
-        typeof leaderboardData?.reclaimScore ===
-          "number"
-          ? leaderboardData.reclaimScore
-          : null
-      );
-
       if (
         typeof leaderboardData?.playerCount ===
         "number"
@@ -342,6 +352,12 @@ export default function ChallengePage() {
       );
     }
   }
+
+  /*
+   * ============================================================
+   * RENAME
+   * ============================================================
+   */
 
   async function saveTitle() {
     if (!challenge) {
@@ -457,6 +473,12 @@ export default function ChallengePage() {
     }
   }
 
+  /*
+   * ============================================================
+   * COPY LINK
+   * ============================================================
+   */
+
   async function copyInviteLink() {
     try {
       const link =
@@ -486,6 +508,12 @@ export default function ChallengePage() {
       );
     }
   }
+
+  /*
+   * ============================================================
+   * SHARE
+   * ============================================================
+   */
 
   async function shareChallenge() {
     const link =
@@ -519,6 +547,12 @@ export default function ChallengePage() {
 
     await copyInviteLink();
   }
+
+  /*
+   * ============================================================
+   * PLAY
+   * ============================================================
+   */
 
   function handlePlay() {
     if (!challenge) {
@@ -562,7 +596,9 @@ export default function ChallengePage() {
    * ============================================================
    */
 
-  if (guestChallenge) {
+  if (
+    guestChallenge
+  ) {
     const challengePath =
       getChallengePath(
         inviteCode
@@ -696,7 +732,7 @@ export default function ChallengePage() {
 
   /*
    * ============================================================
-   * ERROR
+   * GENERAL ERROR
    * ============================================================
    */
 
@@ -734,6 +770,12 @@ export default function ChallengePage() {
     );
   }
 
+  /*
+   * ============================================================
+   * BASIC CHALLENGE DATA
+   * ============================================================
+   */
+
   const isCreator =
     currentUserId ===
     challenge.creator_id;
@@ -742,26 +784,59 @@ export default function ChallengePage() {
     challenge.game_mode ===
     "ipl";
 
-  const creatorScore =
-    leaderboard.find(
-      (entry) =>
-        entry.user_id ===
-        challenge.creator_id
-    );
+  /*
+   * ============================================================
+   * CURRENT PLAYER RECLAIM LOGIC
+   * ============================================================
+   *
+   * IMPORTANT:
+   *
+   * This must be calculated against the CURRENTLY
+   * LOGGED-IN PLAYER, not the challenge creator.
+   *
+   * Example:
+   *
+   * Creator = 56
+   * Current player = 58
+   *
+   * The creator has been beaten,
+   * but the current player has NOT been beaten.
+   *
+   * Therefore the current player must NOT see
+   * "Your score has been beaten."
+   */
 
-  const currentLeader =
-    leaderboard[0] ??
-    null;
+  const currentUserScore =
+    currentUserId
+      ? leaderboard.find(
+          (entry) =>
+            entry.user_id ===
+            currentUserId
+        ) ?? null
+      : null;
 
-  const creatorHasBeenBeaten =
+  const highestOpponent =
+    currentUserId
+      ? leaderboard.find(
+          (entry) =>
+            entry.user_id !==
+            currentUserId
+        ) ?? null
+      : null;
+
+  const currentUserHasBeenBeaten =
     Boolean(
-      creatorScore &&
-      currentLeader &&
-      currentLeader.user_id !==
-        challenge.creator_id &&
-      currentLeader.score >
-        creatorScore.score
+      currentUserScore &&
+      highestOpponent &&
+      highestOpponent.score >
+        currentUserScore.score
     );
+
+  const currentUserReclaimScore =
+    currentUserHasBeenBeaten &&
+    highestOpponent
+      ? highestOpponent.score
+      : null;
 
   return (
     <main className="min-h-screen px-4 py-8 sm:px-6">
@@ -778,6 +853,10 @@ export default function ChallengePage() {
           <ArrowLeft className="h-4 w-4" />
           Back to Challenges
         </button>
+
+        {/* ========================================================
+            CHALLENGE HEADER
+        ======================================================== */}
 
         <section className="card mx-auto max-w-2xl p-7 text-center">
           <div className="flex justify-center">
@@ -943,9 +1022,13 @@ export default function ChallengePage() {
           </div>
         )}
 
-        {creatorHasBeenBeaten &&
-          creatorScore &&
-          currentLeader && (
+        {/* ========================================================
+            RECLAIM
+        ======================================================== */}
+
+        {currentUserHasBeenBeaten &&
+          currentUserScore &&
+          highestOpponent && (
             <section className="mx-auto mt-6 max-w-2xl">
               <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-5 py-4">
                 <div className="flex items-center justify-between gap-4">
@@ -961,14 +1044,14 @@ export default function ChallengePage() {
                     <p className="mt-1 text-xs text-[var(--muted)]">
                       Your score:{" "}
                       {
-                        creatorScore.score
+                        currentUserScore.score
                       }
 
                       {" · "}
 
                       Current score:{" "}
                       {
-                        currentLeader.score
+                        highestOpponent.score
                       }
                     </p>
                   </div>
@@ -979,8 +1062,8 @@ export default function ChallengePage() {
             </section>
           )}
 
-        {creatorHasBeenBeaten &&
-          reclaimScore !==
+        {currentUserHasBeenBeaten &&
+          currentUserReclaimScore !==
             null && (
             <div className="mt-6 rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4">
               <div className="flex items-center gap-3">
@@ -997,7 +1080,7 @@ export default function ChallengePage() {
                     Another player has reached{" "}
                     <span className="font-black text-white">
                       {
-                        reclaimScore
+                        currentUserReclaimScore
                       }
                     </span>
                     . Play again to reclaim the top spot.
@@ -1006,6 +1089,10 @@ export default function ChallengePage() {
               </div>
             </div>
           )}
+
+        {/* ========================================================
+            LEADERBOARD
+        ======================================================== */}
 
         <section className="mt-8">
           <div className="mx-auto max-w-2xl">
@@ -1034,8 +1121,14 @@ export default function ChallengePage() {
             0 ? (
               <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/10">
                 <div className="grid grid-cols-[48px_minmax(0,1fr)_80px] border-b border-white/10 px-4 py-3 text-[9px] font-black uppercase tracking-[0.15em] text-[var(--muted)]">
-                  <span>#</span>
-                  <span>Player</span>
+                  <span>
+                    #
+                  </span>
+
+                  <span>
+                    Player
+                  </span>
+
                   <span className="text-right">
                     Score
                   </span>
@@ -1122,6 +1215,10 @@ export default function ChallengePage() {
           </div>
         </section>
 
+        {/* ========================================================
+            PLAY
+        ======================================================== */}
+
         <div className="mx-auto mt-10 max-w-xl">
           <button
             type="button"
@@ -1140,6 +1237,10 @@ export default function ChallengePage() {
               : "ACCEPT & PLAY ›"}
           </button>
         </div>
+
+        {/* ========================================================
+            ACTIONS
+        ======================================================== */}
 
         <div className="mx-auto mt-4 grid max-w-xl grid-cols-2 gap-3">
           <button

@@ -94,10 +94,25 @@ export default function ChallengesPage() {
 
     /*
      * ============================================================
+     * RECLAIM STATE
+     * ============================================================
+     *
+     * Contains the challenge IDs where the currently
+     * logged-in user is the creator and their score
+     * has been beaten by another player.
+     */
+    const [
+        reclaimChallengeIds,
+        setReclaimChallengeIds,
+    ] = useState<Set<string>>(
+        new Set()
+    );
+
+    /*
+     * ============================================================
      * INLINE RENAME STATE
      * ============================================================
      */
-
     const [editingChallengeId, setEditingChallengeId] =
         useState<string | null>(null);
 
@@ -117,7 +132,9 @@ export default function ChallengesPage() {
     async function loadChallenges() {
         setLoading(true);
         setError("");
-
+        setReclaimChallengeIds(
+            new Set()
+        );
         const {
             data: { user },
             error: userError,
@@ -195,7 +212,191 @@ export default function ChallengesPage() {
                     "challenge_id",
                     ids
                 );
+            /*
+             * ============================================================
+             * RECLAIM STATUS
+             * ============================================================
+             *
+             * A challenge is marked RECLAIM only when:
+             *
+             * 1. The currently logged-in player is the creator.
+             * 2. The creator has a score.
+             * 3. At least one other player has a higher score.
+             *
+             * This lets the creator see the status directly from
+             * the challenge list without opening the challenge.
+             */
 
+            const {
+                data: challengeScores,
+                error: challengeScoresError,
+            } = await supabase
+                .from("challenge_scores")
+                .select(
+                    "challenge_id, user_id, score"
+                )
+                .in(
+                    "challenge_id",
+                    ids
+                );
+
+            if (challengeScoresError) {
+                setError(
+                    challengeScoresError.message
+                );
+            } else {
+                const scoreMap =
+                    new Map<
+                        string,
+                        Map<string, number>
+                    >();
+
+                (
+                    challengeScores ??
+                    []
+                ).forEach(
+                    (scoreRow) => {
+                        const challengeId =
+                            String(
+                                scoreRow.challenge_id
+                            );
+
+                        const userId =
+                            String(
+                                scoreRow.user_id
+                            );
+
+                        const score =
+                            Number(
+                                scoreRow.score
+                            );
+
+                        if (
+                            !Number.isFinite(
+                                score
+                            )
+                        ) {
+                            return;
+                        }
+
+                        if (
+                            !scoreMap.has(
+                                challengeId
+                            )
+                        ) {
+                            scoreMap.set(
+                                challengeId,
+                                new Map<
+                                    string,
+                                    number
+                                >()
+                            );
+                        }
+
+                        const challengeScoresForUsers =
+                            scoreMap.get(
+                                challengeId
+                            )!;
+
+                        const previous =
+                            challengeScoresForUsers.get(
+                                userId
+                            );
+
+                        /*
+                         * Be defensive in case duplicate rows
+                         * ever exist for a challenge/player.
+                         */
+                        challengeScoresForUsers.set(
+                            userId,
+                            previous ===
+                                undefined
+                                ? score
+                                : Math.max(
+                                    previous,
+                                    score
+                                )
+                        );
+                    }
+                );
+
+                const reclaimIds =
+                    new Set<string>();
+
+                challengeData.forEach(
+                    (challenge) => {
+                        /*
+                         * RECLAIM is a creator state.
+                         *
+                         * A player who is not the creator should
+                         * never get the RECLAIM badge.
+                         */
+                        if (
+                            challenge.creator_id !==
+                            user.id
+                        ) {
+                            return;
+                        }
+
+                        const users =
+                            scoreMap.get(
+                                challenge.id
+                            );
+
+                        if (!users) {
+                            return;
+                        }
+
+                        const creatorScore =
+                            users.get(
+                                challenge.creator_id
+                            );
+
+                        if (
+                            creatorScore ===
+                            undefined
+                        ) {
+                            return;
+                        }
+
+                        let highestOpponentScore =
+                            Number.NEGATIVE_INFINITY;
+
+                        users.forEach(
+                            (
+                                score,
+                                playerId
+                            ) => {
+                                if (
+                                    playerId ===
+                                    challenge.creator_id
+                                ) {
+                                    return;
+                                }
+
+                                highestOpponentScore =
+                                    Math.max(
+                                        highestOpponentScore,
+                                        score
+                                    );
+                            }
+                        );
+
+                        if (
+                            highestOpponentScore >
+                            creatorScore
+                        ) {
+                            reclaimIds.add(
+                                challenge.id
+                            );
+                        }
+                    }
+                );
+
+                setReclaimChallengeIds(
+                    reclaimIds
+                );
+            }
             if (playersError) {
                 setError(
                     playersError.message
@@ -1121,7 +1322,16 @@ export default function ChallengesPage() {
                                                     challenge.created_at
                                                 )}
                                             </p>
-
+                                            {isCreator &&
+                                                reclaimChallengeIds.has(
+                                                    challenge.id
+                                                ) && (
+                                                    <div className="mt-3">
+                                                        <span className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-amber-300">
+                                                            RECLAIM
+                                                        </span>
+                                                    </div>
+                                                )}
                                             <div className="mt-5 flex items-center gap-2 text-sm text-[var(--muted)]">
                                                 <Users className="h-4 w-4" />
 
