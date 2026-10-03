@@ -736,13 +736,14 @@ export async function POST(
         )
         .select(
           `
-          id,
-          user_id,
-          game_mode,
-          status,
-          team_season_id,
-          context
-          `
+  id,
+  user_id,
+  game_mode,
+  status,
+  team_season_id,
+  challenge_id,
+  context
+  `
         )
         .eq(
           "id",
@@ -828,11 +829,41 @@ export async function POST(
       (session.context ??
         {}) as SessionContext;
 
-    const challengeId =
+    const sessionChallengeId =
+      typeof session.challenge_id ===
+        "string"
+        ? session.challenge_id
+        : null;
+
+    const contextChallengeId =
       typeof context.challengeId ===
         "string"
         ? context.challengeId
         : null;
+
+    if (
+      sessionChallengeId &&
+      contextChallengeId &&
+      sessionChallengeId !==
+      contextChallengeId
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Game session challenge data is inconsistent.",
+          code:
+            "GAME_SESSION_CHALLENGE_MISMATCH",
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
+    const challengeId =
+      sessionChallengeId ??
+      contextChallengeId ??
+      null;
 
     const venueSnapshot =
       context.venueSnapshot;

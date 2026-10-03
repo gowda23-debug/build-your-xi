@@ -130,6 +130,7 @@ export async function GET(
           "game_mode",
           "ipl"
         )
+
         .maybeSingle();
 
       if (challengeError) {
@@ -157,6 +158,19 @@ export async function GET(
           },
           {
             status: 404,
+          }
+        );
+      }
+      if (challenge.status !== "active") {
+        return NextResponse.json(
+          {
+            error:
+              "This challenge is no longer active.",
+            code:
+              "CHALLENGE_NOT_ACTIVE",
+          },
+          {
+            status: 409,
           }
         );
       }
@@ -298,13 +312,14 @@ export async function GET(
         .from("game_sessions")
         .select(
           `
-          id,
-          user_id,
-          game_mode,
-          status,
-          team_season_id,
-          context
-          `
+  id,
+  user_id,
+  game_mode,
+  status,
+  team_season_id,
+  challenge_id,
+  context
+  `
         )
         .eq(
           "id",
@@ -378,10 +393,27 @@ export async function GET(
        *
        * We do NOT allow the browser to change it.
        */
+      const sessionChallengeId =
+        typeof session.challenge_id ===
+          "string"
+          ? session.challenge_id
+          : null;
+
+      const contextChallengeId =
+        typeof context.challengeId ===
+          "string"
+          ? context.challengeId
+          : null;
+
+      const authoritativeChallengeId =
+        sessionChallengeId ??
+        contextChallengeId ??
+        null;
+
       if (
         requestedChallengeId &&
-        context.challengeId !==
-          requestedChallengeId
+        authoritativeChallengeId !==
+        requestedChallengeId
       ) {
         return NextResponse.json(
           {
@@ -429,10 +461,10 @@ export async function GET(
 
       const selected =
         teamSeasons[
-          Math.floor(
-            Math.random() *
-              teamSeasons.length
-          )
+        Math.floor(
+          Math.random() *
+          teamSeasons.length
+        )
         ];
 
       const team =
@@ -614,10 +646,10 @@ export async function GET(
 
     const selected =
       teamSeasons[
-        Math.floor(
-          Math.random() *
-            teamSeasons.length
-        )
+      Math.floor(
+        Math.random() *
+        teamSeasons.length
+      )
       ];
 
     const team =
@@ -700,9 +732,9 @@ export async function GET(
          */
         ...(requestedChallengeId
           ? {
-              challengeId:
-                requestedChallengeId,
-            }
+            challengeId:
+              requestedChallengeId,
+          }
           : {}),
 
         venueId:
@@ -752,6 +784,9 @@ export async function GET(
 
           team_season_id:
             selected.id,
+
+          challenge_id:
+            requestedChallengeId || null,
 
           context:
             sessionContext,
