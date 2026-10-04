@@ -6,15 +6,25 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
+type GameMode = "ipl" | "world";
+
 type RequestBody = {
   gameScoreId?: string;
+  title?: string;
+};
+
+type GameScore = {
+  id: string;
+  user_id: string;
+  score: number | string;
+  game_mode: GameMode;
 };
 
 type Challenge = {
   id: string;
   creator_id: string;
   title: string;
-  game_mode: "ipl" | "world";
+  game_mode: GameMode;
   invite_code: string;
   status: string;
   created_at: string;
@@ -78,11 +88,45 @@ export async function POST(request: Request) {
         ? body.gameScoreId.trim()
         : "";
 
+    const requestedTitle =
+      typeof body.title === "string"
+        ? body.title.trim()
+        : "";
+
     if (!gameScoreId) {
       return NextResponse.json(
         {
+          error: "gameScoreId is required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    /*
+     * A challenge title is now supplied by the game UI.
+     *
+     * We still validate it server-side because the browser is
+     * never trusted.
+     */
+
+    if (!requestedTitle) {
+      return NextResponse.json(
+        {
+          error: "Challenge title is required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (requestedTitle.length > 60) {
+      return NextResponse.json(
+        {
           error:
-            "gameScoreId is required.",
+            "Challenge title must be 60 characters or fewer.",
         },
         {
           status: 400,
@@ -95,11 +139,16 @@ export async function POST(request: Request) {
      * VERIFY AUTHORITATIVE GAME SCORE
      * ============================================================
      *
-     * The browser sends only the gameScoreId.
+     * IMPORTANT:
      *
-     * We NEVER trust a score sent by the browser.
+     * The browser sends gameScoreId only.
      *
-     * The server loads the completed game from game_scores.
+     * The browser does NOT decide:
+     *
+     *     IPL
+     *     World
+     *
+     * The server reads game_mode directly from game_scores.
      */
 
     const {
@@ -108,7 +157,7 @@ export async function POST(request: Request) {
     } = await supabaseAdmin
       .from("game_scores")
       .select(
-        "id, user_id, score"
+        "id, user_id, score, game_mode"
       )
       .eq("id", gameScoreId)
       .eq("user_id", user.id)
@@ -144,7 +193,42 @@ export async function POST(request: Request) {
     }
 
     /*
-     * Make sure the authoritative score is a valid number.
+     * ============================================================
+     * AUTHORITATIVE GAME MODE
+     * ============================================================
+     *
+     * This is the security boundary.
+     *
+     * We NEVER accept game_mode from the browser.
+     */
+
+    const gameMode =
+      gameScore.game_mode;
+
+    if (
+      gameMode !== "ipl" &&
+      gameMode !== "world"
+    ) {
+      console.error(
+        "Create challenge received unsupported game mode:",
+        gameMode
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "The completed game has an unsupported game mode.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    /*
+     * ============================================================
+     * VERIFY AUTHORITATIVE SCORE
+     * ============================================================
      */
 
     const score =
@@ -167,10 +251,14 @@ export async function POST(request: Request) {
      * CREATE CHALLENGE
      * ============================================================
      *
-     * Use the existing database RPC.
+     * gameMode comes from game_scores.
      *
-     * The authenticated Supabase client is used here so the
-     * database function can use the authenticated user's identity.
+     * Therefore:
+     *
+     * IPL score  -> IPL challenge
+     * World score -> World challenge
+     *
+     * The browser cannot override this.
      */
 
     const supabase =
@@ -183,10 +271,10 @@ export async function POST(request: Request) {
       "create_challenge",
       {
         p_title:
-          "My IPL Challenge",
+          requestedTitle,
 
         p_game_mode:
-          "ipl",
+          gameMode,
       }
     );
 
@@ -238,6 +326,58 @@ export async function POST(request: Request) {
 
     /*
      * ============================================================
+     * VERIFY CHALLENGE MODE
+     * ============================================================
+     *
+     * This is an additional server-side consistency check.
+     */
+
+    if (
+      challenge.game_mode !==
+      gameMode
+    ) {
+      console.error(
+        "Challenge mode mismatch:",
+        {
+          expected: gameMode,
+          returned:
+            challenge.game_mode,
+        }
+      );
+
+      /*
+       * Cleanup the incorrectly-created challenge.
+       */
+
+      await supabaseAdmin
+        .from("challenge_players")
+        .delete()
+        .eq(
+          "challenge_id",
+          challenge.id
+        );
+
+      await supabaseAdmin
+        .from("challenges")
+        .delete()
+        .eq(
+          "id",
+          challenge.id
+        );
+
+      return NextResponse.json(
+        {
+          error:
+            "The challenge game mode could not be verified.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    /*
+     * ============================================================
      * ADD CREATOR TO CHALLENGE
      * ============================================================
      */
@@ -267,7 +407,8 @@ export async function POST(request: Request) {
       );
 
       /*
-       * Cleanup the challenge because creation was not completed.
+       * Cleanup the challenge because creation
+       * was not completed.
        */
 
       await supabaseAdmin
@@ -353,8 +494,6 @@ export async function POST(request: Request) {
      * ATTACH AUTHORITATIVE SCORE
      * ============================================================
      *
-     * New challenge:
-     *
      * game_scores.score
      *        ↓
      * challenge_scores.score
@@ -412,13 +551,14 @@ export async function POST(request: Request) {
             "Unable to initialize the challenge score.",
         },
         {
-          status: 500
+          status: 500,
         }
       );
     }
 
     /*
-     * Normally a brand-new challenge will not have a score yet.
+     * Normally a brand-new challenge will not
+     * have a score yet.
      */
 
     if (!existingScore) {
@@ -473,7 +613,7 @@ export async function POST(request: Request) {
               "Unable to attach your completed game score to the challenge.",
           },
           {
-            status: 500
+            status: 500,
           }
         );
       }
@@ -482,9 +622,6 @@ export async function POST(request: Request) {
        * ==========================================================
        * VERIFY INSERTED SCORE
        * ==========================================================
-       *
-       * Do not assume that a successful request means the
-       * expected row is actually available.
        */
 
       if (
@@ -540,7 +677,7 @@ export async function POST(request: Request) {
               "The challenge was created, but your score could not be verified. Please try again.",
           },
           {
-            status: 500
+            status: 500,
           }
         );
       }
@@ -562,6 +699,12 @@ export async function POST(request: Request) {
         challenge.invite_code,
 
       score,
+
+      gameMode:
+        gameMode,
+
+      title:
+        challenge.title,
     });
   } catch (error) {
     console.error(

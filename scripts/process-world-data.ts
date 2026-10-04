@@ -2,8 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-  WORLD_EDITIONS,
-  WORLD_EDITION_YEARS,
+  WORLD_AVAILABLE_EDITIONS,
+  WORLD_AVAILABLE_EDITION_YEARS,
+  getWorldEdition,
 } from "./data/world/editions";
 
 type WorldRole =
@@ -55,12 +56,12 @@ type WorldSeason = {
 
 const ROOT = process.cwd();
 
-const SOURCE_FILE = path.join(
+const RAW_DIRECTORY = path.join(
   ROOT,
   "scripts",
   "data",
   "world",
-  "source.json",
+  "raw"
 );
 
 const PROCESSED_DIRECTORY = path.join(
@@ -68,24 +69,24 @@ const PROCESSED_DIRECTORY = path.join(
   "scripts",
   "data",
   "world",
-  "processed",
+  "processed"
 );
 
 function fail(message: string): never {
   throw new Error(
-    `[WORLD PROCESSING] ${message}`,
+    `[WORLD PROCESSING] ${message}`
   );
 }
 
 function ensureDirectory(
-  directory: string,
+  directory: string
 ) {
   if (fs.existsSync(directory)) {
     if (
       !fs.statSync(directory).isDirectory()
     ) {
       fail(
-        `"${directory}" exists but is not a directory.`,
+        `"${directory}" exists but is not a directory.`
       );
     }
 
@@ -97,27 +98,24 @@ function ensureDirectory(
   });
 }
 
-function readSource(): unknown {
-  if (!fs.existsSync(SOURCE_FILE)) {
+function readJsonFile(
+  filePath: string
+): unknown {
+  if (!fs.existsSync(filePath)) {
     fail(
-      `Missing World source file:
-
-${SOURCE_FILE}
-
-Create the source file from the authoritative World Cup dataset before running processing.`,
+      `Missing raw source file:\n${filePath}`
     );
   }
 
-  const raw = fs.readFileSync(
-    SOURCE_FILE,
-    "utf8",
-  );
+  const raw =
+    fs.readFileSync(
+      filePath,
+      "utf8"
+    );
 
   if (!raw.trim()) {
     fail(
-      `World source file is empty:
-
-${SOURCE_FILE}`,
+      `Raw source file is empty:\n${filePath}`
     );
   }
 
@@ -125,11 +123,11 @@ ${SOURCE_FILE}`,
     return JSON.parse(raw);
   } catch (error) {
     fail(
-      `World source file contains invalid JSON: ${
+      `Invalid JSON in ${filePath}: ${
         error instanceof Error
           ? error.message
           : String(error)
-      }`,
+      }`
     );
   }
 }
@@ -137,14 +135,14 @@ ${SOURCE_FILE}`,
 function requireString(
   value: unknown,
   field: string,
-  context: string,
+  context: string
 ): string {
   if (
     typeof value !== "string" ||
     value.trim().length === 0
   ) {
     fail(
-      `${context}: ${field} must be a non-empty string.`,
+      `${context}: ${field} must be a non-empty string.`
     );
   }
 
@@ -154,7 +152,7 @@ function requireString(
 function requireInteger(
   value: unknown,
   field: string,
-  context: string,
+  context: string
 ): number {
   if (
     typeof value !== "number" ||
@@ -162,7 +160,7 @@ function requireInteger(
     value < 0
   ) {
     fail(
-      `${context}: ${field} must be a non-negative integer.`,
+      `${context}: ${field} must be a non-negative integer.`
     );
   }
 
@@ -172,7 +170,7 @@ function requireInteger(
 function requireNumberOrNull(
   value: unknown,
   field: string,
-  context: string,
+  context: string
 ): number | null {
   if (value === null) {
     return null;
@@ -184,7 +182,7 @@ function requireNumberOrNull(
     value < 0
   ) {
     fail(
-      `${context}: ${field} must be a non-negative number or null.`,
+      `${context}: ${field} must be a non-negative number or null.`
     );
   }
 
@@ -193,14 +191,14 @@ function requireNumberOrNull(
 
 function requireSources(
   value: unknown,
-  context: string,
+  context: string
 ): string[] {
   if (
     !Array.isArray(value) ||
     value.length === 0
   ) {
     fail(
-      `${context}: at least one source URL is required.`,
+      `${context}: at least one official source URL is required.`
     );
   }
 
@@ -210,30 +208,30 @@ function requireSources(
         requireString(
           source,
           `sources[${index}]`,
-          context,
+          context
         );
 
       if (
         !url.startsWith(
-          "https://",
+          "https://"
         ) &&
         !url.startsWith(
-          "http://",
+          "http://"
         )
       ) {
         fail(
-          `${context}: invalid source URL "${url}".`,
+          `${context}: invalid source URL "${url}".`
         );
       }
 
       return url;
-    },
+    }
   );
 }
 
 function parseStats(
   value: unknown,
-  context: string,
+  context: string
 ): WorldStats {
   if (
     typeof value !== "object" ||
@@ -241,7 +239,7 @@ function parseStats(
     Array.isArray(value)
   ) {
     fail(
-      `${context}: stats must be an object.`,
+      `${context}: stats must be an object.`
     );
   }
 
@@ -255,77 +253,77 @@ function parseStats(
     matches: requireInteger(
       stats.matches,
       "matches",
-      context,
+      context
     ),
 
     innings: requireInteger(
       stats.innings,
       "innings",
-      context,
+      context
     ),
 
     runs: requireInteger(
       stats.runs,
       "runs",
-      context,
+      context
     ),
 
     batting_average:
       requireNumberOrNull(
         stats.batting_average,
         "batting_average",
-        context,
+        context
       ),
 
     strike_rate:
       requireNumberOrNull(
         stats.strike_rate,
         "strike_rate",
-        context,
+        context
       ),
 
     hundreds: requireInteger(
       stats.hundreds,
       "hundreds",
-      context,
+      context
     ),
 
     fifties: requireInteger(
       stats.fifties,
       "fifties",
-      context,
+      context
     ),
 
     wickets: requireInteger(
       stats.wickets,
       "wickets",
-      context,
+      context
     ),
 
     bowling_average:
       requireNumberOrNull(
         stats.bowling_average,
         "bowling_average",
-        context,
+        context
       ),
 
     economy:
       requireNumberOrNull(
         stats.economy,
         "economy",
-        context,
+        context
       ),
 
     catches: requireInteger(
       stats.catches,
       "catches",
-      context,
+      context
     ),
 
     stumpings: requireInteger(
       stats.stumpings,
       "stumpings",
-      context,
+      context
     ),
   };
 
@@ -334,7 +332,7 @@ function parseStats(
     result.matches
   ) {
     fail(
-      `${context}: innings cannot exceed matches.`,
+      `${context}: innings cannot exceed matches.`
     );
   }
 
@@ -343,7 +341,7 @@ function parseStats(
     result.innings
   ) {
     fail(
-      `${context}: hundreds cannot exceed innings.`,
+      `${context}: hundreds cannot exceed innings.`
     );
   }
 
@@ -352,7 +350,7 @@ function parseStats(
     result.innings
   ) {
     fail(
-      `${context}: fifties cannot exceed innings.`,
+      `${context}: fifties cannot exceed innings.`
     );
   }
 
@@ -361,7 +359,7 @@ function parseStats(
 
 function parsePlayer(
   value: unknown,
-  context: string,
+  context: string
 ): WorldPlayer {
   if (
     typeof value !== "object" ||
@@ -369,7 +367,7 @@ function parsePlayer(
     Array.isArray(value)
   ) {
     fail(
-      `${context}: player must be an object.`,
+      `${context}: player must be an object.`
     );
   }
 
@@ -383,7 +381,7 @@ function parsePlayer(
     requireString(
       player.role,
       "role",
-      context,
+      context
     );
 
   if (
@@ -395,7 +393,7 @@ function parsePlayer(
     ].includes(role)
   ) {
     fail(
-      `${context}: invalid role "${role}".`,
+      `${context}: invalid role "${role}".`
     );
   }
 
@@ -404,34 +402,36 @@ function parsePlayer(
       requireString(
         player.fullName,
         "fullName",
-        context,
+        context
       ),
 
     sourcePlayerId:
       requireString(
         player.sourcePlayerId,
         "sourcePlayerId",
-        context,
+        context
       ),
 
-    role: role as WorldRole,
+    role:
+      role as WorldRole,
 
-    stats: parseStats(
-      player.stats,
-      context,
-    ),
+    stats:
+      parseStats(
+        player.stats,
+        context
+      ),
 
     sources:
       requireSources(
         player.sources,
-        context,
+        context
       ),
   };
 }
 
 function parseTeam(
   value: unknown,
-  context: string,
+  context: string
 ): WorldTeam {
   if (
     typeof value !== "object" ||
@@ -439,7 +439,7 @@ function parseTeam(
     Array.isArray(value)
   ) {
     fail(
-      `${context}: team must be an object.`,
+      `${context}: team must be an object.`
     );
   }
 
@@ -451,19 +451,12 @@ function parseTeam(
 
   if (
     !Array.isArray(
-      team.players,
-    )
-  ) {
-    fail(
-      `${context}: players must be an array.`,
-    );
-  }
-
-  if (
+      team.players
+    ) ||
     team.players.length === 0
   ) {
     fail(
-      `${context}: players cannot be empty.`,
+      `${context}: players cannot be empty.`
     );
   }
 
@@ -471,30 +464,32 @@ function parseTeam(
     team.players.map(
       (
         player,
-        index,
+        index
       ) =>
         parsePlayer(
           player,
-          `${context}/player-${index}`,
-        ),
+          `${context}/player-${index}`
+        )
     );
 
   const playerIds =
     new Set<string>();
 
-  for (const player of players) {
+  for (
+    const player of players
+  ) {
     if (
       playerIds.has(
-        player.sourcePlayerId,
+        player.sourcePlayerId
       )
     ) {
       fail(
-        `${context}: duplicate sourcePlayerId "${player.sourcePlayerId}".`,
+        `${context}: duplicate sourcePlayerId "${player.sourcePlayerId}".`
       );
     }
 
     playerIds.add(
-      player.sourcePlayerId,
+      player.sourcePlayerId
     );
   }
 
@@ -503,21 +498,21 @@ function parseTeam(
       requireString(
         team.name,
         "name",
-        context,
+        context
       ),
 
     shortName:
       requireString(
         team.shortName,
         "shortName",
-        context,
+        context
       ),
 
     slug:
       requireString(
         team.slug,
         "slug",
-        context,
+        context
       ),
 
     players,
@@ -525,14 +520,14 @@ function parseTeam(
     sources:
       requireSources(
         team.sources,
-        context,
+        context
       ),
   };
 }
 
 function parseSeason(
   value: unknown,
-  expectedYear: number,
+  expectedYear: number
 ): WorldSeason {
   if (
     typeof value !== "object" ||
@@ -540,7 +535,7 @@ function parseSeason(
     Array.isArray(value)
   ) {
     fail(
-      `${expectedYear}: season must be an object.`,
+      `${expectedYear}: season must be an object.`
     );
   }
 
@@ -550,30 +545,38 @@ function parseSeason(
       unknown
     >;
 
+  const edition =
+    getWorldEdition(
+      expectedYear
+    );
+
+  if (!edition) {
+    fail(
+      `${expectedYear}: unsupported World Cup edition.`
+    );
+  }
+
+  if (
+    edition.status !==
+    "available"
+  ) {
+    fail(
+      `${expectedYear}: this World Cup edition is currently unavailable.`
+    );
+  }
+
   const year =
     requireInteger(
       season.year,
       "year",
-      String(expectedYear),
+      String(expectedYear)
     );
 
   if (
     year !== expectedYear
   ) {
     fail(
-      `Expected ${expectedYear}, received ${year}.`,
-    );
-  }
-
-  const edition =
-    WORLD_EDITIONS.find(
-      (item) =>
-        item.year === year,
-    );
-
-  if (!edition) {
-    fail(
-      `${year}: unsupported World Cup edition.`,
+      `Expected ${expectedYear}, received ${year}.`
     );
   }
 
@@ -581,7 +584,7 @@ function parseSeason(
     requireString(
       season.seasonName,
       "seasonName",
-      String(year),
+      String(year)
     );
 
   if (
@@ -589,15 +592,16 @@ function parseSeason(
     edition.seasonName
   ) {
     fail(
-      `${year}: seasonName must be "${edition.seasonName}".`,
+      `${year}: seasonName must be "${edition.seasonName}".`
     );
   }
 
   if (
-    season.format !== "ODI"
+    season.format !==
+    "ODI"
   ) {
     fail(
-      `${year}: format must be ODI.`,
+      `${year}: format must be ODI.`
     );
   }
 
@@ -606,7 +610,7 @@ function parseSeason(
     "ICC Men's Cricket World Cup"
   ) {
     fail(
-      `${year}: invalid competition.`,
+      `${year}: invalid competition.`
     );
   }
 
@@ -614,7 +618,7 @@ function parseSeason(
     requireInteger(
       season.oversPerInnings,
       "oversPerInnings",
-      String(year),
+      String(year)
     );
 
   if (
@@ -622,18 +626,18 @@ function parseSeason(
     edition.oversPerInnings
   ) {
     fail(
-      `${year}: oversPerInnings must be ${edition.oversPerInnings}.`,
+      `${year}: oversPerInnings must be ${edition.oversPerInnings}.`
     );
   }
 
   if (
     !Array.isArray(
-      season.teams,
+      season.teams
     ) ||
     season.teams.length === 0
   ) {
     fail(
-      `${year}: teams cannot be empty.`,
+      `${year}: teams cannot be empty.`
     );
   }
 
@@ -644,12 +648,12 @@ function parseSeason(
     season.teams.map(
       (
         team,
-        index,
+        index
       ) => {
         const parsed =
           parseTeam(
             team,
-            `${year}/team-${index}`,
+            `${year}/team-${index}`
           );
 
         const key =
@@ -660,14 +664,14 @@ function parseSeason(
           teamNames.has(key)
         ) {
           fail(
-            `${year}: duplicate team "${parsed.name}".`,
+            `${year}: duplicate team "${parsed.name}".`
           );
         }
 
         teamNames.add(key);
 
         return parsed;
-      },
+      }
     );
 
   return {
@@ -675,7 +679,8 @@ function parseSeason(
 
     seasonName,
 
-    format: "ODI",
+    format:
+      "ODI",
 
     competition:
       "ICC Men's Cricket World Cup",
@@ -688,151 +693,62 @@ function parseSeason(
     sources:
       requireSources(
         season.sources,
-        String(year),
+        String(year)
       ),
   };
 }
 
 function main() {
   console.log(
-    "[WORLD PROCESSING] Starting World Cup processing.",
+    "[WORLD PROCESSING] Starting."
   );
 
   console.log(
-    `[WORLD PROCESSING] Expected editions: ${WORLD_EDITION_YEARS.join(
-      ", ",
-    )}`,
+    `[WORLD PROCESSING] Enabled editions: ${WORLD_AVAILABLE_EDITION_YEARS.join(
+      ", "
+    )}`
+  );
+
+  console.log(
+    "[WORLD PROCESSING] 1975 is intentionally skipped until its official dataset is available."
   );
 
   ensureDirectory(
-    PROCESSED_DIRECTORY,
+    RAW_DIRECTORY
   );
 
-  const source =
-    readSource();
-
-  if (
-    typeof source !== "object" ||
-    source === null ||
-    Array.isArray(source)
-  ) {
-    fail(
-      "source.json must contain an object.",
-    );
-  }
-
-  const sourceObject =
-    source as Record<
-      string,
-      unknown
-    >;
-
-  if (
-    !Array.isArray(
-      sourceObject.editions,
-    )
-  ) {
-    fail(
-      "source.json must contain an editions array.",
-    );
-  }
-
-  const sourceYears =
-    new Set<number>();
+  ensureDirectory(
+    PROCESSED_DIRECTORY
+  );
 
   for (
     const edition of
-      sourceObject.editions
+      WORLD_AVAILABLE_EDITIONS
   ) {
-    if (
-      typeof edition ===
-      "object" &&
-      edition !== null &&
-      !Array.isArray(
-        edition,
-      )
-    ) {
-      const year =
-        (edition as Record<
-          string,
-          unknown
-        >).year;
-
-      if (
-        typeof year ===
-        "number"
-      ) {
-        sourceYears.add(
-          year,
-        );
-      }
-    }
-  }
-
-  for (
-    const year of
-      WORLD_EDITION_YEARS
-  ) {
-    if (
-      !sourceYears.has(
-        year,
-      )
-    ) {
-      fail(
-        `source.json is missing World Cup edition ${year}.`,
-      );
-    }
-  }
-
-  const processedYears =
-    new Set<number>();
-
-  for (
-    const edition of
-      sourceObject.editions
-  ) {
-    if (
-      typeof edition !==
-        "object" ||
-      edition === null ||
-      Array.isArray(
-        edition,
-      )
-    ) {
-      fail(
-        "Invalid edition entry in source.json.",
-      );
-    }
-
     const year =
-      (edition as Record<
-        string,
-        unknown
-      >).year;
+      edition.year;
 
-    if (
-      typeof year !==
-      "number"
-    ) {
-      fail(
-        "Every edition must have a numeric year.",
+    const inputPath =
+      path.join(
+        RAW_DIRECTORY,
+        `${year}.json`
       );
-    }
-
-    const season =
-      parseSeason(
-        edition,
-        year,
-      );
-
-    processedYears.add(
-      year,
-    );
 
     const outputPath =
       path.join(
         PROCESSED_DIRECTORY,
-        `${year}.json`,
+        `${year}.json`
+      );
+
+    const raw =
+      readJsonFile(
+        inputPath
+      );
+
+    const season =
+      parseSeason(
+        raw,
+        year
       );
 
     fs.writeFileSync(
@@ -840,39 +756,30 @@ function main() {
       `${JSON.stringify(
         season,
         null,
-        2,
+        2
       )}\n`,
-      "utf8",
+      "utf8"
     );
 
     const playerCount =
       season.teams.reduce(
         (
           total,
-          team,
+          team
         ) =>
           total +
           team.players.length,
-        0,
+        0
       );
 
     console.log(
-      `[WORLD PROCESSING] ${year}: ${season.teams.length} teams / ${playerCount} players`,
-    );
-  }
-
-  if (
-    processedYears.size !==
-    WORLD_EDITION_YEARS.length
-  ) {
-    fail(
-      `Expected ${WORLD_EDITION_YEARS.length} processed editions, found ${processedYears.size}.`,
+      `[WORLD PROCESSING] ${year}: ${season.teams.length} teams / ${playerCount} players`
     );
   }
 
   console.log("");
   console.log(
-    "[WORLD PROCESSING] Processing successful.",
+    "[WORLD PROCESSING] Successful."
   );
 }
 

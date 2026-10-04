@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-  WORLD_EDITION_YEARS,
+  WORLD_AVAILABLE_EDITION_YEARS,
   getWorldEdition,
 } from "./data/world/editions";
 
@@ -60,86 +60,168 @@ const ROLES: readonly WorldRole[] = [
   "BOWL",
 ];
 
-const DATA_DIRECTORY = path.join(
-  process.cwd(),
-  "scripts",
-  "data",
-  "world",
-  "processed",
-);
+const DATA_DIRECTORY =
+  path.join(
+    process.cwd(),
+    "scripts",
+    "data",
+    "world",
+    "processed"
+  );
 
-function fail(message: string): never {
+function fail(
+  message: string
+): never {
   throw new Error(
-    `[WORLD VALIDATION] ${message}`,
+    `[WORLD VALIDATION] ${message}`
   );
 }
 
-function isFiniteNumber(
-  value: unknown,
-): value is number {
-  return (
-    typeof value === "number" &&
-    Number.isFinite(value)
-  );
+function readJson(
+  filePath: string
+): unknown {
+  if (
+    !fs.existsSync(filePath)
+  ) {
+    fail(
+      `Missing file: ${filePath}`
+    );
+  }
+
+  const raw =
+    fs.readFileSync(
+      filePath,
+      "utf8"
+    );
+
+  if (!raw.trim()) {
+    fail(
+      `File is empty: ${filePath}`
+    );
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    fail(
+      `${path.basename(filePath)}: invalid JSON. ${
+        error instanceof Error
+          ? error.message
+          : String(error)
+      }`
+    );
+  }
+}
+
+function validateSources(
+  sources: unknown,
+  context: string
+) {
+  if (
+    !Array.isArray(
+      sources
+    ) ||
+    sources.length === 0
+  ) {
+    fail(
+      `${context}: at least one official source is required.`
+    );
+  }
+
+  for (
+    const source of sources
+  ) {
+    if (
+      typeof source !==
+        "string" ||
+      source.trim().length === 0 ||
+      (
+        !source.startsWith(
+          "https://"
+        ) &&
+        !source.startsWith(
+          "http://"
+        )
+      )
+    ) {
+      fail(
+        `${context}: invalid source URL.`
+      );
+    }
+  }
 }
 
 function validateStats(
   stats: WorldStats,
-  context: string,
+  context: string
 ) {
-  if (!stats || typeof stats !== "object") {
-    fail(`${context}: stats object is required.`);
+  if (
+    !stats ||
+    typeof stats !==
+      "object"
+  ) {
+    fail(
+      `${context}: stats are required.`
+    );
   }
 
-  const integerFields = [
-    "matches",
-    "innings",
-    "runs",
-    "hundreds",
-    "fifties",
-    "wickets",
-    "catches",
-    "stumpings",
-  ] as const;
+  const integers =
+    [
+      "matches",
+      "innings",
+      "runs",
+      "hundreds",
+      "fifties",
+      "wickets",
+      "catches",
+      "stumpings",
+    ] as const;
 
-  for (const field of integerFields) {
-    const value = stats[field];
+  for (
+    const field of integers
+  ) {
+    const value =
+      stats[field];
 
     if (
-      !Number.isInteger(value) ||
+      !Number.isInteger(
+        value
+      ) ||
       value < 0
     ) {
       fail(
-        `${context}: ${field} must be a non-negative integer.`,
+        `${context}: ${field} must be a non-negative integer.`
       );
     }
   }
 
-  const numericFields = [
-    "batting_average",
-    "strike_rate",
-    "bowling_average",
-    "economy",
-  ] as const;
+  const decimals =
+    [
+      "batting_average",
+      "strike_rate",
+      "bowling_average",
+      "economy",
+    ] as const;
 
-  for (const field of numericFields) {
-    const value = stats[field];
+  for (
+    const field of decimals
+  ) {
+    const value =
+      stats[field];
 
     if (
       value !== null &&
-      !isFiniteNumber(value)
+      (
+        typeof value !==
+          "number" ||
+        !Number.isFinite(
+          value
+        ) ||
+        value < 0
+      )
     ) {
       fail(
-        `${context}: ${field} must be a finite number or null.`,
-      );
-    }
-
-    if (
-      typeof value === "number" &&
-      value < 0
-    ) {
-      fail(
-        `${context}: ${field} cannot be negative.`,
+        `${context}: ${field} must be a non-negative number or null.`
       );
     }
   }
@@ -149,7 +231,7 @@ function validateStats(
     stats.matches
   ) {
     fail(
-      `${context}: innings cannot exceed matches.`,
+      `${context}: innings cannot exceed matches.`
     );
   }
 
@@ -158,7 +240,7 @@ function validateStats(
     stats.innings
   ) {
     fail(
-      `${context}: hundreds cannot exceed innings.`,
+      `${context}: hundreds cannot exceed innings.`
     );
   }
 
@@ -167,108 +249,36 @@ function validateStats(
     stats.innings
   ) {
     fail(
-      `${context}: fifties cannot exceed innings.`,
+      `${context}: fifties cannot exceed innings.`
     );
   }
-}
-
-function validateSources(
-  sources: unknown,
-  context: string,
-) {
-  if (
-    !Array.isArray(sources) ||
-    sources.length === 0
-  ) {
-    fail(
-      `${context}: at least one official source is required.`,
-    );
-  }
-
-  for (const source of sources) {
-    if (
-      typeof source !== "string" ||
-      source.trim().length === 0
-    ) {
-      fail(
-        `${context}: every source must be a non-empty string.`,
-      );
-    }
-
-    if (
-      !source.startsWith("http://") &&
-      !source.startsWith("https://")
-    ) {
-      fail(
-        `${context}: invalid source URL "${source}".`,
-      );
-    }
-  }
-}
-
-function validatePlayer(
-  player: WorldPlayer,
-  context: string,
-) {
-  if (
-    !player.fullName ||
-    !player.fullName.trim()
-  ) {
-    fail(
-      `${context}: fullName is required.`,
-    );
-  }
-
-  if (
-    !player.sourcePlayerId ||
-    !player.sourcePlayerId.trim()
-  ) {
-    fail(
-      `${context}: sourcePlayerId is required.`,
-    );
-  }
-
-  if (
-    !ROLES.includes(player.role)
-  ) {
-    fail(
-      `${context}: invalid role "${String(
-        player.role,
-      )}".`,
-    );
-  }
-
-  validateSources(
-    player.sources,
-    context,
-  );
-
-  validateStats(
-    player.stats,
-    context,
-  );
 }
 
 function validateSeason(
   season: WorldSeasonFile,
-  fileName: string,
+  year: number
 ) {
+  const edition =
+    getWorldEdition(
+      year
+    );
+
   if (
-    !WORLD_EDITION_YEARS.includes(
-      season.year,
-    )
+    !edition ||
+    edition.status !==
+      "available"
   ) {
     fail(
-      `${fileName}: unsupported World Cup year ${season.year}.`,
+      `${year}: edition is not currently available.`
     );
   }
 
-  const edition =
-    getWorldEdition(season.year);
-
-  if (!edition) {
+  if (
+    season.year !==
+    year
+  ) {
     fail(
-      `${fileName}: no edition configuration exists for ${season.year}.`,
+      `${year}: year mismatch.`
     );
   }
 
@@ -277,174 +287,177 @@ function validateSeason(
     edition.seasonName
   ) {
     fail(
-      `${fileName}: seasonName must be "${edition.seasonName}".`,
+      `${year}: invalid seasonName.`
     );
   }
 
   if (
     season.format !==
-    edition.format
+    "ODI"
   ) {
     fail(
-      `${fileName}: format must be ${edition.format}.`,
+      `${year}: format must be ODI.`
     );
   }
 
   if (
     season.competition !==
-    edition.competition
+    "ICC Men's Cricket World Cup"
   ) {
     fail(
-      `${fileName}: invalid competition.`,
+      `${year}: invalid competition.`
     );
   }
 
   if (
-    season.oversPerInnings !== undefined &&
     season.oversPerInnings !==
-      edition.oversPerInnings
+    edition.oversPerInnings
   ) {
     fail(
-      `${fileName}: oversPerInnings must be ${edition.oversPerInnings}.`,
-    );
-  }
-
-  if (
-    !Array.isArray(
-      season.teams,
-    ) ||
-    season.teams.length === 0
-  ) {
-    fail(
-      `${fileName}: teams array is empty.`,
+      `${year}: oversPerInnings must be ${edition.oversPerInnings}.`
     );
   }
 
   validateSources(
     season.sources,
-    fileName,
+    String(year)
   );
 
-  const teamKeys =
+  if (
+    !Array.isArray(
+      season.teams
+    ) ||
+    season.teams.length === 0
+  ) {
+    fail(
+      `${year}: teams cannot be empty.`
+    );
+  }
+
+  const teamNames =
     new Set<string>();
 
-  const editionSourceIds =
+  const sourcePlayers =
     new Map<
       string,
       string
     >();
 
-  for (const team of season.teams) {
-    if (
-      !team.name ||
-      !team.name.trim()
-    ) {
-      fail(
-        `${fileName}: team name is required.`,
-      );
-    }
-
-    if (
-      !team.shortName ||
-      !team.shortName.trim()
-    ) {
-      fail(
-        `${fileName}: ${team.name}: shortName is required.`,
-      );
-    }
-
-    if (
-      !team.slug ||
-      !team.slug.trim()
-    ) {
-      fail(
-        `${fileName}: ${team.name}: slug is required.`,
-      );
-    }
-
+  for (
+    const team of
+      season.teams
+  ) {
     const teamKey =
       team.name
         .trim()
         .toLowerCase();
 
     if (
-      teamKeys.has(teamKey)
+      teamNames.has(
+        teamKey
+      )
     ) {
       fail(
-        `${fileName}: duplicate team "${team.name}".`,
+        `${year}: duplicate team ${team.name}.`
       );
     }
 
-    teamKeys.add(teamKey);
+    teamNames.add(
+      teamKey
+    );
 
     validateSources(
       team.sources,
-      `${season.year}/${team.name}`,
+      `${year}/${team.name}`
     );
 
     if (
       !Array.isArray(
-        team.players,
+        team.players
       ) ||
-      team.players.length === 0
+      team.players.length ===
+        0
     ) {
       fail(
-        `${fileName}: ${team.name} has no players.`,
+        `${year}/${team.name}: players are required.`
       );
     }
 
-    const playerKeys =
+    const teamPlayerIds =
       new Set<string>();
 
-    for (const player of team.players) {
-      const playerContext =
-        `${season.year}/${team.name}/${player.fullName}`;
-
-      const playerKey =
-        player.fullName
-          .trim()
-          .toLowerCase();
+    for (
+      const player of
+        team.players
+    ) {
+      if (
+        !player.fullName?.trim()
+      ) {
+        fail(
+          `${year}/${team.name}: player name is required.`
+        );
+      }
 
       if (
-        playerKeys.has(
-          playerKey,
+        !player.sourcePlayerId?.trim()
+      ) {
+        fail(
+          `${year}/${team.name}/${player.fullName}: sourcePlayerId is required.`
+        );
+      }
+
+      if (
+        !ROLES.includes(
+          player.role
         )
       ) {
         fail(
-          `${fileName}: duplicate player "${player.fullName}" in ${team.name}.`,
+          `${year}/${team.name}/${player.fullName}: invalid role.`
         );
       }
 
-      playerKeys.add(
-        playerKey,
+      if (
+        teamPlayerIds.has(
+          player.sourcePlayerId
+        )
+      ) {
+        fail(
+          `${year}/${team.name}: duplicate player sourcePlayerId ${player.sourcePlayerId}.`
+        );
+      }
+
+      teamPlayerIds.add(
+        player.sourcePlayerId
       );
 
-      const sourceId =
-        player.sourcePlayerId.trim();
-
-      const previousPlayer =
-        editionSourceIds.get(
-          sourceId,
+      const existingName =
+        sourcePlayers.get(
+          player.sourcePlayerId
         );
 
       if (
-        previousPlayer &&
-        previousPlayer !==
-          player.fullName.trim()
+        existingName &&
+        existingName !==
+          player.fullName
       ) {
         fail(
-          `${fileName}: sourcePlayerId "${sourceId}" maps to both "${previousPlayer}" and "${player.fullName}".`,
+          `${year}: sourcePlayerId ${player.sourcePlayerId} maps to multiple names.`
         );
       }
 
-      editionSourceIds.set(
-        sourceId,
-        player.fullName.trim(),
+      sourcePlayers.set(
+        player.sourcePlayerId,
+        player.fullName
       );
 
-      validatePlayer(
-        player,
-        playerContext,
+      validateSources(
+        player.sources,
+        `${year}/${team.name}/${player.fullName}`
+      );
+
+      validateStats(
+        player.stats,
+        `${year}/${team.name}/${player.fullName}`
       );
     }
   }
@@ -452,135 +465,92 @@ function validateSeason(
 
 function main() {
   console.log(
-    "[WORLD VALIDATION] Starting validation.",
+    "[WORLD VALIDATION] Starting."
   );
 
   console.log(
-    `[WORLD VALIDATION] Expected editions: ${WORLD_EDITION_YEARS.join(
-      ", ",
-    )}`,
+    `[WORLD VALIDATION] Enabled editions: ${WORLD_AVAILABLE_EDITION_YEARS.join(
+      ", "
+    )}`
   );
 
-  if (
-    !fs.existsSync(
-      DATA_DIRECTORY,
-    )
-  ) {
-    fail(
-      `Missing directory ${DATA_DIRECTORY}`,
-    );
-  }
-
   const files =
-    fs
-      .readdirSync(
-        DATA_DIRECTORY,
-      )
-      .filter(
-        (file) =>
-          file.endsWith(".json") &&
-          !file.startsWith("_"),
-      )
-      .sort();
+    fs.existsSync(
+      DATA_DIRECTORY
+    )
+      ? fs.readdirSync(
+          DATA_DIRECTORY
+        )
+      : [];
 
-  if (
-    files.length !==
-    WORLD_EDITION_YEARS.length
+  const expected =
+    new Set(
+      WORLD_AVAILABLE_EDITION_YEARS.map(
+        (year) =>
+          `${year}.json`
+      )
+    );
+
+  for (
+    const file of files
   ) {
-    fail(
-      `Expected ${WORLD_EDITION_YEARS.length} processed World Cup JSON files, found ${files.length}.`,
-    );
-  }
-
-  const years =
-    new Set<number>();
-
-  let totalTeams = 0;
-  let totalPlayers = 0;
-
-  for (const file of files) {
-    const raw =
-      fs.readFileSync(
-        path.join(
-          DATA_DIRECTORY,
-          file,
-        ),
-        "utf8",
-      );
-
-    let parsed: WorldSeasonFile;
-
-    try {
-      parsed =
-        JSON.parse(raw);
-    } catch {
-      fail(
-        `${file}: invalid JSON.`,
-      );
-    }
-
-    validateSeason(
-      parsed,
-      file,
-    );
-
     if (
-      years.has(
-        parsed.year,
-      )
+      file.endsWith(
+        ".json"
+      ) &&
+      !expected.has(file)
     ) {
       fail(
-        `Duplicate season ${parsed.year}.`,
+        `Unexpected processed World file: ${file}`
       );
     }
-
-    years.add(
-      parsed.year,
-    );
-
-    const playerCount =
-      parsed.teams.reduce(
-        (sum, team) =>
-          sum +
-          team.players.length,
-        0,
-      );
-
-    totalTeams +=
-      parsed.teams.length;
-
-    totalPlayers +=
-      playerCount;
-
-    console.log(
-      `[WORLD VALIDATION] ${parsed.year}: ${parsed.teams.length} teams / ${playerCount} players / ${parsed.oversPerInnings ?? getWorldEdition(parsed.year)!.oversPerInnings} overs`,
-    );
   }
 
   for (
-    const year of WORLD_EDITION_YEARS
+    const year of
+      WORLD_AVAILABLE_EDITION_YEARS
   ) {
-    if (
-      !years.has(year)
-    ) {
-      fail(
-        `Missing required edition ${year}.`,
+    const fileName =
+      `${year}.json`;
+
+    const filePath =
+      path.join(
+        DATA_DIRECTORY,
+        fileName
       );
-    }
+
+    const parsed =
+      readJson(
+        filePath
+      );
+
+    validateSeason(
+      parsed as WorldSeasonFile,
+      year
+    );
+
+    const season =
+      parsed as WorldSeasonFile;
+
+    const playerCount =
+      season.teams.reduce(
+        (
+          total,
+          team
+        ) =>
+          total +
+          team.players.length,
+        0
+      );
+
+    console.log(
+      `[WORLD VALIDATION] ${year}: ${season.teams.length} teams / ${playerCount} players`
+    );
   }
 
   console.log("");
   console.log(
-    "[WORLD VALIDATION] Validation successful.",
-  );
-  console.log(
-    `[WORLD VALIDATION] Editions: ${years.size}`,
-  );
-  console.log(
-    `[WORLD VALIDATION] Team entries: ${totalTeams}`,
-  );
-  console.log(
-    `[WORLD VALIDATION] Player entries: ${totalPlayers}`,
+    "[WORLD VALIDATION] Successful."
   );
 }
 

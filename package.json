@@ -16,6 +16,7 @@
       "import:ipl:roles": "tsx scripts/import-ipl-roles.ts",
       "data:process-world": "tsx scripts/process-world-data.ts",
       "data:validate-world": "tsx scripts/validate-world-data.ts",
+      "data:download-world": "tsx scripts/download-world-data.ts",
       "data:import-world": "tsx scripts/import-world-data.ts"
     },
   "dependencies": {

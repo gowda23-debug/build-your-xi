@@ -31,29 +31,29 @@ type IPLGameProps = {
   challenge: IPLChallenge;
 
   selectedPlayers:
-    IPLPlayer[];
+  IPLPlayer[];
 
   draftSelections:
-    DraftSelection[];
+  DraftSelection[];
 
   venueOriginTeamSeasonId:
-    string | null;
+  string | null;
 
   pitch:
-    PitchProfile | null;
+  PitchProfile | null;
 
   onBuildAnother:
-    () => void;
+  () => void;
 };
 
 type CompletionResponse = {
   result: XIEngineResult;
 
   gameScoreId:
-    string | null;
+  string | null;
 
   completedAt:
-    string | null;
+  string | null;
 };
 
 export default function IPLGame({
@@ -118,15 +118,15 @@ export default function IPLGame({
     const requestKey =
       isGuest
         ? [
-            "guest",
-            challenge.venue.id,
-            venueOriginTeamSeasonId ??
-              "no-origin",
-            ...draftSelections.map(
-              (selection) =>
-                `${selection.playerId}:${selection.teamSeasonId}`
-            ),
-          ].join("|")
+          "guest",
+          challenge.venue.id,
+          venueOriginTeamSeasonId ??
+          "no-origin",
+          ...draftSelections.map(
+            (selection) =>
+              `${selection.playerId}:${selection.teamSeasonId}`
+          ),
+        ].join("|")
         : `registered:${gameSessionId}`;
 
     let request =
@@ -135,26 +135,26 @@ export default function IPLGame({
     if (
       !request ||
       request.requestKey !==
-        requestKey
+      requestKey
     ) {
       const requestBody =
         isGuest
           ? {
-              gameSessionId:
-                null,
+            gameSessionId:
+              null,
 
-              selectedPlayers:
-                draftSelections,
+            selectedPlayers:
+              draftSelections,
 
-              venueId:
-                challenge.venue.id,
+            venueId:
+              challenge.venue.id,
 
-              venueOriginTeamSeasonId:
-                venueOriginTeamSeasonId,
-            }
+            venueOriginTeamSeasonId:
+              venueOriginTeamSeasonId,
+          }
           : {
-              gameSessionId,
-            };
+            gameSessionId,
+          };
 
       const promise =
         fetch(
@@ -190,7 +190,7 @@ export default function IPLGame({
             ) {
               throw new Error(
                 data?.error ??
-                  "Unable to complete the game."
+                "Unable to complete the game."
               );
             }
 
@@ -310,12 +310,11 @@ export default function IPLGame({
                 "application/json",
             },
 
-            cache: "no-store",
-
             body:
               JSON.stringify({
-                gameScoreId:
-                  completion.gameScoreId,
+                gameScoreId: completion.gameScoreId,
+
+                title: "My IPL Challenge",
               }),
           }
         );
@@ -330,7 +329,7 @@ export default function IPLGame({
       if (!response.ok) {
         throw new Error(
           data?.error ??
-            "Unable to create the challenge."
+          "Unable to create the challenge."
         );
       }
 
@@ -348,7 +347,7 @@ export default function IPLGame({
         )}`
       );
     } catch (
-      err
+    err
     ) {
       setError(
         err instanceof
@@ -378,7 +377,7 @@ export default function IPLGame({
 
     const shareUrl =
       typeof window !==
-      "undefined"
+        "undefined"
         ? window.location.href
         : "";
 
@@ -593,12 +592,12 @@ export default function IPLGame({
                 />
 
                 {shareStatus ===
-                "shared"
+                  "shared"
                   ? "Shared"
                   : shareStatus ===
                     "copied"
-                  ? "Copied"
-                  : "Share"}
+                    ? "Copied"
+                    : "Share"}
               </button>
 
               {!isGuest && (
