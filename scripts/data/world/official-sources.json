@@ -1,0 +1,79 @@
+{
+  "gameMode": "world",
+  "format": "ODI",
+  "competition": "ICC Men's Cricket World Cup",
+  "seasonUnit": "ICC Men's Cricket World Cup edition",
+  "editions": [
+    {
+      "year": 2011,
+      "seasonName": "ICC Men's Cricket World Cup 2011",
+      "status": "foundation",
+      "primarySource": "ICC official tournament material",
+      "notes": "Final squad information must be assembled from official ICC/team sources before import. Preliminary squad articles must not be treated as final squads."
+    },
+    {
+      "year": 2015,
+      "seasonName": "ICC Cricket World Cup 2015",
+      "status": "foundation",
+      "primarySource": "ICC official tournament material",
+      "notes": "ICC published the final squads for all 14 participating nations."
+    },
+    {
+      "year": 2019,
+      "seasonName": "ICC Men's Cricket World Cup 2019",
+      "status": "foundation",
+      "primarySource": "ICC official tournament material",
+      "notes": "ICC published the final tournament squads."
+    },
+    {
+      "year": 2023,
+      "seasonName": "ICC Men's Cricket World Cup 2023",
+      "status": "foundation",
+      "primarySource": "ICC official tournament material",
+      "notes": "ICC published the confirmed 15-player squads for the tournament."
+    }
+  ],
+  "sourcePolicy": {
+    "primary": [
+      "ICC official tournament pages",
+      "ICC official match centres and scorecards",
+      "ICC official tournament statistics",
+      "ICC official tournament media guides and PDFs",
+      "ICC official player profiles"
+    ],
+    "secondary": [
+      "Official national cricket board sources"
+    ],
+    "thirdParty": [
+      "ESPNcricinfo",
+      "Cricbuzz",
+      "Kaggle",
+      "GitHub datasets"
+    ],
+    "thirdPartyUsage": "Cross-check and validation only. Third-party sources must never become the authoritative source for imported World game data."
+  },
+  "rolePolicy": {
+    "allowed": [
+      "WK",
+      "BAT",
+      "AR",
+      "BOWL"
+    ],
+    "unresolvedAction": "exclude_from_game_pool_until_verified",
+    "notes": "Do not infer a player's role solely from batting or bowling statistics. Role classification must be supported by an official source or a clearly documented official team classification."
+  },
+  "dataFlow": [
+    "official source",
+    "raw source record",
+    "normalized processed data",
+    "validation",
+    "Supabase generic tables",
+    "World game APIs"
+  ],
+  "applicationPolicy": {
+    "hardCodedPlayerPools": false,
+    "hardCodedTeamPools": false,
+    "hardCodedSeasonPools": false,
+    "databaseIsSourceOfTruth": true
+  }
+}

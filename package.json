@@ -13,7 +13,9 @@
     "data:validate": "tsx scripts/validate-ipl-data.ts",
     "data:validate-import": "tsx scripts/validate-ipl-import.ts",
     "data:import-venues": "tsx scripts/import-ipl-venues.ts",
-    "import:ipl:roles": "tsx scripts/import-ipl-roles.ts"
+    "import:ipl:roles": "tsx scripts/import-ipl-roles.ts",
+    "data:validate-world": "tsx scripts/validate-world-data.ts",
+    "data:import-world": "tsx scripts/import-world-data.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",
