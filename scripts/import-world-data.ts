@@ -3,7 +3,14 @@ import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import {
+  createClient,
+} from "@supabase/supabase-js";
+
+import {
+  WORLD_EDITION_YEARS,
+  getWorldEdition,
+} from "./data/world/editions";
 
 type WorldRole = "BAT" | "WK" | "AR" | "BOWL";
 
@@ -43,6 +50,7 @@ type WorldSeasonFile = {
   seasonName: string;
   format: "ODI";
   competition: "ICC Men's Cricket World Cup";
+  oversPerInnings?: number;
   teams: WorldTeam[];
   sources?: string[];
 };
@@ -70,8 +78,6 @@ type DatabaseTeamSeason = {
   team_id: string;
   season_id: string;
 };
-
-const REQUIRED_YEARS = [2011, 2015, 2019, 2023];
 
 const WORLD_ROLES: readonly WorldRole[] = [
   "BAT",
@@ -242,9 +248,55 @@ function validateSeasonFile(
     fileName,
   );
 
-  if (!REQUIRED_YEARS.includes(data.year)) {
+  if (!WORLD_EDITION_YEARS.includes(data.year)) {
     fail(
       `${fileName}: unsupported World Cup year ${data.year}.`,
+    );
+  }
+
+  const edition =
+    getWorldEdition(data.year);
+
+  if (!edition) {
+    fail(
+      `${fileName}: no World Cup edition configuration found for ${data.year}.`,
+    );
+  }
+
+  if (
+    data.seasonName !==
+    edition.seasonName
+  ) {
+    fail(
+      `${fileName}: seasonName must be "${edition.seasonName}".`,
+    );
+  }
+
+  if (
+    data.format !==
+    edition.format
+  ) {
+    fail(
+      `${fileName}: format must be ${edition.format}.`,
+    );
+  }
+
+  if (
+    data.competition !==
+    edition.competition
+  ) {
+    fail(
+      `${fileName}: invalid competition.`,
+    );
+  }
+
+  if (
+    data.oversPerInnings !== undefined &&
+    data.oversPerInnings !==
+    edition.oversPerInnings
+  ) {
+    fail(
+      `${fileName}: oversPerInnings must be ${edition.oversPerInnings}.`,
     );
   }
 
@@ -458,7 +510,7 @@ function loadSeasonFiles(): WorldSeasonFile[] {
     years.add(season.year);
   }
 
-  for (const requiredYear of REQUIRED_YEARS) {
+  for (const requiredYear of WORLD_EDITION_YEARS) {
     if (!years.has(requiredYear)) {
       fail(
         `Missing required World Cup edition ${requiredYear}.`,
@@ -674,7 +726,7 @@ async function upsertPlayers(
         if (
           existing &&
           existing.full_name !==
-            player.fullName.trim()
+          player.fullName.trim()
         ) {
           fail(
             `sourcePlayerId "${key}" is assigned to multiple players.`,
@@ -1079,7 +1131,7 @@ async function verifyImport(
       )
       .in(
         "year",
-        REQUIRED_YEARS,
+        WORLD_EDITION_YEARS,
       );
 
   if (seasonError) {
@@ -1090,10 +1142,10 @@ async function verifyImport(
 
   if (
     seasonCount !==
-    REQUIRED_YEARS.length
+    WORLD_EDITION_YEARS.length
   ) {
     fail(
-      `Expected ${REQUIRED_YEARS.length} World seasons but found ${seasonCount}.`,
+      `Expected ${WORLD_EDITION_YEARS.length} World seasons but found ${seasonCount}.`,
     );
   }
 
@@ -1183,7 +1235,7 @@ async function main() {
   );
 
   log(
-    `Supported editions: ${REQUIRED_YEARS.join(", ")}`,
+    `Supported editions: ${WORLD_EDITION_YEARS.join(", ")}`,
   );
 
   const seasons =

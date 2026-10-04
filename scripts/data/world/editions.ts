@@ -1,0 +1,113 @@
+export type WorldEdition = {
+  year: number;
+  seasonName: string;
+  format: "ODI";
+  competition: "ICC Men's Cricket World Cup";
+  oversPerInnings: 50 | 60;
+};
+
+export const WORLD_EDITIONS: readonly WorldEdition[] = [
+  {
+    year: 1975,
+    seasonName: "ICC Men's Cricket World Cup 1975",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 60,
+  },
+  {
+    year: 1979,
+    seasonName: "ICC Men's Cricket World Cup 1979",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 60,
+  },
+  {
+    year: 1983,
+    seasonName: "ICC Men's Cricket World Cup 1983",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 60,
+  },
+  {
+    year: 1987,
+    seasonName: "ICC Men's Cricket World Cup 1987",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 1992,
+    seasonName: "ICC Men's Cricket World Cup 1992",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 1996,
+    seasonName: "ICC Men's Cricket World Cup 1996",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 1999,
+    seasonName: "ICC Men's Cricket World Cup 1999",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2003,
+    seasonName: "ICC Men's Cricket World Cup 2003",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2007,
+    seasonName: "ICC Men's Cricket World Cup 2007",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2011,
+    seasonName: "ICC Men's Cricket World Cup 2011",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2015,
+    seasonName: "ICC Men's Cricket World Cup 2015",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2019,
+    seasonName: "ICC Men's Cricket World Cup 2019",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+  {
+    year: 2023,
+    seasonName: "ICC Men's Cricket World Cup 2023",
+    format: "ODI",
+    competition: "ICC Men's Cricket World Cup",
+    oversPerInnings: 50,
+  },
+];
+
+export const WORLD_EDITION_YEARS = WORLD_EDITIONS.map(
+  (edition) => edition.year,
+);
+
+export function getWorldEdition(
+  year: number,
+): WorldEdition | undefined {
+  return WORLD_EDITIONS.find(
+    (edition) => edition.year === year,
+  );
+}

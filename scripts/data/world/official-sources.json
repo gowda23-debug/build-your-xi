@@ -5,32 +5,82 @@
   "seasonUnit": "ICC Men's Cricket World Cup edition",
   "editions": [
     {
+      "year": 1975,
+      "seasonName": "ICC Men's Cricket World Cup 1975",
+      "oversPerInnings": 60,
+      "status": "source-required"
+    },
+    {
+      "year": 1979,
+      "seasonName": "ICC Men's Cricket World Cup 1979",
+      "oversPerInnings": 60,
+      "status": "source-required"
+    },
+    {
+      "year": 1983,
+      "seasonName": "ICC Men's Cricket World Cup 1983",
+      "oversPerInnings": 60,
+      "status": "source-required"
+    },
+    {
+      "year": 1987,
+      "seasonName": "ICC Men's Cricket World Cup 1987",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
+      "year": 1992,
+      "seasonName": "ICC Men's Cricket World Cup 1992",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
+      "year": 1996,
+      "seasonName": "ICC Men's Cricket World Cup 1996",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
+      "year": 1999,
+      "seasonName": "ICC Men's Cricket World Cup 1999",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
+      "year": 2003,
+      "seasonName": "ICC Men's Cricket World Cup 2003",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
+      "year": 2007,
+      "seasonName": "ICC Men's Cricket World Cup 2007",
+      "oversPerInnings": 50,
+      "status": "source-required"
+    },
+    {
       "year": 2011,
       "seasonName": "ICC Men's Cricket World Cup 2011",
-      "status": "foundation",
-      "primarySource": "ICC official tournament material",
-      "notes": "Final squad information must be assembled from official ICC/team sources before import. Preliminary squad articles must not be treated as final squads."
+      "oversPerInnings": 50,
+      "status": "source-required"
     },
     {
       "year": 2015,
-      "seasonName": "ICC Cricket World Cup 2015",
-      "status": "foundation",
-      "primarySource": "ICC official tournament material",
-      "notes": "ICC published the final squads for all 14 participating nations."
+      "seasonName": "ICC Men's Cricket World Cup 2015",
+      "oversPerInnings": 50,
+      "status": "source-required"
     },
     {
       "year": 2019,
       "seasonName": "ICC Men's Cricket World Cup 2019",
-      "status": "foundation",
-      "primarySource": "ICC official tournament material",
-      "notes": "ICC published the final tournament squads."
+      "oversPerInnings": 50,
+      "status": "source-required"
     },
     {
       "year": 2023,
       "seasonName": "ICC Men's Cricket World Cup 2023",
-      "status": "foundation",
-      "primarySource": "ICC official tournament material",
-      "notes": "ICC published the confirmed 15-player squads for the tournament."
+      "oversPerInnings": 50,
+      "status": "source-required"
     }
   ],
   "sourcePolicy": {
@@ -39,9 +89,7 @@
       "ICC official match centres and scorecards",
       "ICC official tournament statistics",
       "ICC official tournament media guides and PDFs",
-      "ICC official player profiles"
-    ],
-    "secondary": [
+      "ICC official player profiles",
       "Official national cricket board sources"
     ],
     "thirdParty": [
@@ -50,7 +98,7 @@
       "Kaggle",
       "GitHub datasets"
     ],
-    "thirdPartyUsage": "Cross-check and validation only. Third-party sources must never become the authoritative source for imported World game data."
+    "thirdPartyUsage": "Cross-checking only. Third-party data must never become the authoritative imported World dataset."
   },
   "rolePolicy": {
     "allowed": [
@@ -60,16 +108,8 @@
       "BOWL"
     ],
     "unresolvedAction": "exclude_from_game_pool_until_verified",
-    "notes": "Do not infer a player's role solely from batting or bowling statistics. Role classification must be supported by an official source or a clearly documented official team classification."
+    "notes": "Roles must be supported by an official source. Do not infer roles from statistics alone."
   },
-  "dataFlow": [
-    "official source",
-    "raw source record",
-    "normalized processed data",
-    "validation",
-    "Supabase generic tables",
-    "World game APIs"
-  ],
   "applicationPolicy": {
     "hardCodedPlayerPools": false,
     "hardCodedTeamPools": false,
