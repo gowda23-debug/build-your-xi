@@ -5,7 +5,6 @@ import path from "node:path";
 
 import {
   createClient,
-  type SupabaseClient,
 } from "@supabase/supabase-js";
 
 import {
@@ -19,44 +18,83 @@ type WorldRole =
   | "AR"
   | "BOWL";
 
-type WorldStats = {
-  matches: number;
-  innings: number;
-  runs: number;
-  batting_average: number | null;
-  strike_rate: number | null;
-  hundreds: number;
-  fifties: number;
-  wickets: number;
-  bowling_average: number | null;
-  economy: number | null;
-  catches: number;
-  stumpings: number;
-};
-
-type WorldPlayer = {
-  fullName: string;
-  sourcePlayerId: string;
-  role: WorldRole;
-  stats: WorldStats;
-  sources: string[];
-};
-
-type WorldTeam = {
-  name: string;
-  shortName: string;
-  slug: string;
-  players: WorldPlayer[];
-  sources: string[];
-};
+const VALID_ROLES =
+  new Set<WorldRole>([
+    "BAT",
+    "WK",
+    "AR",
+    "BOWL",
+  ]);
 
 type WorldSeason = {
   year: number;
+
   seasonName: string;
+
   format: "ODI";
-  competition: "ICC Men's Cricket World Cup";
-  oversPerInnings: 50 | 60;
-  teams: WorldTeam[];
+
+  competition:
+    "ICC Men's Cricket World Cup";
+
+  oversPerInnings:
+    50 | 60;
+
+  teams: Array<{
+    name: string;
+    shortName: string;
+    slug: string;
+
+    players: Array<{
+      fullName: string;
+      sourcePlayerId: string;
+
+      role:
+        | "BAT"
+        | "WK"
+        | "AR"
+        | "BOWL";
+
+      stats: {
+        matches: number;
+        innings: number;
+        runs: number;
+
+        batting_average:
+          number | null;
+
+        strike_rate:
+          number | null;
+
+        hundreds: number;
+        fifties: number;
+
+        wickets: number;
+
+        bowling_average:
+          number | null;
+
+        economy:
+          number | null;
+
+        catches: number;
+        stumpings: number;
+      };
+
+      sources: Array<{
+        provider: string;
+        url: string;
+      }>;
+
+      roleSource: {
+        provider: string;
+        url: string;
+        retrievedAt: string;
+      };
+    }>;
+
+    sources: string[];
+  }>;
+
   sources: string[];
 };
 
@@ -91,7 +129,7 @@ const supabase =
     }
   );
 
-const PROCESSED_DIRECTORY =
+const DIRECTORY =
   path.join(
     process.cwd(),
     "scripts",
@@ -113,7 +151,7 @@ function readSeason(
 ): WorldSeason {
   const filePath =
     path.join(
-      PROCESSED_DIRECTORY,
+      DIRECTORY,
       `${year}.json`
     );
 
@@ -139,10 +177,11 @@ function readSeason(
     );
   }
 
+  let parsed: unknown;
+
   try {
-    return JSON.parse(
-      raw
-    ) as WorldSeason;
+    parsed =
+      JSON.parse(raw);
   } catch (error) {
     fail(
       `Invalid JSON in ${filePath}: ${
@@ -152,14 +191,17 @@ function readSeason(
       }`
     );
   }
+
+  return parsed as WorldSeason;
 }
 
-async function upsertSeason(
-  season: WorldSeason
+function validateSeason(
+  season: WorldSeason,
+  year: number
 ) {
   const edition =
     getWorldEdition(
-      season.year
+      year
     );
 
   if (
@@ -168,391 +210,496 @@ async function upsertSeason(
       "available"
   ) {
     fail(
-      `${season.year} is not an available edition.`
+      `${year} is not an available edition.`
     );
   }
 
-  const {
-    data: existingSeason,
-    error: seasonLookupError,
-  } = await supabase
-    .from("seasons")
-    .select(
-      "id, year"
-    )
-    .eq(
-      "year",
-      season.year
-    )
-    .maybeSingle();
-
   if (
-    seasonLookupError
+    season.year !==
+    year
   ) {
-    throw seasonLookupError;
+    fail(
+      `${year}: year mismatch.`
+    );
   }
 
-  let seasonId =
-    existingSeason?.id ??
-    null;
+  if (
+    season.seasonName !==
+    edition.seasonName
+  ) {
+    fail(
+      `${year}: invalid season name.`
+    );
+  }
 
-  if (!seasonId) {
-    const {
-      data,
-      error,
-    } = await supabase
-      .from("seasons")
-      .insert({
-        year:
-          season.year,
-      })
-      .select(
-        "id, year"
-      )
-      .single();
+  if (
+    season.format !==
+    "ODI"
+  ) {
+    fail(
+      `${year}: invalid format.`
+    );
+  }
 
-    if (error) {
-      throw error;
-    }
+  if (
+    season.competition !==
+    edition.competition
+  ) {
+    fail(
+      `${year}: invalid competition.`
+    );
+  }
 
-    seasonId =
-      data.id;
+  if (
+    season.oversPerInnings !==
+    edition.oversPerInnings
+  ) {
+    fail(
+      `${year}: invalid overs per innings.`
+    );
+  }
+
+  if (
+    !Array.isArray(
+      season.teams
+    ) ||
+    season.teams.length ===
+      0
+  ) {
+    fail(
+      `${year}: no teams found.`
+    );
   }
 
   for (
     const team of
       season.teams
   ) {
-    const {
-      data: existingTeam,
-      error: teamLookupError,
-    } = await supabase
-      .from("teams")
-      .select(
-        "id, name, short_name, slug"
-      )
-      .eq(
-        "slug",
-        team.slug
-      )
-      .maybeSingle();
+    if (
+      !team.name ||
+      !team.slug
+    ) {
+      fail(
+        `${year}: invalid team.`
+      );
+    }
 
     if (
-      teamLookupError
+      !Array.isArray(
+        team.players
+      ) ||
+      team.players.length ===
+        0
     ) {
-      throw teamLookupError;
+      fail(
+        `${year}/${team.name}: no players.`
+      );
     }
 
-    let teamId =
-      existingTeam?.id ??
-      null;
-
-    if (!teamId) {
-      const {
-        data,
-        error,
-      } = await supabase
-        .from("teams")
-        .insert({
-          name:
-            team.name,
-
-          short_name:
-            team.shortName,
-
-          slug:
-            team.slug,
-        })
-        .select(
-          "id, name, short_name, slug"
-        )
-        .single();
-
-      if (error) {
-        throw error;
-      }
-
-      teamId =
-        data.id;
-    } else {
-      const {
-        error,
-      } = await supabase
-        .from("teams")
-        .update({
-          name:
-            team.name,
-
-          short_name:
-            team.shortName,
-        })
-        .eq(
-          "id",
-          teamId
-        );
-
-      if (error) {
-        throw error;
-      }
-    }
-
-    const {
-      data: existingTeamSeason,
-      error: teamSeasonLookupError,
-    } = await supabase
-      .from("team_seasons")
-      .select(
-        "id"
-      )
-      .eq(
-        "team_id",
-        teamId
-      )
-      .eq(
-        "season_id",
-        seasonId
-      )
-      .maybeSingle();
-
-    if (
-      teamSeasonLookupError
-    ) {
-      throw teamSeasonLookupError;
-    }
-
-    let teamSeasonId =
-      existingTeamSeason?.id ??
-      null;
-
-    if (!teamSeasonId) {
-      const {
-        data,
-        error,
-      } = await supabase
-        .from("team_seasons")
-        .insert({
-          team_id:
-            teamId,
-
-          season_id:
-            seasonId,
-        })
-        .select(
-          "id"
-        )
-        .single();
-
-      if (error) {
-        throw error;
-      }
-
-      teamSeasonId =
-        data.id;
-    }
+    const ids =
+      new Set<string>();
 
     for (
       const player of
         team.players
     ) {
-      const {
-        data: existingPlayer,
-        error: playerLookupError,
-      } = await supabase
-        .from("players")
-        .select(
-          "id, full_name, source_player_id"
-        )
-        .eq(
-          "source_player_id",
+      if (
+        ids.has(
           player.sourcePlayerId
         )
-        .maybeSingle();
-
-      if (
-        playerLookupError
       ) {
-        throw playerLookupError;
-      }
-
-      let playerId =
-        existingPlayer?.id ??
-        null;
-
-      if (!playerId) {
-        const {
-          data,
-          error,
-        } = await supabase
-          .from("players")
-          .insert({
-            full_name:
-              player.fullName,
-
-            source_player_id:
-              player.sourcePlayerId,
-          })
-          .select(
-            "id"
-          )
-          .single();
-
-        if (error) {
-          throw error;
-        }
-
-        playerId =
-          data.id;
-      } else if (
-        existingPlayer?.full_name !==
-        player.fullName
-      ) {
-        throw new Error(
-          `Player ID ${player.sourcePlayerId} already belongs to "${existingPlayer?.full_name}", but the World data says "${player.fullName}".`
+        fail(
+          `${year}/${team.name}: duplicate player ID ${player.sourcePlayerId}.`
         );
       }
 
-      const {
-        error: roleError,
-      } = await supabase
-        .from("player_roles")
-        .upsert(
-          {
-            player_id:
-              playerId,
-
-            role:
-              player.role,
-          },
-          {
-            onConflict:
-              "player_id,role",
-          }
-        );
+      ids.add(
+        player.sourcePlayerId
+      );
 
       if (
-        roleError
-      ) {
-        throw roleError;
-      }
-
-      const {
-        error: statsError,
-      } = await supabase
-        .from(
-          "player_season_stats"
+        !VALID_ROLES.has(
+          player.role
         )
-        .upsert(
-          {
-            player_id:
-              playerId,
-
-            team_season_id:
-              teamSeasonId,
-
-            matches:
-              player.stats.matches,
-
-            innings:
-              player.stats.innings,
-
-            runs:
-              player.stats.runs,
-
-            batting_average:
-              player.stats
-                .batting_average,
-
-            strike_rate:
-              player.stats
-                .strike_rate,
-
-            hundreds:
-              player.stats
-                .hundreds,
-
-            fifties:
-              player.stats
-                .fifties,
-
-            wickets:
-              player.stats
-                .wickets,
-
-            bowling_average:
-              player.stats
-                .bowling_average,
-
-            economy:
-              player.stats
-                .economy,
-
-            catches:
-              player.stats
-                .catches,
-
-            stumpings:
-              player.stats
-                .stumpings,
-          },
-          {
-            onConflict:
-              "player_id,team_season_id",
-          }
+      ) {
+        fail(
+          `${year}/${team.name}/${player.fullName}: invalid role.`
         );
+      }
 
       if (
-        statsError
+        !Array.isArray(
+          player.sources
+        ) ||
+        player.sources.length ===
+          0
       ) {
-        throw statsError;
+        fail(
+          `${year}/${team.name}/${player.fullName}: missing sources.`
+        );
       }
     }
   }
 }
 
-async function verifyImport() {
-  for (
-    const table of [
-      "seasons",
-      "teams",
-      "team_seasons",
-      "players",
-      "player_roles",
-      "player_season_stats",
-    ]
-  ) {
-    const {
-      count,
-      error,
-    } = await supabase
-      .from(table)
-      .select(
-        "*",
-        {
-          count:
-            "exact",
-          head: true,
-        }
-      );
+async function getOrCreateSeason(
+  year: number
+) {
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("seasons")
+    .select("id")
+    .eq(
+      "year",
+      year
+    )
+    .maybeSingle();
 
-    if (error) {
-      throw error;
+  if (error) {
+    throw error;
+  }
+
+  if (data) {
+    return data.id;
+  }
+
+  const {
+    data: inserted,
+    error:
+      insertError,
+  } = await supabase
+    .from("seasons")
+    .insert({
+      year,
+    })
+    .select("id")
+    .single();
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  return inserted.id;
+}
+
+async function getOrCreateTeam(
+  team: WorldSeason["teams"][number]
+) {
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("teams")
+    .select(
+      "id, name, short_name, slug"
+    )
+    .eq(
+      "slug",
+      team.slug
+    )
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (data) {
+    if (
+      data.name !==
+        team.name ||
+      data.short_name !==
+        team.shortName
+    ) {
+      const {
+        error:
+          updateError,
+      } = await supabase
+        .from("teams")
+        .update({
+          name:
+            team.name,
+          short_name:
+            team.shortName,
+        })
+        .eq(
+          "id",
+          data.id
+        );
+
+      if (updateError) {
+        throw updateError;
+      }
     }
 
-    console.log(
-      `[WORLD IMPORT] ${table}: ${count ?? 0}`
+    return data.id;
+  }
+
+  const {
+    data: inserted,
+    error:
+      insertError,
+  } = await supabase
+    .from("teams")
+    .insert({
+      name:
+        team.name,
+      short_name:
+        team.shortName,
+      slug:
+        team.slug,
+    })
+    .select("id")
+    .single();
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  return inserted.id;
+}
+
+async function getOrCreateTeamSeason(
+  teamId: string,
+  seasonId: string
+) {
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("team_seasons")
+    .select("id")
+    .eq(
+      "team_id",
+      teamId
+    )
+    .eq(
+      "season_id",
+      seasonId
+    )
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (data) {
+    return data.id;
+  }
+
+  const {
+    data: inserted,
+    error:
+      insertError,
+  } = await supabase
+    .from("team_seasons")
+    .insert({
+      team_id:
+        teamId,
+      season_id:
+        seasonId,
+    })
+    .select("id")
+    .single();
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  return inserted.id;
+}
+
+async function getOrCreatePlayer(
+  player: WorldSeason["teams"][number]["players"][number]
+) {
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("players")
+    .select(
+      "id, full_name"
+    )
+    .eq(
+      "source_player_id",
+      player.sourcePlayerId
+    )
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (data) {
+    if (
+      data.full_name !==
+      player.fullName
+    ) {
+      fail(
+        `Source player ${player.sourcePlayerId} maps to both "${data.full_name}" and "${player.fullName}".`
+      );
+    }
+
+    return data.id;
+  }
+
+  const {
+    data: inserted,
+    error:
+      insertError,
+  } = await supabase
+    .from("players")
+    .insert({
+      full_name:
+        player.fullName,
+      source_player_id:
+        player.sourcePlayerId,
+    })
+    .select("id")
+    .single();
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  return inserted.id;
+}
+
+async function importPlayer(
+  player: WorldSeason["teams"][number]["players"][number],
+  teamSeasonId: string
+) {
+  const playerId =
+    await getOrCreatePlayer(
+      player
     );
+
+  const {
+    error:
+      roleError,
+  } = await supabase
+    .from("player_roles")
+    .upsert(
+      {
+        player_id:
+          playerId,
+        role:
+          player.role,
+      },
+      {
+        onConflict:
+          "player_id,role",
+      }
+    );
+
+  if (roleError) {
+    throw roleError;
+  }
+
+  const {
+    error:
+      statsError,
+  } = await supabase
+    .from(
+      "player_season_stats"
+    )
+    .upsert(
+      {
+        player_id:
+          playerId,
+
+        team_season_id:
+          teamSeasonId,
+
+        matches:
+          player.stats.matches,
+
+        innings:
+          player.stats.innings,
+
+        runs:
+          player.stats.runs,
+
+        batting_average:
+          player.stats
+            .batting_average,
+
+        strike_rate:
+          player.stats
+            .strike_rate,
+
+        hundreds:
+          player.stats.hundreds,
+
+        fifties:
+          player.stats.fifties,
+
+        wickets:
+          player.stats.wickets,
+
+        bowling_average:
+          player.stats
+            .bowling_average,
+
+        economy:
+          player.stats.economy,
+
+        catches:
+          player.stats.catches,
+
+        stumpings:
+          player.stats.stumpings,
+      },
+      {
+        onConflict:
+          "player_id,team_season_id",
+      }
+    );
+
+  if (statsError) {
+    throw statsError;
+  }
+}
+
+async function importSeason(
+  season: WorldSeason
+) {
+  const seasonId =
+    await getOrCreateSeason(
+      season.year
+    );
+
+  for (
+    const team of
+      season.teams
+  ) {
+    const teamId =
+      await getOrCreateTeam(
+        team
+      );
+
+    const teamSeasonId =
+      await getOrCreateTeamSeason(
+        teamId,
+        seasonId
+      );
+
+    for (
+      const player of
+        team.players
+    ) {
+      await importPlayer(
+        player,
+        teamSeasonId
+      );
+    }
   }
 }
 
 async function main() {
   console.log(
     "[WORLD IMPORT] Starting."
-  );
-
-  console.log(
-    `[WORLD IMPORT] Editions: ${WORLD_AVAILABLE_EDITION_YEARS.join(
-      ", "
-    )}`
   );
 
   for (
@@ -564,7 +711,12 @@ async function main() {
         year
       );
 
-    await upsertSeason(
+    validateSeason(
+      season,
+      year
+    );
+
+    await importSeason(
       season
     );
 
@@ -572,8 +724,6 @@ async function main() {
       `[WORLD IMPORT] Imported ${year}.`
     );
   }
-
-  await verifyImport();
 
   console.log(
     "[WORLD IMPORT] Successful."
@@ -587,8 +737,6 @@ main().catch(
       error
     );
 
-    process.exit(
-      1
-    );
+    process.exit(1);
   }
 );

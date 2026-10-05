@@ -9,6 +9,7 @@ export type WorldEdition = {
   competition: "ICC Men's Cricket World Cup";
   oversPerInnings: 50 | 60;
   status: WorldEditionStatus;
+  sourceType: "cricsheet" | "official-historical-pending";
 };
 
 export const WORLD_EDITIONS: readonly WorldEdition[] = [
@@ -19,6 +20,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
     status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -27,7 +29,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -36,7 +39,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -45,7 +49,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -54,7 +59,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -63,7 +69,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -72,7 +79,8 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "available",
+    status: "temporarily-unavailable",
+    sourceType: "official-historical-pending",
   },
 
   {
@@ -82,6 +90,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 
   {
@@ -91,6 +100,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 
   {
@@ -100,6 +110,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 
   {
@@ -109,6 +120,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 
   {
@@ -118,6 +130,7 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 
   {
@@ -127,12 +140,12 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
     status: "available",
+    sourceType: "cricsheet",
   },
 ];
 
-export const WORLD_EDITION_YEARS = WORLD_EDITIONS.map(
-  (edition) => edition.year
-);
+export const WORLD_EDITION_YEARS =
+  WORLD_EDITIONS.map((edition) => edition.year);
 
 export const WORLD_AVAILABLE_EDITIONS =
   WORLD_EDITIONS.filter(

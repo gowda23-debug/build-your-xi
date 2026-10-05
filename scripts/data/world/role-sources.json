@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Authoritative World Cup player-role mappings. Every role must be backed by an explicit official source.",
+  "sourcePolicy": {
+    "primary": [
+      "ICC player profile",
+      "ICC tournament media guide",
+      "Official national cricket board player profile",
+      "Official national cricket board tournament squad/profile"
+    ],
+    "thirdParty": [
+      "ESPNcricinfo",
+      "Cricbuzz",
+      "Kaggle",
+      "GitHub datasets"
+    ],
+    "thirdPartyUsage": "Cross-check only. Third-party sources cannot establish the authoritative role."
+  },
+  "players": {}
+}

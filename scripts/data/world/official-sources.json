@@ -3,103 +3,60 @@
   "format": "ODI",
   "competition": "ICC Men's Cricket World Cup",
   "seasonUnit": "ICC Men's Cricket World Cup edition",
-  "editions": [
+
+  "primarySources": [
     {
-      "year": 1975,
-      "seasonName": "ICC Men's Cricket World Cup 1975",
-      "oversPerInnings": 60,
-      "status": "source-required"
+      "provider": "Cricsheet",
+      "url": "https://cricsheet.org/downloads/",
+      "usage": "Structured match data for editions currently covered by the Cricsheet ICC Men's Cricket World Cup event dataset."
     },
     {
-      "year": 1979,
-      "seasonName": "ICC Men's Cricket World Cup 1979",
-      "oversPerInnings": 60,
-      "status": "source-required"
-    },
-    {
-      "year": 1983,
-      "seasonName": "ICC Men's Cricket World Cup 1983",
-      "oversPerInnings": 60,
-      "status": "source-required"
-    },
-    {
-      "year": 1987,
-      "seasonName": "ICC Men's Cricket World Cup 1987",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 1992,
-      "seasonName": "ICC Men's Cricket World Cup 1992",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 1996,
-      "seasonName": "ICC Men's Cricket World Cup 1996",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 1999,
-      "seasonName": "ICC Men's Cricket World Cup 1999",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2003,
-      "seasonName": "ICC Men's Cricket World Cup 2003",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2007,
-      "seasonName": "ICC Men's Cricket World Cup 2007",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2011,
-      "seasonName": "ICC Men's Cricket World Cup 2011",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2015,
-      "seasonName": "ICC Men's Cricket World Cup 2015",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2019,
-      "seasonName": "ICC Men's Cricket World Cup 2019",
-      "oversPerInnings": 50,
-      "status": "source-required"
-    },
-    {
-      "year": 2023,
-      "seasonName": "ICC Men's Cricket World Cup 2023",
-      "oversPerInnings": 50,
-      "status": "source-required"
+      "provider": "ICC",
+      "url": "https://www.icc-cricket.com/",
+      "usage": "Tournament identity, historical validation and official tournament records."
     }
   ],
-  "sourcePolicy": {
-    "primary": [
-      "ICC official tournament pages",
-      "ICC official match centres and scorecards",
-      "ICC official tournament statistics",
-      "ICC official tournament media guides and PDFs",
-      "ICC official player profiles",
-      "Official national cricket board sources"
-    ],
-    "thirdParty": [
-      "ESPNcricinfo",
-      "Cricbuzz",
-      "Kaggle",
-      "GitHub datasets"
-    ],
-    "thirdPartyUsage": "Cross-checking only. Third-party data must never become the authoritative imported World dataset."
+
+  "historicalEditions": {
+    "1975": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1979": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1983": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1987": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1992": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1996": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    },
+    "1999": {
+      "status": "temporarily-unavailable",
+      "reason": "Complete verified player-level source data has not yet been integrated."
+    }
   },
+
+  "availableEditions": [
+    2003,
+    2007,
+    2011,
+    2015,
+    2019,
+    2023
+  ],
+
   "rolePolicy": {
     "allowed": [
       "WK",
@@ -108,12 +65,15 @@
       "BOWL"
     ],
     "unresolvedAction": "exclude_from_game_pool_until_verified",
-    "notes": "Roles must be supported by an official source. Do not infer roles from statistics alone."
+    "inferFromStatistics": false
   },
+
   "applicationPolicy": {
     "hardCodedPlayerPools": false,
     "hardCodedTeamPools": false,
     "hardCodedSeasonPools": false,
-    "databaseIsSourceOfTruth": true
+    "databaseIsSourceOfTruth": true,
+    "clientSuppliedScoreIsTrusted": false,
+    "clientSuppliedTeamSeasonIsTrusted": false
   }
 }
