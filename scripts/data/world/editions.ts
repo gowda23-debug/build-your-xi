@@ -1,6 +1,4 @@
-export type WorldEditionStatus =
-  | "available"
-  | "temporarily-unavailable";
+export type WorldEditionStatus = "available";
 
 export type WorldEdition = {
   year: number;
@@ -9,7 +7,7 @@ export type WorldEdition = {
   competition: "ICC Men's Cricket World Cup";
   oversPerInnings: 50 | 60;
   status: WorldEditionStatus;
-  sourceType: "cricsheet" | "official-historical-pending";
+  sourceType: "cricsheet" | "cricinfo";
 };
 
 export const WORLD_EDITIONS: readonly WorldEdition[] = [
@@ -19,70 +17,63 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1979,
     seasonName: "ICC Men's Cricket World Cup 1979",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1983,
     seasonName: "ICC Men's Cricket World Cup 1983",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 60,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1987,
     seasonName: "ICC Men's Cricket World Cup 1987",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1992,
     seasonName: "ICC Men's Cricket World Cup 1992",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1996,
     seasonName: "ICC Men's Cricket World Cup 1996",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 1999,
     seasonName: "ICC Men's Cricket World Cup 1999",
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: 50,
-    status: "temporarily-unavailable",
-    sourceType: "official-historical-pending",
+    status: "available",
+    sourceType: "cricinfo",
   },
-
   {
     year: 2003,
     seasonName: "ICC Men's Cricket World Cup 2003",
@@ -92,7 +83,6 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     status: "available",
     sourceType: "cricsheet",
   },
-
   {
     year: 2007,
     seasonName: "ICC Men's Cricket World Cup 2007",
@@ -102,7 +92,6 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     status: "available",
     sourceType: "cricsheet",
   },
-
   {
     year: 2011,
     seasonName: "ICC Men's Cricket World Cup 2011",
@@ -112,7 +101,6 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     status: "available",
     sourceType: "cricsheet",
   },
-
   {
     year: 2015,
     seasonName: "ICC Men's Cricket World Cup 2015",
@@ -122,7 +110,6 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     status: "available",
     sourceType: "cricsheet",
   },
-
   {
     year: 2019,
     seasonName: "ICC Men's Cricket World Cup 2019",
@@ -132,7 +119,6 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
     status: "available",
     sourceType: "cricsheet",
   },
-
   {
     year: 2023,
     seasonName: "ICC Men's Cricket World Cup 2023",
@@ -144,16 +130,25 @@ export const WORLD_EDITIONS: readonly WorldEdition[] = [
   },
 ];
 
-export const WORLD_EDITION_YEARS =
-  WORLD_EDITIONS.map((edition) => edition.year);
+export const WORLD_EDITION_YEARS = WORLD_EDITIONS.map(
+  (edition) => edition.year
+);
 
-export const WORLD_AVAILABLE_EDITIONS =
-  WORLD_EDITIONS.filter(
-    (edition) => edition.status === "available"
+export const WORLD_AVAILABLE_EDITIONS = WORLD_EDITIONS.filter(
+  (edition) => edition.status === "available"
+);
+
+export const WORLD_AVAILABLE_EDITION_YEARS = WORLD_AVAILABLE_EDITIONS.map(
+  (edition) => edition.year
+);
+
+export const WORLD_CRICSHEET_EDITIONS =
+  WORLD_AVAILABLE_EDITIONS.filter(
+    (edition) => edition.sourceType === "cricsheet"
   );
 
-export const WORLD_AVAILABLE_EDITION_YEARS =
-  WORLD_AVAILABLE_EDITIONS.map(
+export const WORLD_CRICSHEET_EDITION_YEARS =
+  WORLD_CRICSHEET_EDITIONS.map(
     (edition) => edition.year
   );
 
@@ -170,10 +165,7 @@ export function getAvailableWorldEdition(
 ): WorldEdition | undefined {
   const edition = getWorldEdition(year);
 
-  if (
-    !edition ||
-    edition.status !== "available"
-  ) {
+  if (!edition || edition.status !== "available") {
     return undefined;
   }
 

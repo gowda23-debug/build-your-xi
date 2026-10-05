@@ -7,12 +7,14 @@ type WorldRole =
   | "AR"
   | "BOWL";
 
-type OfficialProvider =
-  | "ICC"
-  | "BOARD";
+type RoleProvider =
+   | "ICC"
+
+  | "BOARD"
+  | "ESPNcricinfo";
 
 type RoleSource = {
-  provider: OfficialProvider;
+  provider: RoleProvider;
   url: string;
   retrievedAt: string;
 };
@@ -111,11 +113,14 @@ function isWorldRole(value: unknown): value is WorldRole {
   );
 }
 
-function isOfficialProvider(
+function isRoleProvider(
   value: unknown
-): value is OfficialProvider {
-  return value === "ICC" || value === "BOARD";
-}
+): value is RoleProvider {
+  return (
+    value === "ICC" ||
+    value === "BOARD" ||
+    value === "ESPNcricinfo"
+  );}
 
 function validateSource(
   sourcePlayerId: string,
@@ -125,11 +130,11 @@ function validateSource(
     fail(`Missing source for ${sourcePlayerId}.`);
   }
 
-  if (!isOfficialProvider(source.provider)) {
+  if (!isRoleProvider(source.provider)) {
     fail(
-      `Invalid provider for ${sourcePlayerId}: ${String(
+      `Invalid role provider for ${sourcePlayerId}: ${String(
         source.provider
-      )}. Only ICC or BOARD is allowed.`
+      )}.`
     );
   }
 

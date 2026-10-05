@@ -2,13 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
+    WORLD_CRICSHEET_EDITIONS,
     WORLD_AVAILABLE_EDITIONS,
     getWorldEdition,
 } from "./data/world/editions";
 
 import {
     resolveWorldRoles,
-    type WorldPlayerIdentity,
     type RoleEntry,
 } from "./world-role-resolver";
 
@@ -932,25 +932,7 @@ function processEdition(
         string,
         TeamAccumulator
     >,
-    roles: Map<
-        string,
-        {
-            role:
-            | "BAT"
-            | "WK"
-            | "AR"
-            | "BOWL";
-
-            source: {
-                provider:
-                | "ICC"
-                | "BOARD";
-
-                url: string;
-                retrievedAt: string;
-            };
-        }
-    >
+    roles: Map<string, RoleEntry>
 ) {
     const edition =
         getWorldEdition(
@@ -1174,7 +1156,7 @@ async function main() {
 
     for (
         const edition of
-        WORLD_AVAILABLE_EDITIONS
+        WORLD_CRICSHEET_EDITIONS
     ) {
         const raw =
             readRaw(
@@ -1230,23 +1212,8 @@ async function main() {
         `[WORLD PROCESSING] Roles unresolved: ${roleResolution.unresolved.length}`
     );
 
-    const resolvedRoles = new Map<
-        string,
-        {
-            role:
-                | "BAT"
-                | "WK"
-                | "AR"
-                | "BOWL";
-            source: {
-                provider:
-                    | "ICC"
-                    | "BOARD";
-                url: string;
-                retrievedAt: string;
-            };
-        }
-    >();
+const resolvedRoles =
+    new Map<string, RoleEntry>();
 
     for (
         const resolved of
@@ -1271,7 +1238,7 @@ async function main() {
      */
     for (
         const edition of
-            WORLD_AVAILABLE_EDITIONS
+            WORLD_CRICSHEET_EDITIONS
     ) {
         const teams =
             teamsByYear.get(

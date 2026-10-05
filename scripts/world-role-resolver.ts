@@ -8,7 +8,7 @@ export type WorldRole =
   | "BOWL";
 
 export type RoleSource = {
-  provider: "ICC" | "BOARD";
+  provider: "ICC" | "BOARD" | "ESPNcricinfo";
   url: string;
   retrievedAt: string;
 };
@@ -132,7 +132,8 @@ function validateRoleEntry(
 
   if (
     entry.source.provider !== "ICC" &&
-    entry.source.provider !== "BOARD"
+    entry.source.provider !== "BOARD" &&
+    entry.source.provider !== "ESPNcricinfo"
   ) {
     fail(
       `Unsupported authoritative provider for ${sourcePlayerId}: ${String(

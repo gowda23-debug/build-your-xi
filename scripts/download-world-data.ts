@@ -3,7 +3,7 @@ import path from "node:path";
 import AdmZip from "adm-zip";
 
 import {
-  WORLD_AVAILABLE_EDITIONS,
+  WORLD_CRICSHEET_EDITIONS,
 } from "./data/world/editions";
 
 const ROOT = process.cwd();
@@ -353,7 +353,7 @@ function writeRawFiles(
 
   const supportedYears =
     new Set(
-      WORLD_AVAILABLE_EDITIONS.map(
+      WORLD_CRICSHEET_EDITIONS.map(
         (edition) =>
           edition.year
       )
@@ -407,7 +407,7 @@ function writeRawFiles(
 
   for (
     const edition of
-      WORLD_AVAILABLE_EDITIONS
+      WORLD_CRICSHEET_EDITIONS
   ) {
     const matchesForYear =
       byYear.get(
@@ -482,7 +482,7 @@ async function main() {
   );
 
   console.log(
-    `[WORLD DOWNLOAD] Supported editions: ${WORLD_AVAILABLE_EDITIONS.map(
+    `[WORLD DOWNLOAD] Supported editions: ${WORLD_CRICSHEET_EDITIONS.map(
       (edition) =>
         edition.year
     ).join(", ")}`

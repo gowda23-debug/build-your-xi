@@ -19,6 +19,9 @@
     "data:validate-world": "tsx scripts/validate-world-data.ts",
     "data:world-role-review": "tsx scripts/generate-world-role-review.ts",
     "data:import-world": "tsx scripts/import-world-data.ts",
+    "data:download-world-historical": "tsx scripts/download-world-historical.ts",
+    "data:process-world-historical": "tsx scripts/process-world-historical.ts",
+    "data:validate-world-historical": "tsx scripts/validate-world-historical.ts",
     "data:build-world-roles": "tsx scripts/build-world-role-sources.ts"
   },
   "dependencies": {
@@ -28,6 +31,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "adm-zip": "^0.6.0",
+    "cheerio": "^1.2.0",
     "dotenv": "^17.4.2",
     "lucide-react": "latest",
     "next": "latest",
