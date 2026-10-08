@@ -63,7 +63,6 @@ export default function AppHeader() {
 
     useEffect(() => {
         let mounted = true;
-        setLogoutLoading(false);
         async function loadPlayer() {
             const {
                 data: { user },

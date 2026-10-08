@@ -51,7 +51,7 @@ const OUTPUT_ROOT = path.join(
   "scripts",
   "data",
   "world",
-  "processed-historical"
+  "processed"
 );
 
 function fail(message: string): never {

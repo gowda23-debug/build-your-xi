@@ -11,6 +11,7 @@ import {
 
 import {
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -37,7 +38,10 @@ type Challenge = {
 export default function CreatedChallengePage() {
   const params = useParams();
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(
+    () => createClient(),
+    []
+  );
 
   const inviteCode =
     typeof params.inviteCode === "string"
@@ -84,95 +88,101 @@ export default function CreatedChallengePage() {
       return;
     }
 
-    loadChallenge();
-  }, [inviteCode]);
+    async function loadChallenge() {
+      setLoading(true);
+      setError("");
 
-  async function loadChallenge() {
-    setLoading(true);
-    setError("");
+      try {
+        const {
+          data: {
+            user,
+          },
+          error: userError,
+        } = await supabase.auth.getUser();
 
-    try {
-      const {
-        data: {
-          user,
-        },
-        error: userError,
-      } = await supabase.auth.getUser();
+        if (userError) {
+          throw userError;
+        }
 
-      if (userError) {
-        throw userError;
-      }
+        if (!user) {
+          router.replace("/login");
+          return;
+        }
 
-      if (!user) {
-        router.replace("/login");
-        return;
-      }
+        if (user.is_anonymous) {
+          setError(
+            "Registered authentication is required for challenges."
+          );
+          return;
+        }
 
-      if (user.is_anonymous) {
+        const {
+          data,
+          error: challengeError,
+        } = await supabase
+          .from("challenges")
+          .select(
+            "id, creator_id, title, game_mode, invite_code, status, created_at, updated_at"
+          )
+          .eq(
+            "invite_code",
+            inviteCode
+          )
+          .single();
+
+        if (challengeError) {
+          throw challengeError;
+        }
+
+        if (!data) {
+          throw new Error(
+            "The challenge could not be found."
+          );
+        }
+
+        if (
+          data.creator_id !==
+          user.id
+        ) {
+          throw new Error(
+            "You are not the creator of this challenge."
+          );
+        }
+
+        const loadedChallenge =
+          data as Challenge;
+
+        setChallenge(
+          loadedChallenge
+        );
+
+        setTitle(
+          loadedChallenge.title
+        );
+      } catch (err) {
+        console.error(
+          "Created challenge loading error:",
+          err
+        );
+
         setError(
-          "Registered authentication is required for challenges."
+          err instanceof Error
+            ? err.message
+            : "Unable to load the challenge."
         );
-        return;
+      } finally {
+        setLoading(false);
       }
-
-      const {
-        data,
-        error: challengeError,
-      } = await supabase
-        .from("challenges")
-        .select(
-          "id, creator_id, title, game_mode, invite_code, status, created_at, updated_at"
-        )
-        .eq(
-          "invite_code",
-          inviteCode
-        )
-        .single();
-
-      if (challengeError) {
-        throw challengeError;
-      }
-
-      if (!data) {
-        throw new Error(
-          "The challenge could not be found."
-        );
-      }
-
-      if (
-        data.creator_id !==
-        user.id
-      ) {
-        throw new Error(
-          "You are not the creator of this challenge."
-        );
-      }
-
-      const loadedChallenge =
-        data as Challenge;
-
-      setChallenge(
-        loadedChallenge
-      );
-
-      setTitle(
-        loadedChallenge.title
-      );
-    } catch (err) {
-      console.error(
-        "Created challenge loading error:",
-        err
-      );
-
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Unable to load the challenge."
-      );
-    } finally {
-      setLoading(false);
     }
-  }
+
+    void loadChallenge();
+  }, [
+    inviteCode,
+    router,
+    supabase,
+  ]);
+
+
 
   async function saveTitle() {
     const cleanedTitle =

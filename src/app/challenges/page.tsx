@@ -116,12 +116,6 @@ export default function ChallengesPage() {
      * logged-in user is the creator and their score
      * has been beaten by another player.
      */
-    const [
-        reclaimChallengeIds,
-        setReclaimChallengeIds,
-    ] = useState<Set<string>>(
-        new Set()
-    );
 
     const [
         challengeStatuses,
@@ -160,9 +154,7 @@ export default function ChallengesPage() {
         /*
          * Reset reclaim state before refreshing.
          */
-        setReclaimChallengeIds(
-            new Set()
-        );
+
         setChallengeStatuses(
             {}
         );
@@ -254,10 +246,6 @@ export default function ChallengesPage() {
             );
             setPlayerCounts(
                 {}
-            );
-
-            setReclaimChallengeIds(
-                new Set()
             );
 
             setLoading(false);
@@ -370,28 +358,6 @@ export default function ChallengesPage() {
                 );
             }
 
-            const reclaimIds =
-                Array.isArray(
-                    reclaimData?.reclaimChallengeIds
-                )
-                    ? reclaimData.reclaimChallengeIds.filter(
-                        (
-                            value: unknown
-                        ): value is string =>
-                            typeof value ===
-                            "string" &&
-                            value.trim()
-                                .length >
-                            0
-                    )
-                    : [];
-
-            setReclaimChallengeIds(
-                new Set(
-                    reclaimIds
-                )
-            );
-
             const statuses =
                 reclaimData?.challengeStatuses;
 
@@ -425,10 +391,6 @@ export default function ChallengesPage() {
                 reclaimError
             );
 
-            setReclaimChallengeIds(
-                new Set()
-            );
-
             setChallengeStatuses(
                 {}
             );
@@ -440,7 +402,11 @@ export default function ChallengesPage() {
     }
 
     useEffect(() => {
-        loadChallenges();
+        const load = async () => {
+            await loadChallenges();
+        };
+
+        void load();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -1476,7 +1442,7 @@ export default function ChallengesPage() {
                                 <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
                                     You are about to delete{" "}
                                     <span className="font-bold text-white">
-                                        "{deleteTarget.title}"
+                                        &quot;{deleteTarget.title}&quot;
                                     </span>
                                     .
                                 </p>

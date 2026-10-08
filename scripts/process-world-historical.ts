@@ -3,6 +3,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 
 import * as cheerio from "cheerio";
+import type { Element } from "domhandler";
 
 import {
   WORLD_HISTORICAL_SOURCES,
@@ -113,6 +114,7 @@ type ProcessedSeason = {
 };
 
 const ROOT = process.cwd();
+
 const CACHE_ROOT = path.join(
   ROOT,
   "scripts",
@@ -121,6 +123,7 @@ const CACHE_ROOT = path.join(
   ".cache",
   "historical"
 );
+
 const OUTPUT_ROOT = path.join(
   ROOT,
   "scripts",
@@ -128,10 +131,8 @@ const OUTPUT_ROOT = path.join(
   "world",
   "processed"
 );
-const ROLE_CACHE_ROOT = path.join(
-  CACHE_ROOT,
-  "roles"
-);
+
+const ROLE_CACHE_ROOT = path.join(CACHE_ROOT, "roles");
 
 const PROFILE_REQUEST_TIMEOUT_MS = 20_000;
 const PROFILE_CONCURRENCY = 4;
@@ -145,10 +146,7 @@ function ensureDirectory(directory: string): void {
 }
 
 function sha256(value: string): string {
-  return crypto
-    .createHash("sha256")
-    .update(value)
-    .digest("hex");
+  return crypto.createHash("sha256").update(value).digest("hex");
 }
 
 function slugify(value: string): string {
@@ -180,13 +178,13 @@ function normalizeText(value: string): string {
 }
 
 function normalizeName(value: string): string {
-  return cleanPlayerName(value).toLowerCase().replace(/[^a-z0-9]/g, "");
+  return cleanPlayerName(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 }
 
 function numeric(value: string): number | null {
-  const normalized = normalizeText(value)
-    .replace(/,/g, "")
-    .trim();
+  const normalized = normalizeText(value).replace(/,/g, "").trim();
 
   if (
     !normalized ||
@@ -198,6 +196,7 @@ function numeric(value: string): number | null {
   }
 
   const parsed = Number(normalized);
+
   return Number.isFinite(parsed) ? parsed : null;
 }
 
@@ -210,6 +209,12 @@ function cleanPlayerName(value: string): string {
     .trim();
 }
 
+/**
+ * Returns the provider identity when ESPNcricinfo exposes a numeric ID.
+ *
+ * When no provider ID can be extracted, the value is explicitly marked
+ * unresolved so it cannot be mistaken for a real ESPNcricinfo ID.
+ */
 function playerIdFromProfile(
   profileUrl: string | null,
   name: string,
@@ -225,7 +230,7 @@ function playerIdFromProfile(
     }
   }
 
-  return `espncricinfo:${sha256(
+  return `espncricinfo:unresolved:${sha256(
     `${slugify(team)}|${slugify(name)}`
   ).slice(0, 24)}`;
 }
@@ -257,11 +262,17 @@ function oversToLegalBalls(overs: string): number {
 
 function extractPlayerFromRow(
   $: cheerio.CheerioAPI,
-  row: cheerio.Element,
+  row: Element,
   team: string
 ) {
   const firstCell = $(row).children("td,th").first();
-  const name = cleanPlayerName(firstCell.text(" "));
+
+  /*
+   * Cheerio's text() does not accept a separator argument in the
+   * installed version. Normalize whitespace after extracting text.
+   */
+  const name = cleanPlayerName(firstCell.text());
+
   const href = firstCell.find("a[href]").first().attr("href") ?? null;
 
   let profileUrl: string | null = null;
@@ -279,35 +290,31 @@ function extractPlayerFromRow(
 
   return {
     name,
-    sourcePlayerId: playerIdFromProfile(
-      profileUrl,
-      name,
-      team
-    ),
+    sourcePlayerId: playerIdFromProfile(profileUrl, name, team),
     profileUrl,
   };
 }
 
 function rowCells(
   $: cheerio.CheerioAPI,
-  row: cheerio.Element
+  row: Element
 ): string[] {
   return $(row)
     .children("td,th")
-    .map((_index, cell) => normalizeText($(cell).text(" ")))
+    .map((_index, cell) => normalizeText($(cell).text()))
     .get();
 }
 
 function findHeaderRow(
   $: cheerio.CheerioAPI,
-  table: cheerio.Element,
+  table: Element,
   predicate: (row: string[]) => boolean
-): { row: cheerio.Element; values: string[] } | null {
+): { row: Element; values: string[] } | null {
   const rowElements = $(table).children("tbody").length
     ? $(table).children("tbody").children("tr")
     : $(table).children("tr");
 
-  let found: { row: cheerio.Element; values: string[] } | null = null;
+  let found: { row: Element; values: string[] } | null = null;
 
   rowElements.each((_index, row) => {
     if (found) {
@@ -326,11 +333,12 @@ function findHeaderRow(
 
 function parseBattingTable(
   $: cheerio.CheerioAPI,
-  table: cheerio.Element,
+  table: Element,
   team: string
 ): ParsedBattingRow[] {
   const header = findHeaderRow($, table, (row) => {
     const upper = row.map((value) => value.toUpperCase());
+
     return (
       upper.includes("R") &&
       (upper.includes("B") || upper.includes("BALLS")) &&
@@ -344,7 +352,9 @@ function parseBattingTable(
   }
 
   const upperHeader = header.values.map((value) => value.toUpperCase());
+
   const runsIndex = upperHeader.indexOf("R");
+
   const ballsIndex =
     upperHeader.indexOf("B") !== -1
       ? upperHeader.indexOf("B")
@@ -402,11 +412,12 @@ function parseBattingTable(
 
 function parseBowlingTable(
   $: cheerio.CheerioAPI,
-  table: cheerio.Element,
+  table: Element,
   team: string
 ): ParsedBowlingRow[] {
   const header = findHeaderRow($, table, (row) => {
     const upper = row.map((value) => value.toUpperCase());
+
     return (
       (upper.includes("O") || upper.includes("OVERS")) &&
       (upper.includes("M") || upper.includes("MDNS")) &&
@@ -420,11 +431,14 @@ function parseBowlingTable(
   }
 
   const upperHeader = header.values.map((value) => value.toUpperCase());
+
   const oversIndex =
     upperHeader.indexOf("O") !== -1
       ? upperHeader.indexOf("O")
       : upperHeader.indexOf("OVERS");
+
   const runsIndex = upperHeader.indexOf("R");
+
   const wicketsIndex =
     upperHeader.indexOf("W") !== -1
       ? upperHeader.indexOf("W")
@@ -462,11 +476,7 @@ function parseBowlingTable(
     const wickets = numeric(values[wicketsIndex] ?? "");
     const overs = values[oversIndex] ?? "";
 
-    if (
-      runs === null ||
-      wickets === null ||
-      !overs
-    ) {
+    if (runs === null || wickets === null || !overs) {
       return;
     }
 
@@ -499,7 +509,7 @@ function extractTeams(
 
   for (const candidate of candidates) {
     const match = candidate.match(
-      /^(.+?)\s+v(?:s\.?|ersus)?\s+(.+?)(?:\s+at\s+|,|\s+-\s+|$)/i
+      /^(.+?)\s+v(?:\.|ersus)?\s+(.+?)(?:\s+at\s+|,|\s+-\s+|$)/i
     );
 
     if (match) {
@@ -558,6 +568,7 @@ function ensurePlayer(
     if (!existingByTeam.profileUrl && profileUrl) {
       existingByTeam.profileUrl = profileUrl;
     }
+
     return existingByTeam;
   }
 
@@ -566,13 +577,16 @@ function ensurePlayer(
     fullName,
     team
   );
+
   const existingById = playersById.get(sourcePlayerId);
 
   if (existingById) {
     existingById.teams.add(team);
+
     if (!existingById.profileUrl && profileUrl) {
       existingById.profileUrl = profileUrl;
     }
+
     return existingById;
   }
 
@@ -596,6 +610,7 @@ function ensurePlayer(
   };
 
   playersById.set(sourcePlayerId, player);
+
   return player;
 }
 
@@ -625,8 +640,10 @@ function parseDismissalFielding(
       bowlingTeam,
       null
     );
+
     keeper.matches.add(matchId);
     keeper.stumpings += 1;
+
     return;
   }
 
@@ -641,8 +658,10 @@ function parseDismissalFielding(
       bowlingTeam,
       null
     );
+
     bowler.matches.add(matchId);
     bowler.catches += 1;
+
     return;
   }
 
@@ -657,6 +676,7 @@ function parseDismissalFielding(
       bowlingTeam,
       null
     );
+
     fielder.matches.add(matchId);
     fielder.catches += 1;
   }
@@ -672,7 +692,12 @@ function parseMatch(
   players: Map<string, HistoricalPlayer>;
 } {
   const $ = cheerio.load(html);
-  const plainText = normalizeText($.root().text(" "));
+
+  /*
+   * Cheerio's root().text() also takes no separator argument.
+   */
+  const plainText = normalizeText($.root().text());
+
   const teams = extractTeams($, plainText);
   const players = new Map<string, HistoricalPlayer>();
 
@@ -680,12 +705,13 @@ function parseMatch(
     return { teams: null, players };
   }
 
-  const battingTables: cheerio.Element[] = [];
-  const bowlingTables: cheerio.Element[] = [];
+  const battingTables: Element[] = [];
+  const bowlingTables: Element[] = [];
 
   $("table").each((_index, table) => {
     const header = findHeaderRow($, table, (row) => {
       const upper = row.map((value) => value.toUpperCase());
+
       return (
         upper.includes("R") &&
         (upper.includes("B") || upper.includes("BALLS")) &&
@@ -701,6 +727,7 @@ function parseMatch(
 
     const bowlingHeader = findHeaderRow($, table, (row) => {
       const upper = row.map((value) => value.toUpperCase());
+
       return (
         (upper.includes("O") || upper.includes("OVERS")) &&
         (upper.includes("M") || upper.includes("MDNS")) &&
@@ -714,18 +741,40 @@ function parseMatch(
     }
   });
 
-  const inningsCount = Math.min(
-    2,
-    Math.max(battingTables.length, bowlingTables.length)
-  );
+  /*
+   * A World Cup ODI scorecard must contain exactly two innings.
+   * Do not silently accept malformed scorecards.
+   */
+  if (battingTables.length !== 2) {
+    throw new Error(
+      `${source.year}/${matchId}: expected exactly 2 batting tables, found ${battingTables.length}.`
+    );
+  }
 
-  for (let inningsIndex = 0; inningsIndex < inningsCount; inningsIndex += 1) {
+  if (bowlingTables.length !== 2) {
+    throw new Error(
+      `${source.year}/${matchId}: expected exactly 2 bowling tables, found ${bowlingTables.length}.`
+    );
+  }
+
+  const inningsCount = 2;
+
+  for (
+    let inningsIndex = 0;
+    inningsIndex < inningsCount;
+    inningsIndex += 1
+  ) {
     const battingTeam = teams[inningsIndex % 2];
     const bowlingTeam = teams[(inningsIndex + 1) % 2];
 
     const battingTable = battingTables[inningsIndex];
+
     if (battingTable) {
-      for (const batter of parseBattingTable($, battingTable, battingTeam)) {
+      for (const batter of parseBattingTable(
+        $,
+        battingTable,
+        battingTeam
+      )) {
         const player = ensurePlayer(
           players,
           batter.name,
@@ -763,8 +812,13 @@ function parseMatch(
     }
 
     const bowlingTable = bowlingTables[inningsIndex];
+
     if (bowlingTable) {
-      for (const bowler of parseBowlingTable($, bowlingTable, bowlingTeam)) {
+      for (const bowler of parseBowlingTable(
+        $,
+        bowlingTable,
+        bowlingTeam
+      )) {
         const player = ensurePlayer(
           players,
           bowler.name,
@@ -775,24 +829,19 @@ function parseMatch(
         player.matches.add(matchId);
         player.wickets += bowler.wickets;
         player.runsConceded += bowler.runs;
-        player.legalBallsBowled += oversToLegalBalls(bowler.overs);
+        player.legalBallsBowled += oversToLegalBalls(
+          bowler.overs
+        );
       }
     }
-  }
-
-  if (
-    battingTables.length > 2 ||
-    bowlingTables.length > 2
-  ) {
-    console.warn(
-      `[WORLD HISTORICAL PROCESSING] ${source.year}: more than two statistical innings detected in ${matchUrl}.`
-    );
   }
 
   return { teams, players };
 }
 
-function extractRoleFromProfileText(text: string): WorldRole | null {
+function extractRoleFromProfileText(
+  text: string
+): WorldRole | null {
   const match = text.match(
     /\bRole\s*[:\-]\s*(Wicketkeeper(?:[- ]batter)?|Batter|Batsman|Batswoman|Batting Allrounder|Bowling Allrounder|Allrounder|Bowler)\b/i
   );
@@ -822,7 +871,9 @@ async function fetchProfileRole(
   profileUrl: string
 ): Promise<{ role: WorldRole; url: string }> {
   const cacheKey = sha256(profileUrl).slice(0, 32);
+
   ensureDirectory(ROLE_CACHE_ROOT);
+
   const cachePath = path.join(
     ROLE_CACHE_ROOT,
     `${cacheKey}.json`
@@ -835,6 +886,7 @@ async function fetchProfileRole(
   }
 
   const controller = new AbortController();
+
   const timeout = setTimeout(
     () => controller.abort(),
     PROFILE_REQUEST_TIMEOUT_MS
@@ -860,8 +912,9 @@ async function fetchProfileRole(
 
     const html = await response.text();
     const $ = cheerio.load(html);
+
     const role = extractRoleFromProfileText(
-      normalizeText($.root().text(" "))
+      normalizeText($.root().text())
     );
 
     if (!role) {
@@ -889,11 +942,14 @@ async function fetchProfileRole(
 
 async function resolveRoles(
   players: HistoricalPlayer[]
-): Promise<Map<string, { role: WorldRole; url: string }>> {
+): Promise<
+  Map<string, { role: WorldRole; url: string }>
+> {
   const resolved = new Map<
     string,
     { role: WorldRole; url: string }
   >();
+
   const unresolved = new Map<string, HistoricalPlayer>();
 
   for (const player of players) {
@@ -903,12 +959,14 @@ async function resolveRoles(
   }
 
   let cursor = 0;
+
   const workers = Array.from({
     length: Math.min(PROFILE_CONCURRENCY, players.length),
   }).map(async () => {
     while (cursor < players.length) {
       const index = cursor;
       cursor += 1;
+
       const player = players[index];
 
       if (!player.profileUrl) {
@@ -916,13 +974,19 @@ async function resolveRoles(
       }
 
       try {
-        const role = await fetchProfileRole(player.profileUrl);
+        const role = await fetchProfileRole(
+          player.profileUrl
+        );
+
         resolved.set(player.sourcePlayerId, role);
       } catch (error) {
         unresolved.set(player.sourcePlayerId, player);
+
         console.warn(
           `[WORLD HISTORICAL ROLES] ${player.fullName}: ${
-            error instanceof Error ? error.message : String(error)
+            error instanceof Error
+              ? error.message
+              : String(error)
           }`
         );
       }
@@ -967,18 +1031,30 @@ function toProcessedPlayer(
 ) {
   const battingAverage =
     player.dismissals > 0
-      ? Number((player.runs / player.dismissals).toFixed(2))
+      ? Number(
+          (player.runs / player.dismissals).toFixed(2)
+        )
       : null;
+
   const strikeRate =
     player.ballsFaced > 0
       ? Number(
-          ((player.runs / player.ballsFaced) * 100).toFixed(2)
+          (
+            (player.runs / player.ballsFaced) *
+            100
+          ).toFixed(2)
         )
       : null;
+
   const bowlingAverage =
     player.wickets > 0
-      ? Number((player.runsConceded / player.wickets).toFixed(2))
+      ? Number(
+          (
+            player.runsConceded / player.wickets
+          ).toFixed(2)
+        )
       : null;
+
   const economy =
     player.legalBallsBowled > 0
       ? Number(
@@ -1035,11 +1111,58 @@ function readManifest(year: number): EditionManifest {
   ) as EditionManifest;
 }
 
-async function processEdition(source: HistoricalWorldSource): Promise<void> {
+async function processEdition(
+  source: HistoricalWorldSource
+): Promise<void> {
   const manifest = readManifest(source.year);
+
+  if (manifest.year !== source.year) {
+    fail(
+      `${source.year}: manifest year mismatch. Found ${manifest.year}.`
+    );
+  }
+
+  if (manifest.provider !== source.provider) {
+    fail(
+      `${source.year}: manifest provider mismatch. Found ${manifest.provider}.`
+    );
+  }
+
+  if (
+    manifest.matches.length !==
+    source.expectedMatchCount
+  ) {
+    fail(
+      `${source.year}: expected ${source.expectedMatchCount} matches, found ${manifest.matches.length}.`
+    );
+  }
+
+  const matchIds = new Set<string>();
+  const matchUrls = new Set<string>();
+
+  for (const entry of manifest.matches) {
+    if (matchIds.has(entry.id)) {
+      fail(
+        `${source.year}: duplicate match ID ${entry.id}.`
+      );
+    }
+
+    if (matchUrls.has(entry.url)) {
+      fail(
+        `${source.year}: duplicate match URL ${entry.url}.`
+      );
+    }
+
+    matchIds.add(entry.id);
+    matchUrls.add(entry.url);
+  }
+
   const teams = new Map<string, HistoricalTeam>();
   const players = new Map<string, HistoricalPlayer>();
-  const matchUrlsByPlayer = new Map<string, Set<string>>();
+  const matchUrlsByPlayer = new Map<
+    string,
+    Set<string>
+  >();
 
   if (manifest.matches.length === 0) {
     fail(`${source.year}: manifest contains no matches.`);
@@ -1057,6 +1180,7 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
     }
 
     const html = fs.readFileSync(htmlPath, "utf8");
+
     const parsed = parseMatch(
       html,
       source,
@@ -1064,8 +1188,20 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
       entry.url
     );
 
-    if (!parsed.teams) {
-      fail(`Could not identify teams in ${entry.url}.`);
+    if (
+      !parsed.teams ||
+      parsed.teams.length !== 2 ||
+      parsed.teams[0] === parsed.teams[1]
+    ) {
+      fail(
+        `${source.year}: invalid team pair in ${entry.url}.`
+      );
+    }
+
+    if (parsed.players.size === 0) {
+      fail(
+        `${source.year}: no player statistics extracted from ${entry.url}.`
+      );
     }
 
     for (const teamName of parsed.teams) {
@@ -1087,23 +1223,29 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
           ...existing.matches,
           ...player.matches,
         ]);
+
         existing.teams = new Set([
           ...existing.teams,
           ...player.teams,
         ]);
+
         existing.innings += player.innings;
         existing.runs += player.runs;
         existing.dismissals += player.dismissals;
         existing.ballsFaced += player.ballsFaced;
         existing.wickets += player.wickets;
         existing.runsConceded += player.runsConceded;
-        existing.legalBallsBowled += player.legalBallsBowled;
+        existing.legalBallsBowled +=
+          player.legalBallsBowled;
         existing.catches += player.catches;
         existing.stumpings += player.stumpings;
         existing.fifties += player.fifties;
         existing.hundreds += player.hundreds;
 
-        if (!existing.profileUrl && player.profileUrl) {
+        if (
+          !existing.profileUrl &&
+          player.profileUrl
+        ) {
           existing.profileUrl = player.profileUrl;
         }
       }
@@ -1111,12 +1253,14 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
       const urls =
         matchUrlsByPlayer.get(playerId) ??
         new Set<string>();
+
       urls.add(entry.url);
       matchUrlsByPlayer.set(playerId, urls);
     }
   }
 
   const allPlayers = [...players.values()];
+
   console.log(
     `[WORLD HISTORICAL PROCESSING] ${source.year}: ${allPlayers.length} player records discovered.`
   );
@@ -1126,8 +1270,12 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
   for (const player of allPlayers) {
     for (const teamName of player.teams) {
       const team = teams.get(teamName);
+
       if (team) {
-        team.players.set(player.sourcePlayerId, player);
+        team.players.set(
+          player.sourcePlayerId,
+          player
+        );
       }
     }
   }
@@ -1138,14 +1286,19 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
     format: "ODI",
     competition: "ICC Men's Cricket World Cup",
     oversPerInnings: source.oversPerInnings,
+
     teams: [...teams.values()]
       .map((team) => ({
         name: team.name,
         shortName: shortName(team.name),
         slug: slugify(team.name),
+
         players: [...team.players.values()]
           .map((player) => {
-            const role = roles.get(player.sourcePlayerId);
+            const role = roles.get(
+              player.sourcePlayerId
+            );
+
             if (!role) {
               fail(
                 `Missing resolved role for ${source.year}/${team.name}/${player.fullName}.`
@@ -1155,17 +1308,28 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
             return toProcessedPlayer(
               player,
               role,
-              [...(matchUrlsByPlayer.get(player.sourcePlayerId) ?? [])]
+              [
+                ...(matchUrlsByPlayer.get(
+                  player.sourcePlayerId
+                ) ?? []),
+              ]
             );
           })
-          .sort((a, b) => a.fullName.localeCompare(b.fullName)),
+          .sort((a, b) =>
+            a.fullName.localeCompare(b.fullName)
+          ),
+
         sources: [source.archiveRoot],
       }))
-      .sort((a, b) => a.name.localeCompare(b.name)),
+      .sort((a, b) =>
+        a.name.localeCompare(b.name)
+      ),
+
     sources: [source.archiveRoot],
   };
 
   ensureDirectory(OUTPUT_ROOT);
+
   const outputPath = path.join(
     OUTPUT_ROOT,
     `${source.year}.json`
@@ -1182,7 +1346,6 @@ async function processEdition(source: HistoricalWorldSource): Promise<void> {
   );
 }
 
-
 async function main(): Promise<void> {
   for (const source of WORLD_HISTORICAL_SOURCES) {
     await processEdition(source);
@@ -1198,5 +1361,6 @@ main().catch((error) => {
     "[WORLD HISTORICAL PROCESSING] Failed:",
     error
   );
+
   process.exit(1);
 });

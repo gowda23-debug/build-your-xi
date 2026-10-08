@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
     useParams,
     useRouter,
@@ -57,8 +57,10 @@ export default function ChallengePage() {
     const router =
         useRouter();
 
-    const supabase =
-        createClient();
+const supabase = useMemo(
+    () => createClient(),
+    []
+);
 
     const inviteCode =
         typeof params.inviteCode ===
@@ -121,13 +123,10 @@ export default function ChallengePage() {
      * ============================================================
      */
 
-    useEffect(() => {
-        if (inviteCode) {
-            loadChallenge();
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [inviteCode]);
+useEffect(() => {
+    if (!inviteCode) {
+        return;
+    }
 
     async function loadChallenge() {
         setLoading(true);
@@ -352,6 +351,13 @@ export default function ChallengePage() {
             );
         }
     }
+
+    void loadChallenge();
+}, [
+    inviteCode,
+    router,
+    supabase,
+]);
 
     /*
      * ============================================================

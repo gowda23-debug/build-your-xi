@@ -16,3 +16,6 @@ next-env.d.ts
 
 # debug logs
 npm-debug.log*
+
+# scripts/data/world/.cache/
+tsconfig.tsbuildinfo

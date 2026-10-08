@@ -40,7 +40,11 @@ function ProfilePageContent() {
   const [gamerTag, setGamerTag] = useState("");
 
   const [activeTab, setActiveTab] =
-    useState<"profile" | "password">("profile");
+    useState<"profile" | "password">(() =>
+      searchParams.get("tab") === "password"
+        ? "password"
+        : "profile"
+    );
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -75,14 +79,6 @@ function ProfilePageContent() {
    *
    * /profile?tab=password
    */
-
-  useEffect(() => {
-    if (searchParams.get("tab") === "password") {
-      setActiveTab("password");
-    } else {
-      setActiveTab("profile");
-    }
-  }, [searchParams]);
 
   /*
    * Load user and profile.
@@ -478,11 +474,10 @@ function ProfilePageContent() {
                 onClick={() =>
                   setActiveTab("profile")
                 }
-                className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                  activeTab === "profile"
+                className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${activeTab === "profile"
                     ? "bg-[var(--accent)]/15 text-white"
                     : "text-[var(--muted)] hover:bg-white/5"
-                }`}
+                  }`}
               >
                 <User size={18} />
 
@@ -495,11 +490,10 @@ function ProfilePageContent() {
                   onClick={() =>
                     setActiveTab("password")
                   }
-                  className={`mt-2 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                    activeTab === "password"
+                  className={`mt-2 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${activeTab === "password"
                       ? "bg-[var(--accent)]/15 text-white"
                       : "text-[var(--muted)] hover:bg-white/5"
-                  }`}
+                    }`}
                 >
                   <KeyRound size={18} />
 
