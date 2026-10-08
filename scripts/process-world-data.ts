@@ -1,17 +1,32 @@
 import fs from "node:fs";
 import path from "node:path";
 
-type Role = "BAT" | "WK" | "AR" | "BOWL";
-type Json = Record<string, any>;
+type Role =
+  | "BAT"
+  | "WK"
+  | "AR"
+  | "BOWL";
 
 type Match = {
   info: {
     dates?: string[];
     teams: string[];
-    players: Record<string, string[]>;
-    registry?: { people?: Record<string, string> };
-    event?: { name?: string };
+    players: Record<
+      string,
+      string[]
+    >;
+    registry?: {
+      people?: Record<
+        string,
+        string
+      >;
+    };
+    event?: {
+      name?: string;
+      match_number?: number;
+    };
   };
+
   innings?: Array<{
     team: string;
     overs?: Array<{
@@ -19,12 +34,25 @@ type Match = {
         batter: string;
         bowler: string;
         non_striker: string;
-        runs: { batter: number; extras: number; total: number; non_boundary?: boolean };
-        extras?: Record<string, number>;
+
+        runs: {
+          batter: number;
+          extras: number;
+          total: number;
+          non_boundary?: boolean;
+        };
+
+        extras?: Record<
+          string,
+          number
+        >;
+
         wickets?: Array<{
           kind: string;
           player_out: string;
-          fielders?: Array<{ name: string }>;
+          fielders?: Array<{
+            name: string;
+          }>;
         }>;
       }>;
     }>;
@@ -33,164 +61,890 @@ type Match = {
 
 type RoleEntry = {
   role: Role;
-  source: { provider: string; url: string; retrievedAt: string };
+  source: {
+    provider: "ICC" | "BOARD";
+    url: string;
+    retrievedAt: string;
+  };
 };
 
-const ROOT = process.cwd();
-const RAW = path.join(ROOT, "scripts/data/world/raw");
-const OUT = path.join(ROOT, "scripts/data/world/processed");
-const EDITIONS = path.join(ROOT, "scripts/data/world/editions.ts");
-const ROLES = path.join(ROOT, "scripts/data/world/role-sources.json");
+const ROOT =
+  process.cwd();
 
-function fail(message: string): never {
-  throw new Error(`[WORLD PROCESSING] ${message}`);
-}
-function ensureDir(p: string) { fs.mkdirSync(p, { recursive: true }); }
-function readJson<T>(p: string): T {
-  if (!fs.existsSync(p)) fail(`Missing ${p}`);
-  const raw = fs.readFileSync(p, "utf8");
-  if (!raw.trim()) fail(`Empty ${p}`);
-  try { return JSON.parse(raw) as T; } catch (e) { fail(`Invalid JSON ${p}: ${e}`); }
-}
-function parseEditions(): Array<{year:number; seasonName:string; oversPerInnings:number; expectedMatchCount:number; competition:string}> {
-  const text = fs.readFileSync(EDITIONS, "utf8");
-  const re = /\{ year: (\d+), seasonName: "([^"]+)", format: "ODI", competition: "ICC Men's Cricket World Cup", oversPerInnings: (\d+), expectedMatchCount: (\d+),/g;
-  const out=[] as any[];
-  for (const m of text.matchAll(re)) out.push({year:+m[1], seasonName:m[2], oversPerInnings:+m[3], expectedMatchCount:+m[4], competition:"ICC Men's Cricket World Cup"});
-  if (!out.length) fail("Unable to read edition registry.");
-  return out;
-}
-function loadRoles(): Map<string, RoleEntry> {
-  const f = readJson<any>(ROLES);
-  const map = new Map<string, RoleEntry>();
-  for (const [id, entry] of Object.entries(f.players ?? {})) map.set(id, entry as RoleEntry);
-  return map;
-}
-function canonicalId(match: Match, name: string): string {
-  const id = match.info.registry?.people?.[name];
-  if (!id || !/^[0-9a-f]{8}$/.test(id)) fail(`Missing Cricsheet registry ID for ${name}.`);
-  return `cricsheet:${id}`;
-}
-function numeric(value: unknown) { return typeof value === "number" && Number.isFinite(value) ? value : 0; }
+const RAW =
+  path.join(
+    ROOT,
+    "scripts/data/world/raw"
+  );
 
-type Acc = {
-  id: string; name: string; team: string; matches: Set<string>; innings: number;
-  runs: number; balls: number; dismissals: number; wickets: number; ballsBowled: number;
-  runsConceded: number; catches: number; stumpings: number; fifties: number; hundreds: number;
+const OUT =
+  path.join(
+    ROOT,
+    "scripts/data/world/processed"
+  );
+
+const EDITIONS =
+  path.join(
+    ROOT,
+    "scripts/data/world/editions.ts"
+  );
+
+const ROLES =
+  path.join(
+    ROOT,
+    "scripts/data/world/role-sources.json"
+  );
+
+function fail(
+  message: string
+): never {
+  throw new Error(
+    `[WORLD PROCESSING] ${message}`
+  );
+}
+
+function readJson<T>(
+  filePath: string
+): T {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
+    fail(
+      `Missing ${filePath}`
+    );
+  }
+
+  const raw =
+    fs.readFileSync(
+      filePath,
+      "utf8"
+    );
+
+  if (!raw.trim()) {
+    fail(
+      `Empty ${filePath}`
+    );
+  }
+
+  try {
+    return JSON.parse(
+      raw
+    ) as T;
+  } catch (error) {
+    fail(
+      `Invalid JSON ${filePath}: ${
+        error instanceof Error
+          ? error.message
+          : String(error)
+      }`
+    );
+  }
+}
+
+function ensureDirectory(
+  directory: string
+): void {
+  fs.mkdirSync(
+    directory,
+    {
+      recursive: true,
+    }
+  );
+}
+
+function parseEditions(): Array<{
+  year: number;
+  seasonName: string;
+  oversPerInnings:
+    | 50
+    | 60;
+  expectedMatchCount: number;
+  competition: string;
+}> {
+  const text =
+    fs.readFileSync(
+      EDITIONS,
+      "utf8"
+    );
+
+  const regex =
+    /\{ year: (\d+), seasonName: "([^"]+)", format: "ODI", competition: "ICC Men's Cricket World Cup", oversPerInnings: (\d+), expectedMatchCount: (\d+),/g;
+
+  const result: Array<{
+    year: number;
+    seasonName: string;
+    oversPerInnings:
+      | 50
+      | 60;
+    expectedMatchCount: number;
+    competition: string;
+  }> = [];
+
+  for (
+    const match of
+    text.matchAll(regex)
+  ) {
+    result.push({
+      year:
+        Number(match[1]),
+      seasonName:
+        match[2],
+      oversPerInnings:
+        Number(
+          match[3]
+        ) as 50 | 60,
+      expectedMatchCount:
+        Number(
+          match[4]
+        ),
+      competition:
+        "ICC Men's Cricket World Cup",
+    });
+  }
+
+  if (
+    result.length === 0
+  ) {
+    fail(
+      "Unable to read World edition registry."
+    );
+  }
+
+  return result;
+}
+
+function loadRoles():
+  Map<string, RoleEntry> {
+  const file =
+    readJson<{
+      players: Record<
+        string,
+        RoleEntry
+      >;
+    }>(ROLES);
+
+  const result =
+    new Map<
+      string,
+      RoleEntry
+    >();
+
+  for (
+    const [
+      playerId,
+      entry,
+    ] of Object.entries(
+      file.players ?? {}
+    )
+  ) {
+    result.set(
+      playerId,
+      entry
+    );
+  }
+
+  return result;
+}
+
+function canonicalId(
+  match: Match,
+  name: string
+): string {
+  const id =
+    match.info.registry
+      ?.people?.[name];
+
+  if (
+    !id ||
+    !/^[0-9a-f]{8}$/i.test(
+      id
+    )
+  ) {
+    fail(
+      `Missing Cricsheet registry ID for ${name}.`
+    );
+  }
+
+  return id.toLowerCase();
+}
+
+function numeric(
+  value: unknown
+): number {
+  return typeof value ===
+    "number" &&
+    Number.isFinite(value)
+    ? value
+    : 0;
+}
+
+function isLegalDelivery(
+  extras:
+    | Record<
+        string,
+        number
+      >
+    | undefined
+): boolean {
+  return !(
+    (extras?.wides ?? 0) >
+      0 ||
+    (extras?.noballs ?? 0) >
+      0
+  );
+}
+
+type Accumulator = {
+  id: string;
+  name: string;
+  team: string;
+
+  matches: Set<string>;
+
+  innings: number;
+  runs: number;
+  balls: number;
+  dismissals: number;
+
+  wickets: number;
+  ballsBowled: number;
+  runsConceded: number;
+
+  catches: number;
+  stumpings: number;
+
+  inningsScores: number[];
 };
 
-function newAcc(id:string,name:string,team:string):Acc {
-  return {id,name,team,matches:new Set(),innings:0,runs:0,balls:0,dismissals:0,wickets:0,ballsBowled:0,runsConceded:0,catches:0,stumpings:0,fifties:0,hundreds:0};
+function newAccumulator(
+  id: string,
+  name: string,
+  team: string
+): Accumulator {
+  return {
+    id,
+    name,
+    team,
+    matches:
+      new Set<string>(),
+    innings: 0,
+    runs: 0,
+    balls: 0,
+    dismissals: 0,
+    wickets: 0,
+    ballsBowled: 0,
+    runsConceded: 0,
+    catches: 0,
+    stumpings: 0,
+    inningsScores: [],
+  };
 }
 
-function processEdition(year:number, edition:any, roles:Map<string,RoleEntry>) {
-  const wrapper = readJson<any>(path.join(RAW, `${year}.json`));
-  const matches = Array.isArray(wrapper.matches) ? wrapper.matches as Match[] : [];
-  if (matches.length !== edition.expectedMatchCount) fail(`${year}: found ${matches.length} matches, expected ${edition.expectedMatchCount}.`);
+function slugify(
+  value: string
+): string {
+  return value
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    );
+}
 
-  const seen = new Set<string>();
-  const players = new Map<string, Acc>();
-  const teamPlayers = new Map<string, Set<string>>();
+function shortName(
+  value: string
+): string {
+  const words =
+    value
+      .split(/\s+/)
+      .filter(Boolean);
 
-  for (const match of matches) {
-    const date = match.info.dates?.[0] ?? "";
-    const matchKey = `${date}|${[...match.info.teams].sort().join("|")}`;
-    if (seen.has(matchKey)) fail(`${year}: duplicate match ${matchKey}`);
-    seen.add(matchKey);
+  if (
+    words.length === 1
+  ) {
+    return words[0]
+      .slice(0, 4)
+      .toUpperCase();
+  }
 
-    for (const [team, names] of Object.entries(match.info.players ?? {})) {
-      const set = teamPlayers.get(team) ?? new Set<string>();
-      for (const name of names) {
-        const id = canonicalId(match, name);
-        set.add(id);
-        const p = players.get(id) ?? newAcc(id, name, team);
-        p.matches.add(matchKey);
-        players.set(id, p);
-      }
-      teamPlayers.set(team, set);
+  return words
+    .map(
+      (word) =>
+        word[0]
+    )
+    .join("")
+    .slice(0, 4)
+    .toUpperCase();
+}
+
+function processEdition(
+  year: number,
+  edition: ReturnType<
+    typeof parseEditions
+  >[number],
+  roles: Map<
+    string,
+    RoleEntry
+  >
+) {
+  const wrapper =
+    readJson<{
+      matches: Match[];
+    }>(
+      path.join(
+        RAW,
+        `${year}.json`
+      )
+    );
+
+  const matches =
+    Array.isArray(
+      wrapper.matches
+    )
+      ? wrapper.matches
+      : [];
+
+  if (
+    matches.length !==
+    edition.expectedMatchCount
+  ) {
+    fail(
+      `${year}: found ${matches.length} matches; expected ${edition.expectedMatchCount}.`
+    );
+  }
+
+  const seen =
+    new Set<string>();
+
+  const players =
+    new Map<
+      string,
+      Accumulator
+    >();
+
+  const teamPlayers =
+    new Map<
+      string,
+      Set<string>
+    >();
+
+  for (
+    const match of matches
+  ) {
+    const date =
+      match.info.dates?.[0] ??
+      "";
+
+    const matchNumber =
+      match.info.event
+        ?.match_number ??
+      "";
+
+    const matchKey =
+      [
+        date,
+        matchNumber,
+        ...[
+          ...match.info.teams,
+        ].sort(),
+      ].join("|");
+
+    if (
+      seen.has(
+        matchKey
+      )
+    ) {
+      fail(
+        `${year}: duplicate match ${matchKey}.`
+      );
     }
 
-    for (const innings of match.innings ?? []) {
-      for (const over of innings.overs ?? []) {
-        for (const ball of over.deliveries ?? []) {
-          const batterId = canonicalId(match, ball.batter);
-          const bowlerId = canonicalId(match, ball.bowler);
-          const batter = players.get(batterId);
-          const bowler = players.get(bowlerId);
-          if (!batter || !bowler) fail(`${year}: registry player missing from lineup.`);
-          batter.innings = batter.innings || 0;
-          batter.runs += numeric(ball.runs?.batter);
-          batter.balls += ball.extras?.wides || ball.extras?.noballs ? 0 : 1;
-          if (ball.wickets) for (const w of ball.wickets) {
-            if (w.player_out === ball.batter && !["retired hurt","retired not out"].includes(w.kind)) batter.dismissals++;
-            if (w.fielders) for (const f of w.fielders) {
-              const fid = canonicalId(match, f.name);
-              const fp = players.get(fid);
-              if (fp) {
-                if (w.kind === "stumped") fp.stumpings++;
-                else if (["caught","caught and bowled"].includes(w.kind)) fp.catches++;
+    seen.add(
+      matchKey
+    );
+
+    for (
+      const [
+        team,
+        names,
+      ] of Object.entries(
+        match.info.players ??
+          {}
+      )
+    ) {
+      const ids =
+        teamPlayers.get(
+          team
+        ) ??
+        new Set<string>();
+
+      for (
+        const name of
+        names
+      ) {
+        const id =
+          canonicalId(
+            match,
+            name
+          );
+
+        ids.add(id);
+
+        const existing =
+          players.get(
+            id
+          );
+
+        if (
+          existing &&
+          existing.team !==
+            team
+        ) {
+          fail(
+            `${year}: player ${id} appears for multiple teams.`
+          );
+        }
+
+        const player =
+          existing ??
+          newAccumulator(
+            id,
+            name,
+            team
+          );
+
+        player.matches.add(
+          matchKey
+        );
+
+        players.set(
+          id,
+          player
+        );
+      }
+
+      teamPlayers.set(
+        team,
+        ids
+      );
+    }
+
+    for (
+      const innings of
+      match.innings ?? []
+    ) {
+      const inningsScores =
+        new Map<
+          string,
+          number
+        >();
+
+      const batters =
+        new Set<string>();
+
+      for (
+        const over of
+        innings.overs ?? []
+      ) {
+        for (
+          const ball of
+          over.deliveries ??
+          []
+        ) {
+          const batterId =
+            canonicalId(
+              match,
+              ball.batter
+            );
+
+          const bowlerId =
+            canonicalId(
+              match,
+              ball.bowler
+            );
+
+          const batter =
+            players.get(
+              batterId
+            );
+
+          const bowler =
+            players.get(
+              bowlerId
+            );
+
+          if (
+            !batter ||
+            !bowler
+          ) {
+            fail(
+              `${year}: registry player missing from lineup.`
+            );
+          }
+
+          const runs =
+            numeric(
+              ball.runs
+                ?.batter
+            );
+
+          batter.runs +=
+            runs;
+
+          inningsScores.set(
+            batterId,
+            (inningsScores.get(
+              batterId
+            ) ?? 0) +
+              runs
+          );
+
+          batters.add(
+            batterId
+          );
+
+          if (
+            isLegalDelivery(
+              ball.extras
+            )
+          ) {
+            batter.balls++;
+            bowler.ballsBowled++;
+          }
+
+          const conceded =
+            numeric(
+              ball.runs?.total
+            ) -
+            numeric(
+              ball.extras?.byes
+            ) -
+            numeric(
+              ball.extras?.legbyes
+            ) -
+            numeric(
+              ball.extras?.penalty
+            );
+
+          bowler.runsConceded +=
+            Math.max(
+              0,
+              conceded
+            );
+
+          for (
+            const wicket of
+            ball.wickets ??
+            []
+          ) {
+            if (
+              wicket.player_out ===
+                ball.batter &&
+              ![
+                "retired hurt",
+                "retired not out",
+              ].includes(
+                wicket.kind
+              )
+            ) {
+              batter.dismissals++;
+            }
+
+            if (
+              wicket.fielders
+            ) {
+              for (
+                const fielder of
+                wicket.fielders
+              ) {
+                const fielderId =
+                  canonicalId(
+                    match,
+                    fielder.name
+                  );
+
+                const fielderPlayer =
+                  players.get(
+                    fielderId
+                  );
+
+                if (
+                  !fielderPlayer
+                ) {
+                  continue;
+                }
+
+                if (
+                  wicket.kind ===
+                  "stumped"
+                ) {
+                  fielderPlayer.stumpings++;
+                } else if (
+                  [
+                    "caught",
+                    "caught and bowled",
+                  ].includes(
+                    wicket.kind
+                  )
+                ) {
+                  fielderPlayer.catches++;
+                }
               }
             }
-          }
-          bowler.ballsBowled += ball.extras?.wides || ball.extras?.noballs ? 0 : 1;
-          const conceded = numeric(ball.runs?.total) - numeric(ball.extras?.byes) - numeric(ball.extras?.legbyes) - numeric(ball.extras?.penalty);
-          bowler.runsConceded += Math.max(0, conceded);
-          if (ball.wickets) for (const w of ball.wickets) {
-            if (!["run out","retired hurt","retired not out","obstructing the field"].includes(w.kind)) bowler.wickets++;
+
+            if (
+              ![
+                "run out",
+                "retired hurt",
+                "retired not out",
+                "obstructing the field",
+                "timed out",
+              ].includes(
+                wicket.kind
+              )
+            ) {
+              bowler.wickets++;
+            }
           }
         }
       }
-      // innings count is added once per team/player who batted in this innings.
-      const batters = new Set<string>();
-      for (const over of innings.overs ?? []) for (const ball of over.deliveries ?? []) {
-        batters.add(canonicalId(match, ball.batter));
+
+      for (
+        const id of batters
+      ) {
+        const player =
+          players.get(id);
+
+        if (!player) {
+          continue;
+        }
+
+        player.innings++;
+
+        player.inningsScores.push(
+          inningsScores.get(
+            id
+          ) ?? 0
+        );
       }
-      for (const id of batters) { const p=players.get(id); if(p) p.innings++; }
     }
   }
 
-  const teams = [...teamPlayers.entries()].map(([team, ids]) => {
-    const teamOut = [...ids].map(id => {
-      const p = players.get(id)!;
-      const roleId = id.replace(/^cricsheet:/, "");
-      const role = roles.get(roleId);
-      if (!role) fail(`${year}/${team}/${p.name}: no verified role for ${roleId}.`);
-      const battingAvg = p.dismissals ? p.runs / p.dismissals : null;
-      const strike = p.balls ? (p.runs / p.balls) * 100 : null;
-      const bowlingAvg = p.wickets ? p.runsConceded / p.wickets : null;
-      const economy = p.ballsBowled ? (p.runsConceded / (p.ballsBowled / 6)) : null;
-      const stats = {
-        matches:p.matches.size, innings:p.innings, runs:p.runs,
-        batting_average: battingAvg, strike_rate: strike,
-        hundreds:p.hundreds, fifties:p.fifties, wickets:p.wickets,
-        bowling_average:bowlingAvg, economy, catches:p.catches, stumpings:p.stumpings
-      };
-      return {
-        fullName:p.name, sourcePlayerId:id, role:role.role, stats,
-        sources:[{provider:"Cricsheet",url:"https://cricsheet.org/"}],
-        roleSource:role.source
-      };
-    });
-    return {
-      name:team,
-      shortName:team.length <= 4 ? team : team.replace(/[^A-Za-z]/g,"").slice(0,4).toUpperCase(),
-      slug:team.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),
-      players:teamOut,
-      sources:["https://cricsheet.org/"]
-    };
-  });
+  ensureDirectory(
+    OUT
+  );
 
-  return {year,seasonName:edition.seasonName,format:"ODI",competition:edition.competition,oversPerInnings:edition.oversPerInnings,teams,sources:["https://cricsheet.org/"]};
+  const teams =
+    [...teamPlayers.entries()]
+      .sort(
+        ([a], [b]) =>
+          a.localeCompare(b)
+      )
+      .map(
+        ([team, ids]) => {
+          const outputPlayers =
+            [...ids]
+              .map(
+                (id) => {
+                  const player =
+                    players.get(
+                      id
+                    )!;
+
+                  const role =
+                    roles.get(
+                      id
+                    );
+
+                  if (!role) {
+                    fail(
+                      `${year}/${team}/${player.name}: no authoritative role for ${id}.`
+                    );
+                  }
+
+                  const battingAverage =
+                    player.dismissals >
+                    0
+                      ? player.runs /
+                        player.dismissals
+                      : null;
+
+                  const strikeRate =
+                    player.balls >
+                    0
+                      ? (player.runs /
+                          player.balls) *
+                        100
+                      : null;
+
+                  const bowlingAverage =
+                    player.wickets >
+                    0
+                      ? player.runsConceded /
+                        player.wickets
+                      : null;
+
+                  const economy =
+                    player.ballsBowled >
+                    0
+                      ? player.runsConceded /
+                        (player.ballsBowled /
+                          6)
+                      : null;
+
+                  const hundreds =
+                    player.inningsScores.filter(
+                      (score) =>
+                        score >=
+                        100
+                    ).length;
+
+                  const fifties =
+                    player.inningsScores.filter(
+                      (score) =>
+                        score >=
+                          50 &&
+                        score <
+                          100
+                    ).length;
+
+                  return {
+                    fullName:
+                      player.name,
+
+                    sourcePlayerId:
+                      `cricsheet:${player.id}`,
+
+                    role:
+                      role.role,
+
+                    stats: {
+                      matches:
+                        player.matches.size,
+                      innings:
+                        player.innings,
+                      runs:
+                        player.runs,
+                      batting_average:
+                        battingAverage,
+                      strike_rate:
+                        strikeRate,
+                      hundreds,
+                      fifties,
+                      wickets:
+                        player.wickets,
+                      bowling_average:
+                        bowlingAverage,
+                      economy,
+                      catches:
+                        player.catches,
+                      stumpings:
+                        player.stumpings,
+                    },
+
+                    roleSource:
+                      role.source,
+
+                    sources: [
+                      "https://cricsheet.org/",
+                    ],
+                  };
+                }
+              );
+
+          return {
+            name:
+              team,
+            shortName:
+              shortName(team),
+            slug:
+              slugify(team),
+            players:
+              outputPlayers,
+            sources: [
+              "https://cricsheet.org/",
+            ],
+          };
+        }
+      );
+
+  return {
+    year,
+    seasonName:
+      edition.seasonName,
+    format:
+      "ODI" as const,
+    competition:
+      "ICC Men's Cricket World Cup" as const,
+    oversPerInnings:
+      edition.oversPerInnings,
+    teams,
+    sources: [
+      "https://cricsheet.org/",
+    ],
+  };
 }
 
-function main() {
-  const roles = loadRoles();
-  ensureDir(OUT);
-  for (const edition of parseEditions().filter(x => x.year >= 2003)) {
-    const result = processEdition(edition.year, edition, roles);
-    fs.writeFileSync(path.join(OUT, `${edition.year}.json`), JSON.stringify(result,null,2)+"\n");
-    console.log(`[WORLD PROCESSING] ${edition.year}: ${result.teams.length} teams`);
+function main(): void {
+  console.log(
+    "[WORLD PROCESSING] Starting."
+  );
+
+  const roles =
+    loadRoles();
+
+  ensureDirectory(
+    OUT
+  );
+
+  for (
+    const edition of
+    parseEditions()
+  ) {
+    /*
+     * Historical editions are processed
+     * by process-world-historical.ts.
+     */
+    if (
+      edition.year < 2003
+    ) {
+      continue;
+    }
+
+    const result =
+      processEdition(
+        edition.year,
+        edition,
+        roles
+      );
+
+    fs.writeFileSync(
+      path.join(
+        OUT,
+        `${edition.year}.json`
+      ),
+      `${JSON.stringify(
+        result,
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+
+    console.log(
+      `[WORLD PROCESSING] ${edition.year}: ${result.teams.length} teams`
+    );
   }
-  console.log("[WORLD PROCESSING] Modern editions processed.");
+
+  console.log(
+    "[WORLD PROCESSING] Modern editions processed."
+  );
 }
+
 main();

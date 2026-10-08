@@ -23,7 +23,8 @@
         "data:process-world-historical": "tsx scripts/process-world-historical.ts",
         "data:validate-world-historical": "tsx scripts/validate-world-historical.ts",
         "data:build-world-roles": "tsx scripts/build-world-role-sources.ts",
-        "data:sync-world-identities": "tsx scripts/sync-world-identities.ts"
+        "data:sync-world-identities": "tsx scripts/sync-world-identities.ts",
+        "data:prepare-world-historical": "tsx scripts/prepare-world-historical.ts"
     },
     "dependencies": {
         "@supabase/ssr": "^0.12.5",

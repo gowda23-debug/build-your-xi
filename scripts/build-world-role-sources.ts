@@ -8,10 +8,8 @@ type WorldRole =
   | "BOWL";
 
 type RoleProvider =
-   | "ICC"
-
-  | "BOARD"
-  | "ESPNcricinfo";
+  | "ICC"
+  | "BOARD";
 
 type RoleSource = {
   provider: RoleProvider;
@@ -40,71 +38,93 @@ type RoleReviewFile = {
 type VerifiedRolesFile = {
   version: number;
   description: string;
-  players: Record<string, VerifiedRoleEntry>;
+  players: Record<
+    string,
+    VerifiedRoleEntry
+  >;
 };
 
-type RoleSourcesOutput = {
-  version: number;
-  description: string;
-  sourcePolicy: {
-    primary: string[];
-    thirdParty: string[];
-    thirdPartyUsage: string;
-  };
-  players: Record<string, VerifiedRoleEntry>;
-};
+const ROOT =
+  process.cwd();
 
-const ROLE_REVIEW_PATH = path.join(
-  process.cwd(),
-  "scripts",
-  "data",
-  "world",
-  "role-review.json"
-);
+const ROLE_REVIEW_PATH =
+  path.join(
+    ROOT,
+    "scripts",
+    "data",
+    "world",
+    "role-review.json"
+  );
 
-const VERIFIED_ROLES_PATH = path.join(
-  process.cwd(),
-  "scripts",
-  "data",
-  "world",
-  "verified-world-roles.json"
-);
+const VERIFIED_ROLES_PATH =
+  path.join(
+    ROOT,
+    "scripts",
+    "data",
+    "world",
+    "verified-world-roles.json"
+  );
 
-const OUTPUT_PATH = path.join(
-  process.cwd(),
-  "scripts",
-  "data",
-  "world",
-  "role-sources.json"
-);
+const OUTPUT_PATH =
+  path.join(
+    ROOT,
+    "scripts",
+    "data",
+    "world",
+    "role-sources.json"
+  );
 
-function fail(message: string): never {
-  throw new Error(`[WORLD ROLE BUILD] ${message}`);
+function fail(
+  message: string
+): never {
+  throw new Error(
+    `[WORLD ROLE BUILD] ${message}`
+  );
 }
 
-function readJson<T>(filePath: string): T {
-  if (!fs.existsSync(filePath)) {
-    fail(`Missing file: ${filePath}`);
+function readJson<T>(
+  filePath: string
+): T {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
+    fail(
+      `Missing ${filePath}`
+    );
   }
 
-  const raw = fs.readFileSync(filePath, "utf8");
+  const raw =
+    fs.readFileSync(
+      filePath,
+      "utf8"
+    );
 
   if (!raw.trim()) {
-    fail(`File is empty: ${filePath}`);
+    fail(
+      `Empty ${filePath}`
+    );
   }
 
   try {
-    return JSON.parse(raw) as T;
+    return JSON.parse(
+      raw
+    ) as T;
   } catch (error) {
     fail(
-      `Invalid JSON in ${filePath}: ${
-        error instanceof Error ? error.message : String(error)
+      `Invalid JSON ${filePath}: ${
+        error instanceof Error
+          ? error.message
+          : String(error)
       }`
     );
   }
 }
 
-function isWorldRole(value: unknown): value is WorldRole {
+function isRole(
+  value: unknown
+): value is WorldRole {
   return (
     value === "BAT" ||
     value === "WK" ||
@@ -113,299 +133,183 @@ function isWorldRole(value: unknown): value is WorldRole {
   );
 }
 
-function isRoleProvider(
+function isProvider(
   value: unknown
 ): value is RoleProvider {
   return (
     value === "ICC" ||
-    value === "BOARD" ||
-    value === "ESPNcricinfo"
-  );}
-
-function validateSource(
-  sourcePlayerId: string,
-  source: RoleSource
-): void {
-  if (!source || typeof source !== "object") {
-    fail(`Missing source for ${sourcePlayerId}.`);
-  }
-
-  if (!isRoleProvider(source.provider)) {
-    fail(
-      `Invalid role provider for ${sourcePlayerId}: ${String(
-        source.provider
-      )}.`
-    );
-  }
-
-  if (
-    typeof source.url !== "string" ||
-    source.url.trim().length === 0
-  ) {
-    fail(`Missing source URL for ${sourcePlayerId}.`);
-  }
-
-  if (!source.url.startsWith("https://")) {
-    fail(
-      `Source URL must use HTTPS for ${sourcePlayerId}: ${source.url}`
-    );
-  }
-
-  if (
-    typeof source.retrievedAt !== "string" ||
-    source.retrievedAt.trim().length === 0
-  ) {
-    fail(`Missing retrievedAt for ${sourcePlayerId}.`);
-  }
-
-  const parsedDate = new Date(source.retrievedAt);
-
-  if (Number.isNaN(parsedDate.getTime())) {
-    fail(
-      `Invalid retrievedAt date for ${sourcePlayerId}: ${source.retrievedAt}`
-    );
-  }
+    value === "BOARD"
+  );
 }
 
 function validateRoleEntry(
-  sourcePlayerId: string,
+  playerId: string,
   entry: VerifiedRoleEntry
 ): void {
-  if (!entry || typeof entry !== "object") {
-    fail(`Invalid role entry for ${sourcePlayerId}.`);
-  }
-
-  if (!isWorldRole(entry.role)) {
+  if (
+    !entry ||
+    typeof entry !== "object"
+  ) {
     fail(
-      `Invalid role for ${sourcePlayerId}: ${String(
-        entry.role
-      )}.`
+      `Invalid role entry for ${playerId}.`
     );
-  }
-
-  validateSource(sourcePlayerId, entry.source);
-}
-
-function validateReviewFile(
-  review: RoleReviewFile
-): RoleReviewPlayer[] {
-  if (!review || !Array.isArray(review.players)) {
-    fail(
-      `role-review.json must contain a "players" array.`
-    );
-  }
-
-  const seen = new Set<string>();
-
-  for (const player of review.players) {
-    if (
-      !player.sourcePlayerId ||
-      typeof player.sourcePlayerId !== "string"
-    ) {
-      fail(`Role review contains a player without sourcePlayerId.`);
-    }
-
-    if (seen.has(player.sourcePlayerId)) {
-      fail(
-        `Duplicate sourcePlayerId in role-review.json: ${player.sourcePlayerId}`
-      );
-    }
-
-    seen.add(player.sourcePlayerId);
-
-    if (
-      !player.fullName ||
-      typeof player.fullName !== "string"
-    ) {
-      fail(
-        `Player ${player.sourcePlayerId} is missing fullName.`
-      );
-    }
-
-    if (!Array.isArray(player.teams)) {
-      fail(
-        `Player ${player.sourcePlayerId} has invalid teams.`
-      );
-    }
-
-    if (!Array.isArray(player.editions)) {
-      fail(
-        `Player ${player.sourcePlayerId} has invalid editions.`
-      );
-    }
-  }
-
-  return review.players;
-}
-
-function validateVerifiedRoles(
-  verified: VerifiedRolesFile
-): void {
-  if (!verified || typeof verified !== "object") {
-    fail(`verified-world-roles.json is invalid.`);
   }
 
   if (
-    !verified.players ||
-    typeof verified.players !== "object" ||
-    Array.isArray(verified.players)
+    !isRole(entry.role)
   ) {
     fail(
-      `verified-world-roles.json must contain a players object.`
+      `Invalid role for ${playerId}: ${String(entry.role)}`
     );
   }
 
-  for (const [
-    sourcePlayerId,
-    entry,
-  ] of Object.entries(verified.players)) {
-    validateRoleEntry(sourcePlayerId, entry);
-  }
-}
-
-function buildOutput(
-  reviewPlayers: RoleReviewPlayer[],
-  verifiedRoles: Record<string, VerifiedRoleEntry>
-): RoleSourcesOutput {
-  const reviewIds = new Set(
-    reviewPlayers.map((player) => player.sourcePlayerId)
-  );
-
-  const outputPlayers: Record<
-    string,
-    VerifiedRoleEntry
-  > = {};
-
-  for (const [
-    sourcePlayerId,
-    entry,
-  ] of Object.entries(verifiedRoles)) {
-    if (!reviewIds.has(sourcePlayerId)) {
-      console.warn(
-        `[WORLD ROLE BUILD] WARNING: ${sourcePlayerId} exists in verified-world-roles.json but not in role-review.json.`
-      );
-    }
-
-    outputPlayers[sourcePlayerId] = entry;
-  }
-
-  return {
-    version: 1,
-
-    description:
-      "Authoritative World Cup player-role mappings. Every role must be backed by an explicit official source.",
-
-    sourcePolicy: {
-      primary: [
-        "ICC player profile",
-        "ICC tournament media guide",
-        "Official national cricket board player profile",
-        "Official national cricket board tournament squad/profile",
-      ],
-
-      thirdParty: [
-        "ESPNcricinfo",
-        "Cricbuzz",
-        "Kaggle",
-        "GitHub datasets",
-      ],
-
-      thirdPartyUsage:
-        "Cross-check only. Third-party sources cannot establish the authoritative role.",
-    },
-
-    players: outputPlayers,
-  };
-}
-
-function printSummary(
-  reviewPlayers: RoleReviewPlayer[],
-  verifiedRoles: Record<string, VerifiedRoleEntry>
-): void {
-  const total = reviewPlayers.length;
-
-  const resolved = reviewPlayers.filter(
-    (player) =>
-      verifiedRoles[player.sourcePlayerId] !== undefined
-  );
-
-  const unresolved = reviewPlayers.filter(
-    (player) =>
-      verifiedRoles[player.sourcePlayerId] === undefined
-  );
-
-  console.log("");
-  console.log("========================================");
-  console.log("WORLD ROLE VERIFICATION");
-  console.log("========================================");
-  console.log(`Players discovered : ${total}`);
-  console.log(`Roles verified     : ${resolved.length}`);
-  console.log(`Roles unresolved   : ${unresolved.length}`);
-  console.log(
-    `Coverage           : ${
-      total === 0
-        ? "0.00"
-        : ((resolved.length / total) * 100).toFixed(2)
-    }%`
-  );
-  console.log("========================================");
-  console.log("");
-
-  if (unresolved.length > 0) {
-    console.log(
-      "[WORLD ROLE BUILD] Unresolved players:"
+  if (
+    !entry.source ||
+    !isProvider(
+      entry.source.provider
+    )
+  ) {
+    fail(
+      `Role source for ${playerId} must use ICC or BOARD.`
     );
+  }
 
-    for (const player of unresolved) {
-      console.log(
-        `- ${player.sourcePlayerId} | ${player.fullName} | ${player.teams.join(
-          ", "
-        )} | ${player.editions.join(", ")}`
-      );
-    }
+  if (
+    !entry.source.url ||
+    !entry.source.url.startsWith(
+      "https://"
+    )
+  ) {
+    fail(
+      `Invalid role source URL for ${playerId}.`
+    );
+  }
 
-    console.log("");
+  if (
+    !entry.source.retrievedAt ||
+    Number.isNaN(
+      new Date(
+        entry.source.retrievedAt
+      ).getTime()
+    )
+  ) {
+    fail(
+      `Invalid role source timestamp for ${playerId}.`
+    );
   }
 }
 
 function main(): void {
-  console.log(
-    "[WORLD ROLE BUILD] Starting role-source generation."
-  );
+  const review =
+    readJson<RoleReviewFile>(
+      ROLE_REVIEW_PATH
+    );
 
-  const review = readJson<RoleReviewFile>(
-    ROLE_REVIEW_PATH
-  );
+  const verified =
+    readJson<VerifiedRolesFile>(
+      VERIFIED_ROLES_PATH
+    );
 
-  const verified = readJson<VerifiedRolesFile>(
-    VERIFIED_ROLES_PATH
-  );
+  if (
+    !Array.isArray(
+      review.players
+    )
+  ) {
+    fail(
+      "role-review.json has no players array."
+    );
+  }
 
-  const reviewPlayers = validateReviewFile(review);
+  const discoveredIds =
+    new Set(
+      review.players.map(
+        (player) =>
+          player.sourcePlayerId
+      )
+    );
 
-  validateVerifiedRoles(verified);
+  for (
+    const [
+      playerId,
+      entry,
+    ] of Object.entries(
+      verified.players
+    )
+  ) {
+    validateRoleEntry(
+      playerId,
+      entry
+    );
 
-  const output = buildOutput(
-    reviewPlayers,
-    verified.players
-  );
+    if (
+      !discoveredIds.has(
+        playerId
+      )
+    ) {
+      fail(
+        `Verified role ${playerId} does not exist in role-review.json.`
+      );
+    }
+  }
+
+  const unresolved =
+    review.players.filter(
+      (player) =>
+        !verified.players[
+          player.sourcePlayerId
+        ]
+    );
+
+  if (
+    unresolved.length > 0
+  ) {
+    console.log(
+      `[WORLD ROLE BUILD] ${unresolved.length} players remain unresolved.`
+    );
+
+    console.log(
+      "[WORLD ROLE BUILD] No final role-sources.json will be produced."
+    );
+
+    process.exit(2);
+  }
 
   fs.writeFileSync(
     OUTPUT_PATH,
-    JSON.stringify(output, null, 2) + "\n",
+    `${JSON.stringify(
+      {
+        version: 1,
+        description:
+          "Authoritative World Cup player-role mappings. Roles must be supported by ICC or an official national cricket board source.",
+        sourcePolicy: {
+          primary: [
+            "ICC player profile",
+            "ICC tournament media guide",
+            "Official national cricket board player profile",
+            "Official national cricket board tournament squad/profile",
+          ],
+          thirdParty: [
+            "ESPNcricinfo",
+            "Cricbuzz",
+            "Kaggle",
+            "GitHub datasets",
+          ],
+          thirdPartyUsage:
+            "Third-party sources may be used for cross-checking only and cannot establish the authoritative role.",
+        },
+        players:
+          verified.players,
+      },
+      null,
+      2
+    )}\n`,
     "utf8"
   );
 
-  printSummary(
-    reviewPlayers,
-    verified.players
-  );
-
   console.log(
-    `[WORLD ROLE BUILD] Generated: ${OUTPUT_PATH}`
-  );
-  console.log(
-    "[WORLD ROLE BUILD] Completed."
+    `[WORLD ROLE BUILD] ${Object.keys(
+      verified.players
+    ).length} authoritative roles written.`
   );
 }
 

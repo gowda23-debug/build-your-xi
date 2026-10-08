@@ -8,47 +8,59 @@
     {
       "provider": "Cricsheet",
       "url": "https://cricsheet.org/downloads/",
-      "usage": "Structured match data for editions currently covered by the Cricsheet ICC Men's Cricket World Cup event dataset."
+      "usage": "Structured match data for editions covered by the Cricsheet ICC Men's Cricket World Cup dataset."
     },
     {
       "provider": "ICC",
       "url": "https://www.icc-cricket.com/",
-      "usage": "Tournament identity, historical validation and official tournament records."
+      "usage": "Tournament identity, official tournament records and statistical cross-checks."
+    },
+    {
+      "provider": "CricketArchive",
+      "url": "https://www.cricketarchive.com/",
+      "usage": "Archived historical World Cup scorecards for 1975-1999. Used as the historical scorecard acquisition source and cross-checked against official tournament records."
     }
   ],
 
   "historicalEditions": {
     "1975": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1979": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1983": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1987": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1992": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1996": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     },
     "1999": {
-      "status": "temporarily-unavailable",
-      "reason": "Complete verified player-level source data has not yet been integrated."
+      "status": "ingestion-source-available",
+      "provider": "CricketArchive"
     }
   },
 
   "availableEditions": [
+    1975,
+    1979,
+    1983,
+    1987,
+    1992,
+    1996,
+    1999,
     2003,
     2007,
     2011,
@@ -65,7 +77,11 @@
       "BOWL"
     ],
     "unresolvedAction": "exclude_from_game_pool_until_verified",
-    "inferFromStatistics": false
+    "inferFromStatistics": false,
+    "authoritativeProviders": [
+      "ICC",
+      "BOARD"
+    ]
   },
 
   "applicationPolicy": {

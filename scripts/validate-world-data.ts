@@ -1,45 +1,343 @@
 import fs from "node:fs";
 import path from "node:path";
-import { WORLD_AVAILABLE_EDITIONS } from "./data/world/editions";
 
-const ROOT=process.cwd();
-const DIR=path.join(ROOT,"scripts/data/world/processed");
-const VALID=new Set(["BAT","WK","AR","BOWL"]);
+import {
+  WORLD_AVAILABLE_EDITIONS,
+} from "./data/world/editions";
 
-function fail(m:string):never{throw new Error(`[WORLD VALIDATION] ${m}`);}
-function read(p:string):any{
-  if(!fs.existsSync(p)) fail(`Missing ${p}`);
-  try{return JSON.parse(fs.readFileSync(p,"utf8"));}catch(e){fail(`Invalid JSON ${p}: ${e}`);}
+const ROOT =
+  process.cwd();
+
+const DIRECTORY =
+  path.join(
+    ROOT,
+    "scripts",
+    "data",
+    "world",
+    "processed"
+  );
+
+const VALID_ROLES =
+  new Set([
+    "BAT",
+    "WK",
+    "AR",
+    "BOWL",
+  ]);
+
+function fail(
+  message: string
+): never {
+  throw new Error(
+    `[WORLD VALIDATION] ${message}`
+  );
 }
-function finiteOrNull(x:any){return x===null || (typeof x==="number"&&Number.isFinite(x));}
 
-for(const edition of WORLD_AVAILABLE_EDITIONS){
-  const s=read(path.join(DIR,`${edition.year}.json`));
-  if(s.year!==edition.year) fail(`${edition.year}: year mismatch.`);
-  if(s.oversPerInnings!==edition.oversPerInnings) fail(`${edition.year}: overs mismatch.`);
-  if(!Array.isArray(s.teams)||!s.teams.length) fail(`${edition.year}: no teams.`);
-  const ids=new Set<string>();
-  let count=0;
-  for(const t of s.teams){
-    if(!t.name||!t.slug) fail(`${edition.year}: invalid team.`);
-    if(!Array.isArray(t.players)||!t.players.length) fail(`${edition.year}/${t.name}: no players.`);
-    for(const p of t.players){
-      count++;
-      if(!p.sourcePlayerId?.startsWith("cricsheet:")) fail(`${edition.year}/${t.name}/${p.fullName}: canonical Cricsheet ID missing.`);
-      if(!VALID.has(p.role)) fail(`${edition.year}/${t.name}/${p.fullName}: invalid role.`);
-      if(ids.has(p.sourcePlayerId)) fail(`${edition.year}: duplicate player ID ${p.sourcePlayerId}.`);
-      ids.add(p.sourcePlayerId);
-      if(!p.roleSource?.provider||!p.roleSource?.url||!p.roleSource?.retrievedAt) fail(`${edition.year}/${p.fullName}: missing role source.`);
-      for(const k of ["matches","innings","runs","hundreds","fifties","wickets","catches","stumpings"]){
-        if(!Number.isInteger(p.stats?.[k])||p.stats[k]<0) fail(`${edition.year}/${p.fullName}: invalid ${k}.`);
+function readJson(
+  filePath: string
+): any {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
+    fail(
+      `Missing ${filePath}`
+    );
+  }
+
+  try {
+    return JSON.parse(
+      fs.readFileSync(
+        filePath,
+        "utf8"
+      )
+    );
+  } catch (error) {
+    fail(
+      `Invalid JSON ${filePath}: ${error}`
+    );
+  }
+}
+
+function validateNumber(
+  value: unknown,
+  name: string
+): void {
+  if (
+    !Number.isFinite(
+      value
+    ) ||
+    Number(value) < 0
+  ) {
+    fail(
+      `${name} must be a non-negative number.`
+    );
+  }
+}
+
+for (
+  const edition of
+  WORLD_AVAILABLE_EDITIONS
+) {
+  const season =
+    readJson(
+      path.join(
+        DIRECTORY,
+        `${edition.year}.json`
+      )
+    );
+
+  if (
+    season.year !==
+    edition.year
+  ) {
+    fail(
+      `${edition.year}: year mismatch.`
+    );
+  }
+
+  if (
+    season.seasonName !==
+    edition.seasonName
+  ) {
+    fail(
+      `${edition.year}: season name mismatch.`
+    );
+  }
+
+  if (
+    season.format !==
+    "ODI"
+  ) {
+    fail(
+      `${edition.year}: invalid format.`
+    );
+  }
+
+  if (
+    season.competition !==
+    "ICC Men's Cricket World Cup"
+  ) {
+    fail(
+      `${edition.year}: invalid competition.`
+    );
+  }
+
+  if (
+    season.oversPerInnings !==
+    edition.oversPerInnings
+  ) {
+    fail(
+      `${edition.year}: overs mismatch.`
+    );
+  }
+
+  if (
+    !Array.isArray(
+      season.teams
+    ) ||
+    season.teams.length ===
+      0
+  ) {
+    fail(
+      `${edition.year}: no teams.`
+    );
+  }
+
+  const playerIds =
+    new Set<string>();
+
+  let playerCount = 0;
+
+  for (
+    const team of
+    season.teams
+  ) {
+    if (
+      !team.name ||
+      !team.slug
+    ) {
+      fail(
+        `${edition.year}: invalid team metadata.`
+      );
+    }
+
+    if (
+      !Array.isArray(
+        team.players
+      ) ||
+      team.players.length ===
+        0
+    ) {
+      fail(
+        `${edition.year}/${team.name}: no players.`
+      );
+    }
+
+    for (
+      const player of
+      team.players
+    ) {
+      playerCount++;
+
+      if (
+        typeof player.sourcePlayerId !==
+          "string" ||
+        !/^cricsheet:[0-9a-f]{8}$/i.test(
+          player.sourcePlayerId
+        )
+      ) {
+        fail(
+          `${edition.year}/${team.name}/${player.fullName}: invalid canonical player ID.`
+        );
       }
-      for(const k of ["batting_average","strike_rate","bowling_average","economy"]){
-        if(!finiteOrNull(p.stats?.[k])) fail(`${edition.year}/${p.fullName}: invalid ${k}.`);
+
+      if (
+        playerIds.has(
+          player.sourcePlayerId
+        )
+      ) {
+        fail(
+          `${edition.year}: duplicate player ${player.sourcePlayerId}.`
+        );
       }
-      if(p.stats.innings>p.stats.matches) fail(`${edition.year}/${p.fullName}: innings > matches.`);
+
+      playerIds.add(
+        player.sourcePlayerId
+      );
+
+      if (
+        !VALID_ROLES.has(
+          player.role
+        )
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: invalid role.`
+        );
+      }
+
+      if (
+        !player.roleSource ||
+        ![
+          "ICC",
+          "BOARD",
+        ].includes(
+          player.roleSource.provider
+        )
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: role is not backed by ICC/BOARD.`
+        );
+      }
+
+      if (
+        typeof player.roleSource.url !==
+          "string" ||
+        !player.roleSource.url.startsWith(
+          "https://"
+        )
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: invalid role source URL.`
+        );
+      }
+
+      const stats =
+        player.stats;
+
+      for (
+        const field of [
+          "matches",
+          "innings",
+          "runs",
+          "hundreds",
+          "fifties",
+          "wickets",
+          "catches",
+          "stumpings",
+        ]
+      ) {
+        if (
+          !Number.isInteger(
+            stats?.[field]
+          ) ||
+          stats[field] < 0
+        ) {
+          fail(
+            `${edition.year}/${player.fullName}: invalid ${field}.`
+          );
+        }
+      }
+
+      for (
+        const field of [
+          "batting_average",
+          "strike_rate",
+          "bowling_average",
+          "economy",
+        ]
+      ) {
+        if (
+          stats[field] !==
+            null &&
+          !Number.isFinite(
+            stats[field]
+          )
+        ) {
+          fail(
+            `${edition.year}/${player.fullName}: invalid ${field}.`
+          );
+        }
+      }
+
+      if (
+        stats.innings >
+        stats.matches
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: innings > matches.`
+        );
+      }
+
+      if (
+        stats.hundreds >
+        stats.innings
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: hundreds > innings.`
+        );
+      }
+
+      if (
+        stats.fifties >
+        stats.innings
+      ) {
+        fail(
+          `${edition.year}/${player.fullName}: fifties > innings.`
+        );
+      }
+
+      validateNumber(
+        stats.runs,
+        `${edition.year}/${player.fullName}/runs`
+      );
     }
   }
-  if(count===0) fail(`${edition.year}: zero players.`);
-  console.log(`[WORLD VALIDATION] ${edition.year}: ${s.teams.length} teams / ${count} players`);
+
+  if (
+    playerCount === 0
+  ) {
+    fail(
+      `${edition.year}: zero players.`
+    );
+  }
+
+  console.log(
+    `[WORLD VALIDATION] ${edition.year}: ${season.teams.length} teams / ${playerCount} players`
+  );
 }
-console.log("[WORLD VALIDATION] Successful.");
+
+console.log(
+  "[WORLD VALIDATION] Successful."
+);
