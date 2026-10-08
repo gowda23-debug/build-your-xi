@@ -126,11 +126,13 @@ const REVIEW_DIRECTORY =
         "role-review"
     );
 
-const REVIEW_PATH =
-    path.join(
-        REVIEW_DIRECTORY,
-        "players.json"
-    );
+const REVIEW_PATH = path.join(
+  ROOT,
+  "scripts",
+  "data",
+  "world",
+  "role-review.json"
+);
 
 const ROLE_SOURCE_PATH =
     path.join(
@@ -379,37 +381,25 @@ function inferYearFromMatch(
 }
 
 function createPlayerId(
-    match: RawMatch,
-    name: string
+  match: RawMatch,
+  name: string
 ): string {
-    const registryId =
-        match.info.registry
-            ?.people?.[name];
+  const registryId =
+    match.info.registry?.people?.[name];
 
-    if (
-        registryId
-    ) {
-        return registryId;
-    }
+  if (!registryId) {
+    fail(
+      `Missing Cricsheet Register ID for "${name}".`
+    );
+  }
 
-    /*
-     * This fallback is only for raw files that do not
-     * contain a registry identifier.
-     *
-     * It is NOT used as an authoritative player identity
-     * when a real registry identifier exists.
-     */
-    return name
-        .trim()
-        .toLowerCase()
-        .replace(
-            /[^a-z0-9]+/g,
-            "-"
-        )
-        .replace(
-            /^-+|-+$/g,
-            ""
-        );
+  if (!/^[0-9a-f]{8}$/i.test(registryId)) {
+    fail(
+      `Invalid Cricsheet Register ID "${registryId}" for "${name}".`
+    );
+  }
+
+  return registryId.toLowerCase();
 }
 
 function collectPlayers(): PlayerReview[] {
