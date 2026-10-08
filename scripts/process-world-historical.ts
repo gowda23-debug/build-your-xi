@@ -21,7 +21,7 @@ type MatchManifestEntry = {
 type EditionManifest = {
   year: number;
   seasonName: string;
-  provider: "ESPNcricinfo";
+  provider: "CricketArchive",
   archiveRoot: string;
   expectedMatchCount: number;
   retrievedAt: string;
@@ -45,6 +45,7 @@ type HistoricalPlayer = {
   stumpings: number;
   fifties: number;
   hundreds: number;
+  wicketkeeper: boolean;
 };
 
 type HistoricalTeam = {
@@ -59,6 +60,7 @@ type ParsedBattingRow = {
   runs: number;
   balls: number;
   dismissal: string;
+  wicketkeeper: boolean;
 };
 
 type ParsedBowlingRow = {
@@ -132,11 +134,6 @@ const OUTPUT_ROOT = path.join(
   "processed"
 );
 
-const ROLE_CACHE_ROOT = path.join(CACHE_ROOT, "roles");
-
-const PROFILE_REQUEST_TIMEOUT_MS = 20_000;
-const PROFILE_CONCURRENCY = 4;
-
 function fail(message: string): never {
   throw new Error(`[WORLD HISTORICAL PROCESSING] ${message}`);
 }
@@ -202,7 +199,7 @@ function numeric(value: string): number | null {
 
 function cleanPlayerName(value: string): string {
   return normalizeText(value)
-    .replace(/^[*†‡]+\s*/g, "")
+    .replace(/^[+#*†‡]+\s*/g, "")
     .replace(/\s*\(c\)\s*/gi, " ")
     .replace(/\s*\(wk\)\s*/gi, " ")
     .replace(/\s+/g, " ")
@@ -221,16 +218,17 @@ function playerIdFromProfile(
   team: string
 ): string {
   if (profileUrl) {
-    const numericId = profileUrl.match(
-      /(?:player|cricketers)[^0-9]{0,30}(\d{3,8})(?:\.html)?(?:[/?#]|$)/i
-    )?.[1];
+    const cricketArchiveId =
+      profileUrl.match(
+        /\/Archive\/Players\/\d+\/(\d+)\/\d+\.html(?:[?#].*)?$/i
+      )?.[1];
 
-    if (numericId) {
-      return `espncricinfo:${numericId}`;
+    if (cricketArchiveId) {
+      return `cricketarchive:${cricketArchiveId}`;
     }
   }
 
-  return `espncricinfo:unresolved:${sha256(
+  return `cricketarchive:unresolved:${sha256(
     `${slugify(team)}|${slugify(name)}`
   ).slice(0, 24)}`;
 }
@@ -264,24 +262,51 @@ function extractPlayerFromRow(
   $: cheerio.CheerioAPI,
   row: Element,
   team: string
-) {
-  const firstCell = $(row).children("td,th").first();
+): {
+  name: string;
+  sourcePlayerId: string;
+  profileUrl: string | null;
+  wicketkeeper: boolean;
+} {
+  const firstCell = $(row)
+    .children("td,th")
+    .first();
 
   /*
-   * Cheerio's text() does not accept a separator argument in the
-   * installed version. Normalize whitespace after extracting text.
+   * CricketArchive identifies the designated wicketkeeper
+   * with '+' or '#', for example:
+   *
+   * +Wasim Bari
+   * #Player Name
+   *
+   * Detect this BEFORE cleanPlayerName() removes
+   * the marker.
    */
-  const name = cleanPlayerName(firstCell.text());
+  const rawName = normalizeText(
+    firstCell.text()
+  );
 
-  const href = firstCell.find("a[href]").first().attr("href") ?? null;
+  const wicketkeeper =
+    /^[+#]/.test(rawName) ||
+    /[+#]$/.test(rawName);
 
-  let profileUrl: string | null = null;
+  const name =
+    cleanPlayerName(rawName);
+
+  const href =
+    firstCell
+      .find("a[href]")
+      .first()
+      .attr("href") ?? null;
+
+  let profileUrl:
+    string | null = null;
 
   if (href) {
     try {
       profileUrl = new URL(
         href,
-        "https://www.espncricinfo.com/"
+        "https://www.cricketarchive.com/"
       ).toString();
     } catch {
       profileUrl = null;
@@ -290,8 +315,14 @@ function extractPlayerFromRow(
 
   return {
     name,
-    sourcePlayerId: playerIdFromProfile(profileUrl, name, team),
+    sourcePlayerId:
+      playerIdFromProfile(
+        profileUrl,
+        name,
+        team
+      ),
     profileUrl,
+    wicketkeeper,
   };
 }
 
@@ -336,76 +367,194 @@ function parseBattingTable(
   table: Element,
   team: string
 ): ParsedBattingRow[] {
-  const header = findHeaderRow($, table, (row) => {
-    const upper = row.map((value) => value.toUpperCase());
+  const header = findHeaderRow(
+    $,
+    table,
+    (row) => {
+      const upper = row.map(
+        (value) =>
+          value.toUpperCase()
+      );
 
-    return (
-      upper.includes("R") &&
-      (upper.includes("B") || upper.includes("BALLS")) &&
-      (upper.includes("4") || upper.includes("4S")) &&
-      (upper.includes("6") || upper.includes("6S"))
-    );
-  });
+      const hasRuns =
+        upper.includes("R") ||
+        upper.includes("RUNS");
+
+      const hasBalls =
+        upper.includes("B") ||
+        upper.includes("BALLS");
+
+      const hasFours =
+        upper.includes("4") ||
+        upper.includes("4S");
+
+      const hasSixes =
+        upper.includes("6") ||
+        upper.includes("6S");
+
+      return (
+        hasRuns &&
+        hasBalls &&
+        hasFours &&
+        hasSixes
+      );
+    }
+  );
 
   if (!header) {
     return [];
   }
 
-  const upperHeader = header.values.map((value) => value.toUpperCase());
+  const upperHeader =
+    header.values.map(
+      (value) =>
+        value.toUpperCase()
+    );
 
-  const runsIndex = upperHeader.indexOf("R");
+  const runsIndex =
+    upperHeader.findIndex(
+      (value) =>
+        value === "R" ||
+        value === "RUNS"
+    );
 
   const ballsIndex =
-    upperHeader.indexOf("B") !== -1
-      ? upperHeader.indexOf("B")
-      : upperHeader.indexOf("BALLS");
+    upperHeader.findIndex(
+      (value) =>
+        value === "B" ||
+        value === "BALLS"
+    );
 
-  const rowElements = $(table).children("tbody").length
-    ? $(table).children("tbody").children("tr")
-    : $(table).children("tr");
+  if (
+    runsIndex === -1 ||
+    ballsIndex === -1
+  ) {
+    return [];
+  }
 
-  const result: ParsedBattingRow[] = [];
+  const rowElements =
+    $(table).children("tbody").length
+      ? $(table)
+        .children("tbody")
+        .children("tr")
+      : $(table).children("tr");
+
+  const result:
+    ParsedBattingRow[] = [];
+
   let started = false;
 
-  rowElements.each((_index, row) => {
-    const values = rowCells($, row);
+  rowElements.each(
+    (_index, row) => {
+      const values =
+        rowCells($, row);
 
-    if (row === header.row) {
-      started = true;
-      return;
+      if (row === header.row) {
+        started = true;
+        return;
+      }
+
+      if (
+        !started ||
+        values.length === 0
+      ) {
+        return;
+      }
+
+      const rawName =
+        normalizeText(
+          values[0] ?? ""
+        );
+
+      if (!rawName) {
+        return;
+      }
+
+      /*
+       * These rows are not players.
+       */
+      if (
+        /^(extras?|total|fall of wickets|yet to bat)$/i.test(
+          cleanPlayerName(rawName)
+        )
+      ) {
+        return;
+      }
+
+      const player =
+        extractPlayerFromRow(
+          $,
+          row,
+          team
+        );
+
+      if (!player.name) {
+        return;
+      }
+
+      /*
+       * CricketArchive explicitly records DNB
+       * players in the batting table.
+       *
+       * They still belong to the match/player pool.
+       */
+      const didNotBat =
+        /\bdid not bat\b/i.test(
+          values
+            .slice(1)
+            .join(" ")
+        );
+
+      if (didNotBat) {
+        result.push({
+          name: player.name,
+          sourcePlayerId:
+            player.sourcePlayerId,
+          profileUrl:
+            player.profileUrl,
+          runs: 0,
+          balls: 0,
+          dismissal:
+            "did not bat",
+          wicketkeeper:
+            player.wicketkeeper,
+        });
+
+        return;
+      }
+
+      const runs =
+        numeric(
+          values[runsIndex] ?? ""
+        );
+
+      const balls =
+        numeric(
+          values[ballsIndex] ?? ""
+        );
+
+      if (
+        runs === null ||
+        balls === null
+      ) {
+        return;
+      }
+
+      result.push({
+        name: player.name,
+        sourcePlayerId:
+          player.sourcePlayerId,
+        profileUrl:
+          player.profileUrl,
+        runs,
+        balls,
+        dismissal:
+          values[1] ?? "",
+        wicketkeeper:
+          player.wicketkeeper,
+      });
     }
-
-    if (!started || values.length === 0) {
-      return;
-    }
-
-    const name = cleanPlayerName(values[0] ?? "");
-
-    if (
-      !name ||
-      /^(extras?|total|fall of wickets|did not bat|yet to bat)$/i.test(name)
-    ) {
-      return;
-    }
-
-    const runs = numeric(values[runsIndex] ?? "");
-    const balls = numeric(values[ballsIndex] ?? "");
-
-    if (runs === null || balls === null) {
-      return;
-    }
-
-    const player = extractPlayerFromRow($, row, team);
-
-    result.push({
-      name: player.name || name,
-      sourcePlayerId: player.sourcePlayerId,
-      profileUrl: player.profileUrl,
-      runs,
-      balls,
-      dismissal: values[1] ?? "",
-    });
-  });
+  );
 
   return result;
 }
@@ -415,16 +564,39 @@ function parseBowlingTable(
   table: Element,
   team: string
 ): ParsedBowlingRow[] {
-  const header = findHeaderRow($, table, (row) => {
-    const upper = row.map((value) => value.toUpperCase());
+  const header = findHeaderRow(
+    $,
+    table,
+    (row) => {
+      const upper = row.map((value) =>
+        value.toUpperCase()
+      );
 
-    return (
-      (upper.includes("O") || upper.includes("OVERS")) &&
-      (upper.includes("M") || upper.includes("MDNS")) &&
-      upper.includes("R") &&
-      (upper.includes("W") || upper.includes("WKTS"))
-    );
-  });
+      const hasOvers =
+        upper.includes("O") ||
+        upper.includes("OVERS");
+
+      const hasMaidens =
+        upper.includes("M") ||
+        upper.includes("MDNS");
+
+      const hasRuns =
+        upper.includes("R") ||
+        upper.includes("RUNS");
+
+      const hasWickets =
+        upper.includes("W") ||
+        upper.includes("WKTS") ||
+        upper.includes("WICKETS");
+
+      return (
+        hasOvers &&
+        hasMaidens &&
+        hasRuns &&
+        hasWickets
+      );
+    }
+  );
 
   if (!header) {
     return [];
@@ -433,16 +605,26 @@ function parseBowlingTable(
   const upperHeader = header.values.map((value) => value.toUpperCase());
 
   const oversIndex =
-    upperHeader.indexOf("O") !== -1
-      ? upperHeader.indexOf("O")
-      : upperHeader.indexOf("OVERS");
+    upperHeader.findIndex(
+      (value) =>
+        value === "O" ||
+        value === "OVERS"
+    );
 
-  const runsIndex = upperHeader.indexOf("R");
+  const runsIndex =
+    upperHeader.findIndex(
+      (value) =>
+        value === "R" ||
+        value === "RUNS"
+    );
 
   const wicketsIndex =
-    upperHeader.indexOf("W") !== -1
-      ? upperHeader.indexOf("W")
-      : upperHeader.indexOf("WKTS");
+    upperHeader.findIndex(
+      (value) =>
+        value === "W" ||
+        value === "WKTS" ||
+        value === "WICKETS"
+    );
 
   const rowElements = $(table).children("tbody").length
     ? $(table).children("tbody").children("tr")
@@ -591,7 +773,9 @@ function ensurePlayer(
   }
 
   const player: HistoricalPlayer = {
-    fullName: cleanPlayerName(fullName),
+    fullName: cleanPlayerName(
+      fullName
+    ),
     sourcePlayerId,
     profileUrl,
     teams: new Set([team]),
@@ -607,6 +791,7 @@ function ensurePlayer(
     stumpings: 0,
     fifties: 0,
     hundreds: 0,
+    wicketkeeper: false,
   };
 
   playersById.set(sourcePlayerId, player);
@@ -782,8 +967,20 @@ function parseMatch(
           batter.profileUrl
         );
 
-        player.matches.add(matchId);
-        player.innings += 1;
+        player.matches.add(
+          matchId
+        );
+
+        if (batter.wicketkeeper) {
+          player.wicketkeeper = true;
+        }
+
+        if (
+          batter.dismissal !==
+          "did not bat"
+        ) {
+          player.innings += 1;
+        }
         player.runs += batter.runs;
         player.ballsFaced += batter.balls;
 
@@ -838,190 +1035,133 @@ function parseMatch(
 
   return { teams, players };
 }
-
-function extractRoleFromProfileText(
-  text: string
-): WorldRole | null {
-  const match = text.match(
-    /\bRole\s*[:\-]\s*(Wicketkeeper(?:[- ]batter)?|Batter|Batsman|Batswoman|Batting Allrounder|Bowling Allrounder|Allrounder|Bowler)\b/i
-  );
-
-  if (!match) {
-    return null;
-  }
-
-  const rawRole = normalizeText(match[1]).toLowerCase();
-
-  if (rawRole.includes("wicketkeeper")) {
-    return "WK";
-  }
-
-  if (rawRole.includes("allrounder")) {
-    return "AR";
-  }
-
-  if (rawRole.includes("bowler")) {
-    return "BOWL";
-  }
-
-  return "BAT";
-}
-
-async function fetchProfileRole(
-  profileUrl: string
-): Promise<{ role: WorldRole; url: string }> {
-  const cacheKey = sha256(profileUrl).slice(0, 32);
-
-  ensureDirectory(ROLE_CACHE_ROOT);
-
-  const cachePath = path.join(
-    ROLE_CACHE_ROOT,
-    `${cacheKey}.json`
-  );
-
-  if (fs.existsSync(cachePath)) {
-    return JSON.parse(
-      fs.readFileSync(cachePath, "utf8")
-    ) as { role: WorldRole; url: string };
-  }
-
-  const controller = new AbortController();
-
-  const timeout = setTimeout(
-    () => controller.abort(),
-    PROFILE_REQUEST_TIMEOUT_MS
-  );
-
-  try {
-    const response = await fetch(profileUrl, {
-      method: "GET",
-      redirect: "follow",
-      headers: {
-        "User-Agent":
-          "Build-Your-XI historical data importer/1.0",
-        Accept: "text/html,application/xhtml+xml",
-      },
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `HTTP ${response.status} ${response.statusText}`
-      );
-    }
-
-    const html = await response.text();
-    const $ = cheerio.load(html);
-
-    const role = extractRoleFromProfileText(
-      normalizeText($.root().text())
-    );
-
-    if (!role) {
-      throw new Error(
-        `No explicit role found on ${profileUrl}.`
-      );
-    }
-
-    const result = {
-      role,
-      url: profileUrl,
-    };
-
-    fs.writeFileSync(
-      cachePath,
-      `${JSON.stringify(result, null, 2)}\n`,
-      "utf8"
-    );
-
-    return result;
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-async function resolveRoles(
-  players: HistoricalPlayer[]
-): Promise<
-  Map<string, { role: WorldRole; url: string }>
-> {
-  const resolved = new Map<
+function resolveRoles(
+  players: HistoricalPlayer[],
+  matchUrlsByPlayer: Map<
     string,
-    { role: WorldRole; url: string }
-  >();
-
-  const unresolved = new Map<string, HistoricalPlayer>();
+    Set<string>
+  >
+): Map<
+  string,
+  {
+    role: WorldRole;
+    url: string;
+  }
+> {
+  const resolved =
+    new Map<
+      string,
+      {
+        role: WorldRole;
+        url: string;
+      }
+    >();
 
   for (const player of players) {
-    if (!player.profileUrl) {
-      unresolved.set(player.sourcePlayerId, player);
+    const urls =
+      matchUrlsByPlayer.get(
+        player.sourcePlayerId
+      );
+
+    const sourceUrl =
+      urls && urls.size > 0
+        ? [...urls][0]
+        : null;
+
+    if (!sourceUrl) {
+      fail(
+        `Missing source URL for ${player.fullName} (${player.sourcePlayerId}).`
+      );
     }
-  }
 
-  let cursor = 0;
-
-  const workers = Array.from({
-    length: Math.min(PROFILE_CONCURRENCY, players.length),
-  }).map(async () => {
-    while (cursor < players.length) {
-      const index = cursor;
-      cursor += 1;
-
-      const player = players[index];
-
-      if (!player.profileUrl) {
-        continue;
+    resolved.set(
+      player.sourcePlayerId,
+      {
+        role:
+          deriveWorldRole(player),
+        url: sourceUrl,
       }
-
-      try {
-        const role = await fetchProfileRole(
-          player.profileUrl
-        );
-
-        resolved.set(player.sourcePlayerId, role);
-      } catch (error) {
-        unresolved.set(player.sourcePlayerId, player);
-
-        console.warn(
-          `[WORLD HISTORICAL ROLES] ${player.fullName}: ${
-            error instanceof Error
-              ? error.message
-              : String(error)
-          }`
-        );
-      }
-    }
-  });
-
-  await Promise.all(workers);
-
-  if (unresolved.size > 0) {
-    const reportPath = path.join(
-      CACHE_ROOT,
-      "historical-unresolved-roles.json"
-    );
-
-    fs.writeFileSync(
-      reportPath,
-      `${JSON.stringify(
-        [...unresolved.values()].map((player) => ({
-          sourcePlayerId: player.sourcePlayerId,
-          fullName: player.fullName,
-          profileUrl: player.profileUrl,
-          teams: [...player.teams],
-        })),
-        null,
-        2
-      )}\n`,
-      "utf8"
-    );
-
-    fail(
-      `${unresolved.size} historical players have no explicit role source. Review ${reportPath}. No historical processed edition was written.`
     );
   }
 
   return resolved;
+}
+function deriveWorldRole(
+  player: HistoricalPlayer
+): WorldRole {
+  /*
+   * Highest-confidence historical signal:
+   * CricketArchive explicitly marks the designated
+   * wicketkeeper with '+' or '#'.
+   */
+  if (
+    player.wicketkeeper ||
+    player.stumpings > 0
+  ) {
+    return "WK";
+  }
+
+  const hasBatting =
+    player.innings > 0 ||
+    player.runs > 0 ||
+    player.ballsFaced > 0;
+
+  const hasBowling =
+    player.legalBallsBowled > 0;
+
+  /*
+   * Pure bowler.
+   */
+  if (
+    !hasBatting &&
+    hasBowling
+  ) {
+    return "BOWL";
+  }
+
+  /*
+   * Pure batter.
+   */
+  if (
+    hasBatting &&
+    !hasBowling
+  ) {
+    return "BAT";
+  }
+
+  /*
+   * Player contributed both with bat
+   * and ball.
+   *
+   * We require a meaningful bowling workload
+   * before calling someone an all-rounder.
+   */
+  if (
+    hasBatting &&
+    hasBowling
+  ) {
+    if (
+      player.legalBallsBowled >= 60 ||
+      player.wickets >= 3
+    ) {
+      return "AR";
+    }
+
+    /*
+     * Occasional part-time bowling is not
+     * sufficient evidence to classify the
+     * player as an all-rounder.
+     */
+    return "BAT";
+  }
+
+  /*
+   * DNB players who never bowled are still
+   * included in the player pool. BAT is the
+   * safest fallback until an explicit role
+   * source is available.
+   */
+  return "BAT";
 }
 
 function toProcessedPlayer(
@@ -1032,37 +1172,37 @@ function toProcessedPlayer(
   const battingAverage =
     player.dismissals > 0
       ? Number(
-          (player.runs / player.dismissals).toFixed(2)
-        )
+        (player.runs / player.dismissals).toFixed(2)
+      )
       : null;
 
   const strikeRate =
     player.ballsFaced > 0
       ? Number(
-          (
-            (player.runs / player.ballsFaced) *
-            100
-          ).toFixed(2)
-        )
+        (
+          (player.runs / player.ballsFaced) *
+          100
+        ).toFixed(2)
+      )
       : null;
 
   const bowlingAverage =
     player.wickets > 0
       ? Number(
-          (
-            player.runsConceded / player.wickets
-          ).toFixed(2)
-        )
+        (
+          player.runsConceded / player.wickets
+        ).toFixed(2)
+      )
       : null;
 
   const economy =
     player.legalBallsBowled > 0
       ? Number(
-          (
-            player.runsConceded /
-            (player.legalBallsBowled / 6)
-          ).toFixed(2)
-        )
+        (
+          player.runsConceded /
+          (player.legalBallsBowled / 6)
+        ).toFixed(2)
+      )
       : null;
 
   return {
@@ -1084,13 +1224,14 @@ function toProcessedPlayer(
       stumpings: player.stumpings,
     },
     sources: matchUrls.map((url) => ({
-      provider: "ESPNcricinfo",
+      provider: "CricketArchive",
       url,
     })),
     roleSource: {
-      provider: "ESPNcricinfo",
+      provider: "CricketArchive",
       url: role.url,
-      retrievedAt: new Date().toISOString(),
+      retrievedAt:
+        new Date().toISOString(),
     },
   };
 }
@@ -1241,7 +1382,9 @@ async function processEdition(
         existing.stumpings += player.stumpings;
         existing.fifties += player.fifties;
         existing.hundreds += player.hundreds;
-
+        existing.wicketkeeper =
+          existing.wicketkeeper ||
+          player.wicketkeeper;
         if (
           !existing.profileUrl &&
           player.profileUrl
@@ -1265,7 +1408,11 @@ async function processEdition(
     `[WORLD HISTORICAL PROCESSING] ${source.year}: ${allPlayers.length} player records discovered.`
   );
 
-  const roles = await resolveRoles(allPlayers);
+  const roles =
+    resolveRoles(
+      allPlayers,
+      matchUrlsByPlayer
+    );
 
   for (const player of allPlayers) {
     for (const teamName of player.teams) {
