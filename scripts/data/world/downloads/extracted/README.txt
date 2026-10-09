@@ -7,8 +7,8 @@ Premier League (see https://cricsheet.org/withheld-matches for more
 information).
 
 
-The JSON data files contained in this zip file are version 1.2.0 files. You
-can learn about the structure of these files at
+The JSON data files contained in this zip file are version 1.2.0, and 1.3.0
+files. You can learn about the structure of these files at
 https://cricsheet.org/format/json/
 
 
@@ -292,3 +292,7 @@ teams involved in the match.
 2003-02-10 - international - ODI - male - 65237 - Sri Lanka vs New Zealand
 2003-02-10 - international - ODI - male - 65236 - Zimbabwe vs Namibia
 2003-02-09 - international - ODI - male - 65235 - West Indies vs South Africa
+
+Match data is licensed for use under the Open Data Commons Attribution
+License. The full license text is included in this download in the LICENSE.txt
+file.

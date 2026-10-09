@@ -1,6 +1,6 @@
 {
   "year": 1999,
-  "seasonName": "ICC World Cup 1999",
+  "seasonName": "ICC Men's Cricket World Cup 1999",
   "format": "ODI",
   "competition": "ICC Men's Cricket World Cup",
   "oversPerInnings": 50,
@@ -12,7 +12,7 @@
       "players": [
         {
           "fullName": "AC Dale",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5559/5559.html",
+          "sourcePlayerId": "cricketarchive:/players/5/5559/5559.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -56,32 +56,6 @@
             "stumpings": 2
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/4/4170/4170.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "AC Gilchrist",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4170/4170.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/4/4170/4170.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -90,7 +64,7 @@
         },
         {
           "fullName": "BP Julian",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2086/2086.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2086/2086.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -129,32 +103,6 @@
             "fifties": 0,
             "wickets": 0,
             "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2065/2065.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "DR Martyn",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2065/2065.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
             "economy": 12.5,
             "catches": 0,
             "stumpings": 0
@@ -168,7 +116,7 @@
         },
         {
           "fullName": "DS Lehmann",
-          "sourcePlayerId": "cricketarchive:/archive/players/3/3324/3324.html",
+          "sourcePlayerId": "cricketarchive:/players/3/3324/3324.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -194,7 +142,7 @@
         },
         {
           "fullName": "DW Fleming",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2167/2167.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2167/2167.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -231,32 +179,6 @@
             "strike_rate": 0,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2100/2100.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "GD McGrath",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2100/2100.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 18,
             "bowling_average": 20.38,
             "economy": 3.83,
@@ -272,7 +194,7 @@
         },
         {
           "fullName": "ME Waugh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/1/1984/1984.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -285,34 +207,8 @@
             "fifties": 2,
             "wickets": 0,
             "bowling_average": null,
-            "economy": null,
-            "catches": 6,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.com/Archive/Players/1/1984/1984.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "ME Waugh",
-          "sourcePlayerId": "cricketarchive:/players/1/1984/1984.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
             "economy": 4.88,
-            "catches": 0,
+            "catches": 6,
             "stumpings": 0
           },
           "sources": [
@@ -324,7 +220,7 @@
         },
         {
           "fullName": "MG Bevan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2166/2166.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2166/2166.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -350,7 +246,7 @@
         },
         {
           "fullName": "PR Reiffel",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2004/2004.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2004/2004.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -394,32 +290,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2229/2229.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "RT Ponting",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2229/2229.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2229/2229.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -428,7 +298,7 @@
         },
         {
           "fullName": "S Lee",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2241/2241.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2241/2241.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -465,36 +335,10 @@
             "strike_rate": 77.27,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1999/1999.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SK Warne",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1999/1999.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 20,
             "bowling_average": 18.05,
             "economy": 3.82,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -506,7 +350,7 @@
         },
         {
           "fullName": "SR Waugh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/1/1794/1794.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -517,36 +361,10 @@
             "strike_rate": 77.73,
             "hundreds": 1,
             "fifties": 2,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 6,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.com/Archive/Players/1/1794/1794.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SR Waugh",
-          "sourcePlayerId": "cricketarchive:/players/1/1794/1794.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 3,
             "bowling_average": 30.66,
             "economy": 5.11,
-            "catches": 0,
+            "catches": 6,
             "stumpings": 0
           },
           "sources": [
@@ -558,7 +376,7 @@
         },
         {
           "fullName": "TM Moody",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1939/1939.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -597,7 +415,7 @@
       "players": [
         {
           "fullName": "Akram Khan",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1902/1902.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1902/1902.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -623,7 +441,7 @@
         },
         {
           "fullName": "Aminul Islam",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1897/1897.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1897/1897.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -649,7 +467,7 @@
         },
         {
           "fullName": "Enamul Haque",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1963/1963.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1963/1963.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -675,7 +493,7 @@
         },
         {
           "fullName": "Faruk Ahmed",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1903/1903.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1903/1903.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -701,7 +519,7 @@
         },
         {
           "fullName": "Hasibul Hossain",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2204/2204.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2204/2204.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -727,7 +545,7 @@
         },
         {
           "fullName": "Khaled Mahmud",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7045/7045.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7045/7045.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -771,32 +589,6 @@
             "stumpings": 2
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2200/2200.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Khaled Mashud",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2200/2200.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2200/2200.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -805,7 +597,7 @@
         },
         {
           "fullName": "Manjural Islam",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8180/8180.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8180/8180.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -831,7 +623,7 @@
         },
         {
           "fullName": "Mehrab Hossain",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7234/7234.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7234/7234.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -857,7 +649,7 @@
         },
         {
           "fullName": "Minhajul Abedin",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1830/1830.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1830/1830.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -883,7 +675,7 @@
         },
         {
           "fullName": "Mohammad Rafique",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2199/2199.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2199/2199.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -909,7 +701,7 @@
         },
         {
           "fullName": "Naimur Rahman",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2208/2208.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2208/2208.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -935,7 +727,7 @@
         },
         {
           "fullName": "Niamur Rashid",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8187/8187.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8187/8187.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -961,7 +753,7 @@
         },
         {
           "fullName": "Shafiuddin Ahmed",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6381/6381.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6381/6381.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -987,7 +779,7 @@
         },
         {
           "fullName": "Shahriar Hossain",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6252/6252.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6252/6252.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1037,32 +829,6 @@
             "strike_rate": 50,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4263/4263.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "A Flintoff",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4263/4263.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 2,
             "bowling_average": 48,
             "economy": 5.33,
@@ -1078,7 +844,7 @@
         },
         {
           "fullName": "AD Mullally",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2358/2358.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2358/2358.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1104,7 +870,7 @@
         },
         {
           "fullName": "AJ Hollioake",
-          "sourcePlayerId": "cricketarchive:/archive/players/3/3395/3395.html",
+          "sourcePlayerId": "cricketarchive:/players/3/3395/3395.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1130,7 +896,7 @@
         },
         {
           "fullName": "AJ Stewart",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1952/1952.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1156,7 +922,7 @@
         },
         {
           "fullName": "ARC Fraser",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1926/1926.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1926/1926.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1182,7 +948,7 @@
         },
         {
           "fullName": "D Gough",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2159/2159.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2159/2159.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1208,7 +974,7 @@
         },
         {
           "fullName": "GA Hick",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1988/1988.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1234,7 +1000,7 @@
         },
         {
           "fullName": "GP Thorpe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2092/2092.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2092/2092.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1260,7 +1026,7 @@
         },
         {
           "fullName": "ID Austin",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4198/4198.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4198/4198.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1286,7 +1052,7 @@
         },
         {
           "fullName": "MA Ealham",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2356/2356.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2356/2356.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1312,7 +1078,7 @@
         },
         {
           "fullName": "N Hussain",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1951/1951.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1951/1951.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1338,7 +1104,7 @@
         },
         {
           "fullName": "NH Fairbrother",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1864/1864.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1364,7 +1130,7 @@
         },
         {
           "fullName": "RDB Croft",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2332/2332.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2332/2332.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1414,36 +1180,10 @@
             "strike_rate": 66.66,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 5,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1972/1972.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "A Kumble",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1972/1972.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 8,
             "bowling_average": 35.25,
             "economy": 4.18,
-            "catches": 0,
+            "catches": 5,
             "stumpings": 0
           },
           "sources": [
@@ -1455,7 +1195,7 @@
         },
         {
           "fullName": "AB Agarkar",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7111/7111.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7111/7111.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1492,36 +1232,10 @@
             "strike_rate": 75.19,
             "hundreds": 1,
             "fifties": 1,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2059/2059.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "AD Jadeja",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2059/2059.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 1,
             "bowling_average": 22,
             "economy": 5.5,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -1533,7 +1247,7 @@
         },
         {
           "fullName": "BKV Prasad",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2136/2136.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2136/2136.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1559,7 +1273,7 @@
         },
         {
           "fullName": "DS Mohanty",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6218/6218.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6218/6218.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1585,7 +1299,7 @@
         },
         {
           "fullName": "J Srinath",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1996/1996.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1611,7 +1325,7 @@
         },
         {
           "fullName": "M Azharuddin",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1773/1773.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1637,7 +1351,7 @@
         },
         {
           "fullName": "N Chopra",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7251/7251.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7251/7251.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1663,7 +1377,7 @@
         },
         {
           "fullName": "NR Mongia",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2115/2115.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2115/2115.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1689,7 +1403,7 @@
         },
         {
           "fullName": "RR Singh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1955/1955.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1955/1955.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1733,32 +1447,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2280/2280.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "RS Dravid",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2280/2280.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2280/2280.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -1767,7 +1455,7 @@
         },
         {
           "fullName": "S Ramesh",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7543/7543.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7543/7543.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1804,32 +1492,6 @@
             "strike_rate": 81.15,
             "hundreds": 1,
             "fifties": 1,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2023/2023.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SC Ganguly",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2023/2023.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 6,
             "bowling_average": 32.5,
             "economy": 5.13,
@@ -1858,34 +1520,8 @@
             "fifties": 0,
             "wickets": 0,
             "bowling_average": null,
-            "economy": null,
-            "catches": 2,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1933/1933.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SR Tendulkar",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1933/1933.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
             "economy": 7,
-            "catches": 0,
+            "catches": 2,
             "stumpings": 0
           },
           "sources": [
@@ -1910,7 +1546,7 @@
       "players": [
         {
           "fullName": "AO Suji",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4165/4165.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4165/4165.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1936,7 +1572,7 @@
         },
         {
           "fullName": "AV Vadher",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6379/6379.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6379/6379.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1962,7 +1598,7 @@
         },
         {
           "fullName": "AY Karim",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2269/2269.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2269/2269.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1988,7 +1624,7 @@
         },
         {
           "fullName": "DN Chudasama",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2262/2262.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2262/2262.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2014,7 +1650,7 @@
         },
         {
           "fullName": "HS Modi",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2266/2266.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2266/2266.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2040,7 +1676,7 @@
         },
         {
           "fullName": "JK Kamande",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8158/8158.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8158/8158.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2066,7 +1702,7 @@
         },
         {
           "fullName": "JO Angara",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5579/5579.html",
+          "sourcePlayerId": "cricketarchive:/players/5/5579/5579.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2092,7 +1728,7 @@
         },
         {
           "fullName": "KO Otieno",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2263/2263.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2263/2263.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2118,7 +1754,7 @@
         },
         {
           "fullName": "M Sheikh",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6380/6380.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6380/6380.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2144,7 +1780,7 @@
         },
         {
           "fullName": "MA Suji",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2270/2270.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2270/2270.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2170,7 +1806,7 @@
         },
         {
           "fullName": "MO Odumbe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2265/2265.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2265/2265.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2196,7 +1832,7 @@
         },
         {
           "fullName": "RD Shah",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7236/7236.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7236/7236.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2222,7 +1858,7 @@
         },
         {
           "fullName": "SK Gupta",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4164/4164.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4164/4164.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2261,34 +1897,8 @@
             "fifties": 2,
             "wickets": 0,
             "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2264/2264.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SO Tikolo",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2264/2264.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
             "economy": 6.88,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -2300,7 +1910,7 @@
         },
         {
           "fullName": "TM Odoyo",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2267/2267.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2267/2267.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2339,7 +1949,7 @@
       "players": [
         {
           "fullName": "AC Parore",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1970/1970.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1970/1970.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2365,7 +1975,7 @@
         },
         {
           "fullName": "CD McMillan",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5604/5604.html",
+          "sourcePlayerId": "cricketarchive:/players/5/5604/5604.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2391,7 +2001,7 @@
         },
         {
           "fullName": "CE Bulfin",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8160/8160.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8160/8160.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2417,7 +2027,7 @@
         },
         {
           "fullName": "CL Cairns",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1938/1938.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2443,7 +2053,7 @@
         },
         {
           "fullName": "CZ Harris",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2064/2064.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2469,7 +2079,7 @@
         },
         {
           "fullName": "DJ Nash",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2055/2055.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2055/2055.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2495,7 +2105,7 @@
         },
         {
           "fullName": "GI Allott",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2237/2237.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2237/2237.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2521,7 +2131,7 @@
         },
         {
           "fullName": "GR Larsen",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2156/2156.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2547,7 +2157,7 @@
         },
         {
           "fullName": "MJ Horne",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4760/4760.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4760/4760.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2573,7 +2183,7 @@
         },
         {
           "fullName": "MN Hart",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2116/2116.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2116/2116.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2610,36 +2220,10 @@
             "strike_rate": 56.42,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 6,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2234/2234.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "NJ Astle",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2234/2234.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 5,
             "bowling_average": 41,
             "economy": 4.6,
-            "catches": 0,
+            "catches": 6,
             "stumpings": 0
           },
           "sources": [
@@ -2651,7 +2235,7 @@
         },
         {
           "fullName": "RG Twose",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2225/2225.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2225/2225.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2695,32 +2279,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2120/2120.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SP Fleming",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2120/2120.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2120/2120.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -2753,36 +2311,10 @@
             "strike_rate": 43.36,
             "hundreds": 0,
             "fifties": 1,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4172/4172.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Abdul Razzaq",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4172/4172.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 13,
             "bowling_average": 23.23,
             "economy": 3.92,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -2805,36 +2337,10 @@
             "strike_rate": 67.44,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4167/4167.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Azhar Mahmood",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4167/4167.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 13,
             "bowling_average": 26.84,
             "economy": 4.15,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -2864,32 +2370,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/1/1859/1859.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Ijaz Ahmed",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1859/1859.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/1/1859/1859.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -2913,32 +2393,6 @@
             "bowling_average": null,
             "economy": null,
             "catches": 6,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2033/2033.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Inzamam-ul-Haq",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2033/2033.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
             "stumpings": 0
           },
           "sources": [
@@ -2968,32 +2422,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/6/6438/6438.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Mohammad Yousuf",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6438/6438.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/6/6438/6438.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -3020,32 +2448,6 @@
             "stumpings": 4
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/1/1979/1979.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Moin Khan",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1979/1979.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/1/1979/1979.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -3069,32 +2471,6 @@
             "bowling_average": null,
             "economy": null,
             "catches": 3,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1980/1980.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Saeed Anwar",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1980/1980.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
             "stumpings": 0
           },
           "sources": [
@@ -3124,32 +2500,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/1/1671/1671.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Saleem Malik",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1671/1671.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/1/1671/1671.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -3158,7 +2508,7 @@
         },
         {
           "fullName": "Saqlain Mushtaq",
-          "sourcePlayerId": "cricketarchive:/players/2/2220/2220.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2220/2220.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3176,7 +2526,7 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2220/2220.html",
+            "https://www.cricketarchive.com/CricketIreland/Players/2/2220/2220.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
             "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
@@ -3184,7 +2534,7 @@
         },
         {
           "fullName": "Shahid Afridi",
-          "sourcePlayerId": "cricketarchive:/players/4/4163/4163.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/4/4163/4163.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3202,7 +2552,7 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/4/4163/4163.html",
+            "https://www.cricketarchive.com/CricketIreland/Players/4/4163/4163.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
             "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
@@ -3221,36 +2571,10 @@
             "strike_rate": 26.66,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/5/5634/5634.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Shoaib Akhtar",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5634/5634.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 16,
             "bowling_average": 24.43,
             "economy": 4.83,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -3262,7 +2586,7 @@
         },
         {
           "fullName": "Wajahatullah Wasti",
-          "sourcePlayerId": "cricketarchive:/players/7/7137/7137.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/7/7137/7137.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3280,7 +2604,7 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/7/7137/7137.html",
+            "https://www.cricketarchive.com/CricketIreland/Players/7/7137/7137.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
             "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
@@ -3297,32 +2621,6 @@
             "runs": 11,
             "batting_average": 11,
             "strike_rate": 55,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1934/1934.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Waqar Younis",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1934/1934.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
             "hundreds": 0,
             "fifties": 0,
             "wickets": 2,
@@ -3351,36 +2649,10 @@
             "strike_rate": 92.5,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 5,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1774/1774.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Wasim Akram",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1774/1774.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 15,
             "bowling_average": 22.8,
             "economy": 3.77,
-            "catches": 0,
+            "catches": 5,
             "stumpings": 0
           },
           "sources": [
@@ -3405,7 +2677,7 @@
       "players": [
         {
           "fullName": "AA Donald",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2010/2010.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3431,7 +2703,7 @@
         },
         {
           "fullName": "DJ Cullinan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2068/2068.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2068/2068.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3457,7 +2729,7 @@
         },
         {
           "fullName": "G Kirsten",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2114/2114.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2114/2114.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3501,32 +2773,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2345/2345.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "HH Gibbs",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2345/2345.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2345/2345.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -3546,36 +2792,10 @@
             "strike_rate": 66.38,
             "hundreds": 0,
             "fifties": 4,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2231/2231.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "JH Kallis",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2231/2231.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 8,
             "bowling_average": 32.5,
             "economy": 3.93,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -3587,7 +2807,7 @@
         },
         {
           "fullName": "JN Rhodes",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2061/2061.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3602,32 +2822,6 @@
             "bowling_average": null,
             "economy": null,
             "catches": 2,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.com/Archive/Players/2/2061/2061.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "JN Rhodes",
-          "sourcePlayerId": "cricketarchive:/players/2/2061/2061.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
             "stumpings": 0
           },
           "sources": [
@@ -3650,36 +2844,10 @@
             "strike_rate": 122.17,
             "hundreds": 0,
             "fifties": 2,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2244/2244.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "L Klusener",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2244/2244.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 17,
             "bowling_average": 20.58,
             "economy": 4.61,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -3709,32 +2877,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/3/3941/3941.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "MV Boucher",
-          "sourcePlayerId": "cricketarchive:/archive/players/3/3941/3941.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/3/3941/3941.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -3743,7 +2885,7 @@
         },
         {
           "fullName": "N Boje",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2238/2238.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2238/2238.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3769,7 +2911,7 @@
         },
         {
           "fullName": "S Elworthy",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2952/2952.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2952/2952.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3806,36 +2948,10 @@
             "strike_rate": 69.48,
             "hundreds": 0,
             "fifties": 1,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 4,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2227/2227.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "SM Pollock",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2227/2227.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 9,
             "bowling_average": 31.44,
             "economy": 3.36,
-            "catches": 0,
+            "catches": 4,
             "stumpings": 0
           },
           "sources": [
@@ -3847,7 +2963,7 @@
         },
         {
           "fullName": "WJ Cronje",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2009/2009.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3858,36 +2974,10 @@
             "strike_rate": 77.16,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 4,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.com/Archive/Players/2/2009/2009.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "WJ Cronje",
-          "sourcePlayerId": "cricketarchive:/players/2/2009/2009.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 4,
             "bowling_average": 39.25,
             "economy": 4.9,
-            "catches": 0,
+            "catches": 4,
             "stumpings": 0
           },
           "sources": [
@@ -3912,7 +3002,7 @@
       "players": [
         {
           "fullName": "AG Davies",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4958/4958.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4958/4958.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3949,32 +3039,6 @@
             "strike_rate": 82.14,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/7/7224/7224.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "Asim Butt",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7224/7224.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 4,
             "bowling_average": 37,
             "economy": 4,
@@ -3990,7 +3054,7 @@
         },
         {
           "fullName": "BMW Patterson",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7219/7219.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7219/7219.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4016,7 +3080,7 @@
         },
         {
           "fullName": "G Salmond",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4963/4963.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4963/4963.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4053,36 +3117,10 @@
             "strike_rate": 68.67,
             "hundreds": 0,
             "fifties": 2,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4326/4326.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "GM Hamilton",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4326/4326.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 3,
             "bowling_average": 49.66,
             "economy": 4.17,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -4112,32 +3150,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/4/4962/4962.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "IL Philip",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4962/4962.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/4/4962/4962.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -4159,34 +3171,8 @@
             "fifties": 0,
             "wickets": 0,
             "bowling_average": null,
-            "economy": null,
-            "catches": 2,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4664/4664.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "IM Stanger",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4664/4664.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
             "economy": 6.22,
-            "catches": 0,
+            "catches": 2,
             "stumpings": 0
           },
           "sources": [
@@ -4209,36 +3195,10 @@
             "strike_rate": 30,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/4/4956/4956.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "JAR Blain",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4956/4956.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 10,
             "bowling_average": 21,
             "economy": 5.65,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -4250,7 +3210,7 @@
         },
         {
           "fullName": "JE Brinkley",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4218/4218.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4218/4218.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4294,7 +3254,7 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/4/4968/4968.html",
+            "https://cricketarchive.com/Archive/Players/4/4968/4968.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
             "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
@@ -4302,7 +3262,7 @@
         },
         {
           "fullName": "MJ Smith",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4965/4965.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4965/4965.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4328,7 +3288,7 @@
         },
         {
           "fullName": "MJD Allingham",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4955/4955.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4955/4955.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4354,7 +3314,7 @@
         },
         {
           "fullName": "NR Dyer",
-          "sourcePlayerId": "cricketarchive:/archive/players/7/7217/7217.html",
+          "sourcePlayerId": "cricketarchive:/players/7/7217/7217.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4393,7 +3353,7 @@
       "players": [
         {
           "fullName": "A Ranatunga",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1665/1665.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4430,32 +3390,6 @@
             "strike_rate": 96.22,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/6/6298/6298.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "DPMD Jayawardene",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6298/6298.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 2,
             "bowling_average": 65.5,
             "economy": 5.45,
@@ -4471,7 +3405,7 @@
         },
         {
           "fullName": "GP Wickramasinghe",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1997/1997.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4497,7 +3431,7 @@
         },
         {
           "fullName": "HP Tillakaratne",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1944/1944.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4523,7 +3457,7 @@
         },
         {
           "fullName": "KEA Upashantha",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2207/2207.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2207/2207.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4560,36 +3494,10 @@
             "strike_rate": 145.45,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 2,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2040/2040.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "M Muralitharan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2040/2040.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 6,
             "bowling_average": 26.33,
             "economy": 3.67,
-            "catches": 0,
+            "catches": 2,
             "stumpings": 0
           },
           "sources": [
@@ -4619,32 +3527,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/1/1978/1978.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "MS Atapattu",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1978/1978.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/1/1978/1978.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -4653,7 +3535,7 @@
         },
         {
           "fullName": "PA de Silva",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1761/1761.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4679,7 +3561,7 @@
         },
         {
           "fullName": "RS Kaluwitharana",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2038/2038.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2038/2038.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4705,7 +3587,7 @@
         },
         {
           "fullName": "RS Mahanama",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1809/1809.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4742,36 +3624,10 @@
             "strike_rate": 58.57,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1987/1987.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "ST Jayasuriya",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1987/1987.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 3,
             "bowling_average": 56,
             "economy": 5.44,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -4783,7 +3639,7 @@
         },
         {
           "fullName": "UDU Chandana",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2150/2150.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2150/2150.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4820,36 +3676,10 @@
             "strike_rate": 75,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/2/2165/2165.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "WPUJC Vaas",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2165/2165.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 7,
             "bowling_average": 32.85,
             "economy": 4.89,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -4892,32 +3722,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/1/1981/1981.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "BC Lara",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1981/1981.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/1/1981/1981.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -4937,32 +3741,6 @@
             "strike_rate": 50,
             "hundreds": 0,
             "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.co.uk/Players/1/1764/1764.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "CA Walsh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1764/1764.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 11,
             "bowling_average": 9.81,
             "economy": 2.29,
@@ -4978,7 +3756,7 @@
         },
         {
           "fullName": "CEL Ambrose",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1883/1883.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5004,7 +3782,7 @@
         },
         {
           "fullName": "HR Bryan",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8234/8234.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8234/8234.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5030,7 +3808,7 @@
         },
         {
           "fullName": "JC Adams",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2006/2006.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2006/2006.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5056,7 +3834,7 @@
         },
         {
           "fullName": "KLT Arthurton",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1905/1905.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5082,7 +3860,7 @@
         },
         {
           "fullName": "M Dillon",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5418/5418.html",
+          "sourcePlayerId": "cricketarchive:/players/5/5418/5418.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5108,7 +3886,7 @@
         },
         {
           "fullName": "PV Simmons",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1878/1878.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5134,7 +3912,7 @@
         },
         {
           "fullName": "RD Jacobs",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2278/2278.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2278/2278.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5160,7 +3938,7 @@
         },
         {
           "fullName": "RD King",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6386/6386.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6386/6386.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5186,7 +3964,7 @@
         },
         {
           "fullName": "RL Powell",
-          "sourcePlayerId": "cricketarchive:/archive/players/8/8301/8301.html",
+          "sourcePlayerId": "cricketarchive:/players/8/8301/8301.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5230,32 +4008,6 @@
             "stumpings": 0
           },
           "sources": [
-            "https://cricketarchive.co.uk/Players/2/2119/2119.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "S Chanderpaul",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2119/2119.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 0,
-            "stumpings": 0
-          },
-          "sources": [
             "https://cricketarchive.com/Archive/Players/2/2119/2119.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
             "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
@@ -5264,7 +4016,7 @@
         },
         {
           "fullName": "SC Williams",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2121/2121.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2121/2121.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5290,7 +4042,7 @@
         },
         {
           "fullName": "SL Campbell",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2181/2181.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2181/2181.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5329,7 +4081,7 @@
       "players": [
         {
           "fullName": "A Flower",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2046/2046.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5355,7 +4107,7 @@
         },
         {
           "fullName": "ADR Campbell",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2044/2044.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5381,7 +4133,7 @@
         },
         {
           "fullName": "AG Huckle",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4016/4016.html",
+          "sourcePlayerId": "cricketarchive:/players/4/4016/4016.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5407,7 +4159,7 @@
         },
         {
           "fullName": "AR Whittall",
-          "sourcePlayerId": "cricketarchive:/archive/players/3/3398/3398.html",
+          "sourcePlayerId": "cricketarchive:/players/3/3398/3398.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5433,7 +4185,7 @@
         },
         {
           "fullName": "DP Viljoen",
-          "sourcePlayerId": "cricketarchive:/archive/players/5/5598/5598.html",
+          "sourcePlayerId": "cricketarchive:/players/5/5598/5598.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5459,7 +4211,7 @@
         },
         {
           "fullName": "EA Brandes",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2042/2042.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5485,7 +4237,7 @@
         },
         {
           "fullName": "GJ Whittall",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2108/2108.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2108/2108.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5511,7 +4263,7 @@
         },
         {
           "fullName": "GW Flower",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2047/2047.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2047/2047.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5537,7 +4289,7 @@
         },
         {
           "fullName": "HH Streak",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2107/2107.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2107/2107.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5563,7 +4315,7 @@
         },
         {
           "fullName": "HK Olonga",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2180/2180.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2180/2180.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5589,7 +4341,7 @@
         },
         {
           "fullName": "M Mbangwa",
-          "sourcePlayerId": "cricketarchive:/archive/players/3/3393/3393.html",
+          "sourcePlayerId": "cricketarchive:/players/3/3393/3393.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5615,7 +4367,7 @@
         },
         {
           "fullName": "MW Goodwin",
-          "sourcePlayerId": "cricketarchive:/archive/players/6/6276/6276.html",
+          "sourcePlayerId": "cricketarchive:/players/6/6276/6276.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5641,7 +4393,7 @@
         },
         {
           "fullName": "NC Johnson",
-          "sourcePlayerId": "cricketarchive:/archive/players/4/4024/4024.html",
+          "sourcePlayerId": "cricketarchive:/cricketireland/players/4/4024/4024.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5652,36 +4404,10 @@
             "strike_rate": 73.99,
             "hundreds": 1,
             "fifties": 3,
-            "wickets": 0,
-            "bowling_average": null,
-            "economy": null,
-            "catches": 1,
-            "stumpings": 0
-          },
-          "sources": [
-            "https://cricketarchive.com/Archive/Players/4/4024/4024.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Batting_by_Average.html",
-            "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999/Bowling_by_Average.html",
-            "https://www.cricketarchive.com/CricketIreland/Events/ICC_World_Cup_1999/Fielding_by_Dismissals.html"
-          ]
-        },
-        {
-          "fullName": "NC Johnson",
-          "sourcePlayerId": "cricketarchive:/players/4/4024/4024.html",
-          "role": null,
-          "roleSource": null,
-          "stats": {
-            "matches": 0,
-            "innings": 0,
-            "runs": 0,
-            "batting_average": null,
-            "strike_rate": null,
-            "hundreds": 0,
-            "fifties": 0,
             "wickets": 12,
             "bowling_average": 19.41,
             "economy": 4.66,
-            "catches": 0,
+            "catches": 1,
             "stumpings": 0
           },
           "sources": [
@@ -5693,7 +4419,7 @@
         },
         {
           "fullName": "PA Strang",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2168/2168.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2168/2168.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5719,7 +4445,7 @@
         },
         {
           "fullName": "SV Carlisle",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2179/2179.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2179/2179.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -5760,46 +4486,46 @@
   ],
   "status": "staging-unverified-roles",
   "playable": false,
-  "unresolvedRoleCount": 215,
+  "unresolvedRoleCount": 166,
   "unresolvedPlayers": [
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2244/2244.html",
       "fullName": "L Klusener",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2244/2244.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2244/2244.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1939/1939.html",
       "fullName": "TM Moody",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1939/1939.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2278/2278.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2278/2278.html",
       "fullName": "RD Jacobs",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2278/2278.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/1/1794/1794.html",
       "fullName": "SR Waugh",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1794/1794.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/1/1794/1794.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2225/2225.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2225/2225.html",
       "fullName": "RG Twose",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2225/2225.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1830/1830.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1830/1830.html",
       "fullName": "Minhajul Abedin",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1830/1830.html"
@@ -5809,18 +4535,18 @@
       "sourcePlayerId": "cricketarchive:/players/2/2119/2119.html",
       "fullName": "S Chanderpaul",
       "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2119/2119.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2119/2119.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2280/2280.html",
       "fullName": "RS Dravid",
       "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2280/2280.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2280/2280.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1951/1951.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1951/1951.html",
       "fullName": "N Hussain",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1951/1951.html"
@@ -5830,60 +4556,60 @@
       "sourcePlayerId": "cricketarchive:/players/4/4326/4326.html",
       "fullName": "GM Hamilton",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4326/4326.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4326/4326.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2023/2023.html",
       "fullName": "SC Ganguly",
       "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2023/2023.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2023/2023.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/6/6438/6438.html",
       "fullName": "Mohammad Yousuf",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/6/6438/6438.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6438/6438.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1988/1988.html",
       "fullName": "GA Hick",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1988/1988.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2166/2166.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2166/2166.html",
       "fullName": "MG Bevan",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2166/2166.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4024/4024.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/4/4024/4024.html",
       "fullName": "NC Johnson",
       "teamCode": "ZIM",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4024/4024.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/4/4024/4024.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2231/2231.html",
       "fullName": "JH Kallis",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2231/2231.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2231/2231.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2059/2059.html",
       "fullName": "AD Jadeja",
       "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2059/2059.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2059/2059.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6379/6379.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6379/6379.html",
       "fullName": "AV Vadher",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6379/6379.html"
@@ -5893,18 +4619,18 @@
       "sourcePlayerId": "cricketarchive:/players/1/1933/1933.html",
       "fullName": "SR Tendulkar",
       "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1933/1933.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1933/1933.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/1/1984/1984.html",
       "fullName": "ME Waugh",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1984/1984.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/1/1984/1984.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2092/2092.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2092/2092.html",
       "fullName": "GP Thorpe",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2092/2092.html"
@@ -5914,25 +4640,25 @@
       "sourcePlayerId": "cricketarchive:/players/1/1980/1980.html",
       "fullName": "Saeed Anwar",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1980/1980.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1980/1980.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2229/2229.html",
       "fullName": "RT Ponting",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2229/2229.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2229/2229.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2267/2267.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2267/2267.html",
       "fullName": "TM Odoyo",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2267/2267.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2064/2064.html",
       "fullName": "CZ Harris",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2064/2064.html"
@@ -5942,11 +4668,11 @@
       "sourcePlayerId": "cricketarchive:/players/2/2345/2345.html",
       "fullName": "HH Gibbs",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2345/2345.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2345/2345.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1938/1938.html",
       "fullName": "CL Cairns",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1938/1938.html"
@@ -5956,67 +4682,67 @@
       "sourcePlayerId": "cricketarchive:/players/1/1979/1979.html",
       "fullName": "Moin Khan",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1979/1979.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1979/1979.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2264/2264.html",
       "fullName": "SO Tikolo",
       "teamCode": "KEN",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2264/2264.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2264/2264.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2033/2033.html",
       "fullName": "Inzamam-ul-Haq",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2033/2033.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2033/2033.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1955/1955.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1955/1955.html",
       "fullName": "RR Singh",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1955/1955.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7236/7236.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7236/7236.html",
       "fullName": "RD Shah",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7236/7236.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/7/7137/7137.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/7/7137/7137.html",
       "fullName": "Wajahatullah Wasti",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/7/7137/7137.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/7/7137/7137.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/2/2165/2165.html",
       "fullName": "WPUJC Vaas",
       "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2165/2165.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2165/2165.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2156/2156.html",
       "fullName": "GR Larsen",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2156/2156.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7543/7543.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7543/7543.html",
       "fullName": "S Ramesh",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7543/7543.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1864/1864.html",
       "fullName": "NH Fairbrother",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1864/1864.html"
@@ -6026,53 +4752,53 @@
       "sourcePlayerId": "cricketarchive:/players/1/1978/1978.html",
       "fullName": "MS Atapattu",
       "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1978/1978.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1978/1978.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2107/2107.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2107/2107.html",
       "fullName": "HH Streak",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2107/2107.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1809/1809.html",
       "fullName": "RS Mahanama",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1809/1809.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2068/2068.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2068/2068.html",
       "fullName": "DJ Cullinan",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2068/2068.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2061/2061.html",
       "fullName": "JN Rhodes",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2061/2061.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/2/2061/2061.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1773/1773.html",
       "fullName": "M Azharuddin",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1773/1773.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1665/1665.html",
       "fullName": "A Ranatunga",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1665/1665.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2046/2046.html",
       "fullName": "A Flower",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2046/2046.html"
@@ -6082,11 +4808,11 @@
       "sourcePlayerId": "cricketarchive:/players/1/1981/1981.html",
       "fullName": "BC Lara",
       "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1981/1981.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1981/1981.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2006/2006.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2006/2006.html",
       "fullName": "JC Adams",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2006/2006.html"
@@ -6096,11 +4822,11 @@
       "sourcePlayerId": "cricketarchive:/players/2/2120/2120.html",
       "fullName": "SP Fleming",
       "teamCode": "NZ",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2120/2120.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2120/2120.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2265/2265.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2265/2265.html",
       "fullName": "MO Odumbe",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2265/2265.html"
@@ -6110,67 +4836,67 @@
       "sourcePlayerId": "cricketarchive:/players/6/6298/6298.html",
       "fullName": "DPMD Jayawardene",
       "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/6/6298/6298.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6298/6298.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2114/2114.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2114/2114.html",
       "fullName": "G Kirsten",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2114/2114.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6276/6276.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6276/6276.html",
       "fullName": "MW Goodwin",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6276/6276.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1952/1952.html",
       "fullName": "AJ Stewart",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1952/1952.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4760/4760.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4760/4760.html",
       "fullName": "MJ Horne",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4760/4760.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7234/7234.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7234/7234.html",
       "fullName": "Mehrab Hossain",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7234/7234.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2047/2047.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2047/2047.html",
       "fullName": "GW Flower",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2047/2047.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2208/2208.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2208/2208.html",
       "fullName": "Naimur Rahman",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2208/2208.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/3/3324/3324.html",
+      "sourcePlayerId": "cricketarchive:/players/3/3324/3324.html",
       "fullName": "DS Lehmann",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3324/3324.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2038/2038.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2038/2038.html",
       "fullName": "RS Kaluwitharana",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2038/2038.html"
@@ -6180,74 +4906,74 @@
       "sourcePlayerId": "cricketarchive:/players/4/4170/4170.html",
       "fullName": "AC Gilchrist",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4170/4170.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4170/4170.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/1/1859/1859.html",
       "fullName": "Ijaz Ahmed",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1859/1859.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1859/1859.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/4/4172/4172.html",
       "fullName": "Abdul Razzaq",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4172/4172.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4172/4172.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/1/1774/1774.html",
       "fullName": "Wasim Akram",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1774/1774.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1774/1774.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2044/2044.html",
       "fullName": "ADR Campbell",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2044/2044.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2042/2042.html",
       "fullName": "EA Brandes",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2042/2042.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4958/4958.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4958/4958.html",
       "fullName": "AG Davies",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4958/4958.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1963/1963.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1963/1963.html",
       "fullName": "Enamul Haque",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1963/1963.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2263/2263.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2263/2263.html",
       "fullName": "KO Otieno",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2263/2263.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2055/2055.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2055/2055.html",
       "fullName": "DJ Nash",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2055/2055.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1926/1926.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1926/1926.html",
       "fullName": "ARC Fraser",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1926/1926.html"
@@ -6257,11 +4983,11 @@
       "sourcePlayerId": "cricketarchive:/players/2/2227/2227.html",
       "fullName": "SM Pollock",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2227/2227.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2227/2227.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5604/5604.html",
+      "sourcePlayerId": "cricketarchive:/players/5/5604/5604.html",
       "fullName": "CD McMillan",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5604/5604.html"
@@ -6271,60 +4997,60 @@
       "sourcePlayerId": "cricketarchive:/players/4/4167/4167.html",
       "fullName": "Azhar Mahmood",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4167/4167.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4167/4167.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/1/1987/1987.html",
       "fullName": "ST Jayasuriya",
       "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1987/1987.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1987/1987.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/3/3941/3941.html",
       "fullName": "MV Boucher",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/3/3941/3941.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3941/3941.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1970/1970.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1970/1970.html",
       "fullName": "AC Parore",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1970/1970.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2269/2269.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2269/2269.html",
       "fullName": "AY Karim",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2269/2269.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2179/2179.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2179/2179.html",
       "fullName": "SV Carlisle",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2179/2179.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2115/2115.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2115/2115.html",
       "fullName": "NR Mongia",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2115/2115.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2108/2108.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2108/2108.html",
       "fullName": "GJ Whittall",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2108/2108.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1761/1761.html",
       "fullName": "PA de Silva",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1761/1761.html"
@@ -6334,74 +5060,74 @@
       "sourcePlayerId": "cricketarchive:/players/2/2065/2065.html",
       "fullName": "DR Martyn",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2065/2065.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2065/2065.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2159/2159.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2159/2159.html",
       "fullName": "D Gough",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2159/2159.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2181/2181.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2181/2181.html",
       "fullName": "SL Campbell",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2181/2181.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6252/6252.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6252/6252.html",
       "fullName": "Shahriar Hossain",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6252/6252.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/2/2220/2220.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2220/2220.html",
       "fullName": "Saqlain Mushtaq",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2220/2220.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/2/2220/2220.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/4/4163/4163.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/4/4163/4163.html",
       "fullName": "Shahid Afridi",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4163/4163.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/4/4163/4163.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2180/2180.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2180/2180.html",
       "fullName": "HK Olonga",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2180/2180.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1902/1902.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1902/1902.html",
       "fullName": "Akram Khan",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1902/1902.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+      "sourcePlayerId": "cricketarchive:/cricketireland/players/2/2009/2009.html",
       "fullName": "WJ Cronje",
       "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2009/2009.html"
+      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/2/2009/2009.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2167/2167.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2167/2167.html",
       "fullName": "DW Fleming",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2167/2167.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2332/2332.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2332/2332.html",
       "fullName": "RDB Croft",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2332/2332.html"
@@ -6411,18 +5137,18 @@
       "sourcePlayerId": "cricketarchive:/players/4/4664/4664.html",
       "fullName": "IM Stanger",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4664/4664.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4664/4664.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2168/2168.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2168/2168.html",
       "fullName": "PA Strang",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2168/2168.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4963/4963.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4963/4963.html",
       "fullName": "G Salmond",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4963/4963.html"
@@ -6432,18 +5158,18 @@
       "sourcePlayerId": "cricketarchive:/players/1/1999/1999.html",
       "fullName": "SK Warne",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1999/1999.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1999/1999.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/1/1934/1934.html",
       "fullName": "Waqar Younis",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1934/1934.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1934/1934.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4218/4218.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4218/4218.html",
       "fullName": "JE Brinkley",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4218/4218.html"
@@ -6453,39 +5179,39 @@
       "sourcePlayerId": "cricketarchive:/players/2/2200/2200.html",
       "fullName": "Khaled Mashud",
       "teamCode": "BANG",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2200/2200.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2200/2200.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/1/1972/1972.html",
       "fullName": "A Kumble",
       "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1972/1972.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1972/1972.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7045/7045.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7045/7045.html",
       "fullName": "Khaled Mahmud",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7045/7045.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1997/1997.html",
       "fullName": "GP Wickramasinghe",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1997/1997.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1897/1897.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1897/1897.html",
       "fullName": "Aminul Islam",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1897/1897.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2086/2086.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2086/2086.html",
       "fullName": "BP Julian",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2086/2086.html"
@@ -6495,25 +5221,25 @@
       "sourcePlayerId": "cricketarchive:/players/2/2234/2234.html",
       "fullName": "NJ Astle",
       "teamCode": "NZ",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2234/2234.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2234/2234.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2121/2121.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2121/2121.html",
       "fullName": "SC Williams",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2121/2121.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1996/1996.html",
       "fullName": "J Srinath",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1996/1996.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2952/2952.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2952/2952.html",
       "fullName": "S Elworthy",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2952/2952.html"
@@ -6523,32 +5249,32 @@
       "sourcePlayerId": "cricketarchive:/players/2/2040/2040.html",
       "fullName": "M Muralitharan",
       "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2040/2040.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2040/2040.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2207/2207.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2207/2207.html",
       "fullName": "KEA Upashantha",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2207/2207.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1903/1903.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1903/1903.html",
       "fullName": "Faruk Ahmed",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1903/1903.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2204/2204.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2204/2204.html",
       "fullName": "Hasibul Hossain",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2204/2204.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6380/6380.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6380/6380.html",
       "fullName": "M Sheikh",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6380/6380.html"
@@ -6558,18 +5284,18 @@
       "sourcePlayerId": "cricketarchive:/players/4/4263/4263.html",
       "fullName": "A Flintoff",
       "teamCode": "ENG",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4263/4263.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4263/4263.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2270/2270.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2270/2270.html",
       "fullName": "MA Suji",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2270/2270.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4165/4165.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4165/4165.html",
       "fullName": "AO Suji",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4165/4165.html"
@@ -6579,11 +5305,11 @@
       "sourcePlayerId": "cricketarchive:/players/4/4962/4962.html",
       "fullName": "IL Philip",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4962/4962.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4962/4962.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2266/2266.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2266/2266.html",
       "fullName": "HS Modi",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2266/2266.html"
@@ -6593,25 +5319,25 @@
       "sourcePlayerId": "cricketarchive:/players/1/1764/1764.html",
       "fullName": "CA Walsh",
       "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1764/1764.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1764/1764.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1905/1905.html",
       "fullName": "KLT Arthurton",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1905/1905.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5579/5579.html",
+      "sourcePlayerId": "cricketarchive:/players/5/5579/5579.html",
       "fullName": "JO Angara",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5579/5579.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/3/3395/3395.html",
+      "sourcePlayerId": "cricketarchive:/players/3/3395/3395.html",
       "fullName": "AJ Hollioake",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3395/3395.html"
@@ -6621,25 +5347,25 @@
       "sourcePlayerId": "cricketarchive:/players/7/7224/7224.html",
       "fullName": "Asim Butt",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/7/7224/7224.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7224/7224.html"
     },
     {
       "year": 1999,
       "sourcePlayerId": "cricketarchive:/players/4/4968/4968.html",
       "fullName": "JG Williamson",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4968/4968.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4968/4968.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2010/2010.html",
       "fullName": "AA Donald",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2010/2010.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5598/5598.html",
+      "sourcePlayerId": "cricketarchive:/players/5/5598/5598.html",
       "fullName": "DP Viljoen",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5598/5598.html"
@@ -6649,32 +5375,32 @@
       "sourcePlayerId": "cricketarchive:/players/1/1671/1671.html",
       "fullName": "Saleem Malik",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1671/1671.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1671/1671.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2150/2150.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2150/2150.html",
       "fullName": "UDU Chandana",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2150/2150.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1878/1878.html",
       "fullName": "PV Simmons",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1878/1878.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8301/8301.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8301/8301.html",
       "fullName": "RL Powell",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8301/8301.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4965/4965.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4965/4965.html",
       "fullName": "MJ Smith",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4965/4965.html"
@@ -6684,123 +5410,123 @@
       "sourcePlayerId": "cricketarchive:/players/4/4956/4956.html",
       "fullName": "JAR Blain",
       "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/4/4956/4956.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4956/4956.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4955/4955.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4955/4955.html",
       "fullName": "MJD Allingham",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4955/4955.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7219/7219.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7219/7219.html",
       "fullName": "BMW Patterson",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7219/7219.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5418/5418.html",
+      "sourcePlayerId": "cricketarchive:/players/5/5418/5418.html",
       "fullName": "M Dillon",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5418/5418.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2199/2199.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2199/2199.html",
       "fullName": "Mohammad Rafique",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2199/2199.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7217/7217.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7217/7217.html",
       "fullName": "NR Dyer",
       "teamCode": "SCO",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7217/7217.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/3/3398/3398.html",
+      "sourcePlayerId": "cricketarchive:/players/3/3398/3398.html",
       "fullName": "AR Whittall",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3398/3398.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2262/2262.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2262/2262.html",
       "fullName": "DN Chudasama",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2262/2262.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2356/2356.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2356/2356.html",
       "fullName": "MA Ealham",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2356/2356.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2136/2136.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2136/2136.html",
       "fullName": "BKV Prasad",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2136/2136.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2241/2241.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2241/2241.html",
       "fullName": "S Lee",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2241/2241.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1883/1883.html",
       "fullName": "CEL Ambrose",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1883/1883.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2358/2358.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2358/2358.html",
       "fullName": "AD Mullally",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2358/2358.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8187/8187.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8187/8187.html",
       "fullName": "Niamur Rashid",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8187/8187.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7111/7111.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7111/7111.html",
       "fullName": "AB Agarkar",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7111/7111.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6386/6386.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6386/6386.html",
       "fullName": "RD King",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6386/6386.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4164/4164.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4164/4164.html",
       "fullName": "SK Gupta",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4164/4164.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2004/2004.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2004/2004.html",
       "fullName": "PR Reiffel",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2004/2004.html"
@@ -6810,46 +5536,46 @@
       "sourcePlayerId": "cricketarchive:/players/2/2100/2100.html",
       "fullName": "GD McGrath",
       "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/2/2100/2100.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2100/2100.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4016/4016.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4016/4016.html",
       "fullName": "AG Huckle",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4016/4016.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1944/1944.html",
       "fullName": "HP Tillakaratne",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1944/1944.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2116/2116.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2116/2116.html",
       "fullName": "MN Hart",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2116/2116.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/3/3393/3393.html",
+      "sourcePlayerId": "cricketarchive:/players/3/3393/3393.html",
       "fullName": "M Mbangwa",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3393/3393.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6218/6218.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6218/6218.html",
       "fullName": "DS Mohanty",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6218/6218.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8180/8180.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8180/8180.html",
       "fullName": "Manjural Islam",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8180/8180.html"
@@ -6859,413 +5585,70 @@
       "sourcePlayerId": "cricketarchive:/players/5/5634/5634.html",
       "fullName": "Shoaib Akhtar",
       "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.co.uk/Players/5/5634/5634.html"
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5634/5634.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5559/5559.html",
+      "sourcePlayerId": "cricketarchive:/players/5/5559/5559.html",
       "fullName": "AC Dale",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5559/5559.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6381/6381.html",
+      "sourcePlayerId": "cricketarchive:/players/6/6381/6381.html",
       "fullName": "Shafiuddin Ahmed",
       "teamCode": "BANG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6381/6381.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2237/2237.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2237/2237.html",
       "fullName": "GI Allott",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2237/2237.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8234/8234.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8234/8234.html",
       "fullName": "HR Bryan",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8234/8234.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7251/7251.html",
+      "sourcePlayerId": "cricketarchive:/players/7/7251/7251.html",
       "fullName": "N Chopra",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7251/7251.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8158/8158.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8158/8158.html",
       "fullName": "JK Kamande",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8158/8158.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/8/8160/8160.html",
+      "sourcePlayerId": "cricketarchive:/players/8/8160/8160.html",
       "fullName": "CE Bulfin",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/8/8160/8160.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2238/2238.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2238/2238.html",
       "fullName": "N Boje",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2238/2238.html"
     },
     {
       "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4198/4198.html",
+      "sourcePlayerId": "cricketarchive:/players/4/4198/4198.html",
       "fullName": "ID Austin",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4198/4198.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1764/1764.html",
-      "fullName": "CA Walsh",
-      "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1764/1764.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1934/1934.html",
-      "fullName": "Waqar Younis",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1934/1934.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1999/1999.html",
-      "fullName": "SK Warne",
-      "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1999/1999.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/4/4024/4024.html",
-      "fullName": "NC Johnson",
-      "teamCode": "ZIM",
-      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/4/4024/4024.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2100/2100.html",
-      "fullName": "GD McGrath",
-      "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2100/2100.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2244/2244.html",
-      "fullName": "L Klusener",
-      "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2244/2244.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4956/4956.html",
-      "fullName": "JAR Blain",
-      "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4956/4956.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2059/2059.html",
-      "fullName": "AD Jadeja",
-      "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2059/2059.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1774/1774.html",
-      "fullName": "Wasim Akram",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1774/1774.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4172/4172.html",
-      "fullName": "Abdul Razzaq",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4172/4172.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/5/5634/5634.html",
-      "fullName": "Shoaib Akhtar",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/5/5634/5634.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2040/2040.html",
-      "fullName": "M Muralitharan",
-      "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2040/2040.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4167/4167.html",
-      "fullName": "Azhar Mahmood",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4167/4167.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/1/1794/1794.html",
-      "fullName": "SR Waugh",
-      "teamCode": "AUS",
-      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/1/1794/1794.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2227/2227.html",
-      "fullName": "SM Pollock",
-      "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2227/2227.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2231/2231.html",
-      "fullName": "JH Kallis",
-      "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2231/2231.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2023/2023.html",
-      "fullName": "SC Ganguly",
-      "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2023/2023.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2165/2165.html",
-      "fullName": "WPUJC Vaas",
-      "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2165/2165.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1972/1972.html",
-      "fullName": "A Kumble",
-      "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1972/1972.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/7/7224/7224.html",
-      "fullName": "Asim Butt",
-      "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/7/7224/7224.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/2/2009/2009.html",
-      "fullName": "WJ Cronje",
-      "teamCode": "SAF",
-      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/2/2009/2009.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2234/2234.html",
-      "fullName": "NJ Astle",
-      "teamCode": "NZ",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2234/2234.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4263/4263.html",
-      "fullName": "A Flintoff",
-      "teamCode": "ENG",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4263/4263.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4326/4326.html",
-      "fullName": "GM Hamilton",
-      "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4326/4326.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1987/1987.html",
-      "fullName": "ST Jayasuriya",
-      "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1987/1987.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6298/6298.html",
-      "fullName": "DPMD Jayawardene",
-      "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6298/6298.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2065/2065.html",
-      "fullName": "DR Martyn",
-      "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2065/2065.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/1/1984/1984.html",
-      "fullName": "ME Waugh",
-      "teamCode": "AUS",
-      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/1/1984/1984.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4664/4664.html",
-      "fullName": "IM Stanger",
-      "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4664/4664.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2264/2264.html",
-      "fullName": "SO Tikolo",
-      "teamCode": "KEN",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2264/2264.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1933/1933.html",
-      "fullName": "SR Tendulkar",
-      "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1933/1933.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1979/1979.html",
-      "fullName": "Moin Khan",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1979/1979.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4170/4170.html",
-      "fullName": "AC Gilchrist",
-      "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4170/4170.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/3/3941/3941.html",
-      "fullName": "MV Boucher",
-      "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/3/3941/3941.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2033/2033.html",
-      "fullName": "Inzamam-ul-Haq",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2033/2033.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2229/2229.html",
-      "fullName": "RT Ponting",
-      "teamCode": "AUS",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2229/2229.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1981/1981.html",
-      "fullName": "BC Lara",
-      "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1981/1981.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1859/1859.html",
-      "fullName": "Ijaz Ahmed",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1859/1859.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2200/2200.html",
-      "fullName": "Khaled Mashud",
-      "teamCode": "BANG",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2200/2200.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/4/4962/4962.html",
-      "fullName": "IL Philip",
-      "teamCode": "SCO",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/4/4962/4962.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2120/2120.html",
-      "fullName": "SP Fleming",
-      "teamCode": "NZ",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2120/2120.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1980/1980.html",
-      "fullName": "Saeed Anwar",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1980/1980.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2119/2119.html",
-      "fullName": "S Chanderpaul",
-      "teamCode": "WI",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2119/2119.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2280/2280.html",
-      "fullName": "RS Dravid",
-      "teamCode": "IND",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2280/2280.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2345/2345.html",
-      "fullName": "HH Gibbs",
-      "teamCode": "SAF",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2345/2345.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/6/6438/6438.html",
-      "fullName": "Mohammad Yousuf",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/6/6438/6438.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/players/2/2061/2061.html",
-      "fullName": "JN Rhodes",
-      "teamCode": "SAF",
-      "sourceUrl": "https://www.cricketarchive.com/CricketIreland/Players/2/2061/2061.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1978/1978.html",
-      "fullName": "MS Atapattu",
-      "teamCode": "SL",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1978/1978.html"
-    },
-    {
-      "year": 1999,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1671/1671.html",
-      "fullName": "Saleem Malik",
-      "teamCode": "PAK",
-      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1671/1671.html"
     }
   ]
 }

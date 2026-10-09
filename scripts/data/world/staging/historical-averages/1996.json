@@ -1,6 +1,6 @@
 {
   "year": 1996,
-  "seasonName": "Wills World Cup 1995/96",
+  "seasonName": "ICC Men's Cricket World Cup 1996",
   "format": "ODI",
   "competition": "ICC Men's Cricket World Cup",
   "oversPerInnings": 50,
@@ -12,7 +12,7 @@
       "players": [
         {
           "fullName": "CJ McDermott",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1772/1772.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -38,7 +38,7 @@
         },
         {
           "fullName": "DW Fleming",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2167/2167.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2167/2167.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -90,7 +90,7 @@
         },
         {
           "fullName": "IA Healy",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1916/1916.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1916/1916.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -116,7 +116,7 @@
         },
         {
           "fullName": "MA Taylor",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1921/1921.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1921/1921.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -142,7 +142,7 @@
         },
         {
           "fullName": "ME Waugh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1984/1984.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -168,7 +168,7 @@
         },
         {
           "fullName": "MG Bevan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2166/2166.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2166/2166.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -194,7 +194,7 @@
         },
         {
           "fullName": "PR Reiffel",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2004/2004.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2004/2004.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -246,7 +246,7 @@
         },
         {
           "fullName": "S Lee",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2241/2241.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2241/2241.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -272,7 +272,7 @@
         },
         {
           "fullName": "SG Law",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2230/2230.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2230/2230.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -324,7 +324,7 @@
         },
         {
           "fullName": "SR Waugh",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1794/1794.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -363,7 +363,7 @@
       "players": [
         {
           "fullName": "AJ Stewart",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1952/1952.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -389,7 +389,7 @@
         },
         {
           "fullName": "C White",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2158/2158.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2158/2158.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -415,7 +415,7 @@
         },
         {
           "fullName": "D Gough",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2159/2159.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2159/2159.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -441,7 +441,7 @@
         },
         {
           "fullName": "DA Reeve",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2001/2001.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2001/2001.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -467,7 +467,7 @@
         },
         {
           "fullName": "DG Cork",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2213/2213.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2213/2213.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -493,7 +493,7 @@
         },
         {
           "fullName": "GA Hick",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1988/1988.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -519,7 +519,7 @@
         },
         {
           "fullName": "GP Thorpe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2092/2092.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2092/2092.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -545,7 +545,7 @@
         },
         {
           "fullName": "MA Atherton",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1927/1927.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1927/1927.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -571,7 +571,7 @@
         },
         {
           "fullName": "NH Fairbrother",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1864/1864.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -597,7 +597,7 @@
         },
         {
           "fullName": "NMK Smith",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2243/2243.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2243/2243.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -623,7 +623,7 @@
         },
         {
           "fullName": "PAJ DeFreitas",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1849/1849.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -649,7 +649,7 @@
         },
         {
           "fullName": "PJ Martin",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2212/2212.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2212/2212.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -675,7 +675,7 @@
         },
         {
           "fullName": "RA Smith",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1907/1907.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1907/1907.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -701,7 +701,7 @@
         },
         {
           "fullName": "RC Russell",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1914/1914.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1914/1914.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -727,7 +727,7 @@
         },
         {
           "fullName": "RK Illingworth",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1992/1992.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1992/1992.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -818,7 +818,7 @@
         },
         {
           "fullName": "AR Kapoor",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2173/2173.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2173/2173.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -844,7 +844,7 @@
         },
         {
           "fullName": "BKV Prasad",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2136/2136.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2136/2136.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -870,7 +870,7 @@
         },
         {
           "fullName": "J Srinath",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1996/1996.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -896,7 +896,7 @@
         },
         {
           "fullName": "M Azharuddin",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1773/1773.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -922,7 +922,7 @@
         },
         {
           "fullName": "M Prabhakar",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1770/1770.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -948,7 +948,7 @@
         },
         {
           "fullName": "NR Mongia",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2115/2115.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2115/2115.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -974,7 +974,7 @@
         },
         {
           "fullName": "NS Sidhu",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1742/1742.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1742/1742.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1000,7 +1000,7 @@
         },
         {
           "fullName": "SA Ankola",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1931/1931.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1931/1931.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1026,7 +1026,7 @@
         },
         {
           "fullName": "SLV Raju",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1946/1946.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1946/1946.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1078,7 +1078,7 @@
         },
         {
           "fullName": "SV Manjrekar",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1868/1868.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1868/1868.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1104,7 +1104,7 @@
         },
         {
           "fullName": "VG Kambli",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2072/2072.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2072/2072.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1143,7 +1143,7 @@
       "players": [
         {
           "fullName": "AY Karim",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2269/2269.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2269/2269.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1169,7 +1169,7 @@
         },
         {
           "fullName": "DN Chudasama",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2262/2262.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2262/2262.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1195,7 +1195,7 @@
         },
         {
           "fullName": "EO Odumbe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2268/2268.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2268/2268.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1221,7 +1221,7 @@
         },
         {
           "fullName": "HS Modi",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2266/2266.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2266/2266.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1247,7 +1247,7 @@
         },
         {
           "fullName": "IT Iqbal",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2274/2274.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2274/2274.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1273,7 +1273,7 @@
         },
         {
           "fullName": "KO Otieno",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2263/2263.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2263/2263.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1299,7 +1299,7 @@
         },
         {
           "fullName": "LN Onyango",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2277/2277.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2277/2277.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1325,7 +1325,7 @@
         },
         {
           "fullName": "LO Tikolo",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2272/2272.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2272/2272.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1351,7 +1351,7 @@
         },
         {
           "fullName": "MA Suji",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2270/2270.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2270/2270.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1377,7 +1377,7 @@
         },
         {
           "fullName": "MO Odumbe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2265/2265.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2265/2265.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1403,7 +1403,7 @@
         },
         {
           "fullName": "RW Ali",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2271/2271.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2271/2271.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1455,7 +1455,7 @@
         },
         {
           "fullName": "TM Odoyo",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2267/2267.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2267/2267.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1520,7 +1520,7 @@
         },
         {
           "fullName": "EL Gouka",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2260/2260.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2260/2260.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1546,7 +1546,7 @@
         },
         {
           "fullName": "F Jansen",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2273/2273.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2273/2273.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1572,7 +1572,7 @@
         },
         {
           "fullName": "GJAF Aponso",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2253/2253.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2253/2253.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1598,7 +1598,7 @@
         },
         {
           "fullName": "KJJ van Noortwijk",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2257/2257.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2257/2257.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1624,7 +1624,7 @@
         },
         {
           "fullName": "MMC Schewe",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2258/2258.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2258/2258.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1650,7 +1650,7 @@
         },
         {
           "fullName": "NE Clarke",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2251/2251.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2251/2251.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1676,7 +1676,7 @@
         },
         {
           "fullName": "PE Cantrell",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2252/2252.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2252/2252.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1702,7 +1702,7 @@
         },
         {
           "fullName": "PJ Bakker",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2261/2261.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2261/2261.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1728,7 +1728,7 @@
         },
         {
           "fullName": "RF van Oosterom",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2276/2276.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2276/2276.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1754,7 +1754,7 @@
         },
         {
           "fullName": "RP Lefebvre",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2255/2255.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2255/2255.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1780,7 +1780,7 @@
         },
         {
           "fullName": "SW Lubbers",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2254/2254.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2254/2254.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1806,7 +1806,7 @@
         },
         {
           "fullName": "TBM de Leede",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2256/2256.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2256/2256.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1845,7 +1845,7 @@
       "players": [
         {
           "fullName": "AC Parore",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1970/1970.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1970/1970.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1871,7 +1871,7 @@
         },
         {
           "fullName": "CL Cairns",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1938/1938.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1897,7 +1897,7 @@
         },
         {
           "fullName": "CM Spearman",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2228/2228.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2228/2228.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1923,7 +1923,7 @@
         },
         {
           "fullName": "CZ Harris",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2064/2064.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1949,7 +1949,7 @@
         },
         {
           "fullName": "DJ Nash",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2055/2055.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2055/2055.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -1975,7 +1975,7 @@
         },
         {
           "fullName": "DK Morrison",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1869/1869.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2001,7 +2001,7 @@
         },
         {
           "fullName": "DN Patel",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1860/1860.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2027,7 +2027,7 @@
         },
         {
           "fullName": "GR Larsen",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2156/2156.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2053,7 +2053,7 @@
         },
         {
           "fullName": "LK Germon",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2224/2224.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2224/2224.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2105,7 +2105,7 @@
         },
         {
           "fullName": "RG Twose",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2225/2225.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2225/2225.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2131,7 +2131,7 @@
         },
         {
           "fullName": "RJ Kennedy",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2236/2236.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2236/2236.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2157,7 +2157,7 @@
         },
         {
           "fullName": "SA Thomson",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1950/1950.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1950/1950.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2599,7 +2599,7 @@
       "players": [
         {
           "fullName": "AA Donald",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2010/2010.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2625,7 +2625,7 @@
         },
         {
           "fullName": "AC Hudson",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2011/2011.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2011/2011.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2651,7 +2651,7 @@
         },
         {
           "fullName": "BM McMillan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2060/2060.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2060/2060.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2677,7 +2677,7 @@
         },
         {
           "fullName": "CR Matthews",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2063/2063.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2063/2063.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2703,7 +2703,7 @@
         },
         {
           "fullName": "DJ Cullinan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2068/2068.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2068/2068.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2729,7 +2729,7 @@
         },
         {
           "fullName": "G Kirsten",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2114/2114.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2114/2114.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2781,7 +2781,7 @@
         },
         {
           "fullName": "JN Rhodes",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2061/2061.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2807,7 +2807,7 @@
         },
         {
           "fullName": "PL Symcox",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2097/2097.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2097/2097.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2833,7 +2833,7 @@
         },
         {
           "fullName": "PR Adams",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2233/2233.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2233/2233.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2859,7 +2859,7 @@
         },
         {
           "fullName": "PS de Villiers",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2113/2113.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2113/2113.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2885,7 +2885,7 @@
         },
         {
           "fullName": "SJ Palframan",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2245/2245.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2245/2245.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2937,7 +2937,7 @@
         },
         {
           "fullName": "WJ Cronje",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2009/2009.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -2976,7 +2976,7 @@
       "players": [
         {
           "fullName": "A Ranatunga",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1665/1665.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3002,7 +3002,7 @@
         },
         {
           "fullName": "AP Gurusinha",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1788/1788.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3028,7 +3028,7 @@
         },
         {
           "fullName": "GP Wickramasinghe",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1997/1997.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3054,7 +3054,7 @@
         },
         {
           "fullName": "HDPK Dharmasena",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2099/2099.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2099/2099.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3080,7 +3080,7 @@
         },
         {
           "fullName": "HP Tillakaratne",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1944/1944.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3106,7 +3106,7 @@
         },
         {
           "fullName": "KR Pushpakumara",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2163/2163.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2163/2163.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3158,7 +3158,7 @@
         },
         {
           "fullName": "PA de Silva",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1761/1761.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3184,7 +3184,7 @@
         },
         {
           "fullName": "RS Kaluwitharana",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2038/2038.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2038/2038.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3210,7 +3210,7 @@
         },
         {
           "fullName": "RS Mahanama",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1809/1809.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3353,7 +3353,7 @@
         },
         {
           "fullName": "G Mylvaganam",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2247/2247.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2247/2247.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3405,7 +3405,7 @@
         },
         {
           "fullName": "JA Samarasekera",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2145/2145.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2145/2145.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3509,7 +3509,7 @@
         },
         {
           "fullName": "Saeed-al-Saffar",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2275/2275.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2275/2275.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3561,7 +3561,7 @@
         },
         {
           "fullName": "SF Dukanwala",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2249/2249.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2249/2249.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3613,7 +3613,7 @@
         },
         {
           "fullName": "Sultan Zarawani",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2147/2147.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2147/2147.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3639,7 +3639,7 @@
         },
         {
           "fullName": "V Mehra",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2142/2142.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2142/2142.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3730,7 +3730,7 @@
         },
         {
           "fullName": "CE Cuffy",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2170/2170.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2170/2170.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3756,7 +3756,7 @@
         },
         {
           "fullName": "CEL Ambrose",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1883/1883.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3782,7 +3782,7 @@
         },
         {
           "fullName": "CO Browne",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2186/2186.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2186/2186.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3808,7 +3808,7 @@
         },
         {
           "fullName": "IR Bishop",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1923/1923.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1923/1923.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3834,7 +3834,7 @@
         },
         {
           "fullName": "JC Adams",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2006/2006.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2006/2006.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3860,7 +3860,7 @@
         },
         {
           "fullName": "KLT Arthurton",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1905/1905.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3886,7 +3886,7 @@
         },
         {
           "fullName": "OD Gibson",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2214/2214.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2214/2214.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3912,7 +3912,7 @@
         },
         {
           "fullName": "RA Harper",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1744/1744.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3938,7 +3938,7 @@
         },
         {
           "fullName": "RB Richardson",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1743/1743.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -3964,7 +3964,7 @@
         },
         {
           "fullName": "RIC Holder",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2130/2130.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2130/2130.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4016,7 +4016,7 @@
         },
         {
           "fullName": "SL Campbell",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2181/2181.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2181/2181.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4055,7 +4055,7 @@
       "players": [
         {
           "fullName": "A Flower",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2046/2046.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4081,7 +4081,7 @@
         },
         {
           "fullName": "AC Waller",
-          "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+          "sourcePlayerId": "cricketarchive:/players/1/1885/1885.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4107,7 +4107,7 @@
         },
         {
           "fullName": "ACI Lock",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2223/2223.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2223/2223.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4133,7 +4133,7 @@
         },
         {
           "fullName": "ADR Campbell",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2044/2044.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4159,7 +4159,7 @@
         },
         {
           "fullName": "BC Strang",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2182/2182.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2182/2182.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4185,7 +4185,7 @@
         },
         {
           "fullName": "CN Evans",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2029/2029.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2029/2029.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4211,7 +4211,7 @@
         },
         {
           "fullName": "EA Brandes",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2042/2042.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4237,7 +4237,7 @@
         },
         {
           "fullName": "GJ Whittall",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2108/2108.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2108/2108.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4263,7 +4263,7 @@
         },
         {
           "fullName": "GW Flower",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2047/2047.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2047/2047.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4289,7 +4289,7 @@
         },
         {
           "fullName": "HH Streak",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2107/2107.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2107/2107.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4315,7 +4315,7 @@
         },
         {
           "fullName": "PA Strang",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2168/2168.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2168/2168.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4341,7 +4341,7 @@
         },
         {
           "fullName": "SG Davies",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2246/2246.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2246/2246.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4367,7 +4367,7 @@
         },
         {
           "fullName": "SG Peall",
-          "sourcePlayerId": "cricketarchive:/archive/players/2/2105/2105.html",
+          "sourcePlayerId": "cricketarchive:/players/2/2105/2105.html",
           "role": null,
           "roleSource": null,
           "stats": {
@@ -4412,14 +4412,14 @@
   "unresolvedPlayers": [
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1665/1665.html",
       "fullName": "A Ranatunga",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1665/1665.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1761/1761.html",
       "fullName": "PA de Silva",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1761/1761.html"
@@ -4440,21 +4440,21 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1984/1984.html",
       "fullName": "ME Waugh",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1984/1984.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2114/2114.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2114/2114.html",
       "fullName": "G Kirsten",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2114/2114.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2011/2011.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2011/2011.html",
       "fullName": "AC Hudson",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2011/2011.html"
@@ -4468,42 +4468,42 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1944/1944.html",
       "fullName": "HP Tillakaratne",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1944/1944.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2068/2068.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2068/2068.html",
       "fullName": "DJ Cullinan",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2068/2068.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2224/2224.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2224/2224.html",
       "fullName": "LK Germon",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2224/2224.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2092/2092.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2092/2092.html",
       "fullName": "GP Thorpe",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2092/2092.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1743/1743.html",
       "fullName": "RB Richardson",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1743/1743.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2009/2009.html",
       "fullName": "WJ Cronje",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2009/2009.html"
@@ -4517,35 +4517,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1988/1988.html",
       "fullName": "GA Hick",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1988/1988.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2168/2168.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2168/2168.html",
       "fullName": "PA Strang",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2168/2168.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1788/1788.html",
       "fullName": "AP Gurusinha",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1788/1788.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2230/2230.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2230/2230.html",
       "fullName": "SG Law",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2230/2230.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1907/1907.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1907/1907.html",
       "fullName": "RA Smith",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1907/1907.html"
@@ -4566,35 +4566,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1794/1794.html",
       "fullName": "SR Waugh",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1794/1794.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1849/1849.html",
       "fullName": "PAJ DeFreitas",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1849/1849.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2072/2072.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2072/2072.html",
       "fullName": "VG Kambli",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2072/2072.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2257/2257.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2257/2257.html",
       "fullName": "KJJ van Noortwijk",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2257/2257.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2249/2249.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2249/2249.html",
       "fullName": "SF Dukanwala",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2249/2249.html"
@@ -4615,7 +4615,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2064/2064.html",
       "fullName": "CZ Harris",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2064/2064.html"
@@ -4629,7 +4629,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1742/1742.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1742/1742.html",
       "fullName": "NS Sidhu",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1742/1742.html"
@@ -4650,7 +4650,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2243/2243.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2243/2243.html",
       "fullName": "NMK Smith",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2243/2243.html"
@@ -4664,14 +4664,14 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1950/1950.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1950/1950.html",
       "fullName": "SA Thomson",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1950/1950.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2159/2159.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2159/2159.html",
       "fullName": "D Gough",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2159/2159.html"
@@ -4692,14 +4692,14 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2252/2252.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2252/2252.html",
       "fullName": "PE Cantrell",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2252/2252.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2228/2228.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2228/2228.html",
       "fullName": "CM Spearman",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2228/2228.html"
@@ -4713,56 +4713,56 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2166/2166.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2166/2166.html",
       "fullName": "MG Bevan",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2166/2166.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2029/2029.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2029/2029.html",
       "fullName": "CN Evans",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2029/2029.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2047/2047.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2047/2047.html",
       "fullName": "GW Flower",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2047/2047.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2253/2253.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2253/2253.html",
       "fullName": "GJAF Aponso",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2253/2253.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2145/2145.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2145/2145.html",
       "fullName": "JA Samarasekera",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2145/2145.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2263/2263.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2263/2263.html",
       "fullName": "KO Otieno",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2263/2263.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1864/1864.html",
       "fullName": "NH Fairbrother",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1864/1864.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2225/2225.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2225/2225.html",
       "fullName": "RG Twose",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2225/2225.html"
@@ -4776,35 +4776,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1970/1970.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1970/1970.html",
       "fullName": "AC Parore",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1970/1970.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1773/1773.html",
       "fullName": "M Azharuddin",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1773/1773.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1868/1868.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1868/1868.html",
       "fullName": "SV Manjrekar",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1868/1868.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1921/1921.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1921/1921.html",
       "fullName": "MA Taylor",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1921/1921.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1885/1885.html",
       "fullName": "AC Waller",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1885/1885.html"
@@ -4818,35 +4818,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2004/2004.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2004/2004.html",
       "fullName": "PR Reiffel",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2004/2004.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2255/2255.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2255/2255.html",
       "fullName": "RP Lefebvre",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2255/2255.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1938/1938.html",
       "fullName": "CL Cairns",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1938/1938.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2115/2115.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2115/2115.html",
       "fullName": "NR Mongia",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2115/2115.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2277/2277.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2277/2277.html",
       "fullName": "LN Onyango",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2277/2277.html"
@@ -4867,7 +4867,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2265/2265.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2265/2265.html",
       "fullName": "MO Odumbe",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2265/2265.html"
@@ -4881,28 +4881,28 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2262/2262.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2262/2262.html",
       "fullName": "DN Chudasama",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2262/2262.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2006/2006.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2006/2006.html",
       "fullName": "JC Adams",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2006/2006.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2107/2107.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2107/2107.html",
       "fullName": "HH Streak",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2107/2107.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1927/1927.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1927/1927.html",
       "fullName": "MA Atherton",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1927/1927.html"
@@ -4916,14 +4916,14 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2061/2061.html",
       "fullName": "JN Rhodes",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2061/2061.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2044/2044.html",
       "fullName": "ADR Campbell",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2044/2044.html"
@@ -4937,14 +4937,14 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2001/2001.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2001/2001.html",
       "fullName": "DA Reeve",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2001/2001.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2260/2260.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2260/2260.html",
       "fullName": "EL Gouka",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2260/2260.html"
@@ -4958,84 +4958,84 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2256/2256.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2256/2256.html",
       "fullName": "TBM de Leede",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2256/2256.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1952/1952.html",
       "fullName": "AJ Stewart",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1952/1952.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2266/2266.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2266/2266.html",
       "fullName": "HS Modi",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2266/2266.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2258/2258.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2258/2258.html",
       "fullName": "MMC Schewe",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2258/2258.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2186/2186.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2186/2186.html",
       "fullName": "CO Browne",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2186/2186.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1744/1744.html",
       "fullName": "RA Harper",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1744/1744.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2245/2245.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2245/2245.html",
       "fullName": "SJ Palframan",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2245/2245.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2142/2142.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2142/2142.html",
       "fullName": "V Mehra",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2142/2142.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2181/2181.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2181/2181.html",
       "fullName": "SL Campbell",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2181/2181.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1860/1860.html",
       "fullName": "DN Patel",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1860/1860.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2108/2108.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2108/2108.html",
       "fullName": "GJ Whittall",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2108/2108.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2268/2268.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2268/2268.html",
       "fullName": "EO Odumbe",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2268/2268.html"
@@ -5056,70 +5056,70 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2055/2055.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2055/2055.html",
       "fullName": "DJ Nash",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2055/2055.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2158/2158.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2158/2158.html",
       "fullName": "C White",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2158/2158.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1996/1996.html",
       "fullName": "J Srinath",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1996/1996.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2097/2097.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2097/2097.html",
       "fullName": "PL Symcox",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2097/2097.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2038/2038.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2038/2038.html",
       "fullName": "RS Kaluwitharana",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2038/2038.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2213/2213.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2213/2213.html",
       "fullName": "DG Cork",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2213/2213.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2247/2247.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2247/2247.html",
       "fullName": "G Mylvaganam",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2247/2247.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2113/2113.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2113/2113.html",
       "fullName": "PS de Villiers",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2113/2113.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1916/1916.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1916/1916.html",
       "fullName": "IA Healy",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1916/1916.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1923/1923.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1923/1923.html",
       "fullName": "IR Bishop",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1923/1923.html"
@@ -5140,28 +5140,28 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2267/2267.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2267/2267.html",
       "fullName": "TM Odoyo",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2267/2267.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2046/2046.html",
       "fullName": "A Flower",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2046/2046.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2251/2251.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2251/2251.html",
       "fullName": "NE Clarke",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2251/2251.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2233/2233.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2233/2233.html",
       "fullName": "PR Adams",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2233/2233.html"
@@ -5175,77 +5175,77 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2270/2270.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2270/2270.html",
       "fullName": "MA Suji",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2270/2270.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2246/2246.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2246/2246.html",
       "fullName": "SG Davies",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2246/2246.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2241/2241.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2241/2241.html",
       "fullName": "S Lee",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2241/2241.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2099/2099.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2099/2099.html",
       "fullName": "HDPK Dharmasena",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2099/2099.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2269/2269.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2269/2269.html",
       "fullName": "AY Karim",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2269/2269.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2274/2274.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2274/2274.html",
       "fullName": "IT Iqbal",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2274/2274.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2254/2254.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2254/2254.html",
       "fullName": "SW Lubbers",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2254/2254.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2223/2223.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2223/2223.html",
       "fullName": "ACI Lock",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2223/2223.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2042/2042.html",
       "fullName": "EA Brandes",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2042/2042.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1914/1914.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1914/1914.html",
       "fullName": "RC Russell",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1914/1914.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2060/2060.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2060/2060.html",
       "fullName": "BM McMillan",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2060/2060.html"
@@ -5259,21 +5259,21 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2105/2105.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2105/2105.html",
       "fullName": "SG Peall",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2105/2105.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1883/1883.html",
       "fullName": "CEL Ambrose",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1883/1883.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2147/2147.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2147/2147.html",
       "fullName": "Sultan Zarawani",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2147/2147.html"
@@ -5287,84 +5287,84 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1770/1770.html",
       "fullName": "M Prabhakar",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1770/1770.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2214/2214.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2214/2214.html",
       "fullName": "OD Gibson",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2214/2214.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2212/2212.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2212/2212.html",
       "fullName": "PJ Martin",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2212/2212.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2130/2130.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2130/2130.html",
       "fullName": "RIC Holder",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2130/2130.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2236/2236.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2236/2236.html",
       "fullName": "RJ Kennedy",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2236/2236.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2182/2182.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2182/2182.html",
       "fullName": "BC Strang",
       "teamCode": "ZIM",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2182/2182.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2170/2170.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2170/2170.html",
       "fullName": "CE Cuffy",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2170/2170.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2156/2156.html",
       "fullName": "GR Larsen",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2156/2156.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1905/1905.html",
       "fullName": "KLT Arthurton",
       "teamCode": "WI",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1905/1905.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2136/2136.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2136/2136.html",
       "fullName": "BKV Prasad",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2136/2136.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2167/2167.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2167/2167.html",
       "fullName": "DW Fleming",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2167/2167.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2173/2173.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2173/2173.html",
       "fullName": "AR Kapoor",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2173/2173.html"
@@ -5385,7 +5385,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1809/1809.html",
       "fullName": "RS Mahanama",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1809/1809.html"
@@ -5399,35 +5399,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2272/2272.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2272/2272.html",
       "fullName": "LO Tikolo",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2272/2272.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2063/2063.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2063/2063.html",
       "fullName": "CR Matthews",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2063/2063.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1869/1869.html",
       "fullName": "DK Morrison",
       "teamCode": "NZ",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1869/1869.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2276/2276.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2276/2276.html",
       "fullName": "RF van Oosterom",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2276/2276.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2271/2271.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2271/2271.html",
       "fullName": "RW Ali",
       "teamCode": "KEN",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2271/2271.html"
@@ -5448,7 +5448,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1992/1992.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1992/1992.html",
       "fullName": "RK Illingworth",
       "teamCode": "ENG",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1992/1992.html"
@@ -5462,14 +5462,14 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1997/1997.html",
       "fullName": "GP Wickramasinghe",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1997/1997.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1946/1946.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1946/1946.html",
       "fullName": "SLV Raju",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1946/1946.html"
@@ -5483,7 +5483,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2261/2261.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2261/2261.html",
       "fullName": "PJ Bakker",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2261/2261.html"
@@ -5504,7 +5504,7 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2163/2163.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2163/2163.html",
       "fullName": "KR Pushpakumara",
       "teamCode": "SL",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2163/2163.html"
@@ -5518,35 +5518,35 @@
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2273/2273.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2273/2273.html",
       "fullName": "F Jansen",
       "teamCode": "NETH",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2273/2273.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2275/2275.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2275/2275.html",
       "fullName": "Saeed-al-Saffar",
       "teamCode": "UAE",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2275/2275.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1931/1931.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1931/1931.html",
       "fullName": "SA Ankola",
       "teamCode": "IND",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1931/1931.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+      "sourcePlayerId": "cricketarchive:/players/1/1772/1772.html",
       "fullName": "CJ McDermott",
       "teamCode": "AUS",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1772/1772.html"
     },
     {
       "year": 1996,
-      "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+      "sourcePlayerId": "cricketarchive:/players/2/2010/2010.html",
       "fullName": "AA Donald",
       "teamCode": "SAF",
       "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2010/2010.html"

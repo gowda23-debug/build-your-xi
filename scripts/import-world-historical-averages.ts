@@ -119,7 +119,7 @@ function canonicalPlayerId(href: string, pageUrl: string): string {
   let profilePath = decodeURIComponent(url.pathname).replace(/\/+/g, "/").replace(/\/$/, "").toLowerCase();
   // CricketArchive sometimes serves the same archive through a regional mirror.
   // Normalize that mirror prefix so a player keeps the same source identity across editions.
-  profilePath = profilePath.replace(/^\/cricketireland(?=\/)/, "");
+  profilePath = profilePath.replace(/^\/archive(?=\/players?\/)/, "");
   if (!/\/players?\//i.test(profilePath)) {
     fail(`Could not identify a player profile URL: ${url.toString()}`);
   }
@@ -446,8 +446,9 @@ async function processEdition(source: (typeof WORLD_HISTORICAL_SOURCES)[number])
       : [];
     const combined = new Map<string, unknown>();
     for (const item of old) {
-      if (!item || typeof item !== "object") continue;
       const record = item as { sourcePlayerId?: string; year?: number };
+
+      if (record.year === source.year) continue;
       combined.set(`${record.year}:${record.sourcePlayerId}`, item);
     }
     for (const item of unresolved) combined.set(`${item.year}:${item.sourcePlayerId}`, item);

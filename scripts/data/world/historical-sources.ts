@@ -19,7 +19,7 @@ export type HistoricalWorldSource = {
 export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   {
     year: 1975,
-    seasonName: "Prudential World Cup 1975",
+    seasonName: "ICC Men's Cricket World Cup 1975",
     archiveRoot:
        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
     provider: "CricketArchive",
@@ -33,7 +33,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1979,
-    seasonName: "Prudential World Cup 1979",
+    seasonName: "ICC Men's Cricket World Cup 1979",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1979.html",
     provider: "CricketArchive",
@@ -46,7 +46,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1983,
-    seasonName: "Prudential World Cup 1983",
+    seasonName: "ICC Men's Cricket World Cup 1983",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
     provider: "CricketArchive",
@@ -56,7 +56,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1987,
-    seasonName: "Reliance World Cup 1987/88",
+    seasonName: "ICC Men's Cricket World Cup 1987",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
     provider: "CricketArchive",
@@ -70,7 +70,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1992,
-    seasonName: "Benson and Hedges World Cup 1991/92",
+    seasonName: "ICC Men's Cricket World Cup 1992",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
     provider: "CricketArchive",
@@ -80,7 +80,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1996,
-    seasonName: "Wills World Cup 1995/96",
+    seasonName: "ICC Men's Cricket World Cup 1996",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/Wills_World_Cup_1995-96.html",
     provider: "CricketArchive",
@@ -94,7 +94,7 @@ export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
   },
   {
     year: 1999,
-    seasonName: "ICC World Cup 1999",
+    seasonName: "ICC Men's Cricket World Cup 1999",
     archiveRoot:
       "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999.html",
     provider: "CricketArchive",
