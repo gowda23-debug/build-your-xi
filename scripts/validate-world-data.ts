@@ -138,7 +138,7 @@ for (
       season.teams
     ) ||
     season.teams.length ===
-      0
+    0
   ) {
     fail(
       `${edition.year}: no teams.`
@@ -168,7 +168,7 @@ for (
         team.players
       ) ||
       team.players.length ===
-        0
+      0
     ) {
       fail(
         `${edition.year}/${team.name}: no players.`
@@ -181,17 +181,19 @@ for (
     ) {
       playerCount++;
 
-      if (
-        typeof player.sourcePlayerId !==
-          "string" ||
-        !/^cricsheet:[0-9a-f]{8}$/i.test(
-          player.sourcePlayerId
-        )
-      ) {
+
+      const validSourcePlayerId =
+        typeof player.sourcePlayerId === "string" &&
+        (edition.sourceType === "cricsheet"
+          ? /^cricsheet:[0-9a-f]{8}$/i.test(player.sourcePlayerId)
+          : /^cricketarchive:\/players?\//i.test(player.sourcePlayerId));
+
+      if (!validSourcePlayerId) {
         fail(
-          `${edition.year}/${team.name}/${player.fullName}: invalid canonical player ID.`
+          `${edition.year}/${team.name}/${player.fullName}: invalid canonical player ID for source type ${edition.sourceType}.`
         );
       }
+
 
       if (
         playerIds.has(
@@ -233,7 +235,7 @@ for (
 
       if (
         typeof player.roleSource.url !==
-          "string" ||
+        "string" ||
         !player.roleSource.url.startsWith(
           "https://"
         )
@@ -280,7 +282,7 @@ for (
       ) {
         if (
           stats[field] !==
-            null &&
+          null &&
           !Number.isFinite(
             stats[field]
           )

@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-
+import {
+  loadWorldRegister,
+  resolveRegisterName,
+  type WorldRegister,
+} from "./world-historical-utils";
 import { WORLD_AVAILABLE_EDITIONS } from "./data/world/editions";
 
 type WorldRole = "BAT" | "WK" | "AR" | "BOWL";
@@ -120,23 +124,42 @@ function collectCricsheetPlayers(map: Map<string, ReviewAccumulator>, year: numb
   }
 }
 
-function collectCricketArchivePlayers(map: Map<string, ReviewAccumulator>, year: number): void {
+
+function collectCricketArchivePlayers(
+  map: Map<string, ReviewAccumulator>,
+  year: number,
+): void {
   const processedPath = path.join(PROCESSED, `${year}.json`);
   const stagingPath = path.join(STAGING, `${year}.json`);
+
   let filePath = stagingPath;
   let edition: EditionJson;
 
   if (fs.existsSync(processedPath)) {
     const processed = readJson<EditionJson>(processedPath);
-    const processedHasVerifiedRoles = Array.isArray(processed.teams)
-      && processed.teams.length > 0
-      && processed.teams.every(team => Array.isArray(team.players) && team.players.every(player =>
-        player.role != null && player.roleSource != null
-          && (player.roleSource.provider === "ICC" || player.roleSource.provider === "BOARD")
-          && typeof player.roleSource.url === "string"
-          && player.roleSource.url.startsWith("https://")
-          && !Number.isNaN(Date.parse(player.roleSource.retrievedAt))));
-    if (processedHasVerifiedRoles || !fs.existsSync(stagingPath)) {
+
+    const hasVerifiedRoles =
+      Array.isArray(processed.teams) &&
+      processed.teams.length > 0 &&
+      processed.teams.every(
+        team =>
+          Array.isArray(team.players) &&
+          team.players.every(
+            player =>
+              player.role != null &&
+              player.roleSource != null &&
+              ["ICC", "BOARD"].includes(
+                player.roleSource.provider,
+              ) &&
+              typeof player.roleSource.url === "string" &&
+              player.roleSource.url.startsWith("https://") &&
+              !Number.isNaN(
+                Date.parse(player.roleSource.retrievedAt),
+              ),
+          ),
+      );
+
+    if (hasVerifiedRoles || !fs.existsSync(stagingPath)) {
       filePath = processedPath;
       edition = processed;
     } else {
@@ -146,34 +169,55 @@ function collectCricketArchivePlayers(map: Map<string, ReviewAccumulator>, year:
     edition = readJson<EditionJson>(stagingPath);
   }
 
-  if (edition.year !== year || !Array.isArray(edition.teams) || edition.teams.length === 0) {
-    fail(`${year}: historical averages file has an invalid year or no teams (${filePath}).`);
+  if (
+    edition.year !== year ||
+    !Array.isArray(edition.teams) ||
+    edition.teams.length === 0
+  ) {
+    fail(
+      `${year}: invalid historical edition file: ${filePath}`,
+    );
   }
 
   for (const team of edition.teams) {
     for (const player of team.players ?? []) {
-      if (!player.sourcePlayerId.startsWith("cricketarchive:")) {
-        fail(`${year}/${player.fullName}: expected a cricketarchive: identity, got ${player.sourcePlayerId}.`);
+      if (
+        typeof player.sourcePlayerId !== "string" ||
+        !player.sourcePlayerId.startsWith("cricketarchive:")
+      ) {
+        fail(
+          `${year}/${player.fullName}: expected a CricketArchive source ID.`,
+        );
       }
+
       addPlayer(map, {
         sourcePlayerId: player.sourcePlayerId,
         fullName: player.fullName,
         team: team.name,
         year,
-        sourceUrls: [...(player.sources ?? []), ...(player.sourceUrl ? [player.sourceUrl] : [])],
+        sourceUrls: [
+          ...(player.sources ?? []),
+          ...(player.sourceUrl ? [player.sourceUrl] : []),
+        ],
       });
     }
   }
 }
+
 
 function main(): void {
   console.log("[WORLD ROLE REVIEW] Building a unified review from all configured World Cup editions.");
   const players = new Map<string, ReviewAccumulator>();
   const verifiedRoles = loadVerifiedRoles();
 
+  const register = loadWorldRegister();
+
   for (const edition of WORLD_AVAILABLE_EDITIONS) {
-    if (edition.sourceType === "cricsheet") collectCricsheetPlayers(players, edition.year);
-    else collectCricketArchivePlayers(players, edition.year);
+    if (edition.sourceType === "cricsheet") {
+      collectCricsheetPlayers(players, edition.year);
+    } else {
+      collectCricketArchivePlayers(players, edition.year);
+    }
   }
 
   const unknownVerifiedIds = Object.keys(verifiedRoles).filter(id => !players.has(id));
