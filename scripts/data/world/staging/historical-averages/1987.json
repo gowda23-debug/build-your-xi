@@ -1,0 +1,3754 @@
+{
+  "year": 1987,
+  "seasonName": "Reliance World Cup 1987/88",
+  "format": "ODI",
+  "competition": "ICC Men's Cricket World Cup",
+  "oversPerInnings": 50,
+  "teams": [
+    {
+      "name": "Australia",
+      "shortName": "AUS",
+      "slug": "australia",
+      "players": [
+        {
+          "fullName": "AK Zesers",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1884/1884.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 10,
+            "batting_average": null,
+            "strike_rate": 71.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 74,
+            "economy": 4.93,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1884/1884.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AR Border",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 183,
+            "batting_average": 22.87,
+            "strike_rate": 81.33,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 6,
+            "bowling_average": 27.66,
+            "economy": 5.18,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1572/1572.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BA Reid",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1793/1793.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 1,
+            "runs": 1,
+            "batting_average": 1,
+            "strike_rate": 16.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 50.5,
+            "economy": 4.45,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1793/1793.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CJ McDermott",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 34,
+            "batting_average": 5.66,
+            "strike_rate": 94.44,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 18,
+            "bowling_average": 18.94,
+            "economy": 4.67,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1772/1772.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DC Boon",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1766/1766.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 447,
+            "batting_average": 55.87,
+            "strike_rate": 76.67,
+            "hundreds": 0,
+            "fifties": 5,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 17,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1766/1766.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DM Jones",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1753/1753.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 314,
+            "batting_average": 44.85,
+            "strike_rate": 77.72,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1753/1753.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GC Dyer",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1853/1853.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 4,
+            "runs": 50,
+            "batting_average": 12.5,
+            "strike_rate": 116.27,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 9,
+            "stumpings": 2
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1853/1853.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GR Marsh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1792/1792.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 428,
+            "batting_average": 61.14,
+            "strike_rate": 68.26,
+            "hundreds": 2,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1792/1792.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MRJ Veletta",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1870/1870.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 136,
+            "batting_average": 45.33,
+            "strike_rate": 112.39,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1870/1870.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PL Taylor",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1858/1858.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 17,
+            "batting_average": null,
+            "strike_rate": 130.76,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 71,
+            "economy": 7.1,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1858/1858.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SP O'Donnell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1778/1778.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 15,
+            "batting_average": 3.75,
+            "strike_rate": 45.45,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 29,
+            "economy": 4.3,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1778/1778.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SR Waugh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 167,
+            "batting_average": 55.66,
+            "strike_rate": 97.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 26.18,
+            "economy": 4.53,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1794/1794.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "TBA May",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1873/1873.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 16,
+            "batting_average": 8,
+            "strike_rate": 123.07,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 53.25,
+            "economy": 4.84,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1873/1873.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "TM Moody",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 10,
+            "batting_average": 5,
+            "strike_rate": 45.45,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7.5,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1939/1939.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "England",
+      "shortName": "ENG",
+      "slug": "england",
+      "players": [
+        {
+          "fullName": "AJ Lamb",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 299,
+            "batting_average": 59.8,
+            "strike_rate": 94.92,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1678/1678.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BC Broad",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1757/1757.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 67,
+            "batting_average": 22.33,
+            "strike_rate": 44.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1757/1757.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CWJ Athey",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1628/1628.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 211,
+            "batting_average": 52.75,
+            "strike_rate": 64.92,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 10,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1628/1628.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DR Pringle",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1680/1680.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 20,
+            "batting_average": 10,
+            "strike_rate": 54.05,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 148,
+            "economy": 6.16,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1680/1680.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EE Hemmings",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1683/1683.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 1,
+            "runs": 4,
+            "batting_average": null,
+            "strike_rate": 133.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 13,
+            "bowling_average": 21.07,
+            "economy": 4.6,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1683/1683.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GA Gooch",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1446/1446.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 471,
+            "batting_average": 58.87,
+            "strike_rate": 70.29,
+            "hundreds": 1,
+            "fifties": 3,
+            "wickets": 1,
+            "bowling_average": 79,
+            "economy": 5.26,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1446/1446.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GC Small",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1844/1844.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 3,
+            "runs": 3,
+            "batting_average": 1.5,
+            "strike_rate": 60,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 55.16,
+            "economy": 4.86,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1844/1844.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JE Emburey",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1567/1567.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 96,
+            "batting_average": 19.2,
+            "strike_rate": 109.09,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 49.16,
+            "economy": 3.73,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1567/1567.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MW Gatting",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1543/1543.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 354,
+            "batting_average": 50.57,
+            "strike_rate": 95.93,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1543/1543.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "NA Foster",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1732/1732.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 42,
+            "batting_average": 42,
+            "strike_rate": 113.51,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 34.77,
+            "economy": 4.47,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1732/1732.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PAJ DeFreitas",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 79,
+            "batting_average": 19.75,
+            "strike_rate": 119.69,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 23.58,
+            "economy": 4.09,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1849/1849.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PR Downton",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1635/1635.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 19,
+            "batting_average": 4.75,
+            "strike_rate": 59.37,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 8,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1635/1635.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RT Robinson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1769/1769.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 142,
+            "batting_average": 20.28,
+            "strike_rate": 55.9,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1769/1769.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "India",
+      "shortName": "IND",
+      "slug": "india",
+      "players": [
+        {
+          "fullName": "C Sharma",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1762/1762.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 28.33,
+            "economy": 4.7,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1762/1762.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CS Pandit",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1839/1839.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 24,
+            "batting_average": 24,
+            "strike_rate": 80,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1839/1839.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DB Vengsarkar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1491/1491.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 171,
+            "batting_average": 57,
+            "strike_rate": 88.6,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1491/1491.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "K Srikkanth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 248,
+            "batting_average": 35.42,
+            "strike_rate": 82.94,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1652/1652.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Kapil Dev",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 5,
+            "runs": 152,
+            "batting_average": 50.66,
+            "strike_rate": 126.66,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 5,
+            "bowling_average": 51.8,
+            "economy": 4.17,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1568/1568.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KS More",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1837/1837.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 59,
+            "batting_average": 59,
+            "strike_rate": 120.4,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 5
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1837/1837.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "L Sivaramakrishnan",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1710/1710.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 70,
+            "economy": 4.11,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1710/1710.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Azharuddin",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 5,
+            "runs": 190,
+            "batting_average": 63.33,
+            "strike_rate": 78.83,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 5,
+            "bowling_average": 21.8,
+            "economy": 4.57,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1773/1773.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Prabhakar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 23,
+            "batting_average": 7.66,
+            "strike_rate": 35.93,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 26.11,
+            "economy": 3.98,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1770/1770.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Maninder Singh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1693/1693.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 2,
+            "runs": 4,
+            "batting_average": 4,
+            "strike_rate": 80,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 14,
+            "bowling_average": 20,
+            "economy": 4,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1693/1693.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "NS Sidhu",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1742/1742.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 5,
+            "runs": 276,
+            "batting_average": 55.2,
+            "strike_rate": 85.98,
+            "hundreds": 0,
+            "fifties": 4,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1742/1742.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Shastri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 63,
+            "batting_average": 15.75,
+            "strike_rate": 67.02,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 39.14,
+            "economy": 4,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1638/1638.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RMH Binny",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1590/1590.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 46,
+            "economy": 6.57,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1590/1590.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SM Gavaskar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 300,
+            "batting_average": 50,
+            "strike_rate": 79.15,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1378/1378.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "shortName": "NZ",
+      "slug": "new-zealand",
+      "players": [
+        {
+          "fullName": "AH Jones",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1862/1862.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 94,
+            "batting_average": 23.5,
+            "strike_rate": 62.66,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1862/1862.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DK Morrison",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.9,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1869/1869.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DN Patel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 58,
+            "batting_average": 9.66,
+            "strike_rate": 73.41,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 55.75,
+            "economy": 5.18,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1860/1860.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EJ Chatfield",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1443/1443.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 5,
+            "batting_average": 5,
+            "strike_rate": 71.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 46,
+            "economy": 4.58,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1443/1443.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IDS Smith",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 69,
+            "batting_average": 13.8,
+            "strike_rate": 130.18,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1632/1632.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Bracewell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1630/1630.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 39,
+            "batting_average": 13,
+            "strike_rate": 67.24,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.45,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1630/1630.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Wright",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 173,
+            "batting_average": 34.6,
+            "strike_rate": 67.31,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1550/1550.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JJ Crowe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1697/1697.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 180,
+            "batting_average": 36,
+            "strike_rate": 84.5,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1697/1697.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KR Rutherford",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1776/1776.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 204,
+            "batting_average": 40.8,
+            "strike_rate": 73.91,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1776/1776.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MC Snedden",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1639/1639.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 157,
+            "batting_average": 26.16,
+            "strike_rate": 61.08,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 5,
+            "bowling_average": 50.8,
+            "economy": 5.18,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1639/1639.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MD Crowe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 222,
+            "batting_average": 37,
+            "strike_rate": 94.46,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1668/1668.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PA Horne",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1861/1861.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 18,
+            "batting_average": 18,
+            "strike_rate": 51.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1861/1861.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SL Boock",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1549/1549.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 19,
+            "batting_average": 19,
+            "strike_rate": 118.75,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 39,
+            "economy": 4.77,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1549/1549.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "W Watson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1843/1843.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 24,
+            "strike_rate": 61.53,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 38.57,
+            "economy": 5.09,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1843/1843.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Pakistan",
+      "shortName": "PAK",
+      "slug": "pakistan",
+      "players": [
+        {
+          "fullName": "Abdul Qadir",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1538/1538.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 56,
+            "batting_average": null,
+            "strike_rate": 130.23,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 20.16,
+            "economy": 3.55,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1538/1538.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Ijaz Ahmed",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1859/1859.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 129,
+            "batting_average": 21.5,
+            "strike_rate": 89.58,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1859/1859.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Imran Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 147,
+            "batting_average": 24.5,
+            "strike_rate": 83.05,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 17,
+            "bowling_average": 13.05,
+            "economy": 4.45,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Javed Miandad",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 274,
+            "batting_average": 45.66,
+            "strike_rate": 73.26,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 5,
+            "economy": 1.66,
+            "catches": 1,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mansoor Akhtar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1629/1629.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 99,
+            "batting_average": 16.5,
+            "strike_rate": 49.5,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 23,
+            "economy": 5.75,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1629/1629.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Manzoor Elahi",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1763/1763.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 4,
+            "batting_average": null,
+            "strike_rate": 66.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 32,
+            "economy": 3.31,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1763/1763.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mudassar Nazar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1515/1515.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 40,
+            "batting_average": 40,
+            "strike_rate": 72.72,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 110,
+            "economy": 5.78,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1515/1515.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Rameez Raja",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1749/1749.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 349,
+            "batting_average": 49.85,
+            "strike_rate": 63.33,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1749/1749.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Saleem Jaffar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1852/1852.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 9,
+            "batting_average": 9,
+            "strike_rate": 42.85,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 42,
+            "economy": 5.29,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1852/1852.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Saleem Malik",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1671/1671.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 323,
+            "batting_average": 53.83,
+            "strike_rate": 91.24,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 1,
+            "bowling_average": 157,
+            "economy": 5.06,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1671/1671.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Saleem Yousuf",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1672/1672.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 112,
+            "batting_average": 37.33,
+            "strike_rate": 123.07,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 9,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1672/1672.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Shoaib Mohammad",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1738/1738.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1738/1738.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Tauseef Ahmed",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1623/1623.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 2,
+            "runs": 1,
+            "batting_average": 0.5,
+            "strike_rate": 25,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 46,
+            "economy": 3.83,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1623/1623.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Akram",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1774/1774.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 85,
+            "batting_average": 14.16,
+            "strike_rate": 106.25,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 42.14,
+            "economy": 4.65,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1774/1774.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Sri Lanka",
+      "shortName": "SL",
+      "slug": "sri-lanka",
+      "players": [
+        {
+          "fullName": "A Ranatunga",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 252,
+            "batting_average": 84,
+            "strike_rate": 70.98,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7.25,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1665/1665.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ALF de Mel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1657/1657.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 184,
+            "economy": 7.56,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1657/1657.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AP Gurusinha",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 108,
+            "batting_average": 27,
+            "strike_rate": 48.64,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 51,
+            "economy": 10.2,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1788/1788.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DSBP Kuruppu",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1863/1863.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 69,
+            "batting_average": 13.8,
+            "strike_rate": 46.93,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1863/1863.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JR Ratnayeke",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1670/1670.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 52,
+            "batting_average": 10.4,
+            "strike_rate": 46.84,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 10,
+            "bowling_average": 31.3,
+            "economy": 5.79,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1670/1670.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "LRD Mendis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 136,
+            "batting_average": 27.2,
+            "strike_rate": 65.07,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1664/1664.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PA de Silva",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 101,
+            "batting_average": 25.25,
+            "strike_rate": 74.81,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 72.33,
+            "economy": 5.16,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1761/1761.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Ratnayake",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1703/1703.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 27,
+            "batting_average": 13.5,
+            "strike_rate": 71.05,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 40.75,
+            "economy": 6.52,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1703/1703.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RL Dias",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1660/1660.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 85,
+            "batting_average": 42.5,
+            "strike_rate": 67.46,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1660/1660.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RS Madugalle",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1663/1663.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 85,
+            "batting_average": 21.25,
+            "strike_rate": 50.89,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1663/1663.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RS Mahanama",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 134,
+            "batting_average": 22.33,
+            "strike_rate": 65.68,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1809/1809.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Jeganathan",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1701/1701.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 24,
+            "batting_average": 12,
+            "strike_rate": 68.57,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 30.75,
+            "economy": 4.24,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1701/1701.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SD Anurasiri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1807/1807.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 67.75,
+            "economy": 4.92,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1807/1807.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VB John",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1702/1702.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 11,
+            "batting_average": null,
+            "strike_rate": 42.3,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 226,
+            "economy": 4.61,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1702/1702.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "West Indies",
+      "shortName": "WI",
+      "slug": "west-indies",
+      "players": [
+        {
+          "fullName": "AL Logie",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 181,
+            "batting_average": 45.25,
+            "strike_rate": 104.02,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1696/1696.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BP Patterson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1798/1798.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 2,
+            "runs": 4,
+            "batting_average": null,
+            "strike_rate": 33.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 14,
+            "bowling_average": 18.07,
+            "economy": 4.51,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1798/1798.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CA Best",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1795/1795.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 23,
+            "batting_average": 11.5,
+            "strike_rate": 51.11,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1795/1795.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CA Walsh",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1764/1764.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 18,
+            "batting_average": 9,
+            "strike_rate": 105.88,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 25.44,
+            "economy": 4.12,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1764/1764.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CL Hooper",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1872/1872.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 42,
+            "batting_average": 14,
+            "strike_rate": 64.61,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 25.85,
+            "economy": 4.41,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1872/1872.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Haynes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 219,
+            "batting_average": 36.5,
+            "strike_rate": 62.21,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1553/1553.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EAE Baptiste",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1740/1740.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 14,
+            "batting_average": 14,
+            "strike_rate": 70,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.12,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1740/1740.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IVA Richards",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 391,
+            "batting_average": 65.16,
+            "strike_rate": 107.41,
+            "hundreds": 1,
+            "fifties": 3,
+            "wickets": 1,
+            "bowling_average": 126,
+            "economy": 4.06,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1435/1435.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PJL Dujon",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1653/1653.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 59,
+            "batting_average": 14.75,
+            "strike_rate": 55.14,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1653/1653.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PV Simmons",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 170,
+            "batting_average": 42.5,
+            "strike_rate": 77.27,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1878/1878.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RA Harper",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 37,
+            "batting_average": 7.4,
+            "strike_rate": 123.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 51.5,
+            "economy": 3.43,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1744/1744.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RB Richardson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 271,
+            "batting_average": 45.16,
+            "strike_rate": 71.31,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1743/1743.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WKM Benjamin",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1867/1867.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 15,
+            "batting_average": 5,
+            "strike_rate": 68.18,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 54.5,
+            "economy": 4.95,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1867/1867.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Zimbabwe",
+      "shortName": "ZIM",
+      "slug": "zimbabwe",
+      "players": [
+        {
+          "fullName": "AC Waller",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 125,
+            "batting_average": 25,
+            "strike_rate": 59.52,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1885/1885.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AH Omarshah",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 80,
+            "batting_average": 13.33,
+            "strike_rate": 38.83,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 35.8,
+            "economy": 4.47,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2053/2053.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Pycroft",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 174,
+            "batting_average": 34.8,
+            "strike_rate": 68.5,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2050/2050.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Traicos",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 10,
+            "batting_average": 5,
+            "strike_rate": 83.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 36.33,
+            "economy": 3.75,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1358/1358.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Houghton",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 226,
+            "batting_average": 37.66,
+            "strike_rate": 82.48,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 2
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2048/2048.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EA Brandes",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 21,
+            "batting_average": 21,
+            "strike_rate": 140,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 77,
+            "economy": 4.66,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2042/2042.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GA Paterson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1720/1720.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 6,
+            "strike_rate": 25.8,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1720/1720.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IP Butchart",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 98,
+            "batting_average": 19.6,
+            "strike_rate": 68.05,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 3,
+            "bowling_average": 74,
+            "economy": 6.34,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2183/2183.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KJ Arnott",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2041/2041.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 112,
+            "batting_average": 37.33,
+            "strike_rate": 52.09,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2041/2041.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KM Curran",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1723/1723.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 75,
+            "batting_average": 15,
+            "strike_rate": 65.21,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 31,
+            "economy": 4.76,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1723/1723.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MA Meman",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1886/1886.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 19,
+            "batting_average": 19,
+            "strike_rate": 86.36,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.97,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1886/1886.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MP Jarvis",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2049/2049.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 2,
+            "runs": 9,
+            "batting_average": null,
+            "strike_rate": 25,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 77.5,
+            "economy": 4.34,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2049/2049.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PWE Rawson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1724/1724.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 56,
+            "batting_average": 28,
+            "strike_rate": 80,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 47,
+            "economy": 5.69,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1724/1724.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RD Brown",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1726/1726.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 17,
+            "batting_average": 5.66,
+            "strike_rate": 18.47,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1726/1726.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+      ]
+    }
+  ],
+  "sources": [
+    "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
+    "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Batting_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Bowling_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88/Fielding_by_Dismissals.html"
+  ],
+  "status": "staging-unverified-roles",
+  "playable": false,
+  "unresolvedRoleCount": 110,
+  "unresolvedPlayers": [
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+      "fullName": "A Ranatunga",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1665/1665.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+      "fullName": "IVA Richards",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1435/1435.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+      "fullName": "M Azharuddin",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1773/1773.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1792/1792.html",
+      "fullName": "GR Marsh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1792/1792.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+      "fullName": "AJ Lamb",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1678/1678.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1837/1837.html",
+      "fullName": "KS More",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1837/1837.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1446/1446.html",
+      "fullName": "GA Gooch",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1446/1446.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1491/1491.html",
+      "fullName": "DB Vengsarkar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1491/1491.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1766/1766.html",
+      "fullName": "DC Boon",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1766/1766.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+      "fullName": "SR Waugh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1794/1794.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1742/1742.html",
+      "fullName": "NS Sidhu",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1742/1742.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1671/1671.html",
+      "fullName": "Saleem Malik",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1671/1671.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1628/1628.html",
+      "fullName": "CWJ Athey",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1628/1628.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+      "fullName": "Kapil Dev",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1568/1568.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1543/1543.html",
+      "fullName": "MW Gatting",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1543/1543.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+      "fullName": "SM Gavaskar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1378/1378.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1749/1749.html",
+      "fullName": "Rameez Raja",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1749/1749.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+      "fullName": "Javed Miandad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1870/1870.html",
+      "fullName": "MRJ Veletta",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1870/1870.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+      "fullName": "AL Logie",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1696/1696.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+      "fullName": "RB Richardson",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1743/1743.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1753/1753.html",
+      "fullName": "DM Jones",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1753/1753.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+      "fullName": "PV Simmons",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1878/1878.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1660/1660.html",
+      "fullName": "RL Dias",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1660/1660.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1732/1732.html",
+      "fullName": "NA Foster",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1732/1732.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1776/1776.html",
+      "fullName": "KR Rutherford",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1776/1776.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1515/1515.html",
+      "fullName": "Mudassar Nazar",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1515/1515.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+      "fullName": "DL Houghton",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2048/2048.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1672/1672.html",
+      "fullName": "Saleem Yousuf",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1672/1672.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2041/2041.html",
+      "fullName": "KJ Arnott",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2041/2041.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+      "fullName": "MD Crowe",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1668/1668.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+      "fullName": "DL Haynes",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1553/1553.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1697/1697.html",
+      "fullName": "JJ Crowe",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1697/1697.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+      "fullName": "K Srikkanth",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1652/1652.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+      "fullName": "AJ Pycroft",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2050/2050.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+      "fullName": "JG Wright",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1550/1550.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1724/1724.html",
+      "fullName": "PWE Rawson",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1724/1724.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+      "fullName": "LRD Mendis",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1664/1664.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+      "fullName": "AP Gurusinha",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1788/1788.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1639/1639.html",
+      "fullName": "MC Snedden",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1639/1639.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+      "fullName": "PA de Silva",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1761/1761.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+      "fullName": "AC Waller",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1885/1885.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+      "fullName": "Imran Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1843/1843.html",
+      "fullName": "W Watson",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1843/1843.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1839/1839.html",
+      "fullName": "CS Pandit",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1839/1839.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1862/1862.html",
+      "fullName": "AH Jones",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1862/1862.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+      "fullName": "AR Border",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1572/1572.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+      "fullName": "RS Mahanama",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1809/1809.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1757/1757.html",
+      "fullName": "BC Broad",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1757/1757.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1859/1859.html",
+      "fullName": "Ijaz Ahmed",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1859/1859.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1663/1663.html",
+      "fullName": "RS Madugalle",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1663/1663.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+      "fullName": "EA Brandes",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2042/2042.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1769/1769.html",
+      "fullName": "RT Robinson",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1769/1769.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+      "fullName": "PAJ DeFreitas",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1849/1849.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+      "fullName": "IP Butchart",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2183/2183.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1567/1567.html",
+      "fullName": "JE Emburey",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1567/1567.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1549/1549.html",
+      "fullName": "SL Boock",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1549/1549.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1886/1886.html",
+      "fullName": "MA Meman",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1886/1886.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1861/1861.html",
+      "fullName": "PA Horne",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1861/1861.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1629/1629.html",
+      "fullName": "Mansoor Akhtar",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1629/1629.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+      "fullName": "RJ Shastri",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1638/1638.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1723/1723.html",
+      "fullName": "KM Curran",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1723/1723.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1653/1653.html",
+      "fullName": "PJL Dujon",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1653/1653.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1774/1774.html",
+      "fullName": "Wasim Akram",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1774/1774.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1872/1872.html",
+      "fullName": "CL Hooper",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1872/1872.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1740/1740.html",
+      "fullName": "EAE Baptiste",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1740/1740.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+      "fullName": "IDS Smith",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1632/1632.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1863/1863.html",
+      "fullName": "DSBP Kuruppu",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1863/1863.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1703/1703.html",
+      "fullName": "RJ Ratnayake",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1703/1703.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+      "fullName": "AH Omarshah",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2053/2053.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1630/1630.html",
+      "fullName": "JG Bracewell",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1630/1630.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1853/1853.html",
+      "fullName": "GC Dyer",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1853/1853.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1701/1701.html",
+      "fullName": "S Jeganathan",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1701/1701.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1795/1795.html",
+      "fullName": "CA Best",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1795/1795.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1670/1670.html",
+      "fullName": "JR Ratnayeke",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1670/1670.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1680/1680.html",
+      "fullName": "DR Pringle",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1680/1680.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+      "fullName": "DN Patel",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1860/1860.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1764/1764.html",
+      "fullName": "CA Walsh",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1764/1764.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1852/1852.html",
+      "fullName": "Saleem Jaffar",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1852/1852.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1873/1873.html",
+      "fullName": "TBA May",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1873/1873.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+      "fullName": "M Prabhakar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1770/1770.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+      "fullName": "RA Harper",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1744/1744.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1720/1720.html",
+      "fullName": "GA Paterson",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1720/1720.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+      "fullName": "CJ McDermott",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1772/1772.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1726/1726.html",
+      "fullName": "RD Brown",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1726/1726.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1867/1867.html",
+      "fullName": "WKM Benjamin",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1867/1867.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+      "fullName": "TM Moody",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1939/1939.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+      "fullName": "AJ Traicos",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1358/1358.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1443/1443.html",
+      "fullName": "EJ Chatfield",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1443/1443.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1635/1635.html",
+      "fullName": "PR Downton",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1635/1635.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1693/1693.html",
+      "fullName": "Maninder Singh",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1693/1693.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1778/1778.html",
+      "fullName": "SP O'Donnell",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1778/1778.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1844/1844.html",
+      "fullName": "GC Small",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1844/1844.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1793/1793.html",
+      "fullName": "BA Reid",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1793/1793.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1623/1623.html",
+      "fullName": "Tauseef Ahmed",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1623/1623.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1657/1657.html",
+      "fullName": "ALF de Mel",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1657/1657.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1762/1762.html",
+      "fullName": "C Sharma",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1762/1762.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1590/1590.html",
+      "fullName": "RMH Binny",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1590/1590.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1807/1807.html",
+      "fullName": "SD Anurasiri",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1807/1807.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1738/1738.html",
+      "fullName": "Shoaib Mohammad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1738/1738.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1538/1538.html",
+      "fullName": "Abdul Qadir",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1538/1538.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1858/1858.html",
+      "fullName": "PL Taylor",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1858/1858.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1702/1702.html",
+      "fullName": "VB John",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1702/1702.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1884/1884.html",
+      "fullName": "AK Zesers",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1884/1884.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2049/2049.html",
+      "fullName": "MP Jarvis",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2049/2049.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1798/1798.html",
+      "fullName": "BP Patterson",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1798/1798.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1683/1683.html",
+      "fullName": "EE Hemmings",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1683/1683.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1763/1763.html",
+      "fullName": "Manzoor Elahi",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1763/1763.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+      "fullName": "DK Morrison",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1869/1869.html"
+    },
+    {
+      "year": 1987,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1710/1710.html",
+      "fullName": "L Sivaramakrishnan",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1710/1710.html"
+    }
+  ]
+}

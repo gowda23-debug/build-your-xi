@@ -1,0 +1,4262 @@
+{
+  "year": 1992,
+  "seasonName": "Benson and Hedges World Cup 1991/92",
+  "format": "ODI",
+  "competition": "ICC Men's Cricket World Cup",
+  "oversPerInnings": 50,
+  "teams": [
+    {
+      "name": "Australia",
+      "shortName": "AUS",
+      "slug": "australia",
+      "players": [
+        {
+          "fullName": "AR Border",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 60,
+            "batting_average": 8.57,
+            "strike_rate": 68.96,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 53,
+            "economy": 3.78,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1572/1572.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BA Reid",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1793/1793.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 9,
+            "batting_average": 4.5,
+            "strike_rate": 25.71,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 69.66,
+            "economy": 3.82,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1793/1793.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CJ McDermott",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 9,
+            "batting_average": 1.8,
+            "strike_rate": 40.9,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 30.75,
+            "economy": 3.36,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1772/1772.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DC Boon",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1766/1766.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 368,
+            "batting_average": 52.57,
+            "strike_rate": 70.49,
+            "hundreds": 2,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1766/1766.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DM Jones",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1753/1753.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 276,
+            "batting_average": 39.42,
+            "strike_rate": 67.81,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1753/1753.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GR Marsh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1792/1792.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 151,
+            "batting_average": 30.2,
+            "strike_rate": 41.94,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1792/1792.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IA Healy",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1916/1916.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 51,
+            "batting_average": 12.75,
+            "strike_rate": 75,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 9,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1916/1916.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MA Taylor",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1921/1921.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 13,
+            "batting_average": 6.5,
+            "strike_rate": 44.82,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1921/1921.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ME Waugh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 145,
+            "batting_average": 36.25,
+            "strike_rate": 94.15,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 8,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1984/1984.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MG Hughes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1791/1791.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 49,
+            "economy": 5.44,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1791/1791.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MR Whitney",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1648/1648.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 3,
+            "runs": 22,
+            "batting_average": 22,
+            "strike_rate": 43.13,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 23.88,
+            "economy": 3.25,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1648/1648.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PL Taylor",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1858/1858.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 17,
+            "batting_average": 4.25,
+            "strike_rate": 80.95,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 29.4,
+            "economy": 3.9,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1858/1858.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SR Waugh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 187,
+            "batting_average": 26.71,
+            "strike_rate": 78.24,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 8,
+            "bowling_average": 34.62,
+            "economy": 4.56,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1794/1794.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "TM Moody",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 202,
+            "batting_average": 25.25,
+            "strike_rate": 59.94,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 7,
+            "bowling_average": 32.14,
+            "economy": 4.59,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1939/1939.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "England",
+      "shortName": "ENG",
+      "slug": "england",
+      "players": [
+        {
+          "fullName": "AJ Lamb",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 79,
+            "batting_average": 19.75,
+            "strike_rate": 66.94,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1678/1678.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Stewart",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 8,
+            "runs": 259,
+            "batting_average": 37,
+            "strike_rate": 70.95,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 8,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1952/1952.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CC Lewis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1969/1969.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 6,
+            "runs": 81,
+            "batting_average": 20.25,
+            "strike_rate": 142.1,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 30.57,
+            "economy": 4.22,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1969/1969.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DA Reeve",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2001/2001.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 5,
+            "runs": 79,
+            "batting_average": 39.5,
+            "strike_rate": 82.29,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 15.75,
+            "economy": 3.63,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2001/2001.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DR Pringle",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1680/1680.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 30,
+            "batting_average": 10,
+            "strike_rate": 78.94,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 31.14,
+            "economy": 3.27,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1680/1680.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GA Gooch",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1446/1446.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 216,
+            "batting_average": 27,
+            "strike_rate": 51.42,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1446/1446.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GA Hick",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 9,
+            "runs": 264,
+            "batting_average": 33,
+            "strike_rate": 79.04,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 2,
+            "bowling_average": 35,
+            "economy": 4.88,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1988/1988.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GC Small",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1844/1844.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 1,
+            "runs": 5,
+            "batting_average": 5,
+            "strike_rate": 27.77,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 25.4,
+            "economy": 3.62,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1844/1844.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IT Botham",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1529/1529.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 10,
+            "runs": 192,
+            "batting_average": 21.33,
+            "strike_rate": 58.35,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 16,
+            "bowling_average": 19.12,
+            "economy": 3.43,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1529/1529.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "NH Fairbrother",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 7,
+            "runs": 285,
+            "batting_average": 57,
+            "strike_rate": 69.17,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1864/1864.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PAJ DeFreitas",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 5,
+            "runs": 16,
+            "batting_average": 4,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 29,
+            "economy": 3.73,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1849/1849.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PCR Tufnell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1983/1983.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 3,
+            "batting_average": null,
+            "strike_rate": 60,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 44.33,
+            "economy": 4.75,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1983/1983.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RA Smith",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1907/1907.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 193,
+            "batting_average": 32.16,
+            "strike_rate": 57.95,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1907/1907.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RK Illingworth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1992/1992.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 27,
+            "batting_average": 13.5,
+            "strike_rate": 81.81,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 31.25,
+            "economy": 4.29,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1992/1992.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "India",
+      "shortName": "IND",
+      "slug": "india",
+      "players": [
+        {
+          "fullName": "AD Jadeja",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/2/2059/2059.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 93,
+            "batting_average": 23.25,
+            "strike_rate": 50.54,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5.31,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/2/2059/2059.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "J Srinath",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 34,
+            "batting_average": 34,
+            "strike_rate": 121.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 31.12,
+            "economy": 4.68,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1996/1996.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "K Srikkanth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 117,
+            "batting_average": 16.71,
+            "strike_rate": 55.18,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.92,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1652/1652.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Kapil Dev",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 161,
+            "batting_average": 23,
+            "strike_rate": 125.78,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 27.88,
+            "economy": 4.32,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1568/1568.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KS More",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1837/1837.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 41,
+            "batting_average": 10.25,
+            "strike_rate": 110.81,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1837/1837.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Azharuddin",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 332,
+            "batting_average": 47.42,
+            "strike_rate": 77.38,
+            "hundreds": 0,
+            "fifties": 4,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1773/1773.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Prabhakar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 4,
+            "runs": 11,
+            "batting_average": 3.66,
+            "strike_rate": 78.57,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 20.41,
+            "economy": 4.28,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1770/1770.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PK Amre",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2056/2056.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 27,
+            "batting_average": 13.5,
+            "strike_rate": 67.5,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2056/2056.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Shastri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 82,
+            "batting_average": 41,
+            "strike_rate": 45.81,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 28,
+            "economy": 7,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1638/1638.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SLV Raju",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1946/1946.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 2,
+            "runs": 1,
+            "batting_average": 0.5,
+            "strike_rate": 100,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 41.6,
+            "economy": 4.31,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1946/1946.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SR Tendulkar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1933/1933.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 283,
+            "batting_average": 47.16,
+            "strike_rate": 84.73,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 2,
+            "bowling_average": 90,
+            "economy": 4.39,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1933/1933.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ST Banerjee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1998/1998.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 36,
+            "batting_average": 36,
+            "strike_rate": 144,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 85,
+            "economy": 6.53,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1998/1998.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SV Manjrekar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1868/1868.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 154,
+            "batting_average": 25.66,
+            "strike_rate": 78.97,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1868/1868.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VG Kambli",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2072/2072.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 29,
+            "batting_average": 7.25,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2072/2072.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "shortName": "NZ",
+      "slug": "new-zealand",
+      "players": [
+        {
+          "fullName": "AH Jones",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1862/1862.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 9,
+            "runs": 322,
+            "batting_average": 46,
+            "strike_rate": 61.56,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 2,
+            "bowling_average": 26,
+            "economy": 4.33,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1862/1862.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CL Cairns",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 21,
+            "batting_average": null,
+            "strike_rate": 116.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 80.5,
+            "economy": 6.44,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1938/1938.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CZ Harris",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 6,
+            "runs": 44,
+            "batting_average": 8.8,
+            "strike_rate": 56.41,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 16,
+            "bowling_average": 21.37,
+            "economy": 4.73,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2064/2064.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DK Morrison",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 1,
+            "runs": 12,
+            "batting_average": 12,
+            "strike_rate": 26.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 36,
+            "economy": 4.5,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1869/1869.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DN Patel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 3,
+            "runs": 25,
+            "batting_average": 12.5,
+            "strike_rate": 67.56,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 30.62,
+            "economy": 3.1,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1860/1860.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GR Larsen",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 2,
+            "runs": 45,
+            "batting_average": 45,
+            "strike_rate": 52.32,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 29.11,
+            "economy": 3.44,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2156/2156.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IDS Smith",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 5,
+            "runs": 61,
+            "batting_average": 15.25,
+            "strike_rate": 138.63,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1632/1632.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Wright",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 71,
+            "batting_average": 17.75,
+            "strike_rate": 56.34,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1550/1550.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KR Rutherford",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1776/1776.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 7,
+            "runs": 212,
+            "batting_average": 42.4,
+            "strike_rate": 68.16,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.6,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1776/1776.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MD Crowe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 9,
+            "runs": 456,
+            "batting_average": 114,
+            "strike_rate": 90.65,
+            "hundreds": 1,
+            "fifties": 4,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1668/1668.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MJ Greatbatch",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1881/1881.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 313,
+            "batting_average": 44.71,
+            "strike_rate": 87.92,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1881/1881.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RT Latham",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2005/2005.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 136,
+            "batting_average": 19.42,
+            "strike_rate": 62.38,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 136,
+            "economy": 5.91,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2005/2005.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "W Watson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1843/1843.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 1,
+            "runs": 5,
+            "batting_average": null,
+            "strike_rate": 38.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 25.08,
+            "economy": 3.81,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1843/1843.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Pakistan",
+      "shortName": "PAK",
+      "slug": "pakistan",
+      "players": [
+        {
+          "fullName": "Aamer Sohail",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/2/2031/2031.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 10,
+            "runs": 326,
+            "batting_average": 32.6,
+            "strike_rate": 61.39,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 4,
+            "bowling_average": 46,
+            "economy": 4.6,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/2/2031/2031.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Aaqib Javed",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1922/1922.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 2,
+            "runs": 2,
+            "batting_average": null,
+            "strike_rate": 6.06,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 29.81,
+            "economy": 3.86,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1922/1922.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Ijaz Ahmed",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1859/1859.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 14,
+            "batting_average": 4.66,
+            "strike_rate": 53.84,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 149,
+            "economy": 4.13,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1859/1859.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Imran Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 185,
+            "batting_average": 30.83,
+            "strike_rate": 52.55,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 7,
+            "bowling_average": 35.85,
+            "economy": 4.16,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Inzamam-ul-Haq",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/2/2033/2033.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 10,
+            "runs": 225,
+            "batting_average": 22.5,
+            "strike_rate": 92.97,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/2/2033/2033.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Iqbal Sikander",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/2/2026/2026.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 1,
+            "runs": 1,
+            "batting_average": null,
+            "strike_rate": 33.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 49,
+            "economy": 4.2,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/2/2026/2026.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Javed Miandad",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 9,
+            "runs": 437,
+            "batting_average": 62.42,
+            "strike_rate": 62.33,
+            "hundreds": 0,
+            "fifties": 5,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Moin Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1979/1979.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 5,
+            "runs": 44,
+            "batting_average": 14.66,
+            "strike_rate": 88,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 11,
+            "stumpings": 3
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1979/1979.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mushtaq Ahmed",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1945/1945.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 4,
+            "runs": 27,
+            "batting_average": 9,
+            "strike_rate": 49.09,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 16,
+            "bowling_average": 19.43,
+            "economy": 3.98,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1945/1945.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Rameez Raja",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1749/1749.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 349,
+            "batting_average": 58.16,
+            "strike_rate": 64.99,
+            "hundreds": 2,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1749/1749.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Saleem Malik",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1671/1671.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 9,
+            "runs": 116,
+            "batting_average": 19.33,
+            "strike_rate": 77.33,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.5,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1671/1671.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Akram",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1774/1774.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 10,
+            "innings": 8,
+            "runs": 62,
+            "batting_average": 10.33,
+            "strike_rate": 98.41,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 18,
+            "bowling_average": 18.77,
+            "economy": 3.76,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1774/1774.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Haider",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/2/2025/2025.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 26,
+            "batting_average": 13,
+            "strike_rate": 36.61,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 79,
+            "economy": 4.15,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/2/2025/2025.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Zahid Fazal",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1977/1977.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 13,
+            "batting_average": 6.5,
+            "strike_rate": 23.21,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1977/1977.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "South Africa",
+      "shortName": "SA",
+      "slug": "south-africa",
+      "players": [
+        {
+          "fullName": "AA Donald",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 1,
+            "runs": 3,
+            "batting_average": 3,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 13,
+            "bowling_average": 25.3,
+            "economy": 4.21,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2010/2010.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AC Hudson",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2011/2011.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 296,
+            "batting_average": 37,
+            "strike_rate": 62.84,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2011/2011.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AP Kuiper",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2013/2013.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 8,
+            "runs": 113,
+            "batting_average": 16.14,
+            "strike_rate": 71.51,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 26.11,
+            "economy": 5.73,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2013/2013.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BM McMillan",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2060/2060.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 5,
+            "runs": 125,
+            "batting_average": 62.5,
+            "strike_rate": 80.12,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 27.81,
+            "economy": 4.19,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2060/2060.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DJ Richardson",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2015/2015.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 5,
+            "runs": 66,
+            "batting_average": 22,
+            "strike_rate": 66.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 14,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2015/2015.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JN Rhodes",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 8,
+            "runs": 132,
+            "batting_average": 18.85,
+            "strike_rate": 91.03,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2061/2061.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KC Wessels",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1692/1692.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 9,
+            "runs": 313,
+            "batting_average": 44.71,
+            "strike_rate": 53.5,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 7,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1692/1692.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MW Pringle",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2014/2014.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 1,
+            "runs": 5,
+            "batting_average": null,
+            "strike_rate": 83.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 29.5,
+            "economy": 4.14,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2014/2014.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MW Rushmere",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2016/2016.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 49,
+            "batting_average": 16.33,
+            "strike_rate": 47.57,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2016/2016.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "O Henry",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2058/2058.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 11,
+            "batting_average": 11,
+            "strike_rate": 84.61,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 31,
+            "economy": 3.1,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2058/2058.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PN Kirsten",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2012/2012.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 410,
+            "batting_average": 68.33,
+            "strike_rate": 66.55,
+            "hundreds": 0,
+            "fifties": 4,
+            "wickets": 5,
+            "bowling_average": 17.4,
+            "economy": 4.83,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2012/2012.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RP Snell",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2017/2017.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 9,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 12,
+            "strike_rate": 120,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 38.75,
+            "economy": 4.25,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2017/2017.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "T Bosch",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2008/2008.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7.6,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2008/2008.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WJ Cronje",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 102,
+            "batting_average": 34,
+            "strike_rate": 69.38,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 42.5,
+            "economy": 4.25,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2009/2009.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Sri Lanka",
+      "shortName": "SL",
+      "slug": "sri-lanka",
+      "players": [
+        {
+          "fullName": "A Ranatunga",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 262,
+            "batting_average": 52.4,
+            "strike_rate": 81.36,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 3,
+            "bowling_average": 31.33,
+            "economy": 5.22,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1665/1665.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AP Gurusinha",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 73,
+            "batting_average": 10.42,
+            "strike_rate": 45.91,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 42.66,
+            "economy": 5.33,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1788/1788.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CPH Ramanayake",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1880/1880.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 25,
+            "batting_average": 6.25,
+            "strike_rate": 38.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 53,
+            "economy": 4.09,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1880/1880.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GF Labrooy",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1856/1856.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 19,
+            "batting_average": 19,
+            "strike_rate": 55.88,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 68,
+            "economy": 6.8,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1856/1856.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GP Wickramasinghe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 3,
+            "runs": 30,
+            "batting_average": null,
+            "strike_rate": 73.17,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 39.42,
+            "economy": 4.58,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1997/1997.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HP Tillakaratne",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 80,
+            "batting_average": 13.33,
+            "strike_rate": 44.44,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1944/1944.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KIW Wijegunawardene",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1995/1995.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5.17,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1995/1995.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MAR Samarasekera",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1915/1915.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 219,
+            "batting_average": 36.5,
+            "strike_rate": 80.21,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1915/1915.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PA de Silva",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 175,
+            "batting_average": 25,
+            "strike_rate": 68.09,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1761/1761.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RS Kalpage",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2094/2094.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 67,
+            "batting_average": 16.75,
+            "strike_rate": 60.36,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 60.25,
+            "economy": 4.82,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2094/2094.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RS Mahanama",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 246,
+            "batting_average": 35.14,
+            "strike_rate": 53.94,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1809/1809.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SD Anurasiri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1807/1807.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 21,
+            "batting_average": 10.5,
+            "strike_rate": 58.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 36.8,
+            "economy": 3.68,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1807/1807.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ST Jayasuriya",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1987/1987.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 74,
+            "batting_average": 14.8,
+            "strike_rate": 90.24,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7.33,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1987/1987.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "UC Hathurusingha",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1986/1986.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 26,
+            "batting_average": 8.66,
+            "strike_rate": 41.26,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 19.4,
+            "economy": 5.7,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1986/1986.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "West Indies",
+      "shortName": "WI",
+      "slug": "west-indies",
+      "players": [
+        {
+          "fullName": "AC Cummins",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2075/2075.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 2,
+            "runs": 11,
+            "batting_average": 11,
+            "strike_rate": 32.35,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 20.5,
+            "economy": 4.16,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2075/2075.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AL Logie",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 101,
+            "batting_average": 14.42,
+            "strike_rate": 75.93,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1696/1696.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BC Lara",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1981/1981.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 333,
+            "batting_average": 47.57,
+            "strike_rate": 81.61,
+            "hundreds": 0,
+            "fifties": 4,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1981/1981.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BP Patterson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1798/1798.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 25,
+            "economy": 2.5,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1798/1798.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CEL Ambrose",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 33,
+            "batting_average": 11,
+            "strike_rate": 78.57,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 33.57,
+            "economy": 3.45,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1883/1883.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CL Hooper",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1872/1872.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 120,
+            "batting_average": 20,
+            "strike_rate": 66.66,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 8,
+            "bowling_average": 39,
+            "economy": 3.9,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1872/1872.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "D Williams",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2018/2018.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 52,
+            "batting_average": 13,
+            "strike_rate": 74.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 11,
+            "stumpings": 3
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2018/2018.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Haynes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 251,
+            "batting_average": 41.83,
+            "strike_rate": 56.65,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1553/1553.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KLT Arthurton",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 233,
+            "batting_average": 38.83,
+            "strike_rate": 66.38,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 2,
+            "bowling_average": 35,
+            "economy": 4.66,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1905/1905.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MD Marshall",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1571/1571.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 16,
+            "batting_average": 4,
+            "strike_rate": 38.09,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 87,
+            "economy": 4.04,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1571/1571.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PV Simmons",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 153,
+            "batting_average": 38.25,
+            "strike_rate": 80.1,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 30.33,
+            "economy": 4.55,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1878/1878.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RA Harper",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 3,
+            "batting_average": 3,
+            "strike_rate": 21.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 31.5,
+            "economy": 4.5,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1744/1744.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RB Richardson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 132,
+            "batting_average": 18.85,
+            "strike_rate": 49.81,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1743/1743.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WKM Benjamin",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1867/1867.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 54,
+            "batting_average": 27,
+            "strike_rate": 91.52,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 10,
+            "bowling_average": 29.7,
+            "economy": 3.75,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1867/1867.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Zimbabwe",
+      "shortName": "ZIM",
+      "slug": "zimbabwe",
+      "players": [
+        {
+          "fullName": "A Flower",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 246,
+            "batting_average": 41,
+            "strike_rate": 63.89,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2046/2046.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AC Waller",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 192,
+            "batting_average": 32,
+            "strike_rate": 100.52,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1885/1885.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ADR Campbell",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 13,
+            "batting_average": 4.33,
+            "strike_rate": 27.65,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2044/2044.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AH Omarshah",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 160,
+            "batting_average": 26.66,
+            "strike_rate": 59.04,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 5,
+            "bowling_average": 47.4,
+            "economy": 4.15,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2053/2053.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Pycroft",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 50,
+            "batting_average": 8.33,
+            "strike_rate": 38.16,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2050/2050.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Traicos",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 35,
+            "batting_average": 17.5,
+            "strike_rate": 43.2,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 42.16,
+            "economy": 4.08,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1358/1358.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Houghton",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 165,
+            "batting_average": 23.57,
+            "strike_rate": 48.52,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 19,
+            "economy": 9.5,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2048/2048.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EA Brandes",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 71,
+            "batting_average": 14.2,
+            "strike_rate": 71,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 14,
+            "bowling_average": 25.35,
+            "economy": 5.05,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2042/2042.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IP Butchart",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 60,
+            "batting_average": 20,
+            "strike_rate": 85.71,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 34.16,
+            "economy": 6.4,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2183/2183.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KG Duers",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2024/2024.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 2,
+            "runs": 7,
+            "batting_average": 7,
+            "strike_rate": 35,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 85.33,
+            "economy": 5.12,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2024/2024.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KJ Arnott",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2041/2041.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 94,
+            "batting_average": 23.5,
+            "strike_rate": 46.76,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2041/2041.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MG Burmester",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2043/2043.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 17,
+            "batting_average": 8.5,
+            "strike_rate": 40.47,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 34.5,
+            "economy": 6.32,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2043/2043.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MP Jarvis",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2049/2049.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 28,
+            "batting_average": 14,
+            "strike_rate": 90.32,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 45.8,
+            "economy": 4.82,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2049/2049.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WR James",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2112/2112.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 35,
+            "batting_average": 11.66,
+            "strike_rate": 44.3,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2112/2112.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+      ]
+    }
+  ],
+  "sources": [
+    "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
+    "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Batting_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Bowling_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92/Fielding_by_Dismissals.html"
+  ],
+  "status": "staging-unverified-roles",
+  "playable": false,
+  "unresolvedRoleCount": 125,
+  "unresolvedPlayers": [
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+      "fullName": "MD Crowe",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1668/1668.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2012/2012.html",
+      "fullName": "PN Kirsten",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2012/2012.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2060/2060.html",
+      "fullName": "BM McMillan",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2060/2060.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+      "fullName": "Javed Miandad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1749/1749.html",
+      "fullName": "Rameez Raja",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1749/1749.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1864/1864.html",
+      "fullName": "NH Fairbrother",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1864/1864.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1766/1766.html",
+      "fullName": "DC Boon",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1766/1766.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+      "fullName": "A Ranatunga",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1665/1665.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1981/1981.html",
+      "fullName": "BC Lara",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1981/1981.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1773/1773.html",
+      "fullName": "M Azharuddin",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1773/1773.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1933/1933.html",
+      "fullName": "SR Tendulkar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1933/1933.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1862/1862.html",
+      "fullName": "AH Jones",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1862/1862.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2156/2156.html",
+      "fullName": "GR Larsen",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2156/2156.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1692/1692.html",
+      "fullName": "KC Wessels",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1692/1692.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1881/1881.html",
+      "fullName": "MJ Greatbatch",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1881/1881.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1776/1776.html",
+      "fullName": "KR Rutherford",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1776/1776.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+      "fullName": "DL Haynes",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1553/1553.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2046/2046.html",
+      "fullName": "A Flower",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2046/2046.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+      "fullName": "RJ Shastri",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1638/1638.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2001/2001.html",
+      "fullName": "DA Reeve",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2001/2001.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1753/1753.html",
+      "fullName": "DM Jones",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1753/1753.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1905/1905.html",
+      "fullName": "KLT Arthurton",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1905/1905.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1878/1878.html",
+      "fullName": "PV Simmons",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1878/1878.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2011/2011.html",
+      "fullName": "AC Hudson",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2011/2011.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1952/1952.html",
+      "fullName": "AJ Stewart",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1952/1952.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1915/1915.html",
+      "fullName": "MAR Samarasekera",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1915/1915.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1984/1984.html",
+      "fullName": "ME Waugh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1984/1984.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1998/1998.html",
+      "fullName": "ST Banerjee",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1998/1998.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1809/1809.html",
+      "fullName": "RS Mahanama",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1809/1809.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2009/2009.html",
+      "fullName": "WJ Cronje",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2009/2009.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1996/1996.html",
+      "fullName": "J Srinath",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1996/1996.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1988/1988.html",
+      "fullName": "GA Hick",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1988/1988.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/2/2031/2031.html",
+      "fullName": "Aamer Sohail",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/2/2031/2031.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1907/1907.html",
+      "fullName": "RA Smith",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1907/1907.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1885/1885.html",
+      "fullName": "AC Waller",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1885/1885.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+      "fullName": "Imran Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1792/1792.html",
+      "fullName": "GR Marsh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1792/1792.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1446/1446.html",
+      "fullName": "GA Gooch",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1446/1446.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1867/1867.html",
+      "fullName": "WKM Benjamin",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1867/1867.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1794/1794.html",
+      "fullName": "SR Waugh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1794/1794.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+      "fullName": "AH Omarshah",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2053/2053.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1868/1868.html",
+      "fullName": "SV Manjrekar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1868/1868.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1939/1939.html",
+      "fullName": "TM Moody",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1939/1939.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1761/1761.html",
+      "fullName": "PA de Silva",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1761/1761.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+      "fullName": "DL Houghton",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2048/2048.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2041/2041.html",
+      "fullName": "KJ Arnott",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2041/2041.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/2/2059/2059.html",
+      "fullName": "AD Jadeja",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/2/2059/2059.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+      "fullName": "Kapil Dev",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1568/1568.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/2/2033/2033.html",
+      "fullName": "Inzamam-ul-Haq",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/2/2033/2033.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2015/2015.html",
+      "fullName": "DJ Richardson",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2015/2015.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1648/1648.html",
+      "fullName": "MR Whitney",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1648/1648.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1529/1529.html",
+      "fullName": "IT Botham",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1529/1529.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1969/1969.html",
+      "fullName": "CC Lewis",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1969/1969.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1872/1872.html",
+      "fullName": "CL Hooper",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1872/1872.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+      "fullName": "IP Butchart",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2183/2183.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+      "fullName": "AJ Lamb",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1678/1678.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2005/2005.html",
+      "fullName": "RT Latham",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2005/2005.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1671/1671.html",
+      "fullName": "Saleem Malik",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1671/1671.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1856/1856.html",
+      "fullName": "GF Labrooy",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1856/1856.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1743/1743.html",
+      "fullName": "RB Richardson",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1743/1743.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2061/2061.html",
+      "fullName": "JN Rhodes",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2061/2061.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+      "fullName": "JG Wright",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1550/1550.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+      "fullName": "AJ Traicos",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1358/1358.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2094/2094.html",
+      "fullName": "RS Kalpage",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2094/2094.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+      "fullName": "K Srikkanth",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1652/1652.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2016/2016.html",
+      "fullName": "MW Rushmere",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2016/2016.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2013/2013.html",
+      "fullName": "AP Kuiper",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2013/2013.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+      "fullName": "IDS Smith",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1632/1632.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1987/1987.html",
+      "fullName": "ST Jayasuriya",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1987/1987.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1979/1979.html",
+      "fullName": "Moin Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1979/1979.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+      "fullName": "AL Logie",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1696/1696.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2042/2042.html",
+      "fullName": "EA Brandes",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2042/2042.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2049/2049.html",
+      "fullName": "MP Jarvis",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2049/2049.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2056/2056.html",
+      "fullName": "PK Amre",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2056/2056.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1992/1992.html",
+      "fullName": "RK Illingworth",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1992/1992.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1944/1944.html",
+      "fullName": "HP Tillakaratne",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1944/1944.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2018/2018.html",
+      "fullName": "D Williams",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2018/2018.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/2/2025/2025.html",
+      "fullName": "Wasim Haider",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/2/2025/2025.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1916/1916.html",
+      "fullName": "IA Healy",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1916/1916.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1860/1860.html",
+      "fullName": "DN Patel",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1860/1860.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2017/2017.html",
+      "fullName": "RP Snell",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2017/2017.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1869/1869.html",
+      "fullName": "DK Morrison",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1869/1869.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2112/2112.html",
+      "fullName": "WR James",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2112/2112.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1883/1883.html",
+      "fullName": "CEL Ambrose",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1883/1883.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2075/2075.html",
+      "fullName": "AC Cummins",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2075/2075.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2058/2058.html",
+      "fullName": "O Henry",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2058/2058.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1807/1807.html",
+      "fullName": "SD Anurasiri",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1807/1807.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1788/1788.html",
+      "fullName": "AP Gurusinha",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1788/1788.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1774/1774.html",
+      "fullName": "Wasim Akram",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1774/1774.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1837/1837.html",
+      "fullName": "KS More",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1837/1837.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1680/1680.html",
+      "fullName": "DR Pringle",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1680/1680.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1945/1945.html",
+      "fullName": "Mushtaq Ahmed",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1945/1945.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2064/2064.html",
+      "fullName": "CZ Harris",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2064/2064.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1986/1986.html",
+      "fullName": "UC Hathurusingha",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1986/1986.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+      "fullName": "AR Border",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1572/1572.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2043/2043.html",
+      "fullName": "MG Burmester",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2043/2043.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+      "fullName": "AJ Pycroft",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2050/2050.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2072/2072.html",
+      "fullName": "VG Kambli",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2072/2072.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2024/2024.html",
+      "fullName": "KG Duers",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2024/2024.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1921/1921.html",
+      "fullName": "MA Taylor",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1921/1921.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1977/1977.html",
+      "fullName": "Zahid Fazal",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1977/1977.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1880/1880.html",
+      "fullName": "CPH Ramanayake",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1880/1880.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1844/1844.html",
+      "fullName": "GC Small",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1844/1844.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1859/1859.html",
+      "fullName": "Ijaz Ahmed",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1859/1859.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1793/1793.html",
+      "fullName": "BA Reid",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1793/1793.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2044/2044.html",
+      "fullName": "ADR Campbell",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2044/2044.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1858/1858.html",
+      "fullName": "PL Taylor",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1858/1858.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1849/1849.html",
+      "fullName": "PAJ DeFreitas",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1849/1849.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1571/1571.html",
+      "fullName": "MD Marshall",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1571/1571.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1770/1770.html",
+      "fullName": "M Prabhakar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1770/1770.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1744/1744.html",
+      "fullName": "RA Harper",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1744/1744.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2010/2010.html",
+      "fullName": "AA Donald",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2010/2010.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1772/1772.html",
+      "fullName": "CJ McDermott",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1772/1772.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1946/1946.html",
+      "fullName": "SLV Raju",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1946/1946.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1997/1997.html",
+      "fullName": "GP Wickramasinghe",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1997/1997.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1938/1938.html",
+      "fullName": "CL Cairns",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1938/1938.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1843/1843.html",
+      "fullName": "W Watson",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1843/1843.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2014/2014.html",
+      "fullName": "MW Pringle",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2014/2014.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1983/1983.html",
+      "fullName": "PCR Tufnell",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1983/1983.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1922/1922.html",
+      "fullName": "Aaqib Javed",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1922/1922.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/2/2026/2026.html",
+      "fullName": "Iqbal Sikander",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/2/2026/2026.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1791/1791.html",
+      "fullName": "MG Hughes",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1791/1791.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1995/1995.html",
+      "fullName": "KIW Wijegunawardene",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1995/1995.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1798/1798.html",
+      "fullName": "BP Patterson",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1798/1798.html"
+    },
+    {
+      "year": 1992,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2008/2008.html",
+      "fullName": "T Bosch",
+      "teamCode": "SAF",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2008/2008.html"
+    }
+  ]
+}

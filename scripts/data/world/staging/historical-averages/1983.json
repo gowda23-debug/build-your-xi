@@ -1,0 +1,3622 @@
+{
+  "year": 1983,
+  "seasonName": "Prudential World Cup 1983",
+  "format": "ODI",
+  "competition": "ICC Men's Cricket World Cup",
+  "oversPerInnings": 60,
+  "teams": [
+    {
+      "name": "Australia",
+      "shortName": "AUS",
+      "slug": "australia",
+      "players": [
+        {
+          "fullName": "AR Border",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 150,
+            "batting_average": 25,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 85,
+            "economy": 3.69,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1572/1572.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DK Lillee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1369/1369.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 44.25,
+            "economy": 3.93,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1369/1369.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DW Hookes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1524/1524.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 133,
+            "batting_average": 22.16,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1524/1524.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GF Lawson",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1631/1631.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 6,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 25.4,
+            "economy": 3.34,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1631/1631.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GM Wood",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1547/1547.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 144,
+            "batting_average": 36,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1547/1547.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GN Yallop",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1488/1488.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 187,
+            "batting_average": 46.75,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 3,
+            "bowling_average": 18,
+            "economy": 3.85,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1488/1488.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JR Thomson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1401/1401.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 53.66,
+            "economy": 4.9,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1401/1401.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KC Wessels",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1692/1692.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 92,
+            "batting_average": 30.66,
+            "strike_rate": 54.76,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1692/1692.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KH MacLeay",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1718/1718.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 19,
+            "batting_average": 4.75,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 20.37,
+            "economy": 3.63,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1718/1718.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KJ Hughes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1530/1530.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 170,
+            "batting_average": 34,
+            "strike_rate": 58.82,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1530/1530.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RM Hogg",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1569/1569.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 29,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 9,
+            "bowling_average": 24.44,
+            "economy": 3.28,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1569/1569.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RW Marsh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1361/1361.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 142,
+            "batting_average": 35.5,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 8,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1361/1361.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "TG Hogan",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1707/1707.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 12,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 28.66,
+            "economy": 3.65,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1707/1707.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "TM Chappell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1645/1645.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 139,
+            "batting_average": 34.75,
+            "strike_rate": null,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 24.5,
+            "economy": 4.98,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1645/1645.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "England",
+      "shortName": "ENG",
+      "slug": "england",
+      "players": [
+        {
+          "fullName": "AJ Lamb",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 6,
+            "runs": 278,
+            "batting_average": 69.5,
+            "strike_rate": 80.11,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1678/1678.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CJ Tavaré",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1627/1627.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 212,
+            "batting_average": 30.28,
+            "strike_rate": 49.07,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1627/1627.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DI Gower",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1564/1564.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 384,
+            "batting_average": 76.8,
+            "strike_rate": 84.95,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1564/1564.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "G Fowler",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1684/1684.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 360,
+            "batting_average": 72,
+            "strike_rate": 62.82,
+            "hundreds": 0,
+            "fifties": 4,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1684/1684.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GR Dilley",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1593/1593.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 90,
+            "batting_average": 45,
+            "strike_rate": 120,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 34.71,
+            "economy": 3.68,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1593/1593.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IJ Gould",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1716/1716.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 66,
+            "batting_average": 22,
+            "strike_rate": 64.7,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 11,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1716/1716.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IT Botham",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1529/1529.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 40,
+            "batting_average": 10,
+            "strike_rate": 76.92,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 36,
+            "economy": 3.6,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1529/1529.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MW Gatting",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1543/1543.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 5,
+            "runs": 83,
+            "batting_average": 20.75,
+            "strike_rate": 62.4,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 48,
+            "economy": 4,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1543/1543.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "NG Cowans",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1690/1690.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 15.5,
+            "economy": 2.58,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1690/1690.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PJW Allott",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1647/1647.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 3,
+            "runs": 8,
+            "batting_average": 4,
+            "strike_rate": 53.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 41.87,
+            "economy": 4.16,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1647/1647.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RGD Willis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1366/1366.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 2,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 18.72,
+            "economy": 2.79,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1366/1366.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VJ Marks",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1685/1685.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 3,
+            "runs": 18,
+            "batting_average": 6,
+            "strike_rate": 47.36,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 13,
+            "bowling_average": 18.92,
+            "economy": 3.15,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1685/1685.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "India",
+      "shortName": "IND",
+      "slug": "india",
+      "players": [
+        {
+          "fullName": "BS Sandhu",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1694/1694.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 4,
+            "runs": 28,
+            "batting_average": 14,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 37.12,
+            "economy": 3.57,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1694/1694.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DB Vengsarkar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1491/1491.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 37,
+            "batting_average": 37,
+            "strike_rate": 50.68,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1491/1491.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "K Srikkanth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 156,
+            "batting_average": 19.5,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1652/1652.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Kapil Dev",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 303,
+            "batting_average": 60.6,
+            "strike_rate": null,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 20.41,
+            "economy": 2.91,
+            "catches": 7,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1568/1568.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KBJ Azad",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1637/1637.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 15,
+            "batting_average": 7.5,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 42,
+            "economy": 2.47,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1637/1637.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Amarnath",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1353/1353.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 237,
+            "batting_average": 29.62,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 8,
+            "bowling_average": 22.25,
+            "economy": 3.63,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1353/1353.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Madan Lal",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1428/1428.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 102,
+            "batting_average": 34,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 17,
+            "bowling_average": 16.76,
+            "economy": 3.43,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1428/1428.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Shastri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 40,
+            "batting_average": 10,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 21.75,
+            "economy": 4.31,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1638/1638.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RMH Binny",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1590/1590.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 73,
+            "batting_average": 12.16,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 18,
+            "bowling_average": 18.66,
+            "economy": 3.81,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1590/1590.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SM Gavaskar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 59,
+            "batting_average": 9.83,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1378/1378.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SM Patil",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1617/1617.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 216,
+            "batting_average": 30.85,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.77,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1617/1617.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SMH Kirmani",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1490/1490.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 6,
+            "runs": 61,
+            "batting_average": 12.2,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 12,
+            "stumpings": 2
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1490/1490.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Yashpal Sharma",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1585/1585.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 240,
+            "batting_average": 34.28,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1585/1585.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "shortName": "NZ",
+      "slug": "new-zealand",
+      "players": [
+        {
+          "fullName": "BA Edgar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1566/1566.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 81,
+            "batting_average": 16.2,
+            "strike_rate": 37.15,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1566/1566.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BL Cairns",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1422/1422.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 16,
+            "batting_average": 3.2,
+            "strike_rate": 66.66,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 33.85,
+            "economy": 3.86,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1422/1422.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "EJ Chatfield",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1443/1443.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 37,
+            "batting_average": null,
+            "strike_rate": 43.02,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 31.12,
+            "economy": 3.54,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1443/1443.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GM Turner",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1328/1328.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 103,
+            "batting_average": 17.16,
+            "strike_rate": 66.02,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1328/1328.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GP Howarth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1444/1444.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 224,
+            "batting_average": 37.33,
+            "strike_rate": 66.66,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1444/1444.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IDS Smith",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 8,
+            "batting_average": 8,
+            "strike_rate": 114.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1632/1632.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Bracewell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1630/1630.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 41,
+            "batting_average": 20.5,
+            "strike_rate": 110.81,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 155,
+            "economy": 4.42,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1630/1630.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Wright",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 83,
+            "batting_average": 16.6,
+            "strike_rate": 56.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1550/1550.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JJ Crowe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1697/1697.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 40,
+            "batting_average": 20,
+            "strike_rate": 55.55,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1697/1697.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JV Coney",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1421/1421.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 197,
+            "batting_average": 49.25,
+            "strike_rate": 55.96,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 9,
+            "bowling_average": 20.33,
+            "economy": 3.15,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1421/1421.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MC Snedden",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1639/1639.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 61,
+            "batting_average": 30.5,
+            "strike_rate": 68.53,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 40.2,
+            "economy": 6.12,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1639/1639.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MD Crowe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 202,
+            "batting_average": 33.66,
+            "strike_rate": 63.92,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 110,
+            "economy": 6.47,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1668/1668.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Hadlee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1407/1407.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 71,
+            "batting_average": 14.2,
+            "strike_rate": 57.25,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 14,
+            "bowling_average": 12.85,
+            "economy": 2.76,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1407/1407.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WK Lees",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1505/1505.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 60,
+            "batting_average": 20,
+            "strike_rate": 70.58,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1505/1505.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Pakistan",
+      "shortName": "PAK",
+      "slug": "pakistan",
+      "players": [
+        {
+          "fullName": "Abdul Qadir",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1538/1538.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 62,
+            "batting_average": 31,
+            "strike_rate": 59.04,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 22,
+            "economy": 3.9,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1538/1538.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Ijaz Faqih",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1634/1634.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 61,
+            "batting_average": 15.25,
+            "strike_rate": 54.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.37,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1634/1634.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Imran Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 283,
+            "batting_average": 70.75,
+            "strike_rate": 76.48,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Javed Miandad",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 220,
+            "batting_average": 36.66,
+            "strike_rate": 73.82,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mansoor Akhtar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1629/1629.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 9,
+            "batting_average": 4.5,
+            "strike_rate": 19.14,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 52,
+            "economy": 4,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1629/1629.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mohsin Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1544/1544.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 223,
+            "batting_average": 31.85,
+            "strike_rate": 44.15,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1544/1544.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mudassar Nazar",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1515/1515.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 106,
+            "batting_average": 17.66,
+            "strike_rate": 36.05,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 27.5,
+            "economy": 3.43,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1515/1515.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Rashid Khan",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1669/1669.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 1,
+            "runs": 9,
+            "batting_average": 9,
+            "strike_rate": 42.85,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 33.25,
+            "economy": 3.74,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1669/1669.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Sarfraz Nawaz",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1329/1329.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 5,
+            "runs": 53,
+            "batting_average": 10.6,
+            "strike_rate": 74.64,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 7,
+            "bowling_average": 33,
+            "economy": 3.16,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1329/1329.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Shahid Mahboob",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1941/1941.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 100,
+            "batting_average": 33.33,
+            "strike_rate": 59.88,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 4,
+            "bowling_average": 57,
+            "economy": 4.38,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1941/1941.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Tahir Naqqash",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1673/1673.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 49,
+            "economy": 6.12,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1673/1673.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Bari",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1299/1299.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 58,
+            "batting_average": 58,
+            "strike_rate": 56.86,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 3
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1299/1299.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Raja",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1409/1409.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 24,
+            "batting_average": 8,
+            "strike_rate": 52.17,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5.75,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1409/1409.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Zaheer Abbas",
+          "sourcePlayerId": "cricketarchive:/pakistan/players/1/1350/1350.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 313,
+            "batting_average": 62.6,
+            "strike_rate": 81.72,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 2,
+            "bowling_average": 37,
+            "economy": 3.76,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Pakistan/Players/1/1350/1350.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Sri Lanka",
+      "shortName": "SL",
+      "slug": "sri-lanka",
+      "players": [
+        {
+          "fullName": "A Ranatunga",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 80,
+            "batting_average": 13.33,
+            "strike_rate": 67.22,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 240,
+            "economy": 5.43,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1665/1665.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ALF de Mel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1657/1657.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 66,
+            "batting_average": 13.2,
+            "strike_rate": 68.75,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 17,
+            "bowling_average": 15.58,
+            "economy": 4.01,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1657/1657.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DS de Silva",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1658/1658.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 94,
+            "batting_average": 15.66,
+            "strike_rate": 59.87,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 79.33,
+            "economy": 4.1,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1658/1658.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DSBP Kuruppu",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1863/1863.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 182,
+            "batting_average": 30.33,
+            "strike_rate": 51.12,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1863/1863.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "LRD Mendis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 158,
+            "batting_average": 26.33,
+            "strike_rate": 65.83,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1664/1664.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MAR Samarasekera",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1915/1915.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 5,
+            "batting_average": 2.5,
+            "strike_rate": 38.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.34,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1915/1915.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RG de Alwis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1698/1698.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 167,
+            "batting_average": 55.66,
+            "strike_rate": 105.03,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1698/1698.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Ratnayake",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1703/1703.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 5,
+            "runs": 54,
+            "batting_average": 13.5,
+            "strike_rate": 69.23,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 34.25,
+            "economy": 4.28,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1703/1703.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RL Dias",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1660/1660.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 150,
+            "batting_average": 30,
+            "strike_rate": 54.15,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1660/1660.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RS Madugalle",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1663/1663.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 104,
+            "batting_average": 20.8,
+            "strike_rate": 62.27,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1663/1663.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Wettimuny",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1667/1667.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 128,
+            "batting_average": 21.33,
+            "strike_rate": 40.37,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1667/1667.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VB John",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1702/1702.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 35,
+            "batting_average": 17.5,
+            "strike_rate": 59.32,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 83.66,
+            "economy": 4.98,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1702/1702.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "West Indies",
+      "shortName": "WI",
+      "slug": "west-indies",
+      "players": [
+        {
+          "fullName": "AL Logie",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1696/1696.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AME Roberts",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1426/1426.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 53,
+            "batting_average": 17.66,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 21.63,
+            "economy": 3.21,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1426/1426.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CG Greenidge",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1433/1433.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 7,
+            "runs": 250,
+            "batting_average": 41.66,
+            "strike_rate": null,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1433/1433.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CH Lloyd",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1286/1286.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 112,
+            "batting_average": 28,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1286/1286.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Haynes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 8,
+            "runs": 240,
+            "batting_average": 34.28,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 5,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1553/1553.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HA Gomes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1497/1497.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 258,
+            "batting_average": 64.5,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 9,
+            "bowling_average": 33.77,
+            "economy": 4.1,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1497/1497.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IVA Richards",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 7,
+            "runs": 367,
+            "batting_average": 73.4,
+            "strike_rate": null,
+            "hundreds": 1,
+            "fifties": 2,
+            "wickets": 3,
+            "bowling_average": 31,
+            "economy": 3.87,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1435/1435.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "J Garner",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1522/1522.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 42,
+            "batting_average": 42,
+            "strike_rate": 87.5,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 23.4,
+            "economy": 2.72,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1522/1522.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MA Holding",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1451/1451.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 7,
+            "innings": 4,
+            "runs": 36,
+            "batting_average": 9,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 19.58,
+            "economy": 3.14,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1451/1451.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MD Marshall",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1571/1571.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 3,
+            "runs": 24,
+            "batting_average": 8,
+            "strike_rate": 38.09,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 12,
+            "bowling_average": 14.58,
+            "economy": 2.5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1571/1571.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PJL Dujon",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1653/1653.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 4,
+            "runs": 53,
+            "batting_average": 13.25,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 15,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1653/1653.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SFAF Bacchus",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1563/1563.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 8,
+            "innings": 5,
+            "runs": 157,
+            "batting_average": 39.25,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1563/1563.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WW Daniel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1495/1495.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 16,
+            "batting_average": null,
+            "strike_rate": 133.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 28,
+            "economy": 3.5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1495/1495.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "WW Davis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1709/1709.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 25.75,
+            "economy": 3.77,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1709/1709.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Zimbabwe",
+      "shortName": "ZIM",
+      "slug": "zimbabwe",
+      "players": [
+        {
+          "fullName": "AH Omarshah",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 26,
+            "batting_average": 8.66,
+            "strike_rate": 23.85,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 40,
+            "economy": 5.33,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2053/2053.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Pycroft",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 71,
+            "batting_average": 11.83,
+            "strike_rate": 40.57,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2050/2050.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AJ Traicos",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 25,
+            "batting_average": 8.33,
+            "strike_rate": 58.13,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 50.5,
+            "economy": 2.97,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1358/1358.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DAG Fletcher",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1722/1722.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 191,
+            "batting_average": 47.75,
+            "strike_rate": 66.08,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 7,
+            "bowling_average": 31.57,
+            "economy": 4.4,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1722/1722.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Houghton",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 176,
+            "batting_average": 29.33,
+            "strike_rate": 61.53,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 7,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2048/2048.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GA Paterson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1720/1720.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 99,
+            "batting_average": 16.5,
+            "strike_rate": 42.3,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1720/1720.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GE Peckover",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1727/1727.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 33,
+            "batting_average": 16.5,
+            "strike_rate": 61.11,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1727/1727.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IP Butchart",
+          "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 82,
+            "batting_average": 20.5,
+            "strike_rate": 55.78,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 71,
+            "economy": 4.26,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/2/2183/2183.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JG Heron",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1721/1721.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 50,
+            "batting_average": 8.33,
+            "strike_rate": 30.67,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1721/1721.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KM Curran",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1723/1723.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 6,
+            "runs": 212,
+            "batting_average": 35.33,
+            "strike_rate": 67.3,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 5,
+            "bowling_average": 54.8,
+            "economy": 4.69,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1723/1723.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PWE Rawson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1724/1724.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 6,
+            "innings": 4,
+            "runs": 24,
+            "batting_average": 8,
+            "strike_rate": 45.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 29.87,
+            "economy": 3.84,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1724/1724.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RD Brown",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1726/1726.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 93,
+            "batting_average": 23.25,
+            "strike_rate": 38.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1726/1726.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VR Hogg",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1725/1725.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 7,
+            "batting_average": null,
+            "strike_rate": 36.84,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.26,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1725/1725.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+      ]
+    }
+  ],
+  "sources": [
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Batting_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Bowling_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983/Fielding_by_Dismissals.html"
+  ],
+  "status": "staging-unverified-roles",
+  "playable": false,
+  "unresolvedRoleCount": 106,
+  "unresolvedPlayers": [
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1564/1564.html",
+      "fullName": "DI Gower",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1564/1564.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+      "fullName": "IVA Richards",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1435/1435.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1684/1684.html",
+      "fullName": "G Fowler",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1684/1684.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1383/1383.html",
+      "fullName": "Imran Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1383/1383.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1678/1678.html",
+      "fullName": "AJ Lamb",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1678/1678.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1497/1497.html",
+      "fullName": "HA Gomes",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1497/1497.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1350/1350.html",
+      "fullName": "Zaheer Abbas",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1350/1350.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1568/1568.html",
+      "fullName": "Kapil Dev",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1568/1568.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1299/1299.html",
+      "fullName": "Wasim Bari",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1299/1299.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1698/1698.html",
+      "fullName": "RG de Alwis",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1698/1698.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1421/1421.html",
+      "fullName": "JV Coney",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1421/1421.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1722/1722.html",
+      "fullName": "DAG Fletcher",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1722/1722.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1488/1488.html",
+      "fullName": "GN Yallop",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1488/1488.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1593/1593.html",
+      "fullName": "GR Dilley",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1593/1593.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1522/1522.html",
+      "fullName": "J Garner",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1522/1522.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1433/1433.html",
+      "fullName": "CG Greenidge",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1433/1433.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1563/1563.html",
+      "fullName": "SFAF Bacchus",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1563/1563.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1444/1444.html",
+      "fullName": "GP Howarth",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1444/1444.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1491/1491.html",
+      "fullName": "DB Vengsarkar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1491/1491.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1504/1504.html",
+      "fullName": "Javed Miandad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1504/1504.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1547/1547.html",
+      "fullName": "GM Wood",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1547/1547.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1361/1361.html",
+      "fullName": "RW Marsh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1361/1361.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1723/1723.html",
+      "fullName": "KM Curran",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1723/1723.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1645/1645.html",
+      "fullName": "TM Chappell",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1645/1645.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1553/1553.html",
+      "fullName": "DL Haynes",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1553/1553.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1585/1585.html",
+      "fullName": "Yashpal Sharma",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1585/1585.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1530/1530.html",
+      "fullName": "KJ Hughes",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1530/1530.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1428/1428.html",
+      "fullName": "Madan Lal",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1428/1428.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1668/1668.html",
+      "fullName": "MD Crowe",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1668/1668.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1941/1941.html",
+      "fullName": "Shahid Mahboob",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1941/1941.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1544/1544.html",
+      "fullName": "Mohsin Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1544/1544.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1538/1538.html",
+      "fullName": "Abdul Qadir",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1538/1538.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1617/1617.html",
+      "fullName": "SM Patil",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1617/1617.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1692/1692.html",
+      "fullName": "KC Wessels",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1692/1692.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1639/1639.html",
+      "fullName": "MC Snedden",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1639/1639.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1863/1863.html",
+      "fullName": "DSBP Kuruppu",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1863/1863.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1627/1627.html",
+      "fullName": "CJ Tavaré",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1627/1627.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1660/1660.html",
+      "fullName": "RL Dias",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1660/1660.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1353/1353.html",
+      "fullName": "M Amarnath",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1353/1353.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2048/2048.html",
+      "fullName": "DL Houghton",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2048/2048.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1286/1286.html",
+      "fullName": "CH Lloyd",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1286/1286.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+      "fullName": "LRD Mendis",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1664/1664.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1572/1572.html",
+      "fullName": "AR Border",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1572/1572.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1726/1726.html",
+      "fullName": "RD Brown",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1726/1726.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1524/1524.html",
+      "fullName": "DW Hookes",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1524/1524.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1716/1716.html",
+      "fullName": "IJ Gould",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1716/1716.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1667/1667.html",
+      "fullName": "S Wettimuny",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1667/1667.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1663/1663.html",
+      "fullName": "RS Madugalle",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1663/1663.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1543/1543.html",
+      "fullName": "MW Gatting",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1543/1543.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2183/2183.html",
+      "fullName": "IP Butchart",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2183/2183.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1630/1630.html",
+      "fullName": "JG Bracewell",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1630/1630.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1505/1505.html",
+      "fullName": "WK Lees",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1505/1505.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1697/1697.html",
+      "fullName": "JJ Crowe",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1697/1697.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1652/1652.html",
+      "fullName": "K Srikkanth",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1652/1652.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1515/1515.html",
+      "fullName": "Mudassar Nazar",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1515/1515.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1426/1426.html",
+      "fullName": "AME Roberts",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1426/1426.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1702/1702.html",
+      "fullName": "VB John",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1702/1702.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1328/1328.html",
+      "fullName": "GM Turner",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1328/1328.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1550/1550.html",
+      "fullName": "JG Wright",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1550/1550.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1720/1720.html",
+      "fullName": "GA Paterson",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1720/1720.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1727/1727.html",
+      "fullName": "GE Peckover",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1727/1727.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1566/1566.html",
+      "fullName": "BA Edgar",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1566/1566.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1658/1658.html",
+      "fullName": "DS de Silva",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1658/1658.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1634/1634.html",
+      "fullName": "Ijaz Faqih",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1634/1634.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1407/1407.html",
+      "fullName": "RJ Hadlee",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1407/1407.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1694/1694.html",
+      "fullName": "BS Sandhu",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1694/1694.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1703/1703.html",
+      "fullName": "RJ Ratnayake",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1703/1703.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1665/1665.html",
+      "fullName": "A Ranatunga",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1665/1665.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1653/1653.html",
+      "fullName": "PJL Dujon",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1653/1653.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1657/1657.html",
+      "fullName": "ALF de Mel",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1657/1657.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1490/1490.html",
+      "fullName": "SMH Kirmani",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1490/1490.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1590/1590.html",
+      "fullName": "RMH Binny",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1590/1590.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1707/1707.html",
+      "fullName": "TG Hogan",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1707/1707.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2050/2050.html",
+      "fullName": "AJ Pycroft",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2050/2050.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1329/1329.html",
+      "fullName": "Sarfraz Nawaz",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1329/1329.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1638/1638.html",
+      "fullName": "RJ Shastri",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1638/1638.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1529/1529.html",
+      "fullName": "IT Botham",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1529/1529.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+      "fullName": "SM Gavaskar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1378/1378.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1451/1451.html",
+      "fullName": "MA Holding",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1451/1451.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1669/1669.html",
+      "fullName": "Rashid Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1669/1669.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/2/2053/2053.html",
+      "fullName": "AH Omarshah",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/2/2053/2053.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1721/1721.html",
+      "fullName": "JG Heron",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1721/1721.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1358/1358.html",
+      "fullName": "AJ Traicos",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1358/1358.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1724/1724.html",
+      "fullName": "PWE Rawson",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1724/1724.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1409/1409.html",
+      "fullName": "Wasim Raja",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1409/1409.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1571/1571.html",
+      "fullName": "MD Marshall",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1571/1571.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1632/1632.html",
+      "fullName": "IDS Smith",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1632/1632.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1637/1637.html",
+      "fullName": "KBJ Azad",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1637/1637.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1631/1631.html",
+      "fullName": "GF Lawson",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1631/1631.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1685/1685.html",
+      "fullName": "VJ Marks",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1685/1685.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1718/1718.html",
+      "fullName": "KH MacLeay",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1718/1718.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1629/1629.html",
+      "fullName": "Mansoor Akhtar",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1629/1629.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1647/1647.html",
+      "fullName": "PJW Allott",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1647/1647.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1422/1422.html",
+      "fullName": "BL Cairns",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1422/1422.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1915/1915.html",
+      "fullName": "MAR Samarasekera",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1915/1915.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1366/1366.html",
+      "fullName": "RGD Willis",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1366/1366.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1401/1401.html",
+      "fullName": "JR Thomson",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1401/1401.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1369/1369.html",
+      "fullName": "DK Lillee",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1369/1369.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1443/1443.html",
+      "fullName": "EJ Chatfield",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1443/1443.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1569/1569.html",
+      "fullName": "RM Hogg",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1569/1569.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1495/1495.html",
+      "fullName": "WW Daniel",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1495/1495.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1725/1725.html",
+      "fullName": "VR Hogg",
+      "teamCode": "ZIM",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1725/1725.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1709/1709.html",
+      "fullName": "WW Davis",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1709/1709.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/pakistan/players/1/1673/1673.html",
+      "fullName": "Tahir Naqqash",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Pakistan/Players/1/1673/1673.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1690/1690.html",
+      "fullName": "NG Cowans",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1690/1690.html"
+    },
+    {
+      "year": 1983,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1696/1696.html",
+      "fullName": "AL Logie",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1696/1696.html"
+    }
+  ]
+}

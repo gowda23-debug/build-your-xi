@@ -338,24 +338,42 @@ async function importPlayer(
    * Provider-specific identities belong in
    * world_player_sources.
    */
+  // const sourceId = player.sourcePlayerId.replace(
+  //   /^cricsheet:/,
+  //   ""
+  // );
+
+  const isCricketArchive = player.sourcePlayerId.startsWith("cricketarchive:");
+  const isCricsheet = player.sourcePlayerId.startsWith("cricsheet:");
+
+  if (!isCricketArchive && !isCricsheet) {
+    fail(`Unsupported source identity: ${player.sourcePlayerId}`);
+  }
+
+  const provider = isCricketArchive ? "CricketArchive" : "Cricsheet";
   const sourceId = player.sourcePlayerId.replace(
-    /^cricsheet:/,
-    ""
+    /^(cricketarchive|cricsheet):/,
+    "",
   );
+
+  const sourceUrl = isCricketArchive
+    ? player.sources.find(url => url.includes("cricketarchive"))
+      ?? "https://cricketarchive.com/"
+    : "https://cricsheet.org/";
 
   const source = await db
     .from("world_player_sources")
     .upsert(
       {
         player_id: playerId,
-        provider: "Cricsheet",
+        provider,
         source_player_id: sourceId,
-        source_url: "https://cricsheet.org/",
+        source_url: sourceUrl,
         retrieved_at: new Date().toISOString(),
       },
       {
         onConflict: "provider,source_player_id",
-      }
+      },
     );
 
   if (source.error) {

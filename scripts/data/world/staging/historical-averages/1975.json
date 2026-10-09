@@ -1,0 +1,3490 @@
+{
+  "year": 1975,
+  "seasonName": "Prudential World Cup 1975",
+  "format": "ODI",
+  "competition": "ICC Men's Cricket World Cup",
+  "oversPerInnings": 60,
+  "teams": [
+    {
+      "name": "Australia",
+      "shortName": "AUS",
+      "slug": "australia",
+      "players": [
+        {
+          "fullName": "A Turner",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1447/1447.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 201,
+            "batting_average": 40.2,
+            "strike_rate": 77.6,
+            "hundreds": 1,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1447/1447.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AA Mallett",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1319/1319.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 52,
+            "economy": 4.45,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1319/1319.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DK Lillee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1369/1369.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 2,
+            "runs": 19,
+            "batting_average": 19,
+            "strike_rate": 61.29,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 27.87,
+            "economy": 4.2,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1369/1369.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GJ Gilmour",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1419/1419.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 42,
+            "batting_average": 42,
+            "strike_rate": 107.69,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 11,
+            "bowling_average": 5.63,
+            "economy": 2.58,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1419/1419.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GS Chappell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1364/1364.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 129,
+            "batting_average": 25.8,
+            "strike_rate": 75.43,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.88,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1364/1364.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IM Chappell",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1243/1243.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 121,
+            "batting_average": 24.2,
+            "strike_rate": 57.07,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 2,
+            "bowling_average": 11.5,
+            "economy": 3.28,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1243/1243.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JR Thomson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1401/1401.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 51,
+            "batting_average": 25.5,
+            "strike_rate": 113.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 32.25,
+            "economy": 2.93,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1401/1401.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KD Walters",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1277/1277.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 123,
+            "batting_average": 30.75,
+            "strike_rate": 64.39,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 85,
+            "economy": 5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1277/1277.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MHN Walker",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1402/1402.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 33,
+            "batting_average": 11,
+            "strike_rate": 55.93,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 35,
+            "economy": 3.66,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1402/1402.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "R Edwards",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1394/1394.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 166,
+            "batting_average": 55.33,
+            "strike_rate": 79.8,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1394/1394.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RB McCosker",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1440/1440.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 120,
+            "batting_average": 24,
+            "strike_rate": 45.45,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1440/1440.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RW Marsh",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1361/1361.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 78,
+            "batting_average": 26,
+            "strike_rate": 60.93,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 9,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1361/1361.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "East Africa",
+      "shortName": "EA",
+      "slug": "east-africa",
+      "players": [
+        {
+          "fullName": "DJ Pringle",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1475/1475.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 5,
+            "batting_average": 2.5,
+            "strike_rate": 33.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.66,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1475/1475.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Frasat Ali",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1462/1462.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 57,
+            "batting_average": 19,
+            "strike_rate": 32.38,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.45,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1462/1462.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HG McLeod",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1470/1470.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 5,
+            "batting_average": 2.5,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1470/1470.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HR Shah",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1467/1467.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 6,
+            "batting_average": 2,
+            "strike_rate": 10.71,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1467/1467.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "J Nagenda",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1472/1472.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 50,
+            "economy": 5.55,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1472/1472.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JN Shah",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1466/1466.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 46,
+            "batting_average": 15.33,
+            "strike_rate": 40.35,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1466/1466.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mehmood Quaraishy",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1468/1468.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 41,
+            "batting_average": 20.5,
+            "strike_rate": 26.62,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 31.33,
+            "economy": 5.22,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1468/1468.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PG Nana",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1471/1471.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 9,
+            "batting_average": 9,
+            "strike_rate": 20,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 116,
+            "economy": 4.02,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1471/1471.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PS Mehta",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1473/1473.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 12,
+            "batting_average": 12,
+            "strike_rate": 29.26,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1473/1473.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RK Sethi",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1464/1464.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 54,
+            "batting_average": 18,
+            "strike_rate": 29.18,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 100,
+            "economy": 5,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1464/1464.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Sumar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1465/1465.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 4,
+            "batting_average": 4,
+            "strike_rate": 36.36,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1465/1465.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Walusimbi",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1463/1463.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 38,
+            "batting_average": 12.66,
+            "strike_rate": 30.15,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1463/1463.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Yunus Badat",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1474/1474.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 1,
+            "batting_average": 0.5,
+            "strike_rate": 14.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1474/1474.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Zulfiqar Ali",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1469/1469.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 39,
+            "batting_average": 19.5,
+            "strike_rate": 51.31,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 41.5,
+            "economy": 4.74,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1469/1469.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "England",
+      "shortName": "ENG",
+      "slug": "england",
+      "players": [
+        {
+          "fullName": "APE Knott",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1301/1301.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 18,
+            "batting_average": 18,
+            "strike_rate": 75,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1301/1301.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AW Greig",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1393/1393.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 29,
+            "batting_average": 7.25,
+            "strike_rate": 42.02,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 14.83,
+            "economy": 2.87,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1393/1393.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "B Wood",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1396/1396.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 83,
+            "batting_average": 41.5,
+            "strike_rate": 52.86,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 1.16,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1396/1396.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CM Old",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1403/1403.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 89,
+            "batting_average": 44.5,
+            "strike_rate": 136.92,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 7,
+            "bowling_average": 12.28,
+            "economy": 2.64,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1403/1403.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Amiss",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1285/1285.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 243,
+            "batting_average": 60.75,
+            "strike_rate": 84.37,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1285/1285.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Underwood",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1284/1284.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 20.5,
+            "economy": 1.86,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1284/1284.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "FC Hayes",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1414/1414.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 90,
+            "batting_average": 30,
+            "strike_rate": 66.17,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1414/1414.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GG Arnold",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1300/1300.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 18,
+            "batting_average": null,
+            "strike_rate": 60,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 23.33,
+            "economy": 2.35,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1300/1300.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JA Jameson",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1385/1385.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 32,
+            "batting_average": 16,
+            "strike_rate": 43.83,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 1.5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1385/1385.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JA Snow",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1270/1270.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 2,
+            "batting_average": 2,
+            "strike_rate": 14.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 10.83,
+            "economy": 1.8,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1270/1270.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KWR Fletcher",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1316/1316.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 207,
+            "batting_average": 69,
+            "strike_rate": 69.23,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1316/1316.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MH Denness",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1340/1340.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 113,
+            "batting_average": 56.5,
+            "strike_rate": 75.83,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1340/1340.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "P Lever",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1365/1365.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 1,
+            "runs": 5,
+            "batting_average": 5,
+            "strike_rate": 38.46,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 18.4,
+            "economy": 2.55,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1365/1365.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "India",
+      "shortName": "IND",
+      "slug": "india",
+      "players": [
+        {
+          "fullName": "AD Gaekwad",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1438/1438.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 59,
+            "batting_average": 29.5,
+            "strike_rate": 60.82,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1438/1438.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BP Patel",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1429/1429.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 25,
+            "batting_average": 25,
+            "strike_rate": 28.08,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1429/1429.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BS Bedi",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1290/1290.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 1,
+            "runs": 6,
+            "batting_average": 6,
+            "strike_rate": 60,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 17,
+            "economy": 1.41,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1290/1290.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ED Solkar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1346/1346.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 21,
+            "batting_average": 10.5,
+            "strike_rate": 47.72,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1346/1346.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "FM Engineer",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1160/1160.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 78,
+            "batting_average": 78,
+            "strike_rate": 60.46,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1160/1160.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GR Viswanath",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1352/1352.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 39,
+            "batting_average": 19.5,
+            "strike_rate": 57.35,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1352/1352.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KD Ghavri",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1439/1439.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 7.54,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1439/1439.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "M Amarnath",
+          "sourcePlayerId": "cricketarchive:/players/1/1353/1353.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 1,
+            "batting_average": 1,
+            "strike_rate": 33.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 34.75,
+            "economy": 4.63,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1353/1353.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Madan Lal",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1428/1428.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 20,
+            "batting_average": 20,
+            "strike_rate": 45.45,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 28.2,
+            "economy": 4.23,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1428/1428.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Abid Ali",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1304/1304.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 70,
+            "batting_average": 70,
+            "strike_rate": 71.42,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 6,
+            "bowling_average": 19.16,
+            "economy": 3.19,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1304/1304.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "S Venkataraghavan",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1260/1260.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 26,
+            "batting_average": null,
+            "strike_rate": 44.82,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.02,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1260/1260.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SM Gavaskar",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 113,
+            "batting_average": 113,
+            "strike_rate": 41.24,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1378/1378.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "shortName": "NZ",
+      "slug": "new-zealand",
+      "players": [
+        {
+          "fullName": "BF Hastings",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1326/1326.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 76,
+            "batting_average": 25.33,
+            "strike_rate": 54.67,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1326/1326.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BG Hadlee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1457/1457.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 19,
+            "batting_average": 19,
+            "strike_rate": 24.67,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1457/1457.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BJ McKechnie",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1459/1459.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 28,
+            "batting_average": 14,
+            "strike_rate": 47.45,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 40.75,
+            "economy": 3.7,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1459/1459.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BL Cairns",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1422/1422.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 10,
+            "batting_average": 10,
+            "strike_rate": 71.42,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.72,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1422/1422.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DR Hadlee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1336/1336.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 3,
+            "runs": 28,
+            "batting_average": 14,
+            "strike_rate": 47.45,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 20.25,
+            "economy": 3.52,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1336/1336.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GM Turner",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1328/1328.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 333,
+            "batting_average": 166.5,
+            "strike_rate": 68.51,
+            "hundreds": 2,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1328/1328.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GP Howarth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1444/1444.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 80,
+            "batting_average": 26.66,
+            "strike_rate": 54.79,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1444/1444.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HJ Howarth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1337/1337.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 1,
+            "batting_average": 1,
+            "strike_rate": 12.5,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 29.6,
+            "economy": 3.7,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1337/1337.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JFM Morrison",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1420/1420.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 91,
+            "batting_average": 22.75,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1420/1420.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "JM Parker",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1408/1408.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 71,
+            "batting_average": 17.75,
+            "strike_rate": 75.53,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1408/1408.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KJ Wadsworth",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1338/1338.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 68,
+            "batting_average": 17,
+            "strike_rate": 75.55,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 1
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1338/1338.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RJ Hadlee",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1407/1407.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 21,
+            "batting_average": 10.5,
+            "strike_rate": 52.5,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 41.33,
+            "economy": 3.44,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1407/1407.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RO Collinge",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1250/1250.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 2,
+            "runs": 8,
+            "batting_average": 4,
+            "strike_rate": 80,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 6,
+            "bowling_average": 22.83,
+            "economy": 2.85,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1250/1250.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Pakistan",
+      "shortName": "PAK",
+      "slug": "pakistan",
+      "players": [
+        {
+          "fullName": "Asif Iqbal",
+          "sourcePlayerId": "cricketarchive:/players/1/1237/1237.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 53,
+            "batting_average": 53,
+            "strike_rate": 55.78,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 58,
+            "economy": 4.83,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1237/1237.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Asif Masood",
+          "sourcePlayerId": "cricketarchive:/players/1/1324/1324.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 6,
+            "batting_average": 6,
+            "strike_rate": 85.71,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 64,
+            "economy": 4.26,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1324/1324.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Imran Khan",
+          "sourcePlayerId": "cricketarchive:/players/1/1383/1383.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 9,
+            "batting_average": 4.5,
+            "strike_rate": 42.85,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 11.8,
+            "economy": 3.43,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1383/1383.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Javed Miandad",
+          "sourcePlayerId": "cricketarchive:/players/1/1504/1504.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 52,
+            "batting_average": 52,
+            "strike_rate": 77.61,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 22.66,
+            "economy": 3.57,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1504/1504.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Majid Khan",
+          "sourcePlayerId": "cricketarchive:/players/1/1239/1239.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 209,
+            "batting_average": 69.66,
+            "strike_rate": 75.45,
+            "hundreds": 0,
+            "fifties": 3,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1239/1239.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Mushtaq Mohammad",
+          "sourcePlayerId": "cricketarchive:/players/1/1105/1105.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 89,
+            "batting_average": 29.66,
+            "strike_rate": 54.26,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 3.28,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1105/1105.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Naseer Malik",
+          "sourcePlayerId": "cricketarchive:/players/1/1460/1460.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 19.6,
+            "economy": 3.26,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1460/1460.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Parvez Mir",
+          "sourcePlayerId": "cricketarchive:/players/1/1461/1461.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 8,
+            "batting_average": 8,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 29.5,
+            "economy": 3.93,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1461/1461.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Sadiq Mohammad",
+          "sourcePlayerId": "cricketarchive:/players/1/1348/1348.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 85,
+            "batting_average": 28.33,
+            "strike_rate": 69.1,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 2,
+            "bowling_average": 10,
+            "economy": 3.33,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1348/1348.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Sarfraz Nawaz",
+          "sourcePlayerId": "cricketarchive:/players/1/1329/1329.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 21.4,
+            "economy": 4.45,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1329/1329.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Bari",
+          "sourcePlayerId": "cricketarchive:/players/1/1299/1299.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 3,
+            "batting_average": 3,
+            "strike_rate": 15.78,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 6,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1299/1299.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Wasim Raja",
+          "sourcePlayerId": "cricketarchive:/players/1/1409/1409.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 91,
+            "batting_average": 30.33,
+            "strike_rate": 75.83,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 1,
+            "bowling_average": 23,
+            "economy": 2.37,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1409/1409.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "Zaheer Abbas",
+          "sourcePlayerId": "cricketarchive:/players/1/1350/1350.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 136,
+            "batting_average": 45.33,
+            "strike_rate": 87.74,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.co.uk/Players/1/1350/1350.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "Sri Lanka",
+      "shortName": "SL",
+      "slug": "sri-lanka",
+      "players": [
+        {
+          "fullName": "AN Ranasinghe",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1675/1675.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 23,
+            "batting_average": 11.5,
+            "strike_rate": 53.48,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.5,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1675/1675.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "APB Tennekoon",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1477/1477.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 78,
+            "batting_average": 26,
+            "strike_rate": 70.27,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1477/1477.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ARM Opatha",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1481/1481.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 11,
+            "batting_average": 5.5,
+            "strike_rate": 39.28,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 59,
+            "economy": 4.72,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1481/1481.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "B Warnapura",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1666/1666.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 41,
+            "batting_average": 13.66,
+            "strike_rate": 37.96,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 27.33,
+            "economy": 4.82,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1666/1666.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DS de Silva",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1658/1658.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 47,
+            "batting_average": 23.5,
+            "strike_rate": 41.59,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 4,
+            "bowling_average": 38.5,
+            "economy": 4.81,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1658/1658.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "ER Fernando",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1476/1476.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 47,
+            "batting_average": 15.66,
+            "strike_rate": 71.21,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1476/1476.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "GRA de Silva",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1659/1659.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 0,
+            "batting_average": 0,
+            "strike_rate": 0,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 6.57,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1659/1659.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "HSM Pieris",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1480/1480.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 19,
+            "batting_average": 9.5,
+            "strike_rate": 32.2,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 2,
+            "bowling_average": 67.5,
+            "economy": 6.13,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1480/1480.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "LRD Mendis",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 40,
+            "batting_average": 40,
+            "strike_rate": 68.96,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1664/1664.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "LWS Kaluperuma",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1662/1662.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 2,
+            "runs": 19,
+            "batting_average": null,
+            "strike_rate": 41.3,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 1,
+            "bowling_average": 102,
+            "economy": 3.68,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1662/1662.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "MH Tissera",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1479/1479.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 3,
+            "innings": 3,
+            "runs": 78,
+            "batting_average": 26,
+            "strike_rate": 53.06,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1479/1479.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "PD Heyn",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1478/1478.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 2,
+            "innings": 2,
+            "runs": 3,
+            "batting_average": 1.5,
+            "strike_rate": 15,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 1,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1478/1478.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "SRD Wettimuny",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1482/1482.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 1,
+            "runs": 53,
+            "batting_average": null,
+            "strike_rate": 51.96,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1482/1482.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    },
+    {
+      "name": "West Indies",
+      "shortName": "WI",
+      "slug": "west-indies",
+      "players": [
+        {
+          "fullName": "AI Kallicharran",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1389/1389.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 197,
+            "batting_average": 49.25,
+            "strike_rate": 77.25,
+            "hundreds": 0,
+            "fifties": 2,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1389/1389.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "AME Roberts",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1426/1426.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 1,
+            "runs": 24,
+            "batting_average": null,
+            "strike_rate": 50,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 8,
+            "bowling_average": 20.62,
+            "economy": 2.91,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1426/1426.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "BD Julien",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1416/1416.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 48,
+            "batting_average": 48,
+            "strike_rate": 58.53,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 10,
+            "bowling_average": 17.7,
+            "economy": 2.95,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1416/1416.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CG Greenidge",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1433/1433.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 4,
+            "innings": 4,
+            "runs": 88,
+            "batting_average": 22,
+            "strike_rate": 48.88,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1433/1433.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "CH Lloyd",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1286/1286.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 158,
+            "batting_average": 52.66,
+            "strike_rate": 104.63,
+            "hundreds": 1,
+            "fifties": 1,
+            "wickets": 3,
+            "bowling_average": 41.66,
+            "economy": 3.47,
+            "catches": 4,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1286/1286.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "DL Murray",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1204/1204.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 3,
+            "runs": 105,
+            "batting_average": 105,
+            "strike_rate": 77.2,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 9,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1204/1204.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "IVA Richards",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 38,
+            "batting_average": 12.66,
+            "strike_rate": 46.34,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 3,
+            "bowling_average": 13,
+            "economy": 3.9,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1435/1435.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "KD Boyce",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1379/1379.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 2,
+            "runs": 41,
+            "batting_average": 20.5,
+            "strike_rate": 95.34,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 10,
+            "bowling_average": 18.5,
+            "economy": 3.55,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1379/1379.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "LR Gibbs",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1067/1067.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 1,
+            "innings": 0,
+            "runs": 0,
+            "batting_average": null,
+            "strike_rate": null,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": 4.25,
+            "catches": 0,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1067/1067.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RB Kanhai",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1052/1052.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 4,
+            "runs": 109,
+            "batting_average": 54.5,
+            "strike_rate": 55.05,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 3,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1052/1052.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "RC Fredericks",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1322/1322.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 5,
+            "runs": 116,
+            "batting_average": 23.2,
+            "strike_rate": 64.08,
+            "hundreds": 0,
+            "fifties": 1,
+            "wickets": 0,
+            "bowling_average": null,
+            "economy": null,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1322/1322.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        },
+        {
+          "fullName": "VA Holder",
+          "sourcePlayerId": "cricketarchive:/archive/players/1/1331/1331.html",
+          "role": null,
+          "roleSource": null,
+          "stats": {
+            "matches": 5,
+            "innings": 2,
+            "runs": 22,
+            "batting_average": 22,
+            "strike_rate": 73.33,
+            "hundreds": 0,
+            "fifties": 0,
+            "wickets": 5,
+            "bowling_average": 36.8,
+            "economy": 4.24,
+            "catches": 2,
+            "stumpings": 0
+          },
+          "sources": [
+            "https://cricketarchive.com/Archive/Players/1/1331/1331.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+            "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+          ]
+        }
+      ],
+      "sources": [
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+        "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+      ]
+    }
+  ],
+  "sources": [
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Batting_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Bowling_by_Average.html",
+    "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975/Fielding_by_Dismissals.html"
+  ],
+  "status": "staging-unverified-roles",
+  "playable": false,
+  "unresolvedRoleCount": 102,
+  "unresolvedPlayers": [
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1328/1328.html",
+      "fullName": "GM Turner",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1328/1328.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1378/1378.html",
+      "fullName": "SM Gavaskar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1378/1378.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1204/1204.html",
+      "fullName": "DL Murray",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1204/1204.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1160/1160.html",
+      "fullName": "FM Engineer",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1160/1160.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1304/1304.html",
+      "fullName": "S Abid Ali",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1304/1304.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1239/1239.html",
+      "fullName": "Majid Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1239/1239.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1316/1316.html",
+      "fullName": "KWR Fletcher",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1316/1316.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1285/1285.html",
+      "fullName": "DL Amiss",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1285/1285.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1340/1340.html",
+      "fullName": "MH Denness",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1340/1340.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1394/1394.html",
+      "fullName": "R Edwards",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1394/1394.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1052/1052.html",
+      "fullName": "RB Kanhai",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1052/1052.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1237/1237.html",
+      "fullName": "Asif Iqbal",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1237/1237.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1286/1286.html",
+      "fullName": "CH Lloyd",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1286/1286.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1504/1504.html",
+      "fullName": "Javed Miandad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1504/1504.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1389/1389.html",
+      "fullName": "AI Kallicharran",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1389/1389.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1416/1416.html",
+      "fullName": "BD Julien",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1416/1416.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1350/1350.html",
+      "fullName": "Zaheer Abbas",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1350/1350.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1403/1403.html",
+      "fullName": "CM Old",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1403/1403.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1419/1419.html",
+      "fullName": "GJ Gilmour",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1419/1419.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1396/1396.html",
+      "fullName": "B Wood",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1396/1396.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1447/1447.html",
+      "fullName": "A Turner",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1447/1447.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1664/1664.html",
+      "fullName": "LRD Mendis",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1664/1664.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1277/1277.html",
+      "fullName": "KD Walters",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1277/1277.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1409/1409.html",
+      "fullName": "Wasim Raja",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1409/1409.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1414/1414.html",
+      "fullName": "FC Hayes",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1414/1414.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1105/1105.html",
+      "fullName": "Mushtaq Mohammad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1105/1105.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1438/1438.html",
+      "fullName": "AD Gaekwad",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1438/1438.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1348/1348.html",
+      "fullName": "Sadiq Mohammad",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1348/1348.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1444/1444.html",
+      "fullName": "GP Howarth",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1444/1444.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1361/1361.html",
+      "fullName": "RW Marsh",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1361/1361.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1479/1479.html",
+      "fullName": "MH Tissera",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1479/1479.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1477/1477.html",
+      "fullName": "APB Tennekoon",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1477/1477.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1364/1364.html",
+      "fullName": "GS Chappell",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1364/1364.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1401/1401.html",
+      "fullName": "JR Thomson",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1401/1401.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1326/1326.html",
+      "fullName": "BF Hastings",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1326/1326.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1429/1429.html",
+      "fullName": "BP Patel",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1429/1429.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1243/1243.html",
+      "fullName": "IM Chappell",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1243/1243.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1440/1440.html",
+      "fullName": "RB McCosker",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1440/1440.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1658/1658.html",
+      "fullName": "DS de Silva",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1658/1658.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1322/1322.html",
+      "fullName": "RC Fredericks",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1322/1322.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1420/1420.html",
+      "fullName": "JFM Morrison",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1420/1420.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1433/1433.html",
+      "fullName": "CG Greenidge",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1433/1433.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1331/1331.html",
+      "fullName": "VA Holder",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1331/1331.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1468/1468.html",
+      "fullName": "Mehmood Quaraishy",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1468/1468.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1379/1379.html",
+      "fullName": "KD Boyce",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1379/1379.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1428/1428.html",
+      "fullName": "Madan Lal",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1428/1428.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1469/1469.html",
+      "fullName": "Zulfiqar Ali",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1469/1469.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1352/1352.html",
+      "fullName": "GR Viswanath",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1352/1352.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1462/1462.html",
+      "fullName": "Frasat Ali",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1462/1462.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1369/1369.html",
+      "fullName": "DK Lillee",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1369/1369.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1457/1457.html",
+      "fullName": "BG Hadlee",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1457/1457.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1464/1464.html",
+      "fullName": "RK Sethi",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1464/1464.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1301/1301.html",
+      "fullName": "APE Knott",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1301/1301.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1408/1408.html",
+      "fullName": "JM Parker",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1408/1408.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1338/1338.html",
+      "fullName": "KJ Wadsworth",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1338/1338.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1385/1385.html",
+      "fullName": "JA Jameson",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1385/1385.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1476/1476.html",
+      "fullName": "ER Fernando",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1476/1476.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1466/1466.html",
+      "fullName": "JN Shah",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1466/1466.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1336/1336.html",
+      "fullName": "DR Hadlee",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1336/1336.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1459/1459.html",
+      "fullName": "BJ McKechnie",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1459/1459.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1666/1666.html",
+      "fullName": "B Warnapura",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1666/1666.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1435/1435.html",
+      "fullName": "IVA Richards",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1435/1435.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1463/1463.html",
+      "fullName": "S Walusimbi",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1463/1463.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1473/1473.html",
+      "fullName": "PS Mehta",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1473/1473.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1675/1675.html",
+      "fullName": "AN Ranasinghe",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1675/1675.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1402/1402.html",
+      "fullName": "MHN Walker",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1402/1402.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1407/1407.html",
+      "fullName": "RJ Hadlee",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1407/1407.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1346/1346.html",
+      "fullName": "ED Solkar",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1346/1346.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1422/1422.html",
+      "fullName": "BL Cairns",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1422/1422.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1480/1480.html",
+      "fullName": "HSM Pieris",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1480/1480.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1471/1471.html",
+      "fullName": "PG Nana",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1471/1471.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1461/1461.html",
+      "fullName": "Parvez Mir",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1461/1461.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1393/1393.html",
+      "fullName": "AW Greig",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1393/1393.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1324/1324.html",
+      "fullName": "Asif Masood",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1324/1324.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1290/1290.html",
+      "fullName": "BS Bedi",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1290/1290.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1481/1481.html",
+      "fullName": "ARM Opatha",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1481/1481.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1365/1365.html",
+      "fullName": "P Lever",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1365/1365.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1383/1383.html",
+      "fullName": "Imran Khan",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1383/1383.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1250/1250.html",
+      "fullName": "RO Collinge",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1250/1250.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1465/1465.html",
+      "fullName": "S Sumar",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1465/1465.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1299/1299.html",
+      "fullName": "Wasim Bari",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1299/1299.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1470/1470.html",
+      "fullName": "HG McLeod",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1470/1470.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1475/1475.html",
+      "fullName": "DJ Pringle",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1475/1475.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1467/1467.html",
+      "fullName": "HR Shah",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1467/1467.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1270/1270.html",
+      "fullName": "JA Snow",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1270/1270.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1478/1478.html",
+      "fullName": "PD Heyn",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1478/1478.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1337/1337.html",
+      "fullName": "HJ Howarth",
+      "teamCode": "NZ",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1337/1337.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1353/1353.html",
+      "fullName": "M Amarnath",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1353/1353.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1474/1474.html",
+      "fullName": "Yunus Badat",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1474/1474.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1329/1329.html",
+      "fullName": "Sarfraz Nawaz",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1329/1329.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1319/1319.html",
+      "fullName": "AA Mallett",
+      "teamCode": "AUS",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1319/1319.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1659/1659.html",
+      "fullName": "GRA de Silva",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1659/1659.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1482/1482.html",
+      "fullName": "SRD Wettimuny",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1482/1482.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1260/1260.html",
+      "fullName": "S Venkataraghavan",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1260/1260.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1426/1426.html",
+      "fullName": "AME Roberts",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1426/1426.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1662/1662.html",
+      "fullName": "LWS Kaluperuma",
+      "teamCode": "SL",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1662/1662.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1300/1300.html",
+      "fullName": "GG Arnold",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1300/1300.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/players/1/1460/1460.html",
+      "fullName": "Naseer Malik",
+      "teamCode": "PAK",
+      "sourceUrl": "https://cricketarchive.co.uk/Players/1/1460/1460.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1439/1439.html",
+      "fullName": "KD Ghavri",
+      "teamCode": "IND",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1439/1439.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1472/1472.html",
+      "fullName": "J Nagenda",
+      "teamCode": "EA",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1472/1472.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1067/1067.html",
+      "fullName": "LR Gibbs",
+      "teamCode": "WI",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1067/1067.html"
+    },
+    {
+      "year": 1975,
+      "sourcePlayerId": "cricketarchive:/archive/players/1/1284/1284.html",
+      "fullName": "DL Underwood",
+      "teamCode": "ENG",
+      "sourceUrl": "https://cricketarchive.com/Archive/Players/1/1284/1284.html"
+    }
+  ]
+}
