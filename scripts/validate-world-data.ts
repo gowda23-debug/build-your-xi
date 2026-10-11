@@ -224,12 +224,14 @@ for (
         ![
           "ICC",
           "BOARD",
+          "ESPNCRICINFO",
+          "CRICKETARCHIVE",
         ].includes(
           player.roleSource.provider
         )
       ) {
         fail(
-          `${edition.year}/${player.fullName}: role is not backed by ICC/BOARD.`
+          `${edition.year}/${player.fullName}: role is not backed by an approved documented source.`
         );
       }
 

@@ -15,7 +15,7 @@ Primary sources:
 6. Official national cricket board sources where ICC does not provide
    the required historical information
 
-Third-party sources may be used only for cross-checking.
+Third-party sources may be used only for cross-checking for match/statistical data. For the player-role field only, a documented ESPNcricinfo or CricketArchive profile may be used as a fallback when ICC/national-board role evidence is unavailable; the provider must be recorded accurately, and the role must be explicitly stated on that profile.
 
 ## Required files
 

@@ -9,7 +9,9 @@ type WorldRole =
 
 type RoleProvider =
   | "ICC"
-  | "BOARD";
+  | "BOARD"
+  | "ESPNCRICINFO"
+  | "CRICKETARCHIVE";
 
 type RoleSource = {
   provider: RoleProvider;
@@ -136,10 +138,7 @@ function isRole(
 function isProvider(
   value: unknown
 ): value is RoleProvider {
-  return (
-    value === "ICC" ||
-    value === "BOARD"
-  );
+  return ["ICC", "BOARD", "ESPNCRICINFO", "CRICKETARCHIVE"].includes(value as RoleProvider);
 }
 
 function validateRoleEntry(
@@ -170,7 +169,7 @@ function validateRoleEntry(
     )
   ) {
     fail(
-      `Role source for ${playerId} must use ICC or BOARD.`
+      `Role source for ${playerId} must use an approved provider.`
     );
   }
 
@@ -280,7 +279,7 @@ function main(): void {
       {
         version: 1,
         description:
-          "Authoritative World Cup player-role mappings. Roles must be supported by ICC or an official national cricket board source.",
+          "World Cup player-role mappings with explicit source provenance; ICC/board sources preferred, documented profile fallback permitted.",
         sourcePolicy: {
           primary: [
             "ICC player profile",
@@ -288,14 +287,17 @@ function main(): void {
             "Official national cricket board player profile",
             "Official national cricket board tournament squad/profile",
           ],
-          thirdParty: [
-            "ESPNcricinfo",
+          fallback: [
+            "ESPNcricinfo player profile with an explicit playing-role field",
+            "CricketArchive historical player profile with an explicit playing-role field",
+          ],
+          fallbackUsage:
+            "Use only when ICC or a national board does not provide a role. Record the actual provider. Never infer roles from statistics or use name-only identity matching.",
+          crossCheckOnly: [
             "Cricbuzz",
             "Kaggle",
-            "GitHub datasets",
+            "Unverified GitHub datasets",
           ],
-          thirdPartyUsage:
-            "Third-party sources may be used for cross-checking only and cannot establish the authoritative role.",
         },
         players:
           verified.players,
@@ -309,7 +311,7 @@ function main(): void {
   console.log(
     `[WORLD ROLE BUILD] ${Object.keys(
       verified.players
-    ).length} authoritative roles written.`
+    ).length} role mappings written.`
   );
 }
 

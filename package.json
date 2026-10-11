@@ -22,10 +22,16 @@
         "data:download-world-historical": "tsx scripts/download-world-historical.ts",
         "data:process-world-historical": "tsx scripts/process-world-historical.ts",
         "data:validate-world-historical": "tsx scripts/validate-world-historical.ts",
+        "data:validate-world-historical-averages": "tsx scripts/validate-world-historical-averages.ts",
+        "data:validate-world-historical-scorecards": "tsx scripts/validate-world-historical.ts",
         "data:build-world-roles": "tsx scripts/build-world-role-sources.ts",
         "data:sync-world-identities": "tsx scripts/sync-world-identities.ts",
         "data:prepare-world-historical": "tsx scripts/prepare-world-historical.ts",
-        "data:import-world-historical-averages": "tsx scripts/import-world-historical-averages.ts"
+        "data:import-world-historical-averages": "tsx scripts/import-world-historical-averages.ts",
+        "data:prepare-world-role-review": "tsx scripts/world-role-review-queue.ts export",
+        "data:apply-world-role-review": "tsx scripts/world-role-review-queue.ts import",
+        "data:enrich-world-role-candidates": "tsx scripts/enrich-world-role-candidates.ts"
+
     },
     "dependencies": {
         "@supabase/ssr": "^0.12.5",

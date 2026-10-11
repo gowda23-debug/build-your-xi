@@ -3,7 +3,6 @@
   "format": "ODI",
   "competition": "ICC Men's Cricket World Cup",
   "seasonUnit": "ICC Men's Cricket World Cup edition",
-
   "primarySources": [
     {
       "provider": "Cricsheet",
@@ -21,7 +20,6 @@
       "usage": "Archived historical World Cup scorecards for 1975-1999. Used as the historical scorecard acquisition source and cross-checked against official tournament records."
     }
   ],
-
   "historicalEditions": {
     "1975": {
       "status": "ingestion-source-available",
@@ -52,7 +50,6 @@
       "provider": "CricketArchive"
     }
   },
-
   "availableEditions": [
     1975,
     1979,
@@ -68,7 +65,6 @@
     2019,
     2023
   ],
-
   "rolePolicy": {
     "allowed": [
       "WK",
@@ -76,14 +72,18 @@
       "AR",
       "BOWL"
     ],
-    "unresolvedAction": "exclude_from_game_pool_until_verified",
+    "unresolvedAction": "exclude_from_game_pool_until_documented_role_found",
     "inferFromStatistics": false,
     "authoritativeProviders": [
       "ICC",
       "BOARD"
-    ]
+    ],
+    "fallbackProviders": [
+      "ESPNCRICINFO",
+      "CRICKETARCHIVE"
+    ],
+    "fallbackUsage": "A fallback provider may be used only when its player profile explicitly documents the playing role. Do not infer roles from statistics or use a name-only match."
   },
-
   "applicationPolicy": {
     "hardCodedPlayerPools": false,
     "hardCodedTeamPools": false,

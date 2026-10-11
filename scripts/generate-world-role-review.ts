@@ -8,7 +8,7 @@ import {
 import { WORLD_AVAILABLE_EDITIONS } from "./data/world/editions";
 
 type WorldRole = "BAT" | "WK" | "AR" | "BOWL";
-type RoleSource = { provider: "ICC" | "BOARD"; url: string; retrievedAt: string };
+type RoleSource = { provider: "ICC" | "BOARD" | "ESPNCRICINFO" | "CRICKETARCHIVE"; url: string; retrievedAt: string };
 type RoleEntry = { role: WorldRole; source: RoleSource };
 type ReviewPlayer = {
   sourcePlayerId: string;
@@ -148,7 +148,7 @@ function collectCricketArchivePlayers(
             player =>
               player.role != null &&
               player.roleSource != null &&
-              ["ICC", "BOARD"].includes(
+              ["ICC", "BOARD", "ESPNCRICINFO", "CRICKETARCHIVE"].includes(
                 player.roleSource.provider,
               ) &&
               typeof player.roleSource.url === "string" &&

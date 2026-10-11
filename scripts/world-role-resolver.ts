@@ -9,7 +9,9 @@ export type WorldRole =
 
 export type RoleProvider =
   | "ICC"
-  | "BOARD";
+  | "BOARD"
+  | "ESPNCRICINFO"
+  | "CRICKETARCHIVE";
 
 export type RoleEntry = {
   role: WorldRole;
@@ -86,13 +88,19 @@ function validateRoleEntry(
   }
 
   if (
-    entry.source.provider !==
-      "ICC" &&
-    entry.source.provider !==
-      "BOARD"
+    !entry.source ||
+    typeof entry.source !== "object"
+  ) {
+    fail(`Missing role source metadata for ${playerId}.`);
+  }
+
+  if (
+    !["ICC", "BOARD", "ESPNCRICINFO", "CRICKETARCHIVE"].includes(
+      entry.source.provider,
+    )
   ) {
     fail(
-      `Role source for ${playerId} must be ICC or BOARD.`
+      `Role source for ${playerId} must use an approved provider.`
     );
   }
 

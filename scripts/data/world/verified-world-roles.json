@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "description": "Verified World Cup player roles backed by official ICC or national cricket board sources.",
+  "description": "World Cup player roles with source provenance; prefer ICC/board sources, with documented ESPNcricinfo/CricketArchive profile fallback.",
   "players": {}
 }

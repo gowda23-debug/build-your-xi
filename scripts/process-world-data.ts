@@ -62,7 +62,7 @@ type Match = {
 type RoleEntry = {
   role: Role;
   source: {
-    provider: "ICC" | "BOARD";
+    provider: "ICC" | "BOARD" | "ESPNCRICINFO" | "CRICKETARCHIVE";
     url: string;
     retrievedAt: string;
   };

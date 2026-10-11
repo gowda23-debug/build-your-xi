@@ -57,15 +57,13 @@ Examples:
 - Cricket Kenya
 - Netherlands Cricket
 
-### 3. Third-party sources
+### 3. Documented player-profile fallback
 
-Third-party datasets may only be used for:
+When an ICC or national-board source does not expose a player's playing role, the pipeline may use an explicit role stated on an ESPNcricinfo player profile. CricketArchive may be used for historical players only when the profile explicitly documents the role.
 
-- cross-checking
-- identifying possible discrepancies
-- locating missing source material
+Fallback sources must be recorded under their actual provider (`ESPNCRICINFO` or `CRICKETARCHIVE`); never label them as ICC/BOARD. The identity must be matched through a stable source identifier or a reviewed identity crosswalk. A name-only match is insufficient.
 
-They are not authoritative for the imported game data.
+Third-party statistics may be used to cross-check identity or locate source material, but roles must not be inferred from runs, wickets, batting position, strike rate, or other statistics. If a profile does not explicitly document a role, leave the record unresolved.
 
 ---
 
@@ -111,7 +109,7 @@ Do not guess a player's role from:
 - fantasy-cricket classifications
 - third-party player databases
 
-The role must be supported by an official source or documented official team classification.
+The role must be supported by an explicit role statement in an ICC/national-board source, or by a documented ESPNcricinfo/CricketArchive player profile when official sources are unavailable. Record the real provider and source URL.
 
 ---
 
