@@ -455,40 +455,19 @@ function parseScorecard(
   const text = cleanText($("body").text());
 
   // Verify the source ID using the rules for the configured provider.
-  if (source.provider === "CricketArchive") {
-    const scorecardId = text
-      .match(/\b(o\d+)\b/i)?.[1]
-      ?.toLowerCase();
 
-    if (!scorecardId) {
-      fail(
-        `${source.year}/${manifestEntry.sourceMatchId}: missing CricketArchive match ID.`
-      );
-    }
+  // Validate the match ID against the configured ESPNcricinfo scorecard filename.
+  const filename = path.posix
+    .basename(new URL(manifestEntry.url).pathname)
+    .replace(/\.html$/i, "")
+    .toLowerCase();
 
-    if (
-      scorecardId !==
-      manifestEntry.sourceMatchId.toLowerCase()
-    ) {
-      fail(
-        `${source.year}: manifest ID ${manifestEntry.sourceMatchId} does not match scorecard ID ${scorecardId}.`
-      );
-    }
-  } else {
-    const filename = path.posix
-      .basename(new URL(manifestEntry.url).pathname)
-      .replace(/\.html$/i, "")
-      .toLowerCase();
-
-    if (
-      filename !==
-      manifestEntry.sourceMatchId.toLowerCase()
-    ) {
-      fail(
-        `${source.year}: manifest ID does not match the ESPNcricinfo scorecard filename.`
-      );
-    }
+  if (filename !== manifestEntry.sourceMatchId.toLowerCase()) {
+    fail(
+      `${source.year}: manifest ID does not match the ESPNcricinfo scorecard filename.`
+    );
   }
+
 
   const date = parseMatchDate(text, source.year);
   const innings: HistoricalInnings[] = [];

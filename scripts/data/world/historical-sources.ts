@@ -1,6 +1,9 @@
-export type HistoricalWorldProvider =
-  | "CricketArchive"
-  | "ESPNcricinfo";
+/**
+ * Historical men's ODI World Cup sources are intentionally not configured.
+ * CricketArchive is excluded by the current project source policy. Do not add
+ * an edition here until an approved, auditable source and match inventory exist.
+ */
+export type HistoricalWorldProvider = "ICC" | "BOARD" | "ESPNcricinfo";
 
 export type HistoricalWorldSource = {
   year: number;
@@ -10,104 +13,14 @@ export type HistoricalWorldSource = {
   oversPerInnings: 50 | 60;
   expectedMatchCount: number;
   sourcePolicy: "archived-scorecards";
+
   integrityChecks?: {
     expectedTopRuns?: number;
     expectedTopWickets?: number;
   };
 };
 
-export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [
-  {
-    year: 1975,
-    seasonName: "ICC Men's Cricket World Cup 1975",
-    archiveRoot:
-       "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1975.html",
-    provider: "CricketArchive",
-    oversPerInnings: 60,
-    expectedMatchCount: 15,
-    sourcePolicy: "archived-scorecards",
-    integrityChecks: {
-      expectedTopRuns: 333,
-      expectedTopWickets: 11,
-    },
-  },
-  {
-    year: 1979,
-    seasonName: "ICC Men's Cricket World Cup 1979",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1979.html",
-    provider: "CricketArchive",
-    oversPerInnings: 60,
-    expectedMatchCount: 15,
-    sourcePolicy: "archived-scorecards",
-    integrityChecks: {
-      expectedTopWickets: 10,
-    },
-  },
-  {
-    year: 1983,
-    seasonName: "ICC Men's Cricket World Cup 1983",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/Prudential_World_Cup_1983.html",
-    provider: "CricketArchive",
-    oversPerInnings: 60,
-    expectedMatchCount: 27,
-    sourcePolicy: "archived-scorecards",
-  },
-  {
-    year: 1987,
-    seasonName: "ICC Men's Cricket World Cup 1987",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/Reliance_World_Cup_1987-88.html",
-    provider: "CricketArchive",
-    oversPerInnings: 50,
-    expectedMatchCount: 27,
-    sourcePolicy: "archived-scorecards",
-    integrityChecks: {
-      expectedTopRuns: 471,
-      expectedTopWickets: 18,
-    },
-  },
-  {
-    year: 1992,
-    seasonName: "ICC Men's Cricket World Cup 1992",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/Benson_and_Hedges_World_Cup_1991-92.html",
-    provider: "CricketArchive",
-    oversPerInnings: 50,
-    expectedMatchCount: 39,
-    sourcePolicy: "archived-scorecards",
-  },
-  {
-    year: 1996,
-    seasonName: "ICC Men's Cricket World Cup 1996",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/Wills_World_Cup_1995-96.html",
-    provider: "CricketArchive",
-    oversPerInnings: 50,
-    expectedMatchCount: 37,
-    sourcePolicy: "archived-scorecards",
-    integrityChecks: {
-      expectedTopRuns: 523,
-      expectedTopWickets: 15,
-    },
-  },
-  {
-    year: 1999,
-    seasonName: "ICC Men's Cricket World Cup 1999",
-    archiveRoot:
-      "https://cricketarchive.co.uk/Events/ICC_World_Cup_1999.html",
-    provider: "CricketArchive",
-    oversPerInnings: 50,
-    expectedMatchCount: 42,
-    sourcePolicy: "archived-scorecards",
-  },
-];
-
-export function getHistoricalWorldSource(
-  year: number
-): HistoricalWorldSource | undefined {
-  return WORLD_HISTORICAL_SOURCES.find(
-    (source) => source.year === year
-  );
+export const WORLD_HISTORICAL_SOURCES: readonly HistoricalWorldSource[] = [];
+export function getHistoricalWorldSource(_year: number): HistoricalWorldSource | undefined {
+  return undefined;
 }

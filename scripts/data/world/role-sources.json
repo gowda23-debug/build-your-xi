@@ -1,22 +1,19 @@
 {
-  "version": 1,
-  "description": "World Cup player-role mappings with explicit source provenance; ICC/board sources preferred, documented profile fallback permitted.",
+  "version": 2,
+  "generatedAt": "2026-10-14T09:40:13.620Z",
+  "description": "Approved per-player roles with explicit source provenance. Only ICC, official board and explicitly documented ESPNcricinfo roles are permitted.",
   "sourcePolicy": {
     "primary": [
-      "ICC player profile",
-      "ICC tournament media guide",
-      "Official national cricket board player profile",
-      "Official national cricket board tournament squad/profile"
+      "ICC player profile or tournament media guide",
+      "Official national cricket board profile or squad release"
     ],
     "fallback": [
-      "ESPNcricinfo player profile with an explicit playing-role field",
-      "CricketArchive historical player profile with an explicit playing-role field"
+      "ESPNcricinfo player profile with an explicit playing-role field"
     ],
-    "fallbackUsage": "Use only when ICC or a national board does not provide a role. Record the actual provider. Never infer roles from statistics or use name-only identity matching.",
-    "crossCheckOnly": [
-      "Cricbuzz",
-      "Kaggle",
-      "Unverified GitHub datasets"
+    "prohibited": [
+      "CricketArchive as an input source",
+      "Role inference from statistics",
+      "Name-only identity merges"
     ]
   },
   "players": {}
