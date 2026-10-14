@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-14T10:00:25.014Z",
+  "provider": "Cricsheet",
+  "sourceUrl": "https://cricsheet.org/downloads/",
+  "license": "ODC-By-1.0",
+  "policy": "An edition is complete only when the expected match count is met, match keys are unique, and every match has valid player registry IDs.",
+  "editions": [
+    {
+      "year": 2003,
+      "expectedMatchCount": 54,
+      "actualMatchCount": 49,
+      "uniqueMatchCount": 49,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "incomplete",
+      "blockers": [
+        "Found 49 matches; expected 54."
+      ]
+    },
+    {
+      "year": 2007,
+      "expectedMatchCount": 51,
+      "actualMatchCount": 50,
+      "uniqueMatchCount": 50,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "incomplete",
+      "blockers": [
+        "Found 50 matches; expected 51."
+      ]
+    },
+    {
+      "year": 2011,
+      "expectedMatchCount": 49,
+      "actualMatchCount": 49,
+      "uniqueMatchCount": 49,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "complete",
+      "blockers": []
+    },
+    {
+      "year": 2015,
+      "expectedMatchCount": 49,
+      "actualMatchCount": 42,
+      "uniqueMatchCount": 42,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "incomplete",
+      "blockers": [
+        "Found 42 matches; expected 49."
+      ]
+    },
+    {
+      "year": 2019,
+      "expectedMatchCount": 48,
+      "actualMatchCount": 36,
+      "uniqueMatchCount": 36,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "incomplete",
+      "blockers": [
+        "Found 36 matches; expected 48."
+      ]
+    },
+    {
+      "year": 2023,
+      "expectedMatchCount": 48,
+      "actualMatchCount": 39,
+      "uniqueMatchCount": 39,
+      "duplicateMatchKeys": [],
+      "invalidMatchIndexes": [],
+      "status": "incomplete",
+      "blockers": [
+        "Found 39 matches; expected 48."
+      ]
+    }
+  ],
+  "completeEditions": [
+    2011
+  ],
+  "blockedEditions": [
+    2003,
+    2007,
+    2015,
+    2019,
+    2023
+  ]
+}

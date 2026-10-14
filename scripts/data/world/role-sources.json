@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generatedAt": "2026-10-14T09:40:13.620Z",
+  "generatedAt": "2026-10-14T10:09:00.286Z",
   "description": "Approved per-player roles with explicit source provenance. Only ICC, official board and explicitly documented ESPNcricinfo roles are permitted.",
   "sourcePolicy": {
     "primary": [

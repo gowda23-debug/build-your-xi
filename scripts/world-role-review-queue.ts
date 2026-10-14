@@ -47,26 +47,69 @@ function sanitizeCell(value: unknown): string { return String(value ?? "").repla
 function encodeTsv(rows: QueueRow[]): string {
   return [HEADERS.join("\t"), ...rows.map((row) => HEADERS.map((header) => sanitizeCell(row[header])).join("\t"))].join("\n") + "\n";
 }
-function readQueue(): QueueRow[] {
+
+function readQueue(
+  options: { skipLegacyIds?: boolean } = {},
+): QueueRow[] {
   if (!fs.existsSync(QUEUE_PATH)) return [];
+
   const content = fs.readFileSync(QUEUE_PATH, "utf8").replace(/^\uFEFF/, "");
   const lines = content.split(/\r?\n/).filter((line) => line.length > 0);
+
   if (!lines.length) return [];
+
   const columns = lines[0].split("\t");
   const missing = HEADERS.filter((header) => !columns.includes(header));
-  if (missing.length) fail(`Existing role queue is missing columns: ${missing.join(", ")}. Delete/export a new queue after backing up manual notes.`);
+
+  if (missing.length) {
+    fail(
+      `Existing role queue is missing columns: ${missing.join(", ")}. ` +
+      "Back up manual notes and regenerate the queue.",
+    );
+  }
+
   const seen = new Set<string>();
-  return lines.slice(1).map((line, index) => {
+  const rows: QueueRow[] = [];
+
+  for (const [index, line] of lines.slice(1).entries()) {
     const values = line.split("\t");
     const row = {} as QueueRow;
-    for (const header of HEADERS) row[header] = values[columns.indexOf(header)] ?? "";
-    if (!/^[0-9a-f]{8}$/i.test(row.sourcePlayerId)) fail(`Existing queue row ${index + 2} has invalid/non-Cricsheet ID ${row.sourcePlayerId}. Re-export the queue from the current role inventory.`);
-    const id = row.sourcePlayerId.toLowerCase();
-    if (seen.has(id)) fail(`Duplicate ID ${id} in existing role queue.`);
+
+    for (const header of HEADERS) {
+      row[header] = values[columns.indexOf(header)] ?? "";
+    }
+
+    const rawId = row.sourcePlayerId.trim();
+
+    if (!/^[0-9a-f]{8}$/i.test(rawId)) {
+      if (options.skipLegacyIds) {
+        console.warn(
+          `[WORLD ROLE QUEUE] Skipping obsolete row ${index + 2} ` +
+          `with a non-Cricsheet ID: ${rawId}`,
+        );
+        continue;
+      }
+
+      fail(
+        `Existing queue row ${index + 2} has invalid/non-Cricsheet ID ` +
+        `${rawId}. Re-export the queue from the current role inventory.`,
+      );
+    }
+
+    const id = rawId.toLowerCase();
+
+    if (seen.has(id)) {
+      fail(`Duplicate ID ${id} in existing role queue.`);
+    }
+
+    row.sourcePlayerId = id;
     seen.add(id);
-    return row;
-  });
+    rows.push(row);
+  }
+
+  return rows;
 }
+
 function validRole(value: unknown): value is WorldRole { return value === "BAT" || value === "WK" || value === "AR" || value === "BOWL"; }
 function validProvider(value: unknown): value is RoleProvider { return value === "ICC" || value === "BOARD" || value === "ESPNCRICINFO"; }
 function validatedEntry(playerId: string, entry: unknown): RoleEntry | null {
@@ -107,7 +150,11 @@ function exportQueue(): void {
   const review = readJson<RoleReviewFile>(REVIEW_PATH);
   if (!Array.isArray(review.players)) fail("role-review.json must contain a players array.");
   const verified = readVerified();
-  const oldById = new Map(readQueue().map((row) => [row.sourcePlayerId.toLowerCase(), row]));
+  const oldById = new Map(
+  readQueue({ skipLegacyIds: true }).map(
+    (row) => [row.sourcePlayerId.toLowerCase(), row] as const,
+  ),
+);
   const seen = new Set<string>();
   const rows: QueueRow[] = [];
   for (const player of review.players) {

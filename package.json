@@ -31,7 +31,7 @@
         "data:prepare-world-role-review": "tsx scripts/world-role-review-queue.ts export",
         "data:apply-world-role-review": "tsx scripts/world-role-review-queue.ts import",
         "data:enrich-world-role-candidates": "tsx scripts/enrich-world-role-candidates.ts",
-        "data:audit-world-source-coverages": "tsx scripts/audit-world-source-coverages.ts"
+        "data:audit-world-source-coverage": "tsx scripts/audit-world-source-coverage.ts"
     },
     "dependencies": {
         "@supabase/ssr": "^0.12.5",
