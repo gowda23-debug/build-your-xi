@@ -1,0 +1,100 @@
+{
+  "year": 1975,
+  "seasonName": "ICC Men's Cricket World Cup 1975",
+  "provider": "ESPNcricinfo",
+  "archiveRoot": "https://i.imgci.com/link_to_database/ARCHIVE/WORLD_CUPS/WC75/",
+  "expectedMatchCount": 15,
+  "retrievedAt": "2026-10-14T13:30:50.103Z",
+  "matches": [
+    {
+      "sourceMatchId": "wc75_match_01_eng_ind_07jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/ENG_IND_WC75_ODI1_07JUN1975.html",
+      "file": "9e4ab4fc6b17281e0299ca6502a6c32369164e44dac3d2260576710f0d3ca6e8.html",
+      "cacheKey": "9e4ab4fc6b17281e0299ca6502a6c32369164e44dac3d2260576710f0d3ca6e8"
+    },
+    {
+      "sourceMatchId": "wc75_match_02_ea_nz_07jun1975",
+      "url": "https://i.imgci.com/db/ARCHIVE/WORLD_CUPS/WC75/NZ_EA_WC75_ODI2_07JUN1975.html",
+      "file": "e64750dfaa468e2263b66b2ba4c663578bd4f82bd250706bb27bef34bd98b224.html",
+      "cacheKey": "e64750dfaa468e2263b66b2ba4c663578bd4f82bd250706bb27bef34bd98b224"
+    },
+    {
+      "sourceMatchId": "wc75_match_03_aus_pak_07jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/AUS_PAK_WC75_ODI3_07JUN1975.html",
+      "file": "117e0d7aaf7ffcd5ce1bbf40acd6c5672ae13213f21fd909a308351ee2b3abb3.html",
+      "cacheKey": "117e0d7aaf7ffcd5ce1bbf40acd6c5672ae13213f21fd909a308351ee2b3abb3"
+    },
+    {
+      "sourceMatchId": "wc75_match_04_sl_wi_07jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/SL_WI_WC75_ODI4_07JUN1975.html",
+      "file": "a63998d7126c87829cfcad841496f3a07e156bdcd85a3b6bc4072f212e1dd384.html",
+      "cacheKey": "a63998d7126c87829cfcad841496f3a07e156bdcd85a3b6bc4072f212e1dd384"
+    },
+    {
+      "sourceMatchId": "wc75_match_05_eng_nz_11jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/ENG_NZ_WC75_ODI5_11JUN1975.html",
+      "file": "d40fc504df3b01f9e51de9bf5708424d61eafb795dc1e5dbe39860b8f750c040.html",
+      "cacheKey": "d40fc504df3b01f9e51de9bf5708424d61eafb795dc1e5dbe39860b8f750c040"
+    },
+    {
+      "sourceMatchId": "wc75_match_06_ea_ind_11jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/EA_IND_WC75_ODI6_11JUN1975.html",
+      "file": "49769557343252c5cacad9b4def27a6765ac39038314b3ddca2e05c5dc135bd8.html",
+      "cacheKey": "49769557343252c5cacad9b4def27a6765ac39038314b3ddca2e05c5dc135bd8"
+    },
+    {
+      "sourceMatchId": "wc75_match_07_aus_sl_11jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/AUS_SL_WC75_ODI7_11JUN1975.html",
+      "file": "9b499f8fcfd0c781830d01e7dd17683679a047aedbceb44805e5a48e20468197.html",
+      "cacheKey": "9b499f8fcfd0c781830d01e7dd17683679a047aedbceb44805e5a48e20468197"
+    },
+    {
+      "sourceMatchId": "wc75_match_08_pak_wi_11jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/PAK_WI_WC75_ODI8_11JUN1975.html",
+      "file": "016df1cf2aab9e177a1db538171e869a24eeeb714d779d51e78f29e346a883a9.html",
+      "cacheKey": "016df1cf2aab9e177a1db538171e869a24eeeb714d779d51e78f29e346a883a9"
+    },
+    {
+      "sourceMatchId": "wc75_match_09_eng_ea_14jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/ENG_EA_WC75_ODI9_14JUN1975.html",
+      "file": "79827a7d63390a528c54575de283994ed84af23799356745c575893504c0a01a.html",
+      "cacheKey": "79827a7d63390a528c54575de283994ed84af23799356745c575893504c0a01a"
+    },
+    {
+      "sourceMatchId": "wc75_match_10_ind_nz_14jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/IND_NZ_WC75_ODI10_14JUN1975.html",
+      "file": "25363be4f7fe09f06dc5c4e1ea2347f246ebcffb58220e35f34bdd7f21030807.html",
+      "cacheKey": "25363be4f7fe09f06dc5c4e1ea2347f246ebcffb58220e35f34bdd7f21030807"
+    },
+    {
+      "sourceMatchId": "wc75_match_11_aus_wi_14jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/AUS_WI_WC75_ODI11_14JUN1975.html",
+      "file": "ab3c273114318a9150ada590d8938eed181324ea404c609132e97623f8e2648c.html",
+      "cacheKey": "ab3c273114318a9150ada590d8938eed181324ea404c609132e97623f8e2648c"
+    },
+    {
+      "sourceMatchId": "wc75_match_12_pak_sl_14jun1975",
+      "url": "https://img.cricinfo.com/db/ARCHIVE/WORLD_CUPS/WC75/PAK_SL_WC75_ODI12_14JUN1975.html",
+      "file": "757e0d252c7278f78839c47b742a5c2fa489c9b270c7988f295db2adc765f175.html",
+      "cacheKey": "757e0d252c7278f78839c47b742a5c2fa489c9b270c7988f295db2adc765f175"
+    },
+    {
+      "sourceMatchId": "wc75_match_13_eng_aus_18jun1975",
+      "url": "https://i.imgci.com/db/ARCHIVE/WORLD_CUPS/WC75/ENG_AUS_WC75_ODI-SEMI1_18JUN1975.html",
+      "file": "20f18e399838d33731ecba945ee64f3514f1ccc8719adf8adfecc017226165eb.html",
+      "cacheKey": "20f18e399838d33731ecba945ee64f3514f1ccc8719adf8adfecc017226165eb"
+    },
+    {
+      "sourceMatchId": "wc75_match_14_nz_wi_18jun1975",
+      "url": "https://i.imgci.com/db/ARCHIVE/WORLD_CUPS/WC75/NZ_WI_WC75_ODI-SEMI2_18JUN1975.html",
+      "file": "25c5ed7ade9cbd0ac2a177edc86b5c40abd7cdd1cd88456a4c61f5d2da1ad5a1.html",
+      "cacheKey": "25c5ed7ade9cbd0ac2a177edc86b5c40abd7cdd1cd88456a4c61f5d2da1ad5a1"
+    },
+    {
+      "sourceMatchId": "wc75_match_15_aus_wi_21jun1975",
+      "url": "https://img.cricinfo.com/link_to_database/ARCHIVE/WORLD_CUPS/WC75/WI_AUS_WC75_ODI-FINAL_21JUN1975.html",
+      "file": "e2ea1147e25c4e1b1fe170ded70a5fd35be75537fc5b958a1050197ed92273fc.html",
+      "cacheKey": "e2ea1147e25c4e1b1fe170ded70a5fd35be75537fc5b958a1050197ed92273fc"
+    }
+  ]
+}

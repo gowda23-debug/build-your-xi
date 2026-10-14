@@ -7,64 +7,107 @@
     {
       "provider": "Cricsheet",
       "url": "https://cricsheet.org/downloads/",
-      "usage": "Structured match data for editions covered by the Cricsheet ICC Men's Cricket World Cup dataset."
+      "usage": "Structured ball-by-ball data for editions available in the Cricsheet dataset, with its attribution and license requirements."
+    },
+    {
+      "provider": "ESPNcricinfo",
+      "url": "https://i.imgci.com/link_to_database/ARCHIVE/WORLD_CUPS/",
+      "usage": "Historical World Cup scorecards and tournament batting and bowling averages. Every downloaded record must pass source, identity, uniqueness and statistics validation."
     },
     {
       "provider": "ICC",
       "url": "https://www.icc-cricket.com/",
-      "usage": "Tournament identity, official tournament records and statistical cross-checks."
+      "usage": "Official tournament identity, records and independent statistical cross-checks."
     },
     {
-      "provider": "CricketArchive",
-      "url": "https://www.cricketarchive.com/",
-      "usage": "Archived historical World Cup scorecards for 1975-1999. Used as the historical scorecard acquisition source and cross-checked against official tournament records."
+      "provider": "Official national cricket boards",
+      "url": "https://www.icc-cricket.com/about/members",
+      "usage": "Explicit player-role evidence when published on an official board domain."
     }
   ],
   "historicalEditions": {
     "1975": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC75",
+      "expectedMatchCount": 15,
+      "oversPerInnings": 60
     },
     "1979": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC79",
+      "expectedMatchCount": 15,
+      "oversPerInnings": 60
     },
     "1983": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC83",
+      "expectedMatchCount": 27,
+      "oversPerInnings": 60
     },
     "1987": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC87",
+      "expectedMatchCount": 27,
+      "oversPerInnings": 50
     },
     "1992": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC92",
+      "expectedMatchCount": 39,
+      "oversPerInnings": 50
     },
     "1996": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC96",
+      "expectedMatchCount": 37,
+      "oversPerInnings": 50
     },
     "1999": {
-      "status": "ingestion-source-available",
-      "provider": "CricketArchive"
+      "status": "configured-pending-validation",
+      "provider": "ESPNcricinfo",
+      "archiveCode": "WC99",
+      "expectedMatchCount": 42,
+      "oversPerInnings": 50
     }
   },
-  "availableEditions": [
-    1975,
-    1979,
-    1983,
-    1987,
-    1992,
-    1996,
-    1999,
-    2003,
-    2007,
-    2011,
-    2015,
-    2019,
-    2023
-  ],
+  "modernEditions": {
+    "2003": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 54,
+      "status": "pending-source-coverage"
+    },
+    "2007": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 51,
+      "status": "pending-source-coverage"
+    },
+    "2011": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 49,
+      "status": "pending-role-verification"
+    },
+    "2015": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 49,
+      "status": "pending-source-coverage"
+    },
+    "2019": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 48,
+      "status": "pending-source-coverage"
+    },
+    "2023": {
+      "provider": "Cricsheet",
+      "expectedMatchCount": 48,
+      "status": "pending-source-coverage"
+    }
+  },
   "rolePolicy": {
     "allowed": [
       "WK",
@@ -79,10 +122,12 @@
       "BOARD"
     ],
     "fallbackProviders": [
-      "ESPNCRICINFO",
-      "CRICKETARCHIVE"
+      "ESPNCRICINFO"
     ],
-    "fallbackUsage": "A fallback provider may be used only when its player profile explicitly documents the playing role. Do not infer roles from statistics or use a name-only match."
+    "fallbackUsage": "A fallback provider may be used only when an explicit playing role is visible in the player's profile or structured profile data. Candidates require human review before approval. Never infer a role from statistics or merge identities by name alone.",
+    "prohibitedProviders": [
+      "CricketArchive"
+    ]
   },
   "applicationPolicy": {
     "hardCodedPlayerPools": false,
@@ -90,6 +135,7 @@
     "hardCodedSeasonPools": false,
     "databaseIsSourceOfTruth": true,
     "clientSuppliedScoreIsTrusted": false,
-    "clientSuppliedTeamSeasonIsTrusted": false
+    "clientSuppliedTeamSeasonIsTrusted": false,
+    "incompleteEditionsMayBePublished": false
   }
 }
