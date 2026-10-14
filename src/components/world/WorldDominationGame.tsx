@@ -240,7 +240,7 @@ export default function WorldDominationGame({
           setLoading(false);
         }
       },
-      []
+      [challengeId]
     );
 
   useEffect(

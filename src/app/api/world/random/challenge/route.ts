@@ -231,8 +231,11 @@ export async function GET(request: Request) {
 
     if (teamSeasons.length === 0) {
       return NextResponse.json(
-        { error: "No World Cup data is available yet." },
-        { status: 404 },
+        {
+          error: "World Cup data is not ready for gameplay yet.",
+          code: "WORLD_DATA_NOT_READY",
+        },
+        { status: 503 }
       );
     }
 
