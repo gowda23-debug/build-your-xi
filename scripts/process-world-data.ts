@@ -260,7 +260,7 @@ function hasPlayableXI(players: ProcessedPlayer[]): boolean {
 function processEdition(edition: WorldEdition, roles: Map<string, RoleEntry>): ProcessedSeason {
   const matches = readRawEdition(edition);
   if (matches.length !== edition.expectedMatchCount) {
-    fail(`${edition.year}: source coverage is incomplete (${matches.length}/${edition.expectedMatchCount}). Run npm.cmd run data:audit-world-source and do not import this edition.`);
+    fail(`${edition.year}: source coverage is incomplete (${matches.length}/${edition.expectedMatchCount}). Run npm.cmd run data:audit-world-source-coverage and do not import this edition.`);
   }
 
   const seenMatches = new Set<string>();
@@ -534,7 +534,7 @@ function main(): void {
     for (const blocker of blockers) console.log(`  - ${blocker}`);
   }
   if (completed.length === 0) {
-    console.error("[WORLD PROCESSING] No edition reached processed-ready state. Run data:audit-world-source, generate/export/review roles, then data:build-world-roles. Do not run the importer yet.");
+    console.error("[WORLD PROCESSING] No edition reached processed-ready state. Run data:audit-world-source-coverage, generate/export/review roles, then data:build-world-roles. Do not run the importer yet.");
     process.exitCode = 2;
   }
 }
