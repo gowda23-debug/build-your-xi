@@ -354,17 +354,14 @@ export async function GET(
                     row.score
                 );
 
-            const score =
-                Number.isFinite(
-                    resultScore
-                )
-                    ? resultScore
-                    : storedScore;
+            const score = Number(row.result?.score);
 
+            // Only a valid, server-generated result is authoritative.
+            // Do not fall back to an unvalidated top-level database score.
             if (
-                !Number.isFinite(
-                    score
-                )
+                !Number.isFinite(score) ||
+                score < 0 ||
+                score > 100
             ) {
                 continue;
             }

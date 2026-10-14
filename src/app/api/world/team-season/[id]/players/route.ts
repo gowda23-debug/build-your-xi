@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
-
+import type { WorldPlayer } from "@/types/world";
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -107,19 +107,33 @@ export async function GET(
       if (VALID_ROLES.has(row.role)) roleMap.set(row.player_id, row.role);
     }
 
-    const missingRoles = playerIds.filter((playerId) => !roleMap.has(playerId));
-    if (missingRoles.length > 0) {
-      console.error(`World edition ${edition.year} has ${missingRoles.length} stats rows without edition-specific roles.`);
-      return NextResponse.json({ error: "World player data is incomplete. Please contact support." }, { status: 500 });
-    }
+    const players = rows.flatMap((row): WorldPlayer[] => {
+      const role = roleMap.get(row.player_id);
 
-    const players = rows.map((row) => {
-      const player = Array.isArray(row.player) ? row.player[0] : row.player;
-      if (!player) throw new Error(`Player relationship missing for player_id=${row.player_id}.`);
-      return {
+      // An unresolved role excludes this player from the game pool.
+      if (
+        role !== "BAT" &&
+        role !== "WK" &&
+        role !== "AR" &&
+        role !== "BOWL"
+      ) {
+        return [];
+      }
+
+      const player = Array.isArray(row.player)
+        ? row.player[0]
+        : row.player;
+
+      if (!player) {
+        throw new Error(
+          `Player relationship missing for player_id=${row.player_id}.`
+        );
+      }
+
+      return [{
         id: player.id,
         name: player.full_name,
-        role: roleMap.get(row.player_id),
+        role,
         stats: {
           matches: row.matches,
           innings: row.innings,
@@ -134,22 +148,33 @@ export async function GET(
           catches: row.catches,
           stumpings: row.stumpings,
         },
-      };
+      }];
     });
 
-    return NextResponse.json({
-      teamSeason: {
-        id: teamSeason.id,
-        team,
-        season: {
-          id: season.id,
-          year: season.year,
-          seasonName: edition.season_name,
-          oversPerInnings: edition.overs_per_innings,
+    const roleCounts = {
+      WK: players.filter((p) => p.role === "WK").length,
+      BAT: players.filter((p) => p.role === "BAT").length,
+      AR: players.filter((p) => p.role === "AR").length,
+      BOWL: players.filter((p) => p.role === "BOWL").length,
+    };
+
+    const poolCanFormXI =
+      players.length >= 11 &&
+      roleCounts.WK >= 1 &&
+      roleCounts.BAT >= 4 &&
+      roleCounts.AR >= 1 &&
+      roleCounts.BOWL >= 3 &&
+      roleCounts.AR + roleCounts.BOWL >= 5;
+
+    if (!poolCanFormXI) {
+      return NextResponse.json(
+        {
+          error:
+            "This World Cup team does not yet have enough verified players to form a valid XI.",
         },
-      },
-      players,
-    });
+        { status: 409 }
+      );
+    }
   } catch (error) {
     console.error("World player pool endpoint failed:", error);
     return NextResponse.json({ error: "Unable to load World Cup players." }, { status: 500 });

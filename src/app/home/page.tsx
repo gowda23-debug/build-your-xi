@@ -60,7 +60,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 py-4 md:px-10 md:py-5">
-          
+
           {/* =========================
               HERO
           ========================= */}
@@ -137,19 +137,19 @@ export default function HomePage() {
 
             {/* WORLD DOMINATION */}
 
-            <article className="card relative flex min-h-[280px] flex-col overflow-hidden p-7 opacity-80">
+            <article className="card group relative flex min-h-[280px] flex-col overflow-hidden p-7 transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)]/50">
               <div className="flex items-start justify-between">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-white/80">
+
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/15 text-[var(--accent)]">
                   <Globe2 size={28} />
                 </div>
-
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-[var(--muted)]">
-                  COMING SOON
+                <span className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 text-xs font-bold text-[var(--accent)]">
+                  FEATURED
                 </span>
               </div>
 
               <div className="mt-8">
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--accent)]/80">
                   Global Cricket
                 </p>
 
@@ -164,13 +164,13 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <button
-                type="button"
-                disabled
-                className="btn btn-secondary mt-auto w-full cursor-not-allowed opacity-50"
+              <Link
+                href="/_not-found"
+                className="btn btn-primary relative mt-auto inline-flex w-full items-center justify-center gap-2"
               >
-                Coming Soon
-              </button>
+                Play Challenge
+                <ChevronRight size={19} />
+              </Link>
             </article>
 
             {/* 1V1 ONLINE */}

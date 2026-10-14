@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-
+import { evaluateWorldXI } from "@/lib/world/scoring";
 import type {
   WorldPlayer,
   WorldTeam,
@@ -20,11 +20,11 @@ import {
 
 type ChallengeResponse = {
   gameSessionId:
-    | string
-    | null;
+  | string
+  | null;
 
   teamSeasonId:
-    string;
+  string;
 
   team: WorldTeam;
 
@@ -42,8 +42,8 @@ type ResultResponse = {
       opponentStrength: number;
       winProbability: number;
       result:
-        | "W"
-        | "L";
+      | "W"
+      | "L";
     }>;
     breakdown: {
       batting: number;
@@ -54,15 +54,19 @@ type ResultResponse = {
   };
 
   gameScoreId:
-    string | null;
+  string | null;
 
   completedAt:
-    string | null;
+  string | null;
 };
 
 const MAX_PLAYERS = 11;
 
-export default function WorldDominationGame() {
+export default function WorldDominationGame({
+  challengeId,
+}: {
+  challengeId?: string | null;
+}) {
   const [
     challenge,
     setChallenge,
@@ -92,7 +96,7 @@ export default function WorldDominationGame() {
     setLoading,
   ] =
     useState(true);
-
+  const [creatingChallenge, setCreatingChallenge] = useState(false);
   const [
     selecting,
     setSelecting,
@@ -146,14 +150,15 @@ export default function WorldDominationGame() {
         setError(null);
 
         try {
-          const response =
-            await fetch(
-              "/api/world/random/challenge",
-              {
-                cache:
-                  "no-store",
-              }
-            );
+          const endpoint = challengeId
+            ? `/api/world/random/challenge?challengeId=${encodeURIComponent(
+              challengeId
+            )}`
+            : "/api/world/random/challenge";
+
+          const response = await fetch(endpoint, {
+            cache: "no-store",
+          });
 
           const data =
             await response
@@ -167,7 +172,7 @@ export default function WorldDominationGame() {
           ) {
             throw new Error(
               data?.error ??
-                "Unable to start World Domination."
+              "Unable to start World Domination."
             );
           }
 
@@ -198,13 +203,13 @@ export default function WorldDominationGame() {
           ) {
             throw new Error(
               playerData?.error ??
-                "Unable to load World players."
+              "Unable to load World players."
             );
           }
 
           setPlayers(
             playerData.players ??
-              []
+            []
           );
 
           setSelectedPlayers(
@@ -215,7 +220,7 @@ export default function WorldDominationGame() {
             null
           );
         } catch (
-          loadError
+        loadError
         ) {
           setError(
             loadError instanceof
@@ -270,9 +275,9 @@ export default function WorldDominationGame() {
 
             const matchesRole =
               role ===
-                "ALL" ||
+              "ALL" ||
               player.role ===
-                role;
+              role;
 
             return (
               matchesSearch &&
@@ -288,6 +293,62 @@ export default function WorldDominationGame() {
       ]
     );
 
+  async function createWorldChallenge() {
+    if (
+      !result?.gameScoreId ||
+      challengeId ||
+      creatingChallenge
+    ) {
+      return;
+    }
+
+    setCreatingChallenge(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        "/api/challenges/create-from-game",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-store",
+          body: JSON.stringify({
+            gameScoreId: result.gameScoreId,
+            title: "My World Domination Challenge",
+          }),
+        }
+      );
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ?? "Unable to create the World challenge."
+        );
+      }
+
+      if (typeof data?.inviteCode !== "string" || !data.inviteCode) {
+        throw new Error(
+          "The server did not return a challenge invitation code."
+        );
+      }
+
+      window.location.assign(
+        `/challenges/created/${encodeURIComponent(data.inviteCode)}`
+      );
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to create the World challenge."
+      );
+    } finally {
+      setCreatingChallenge(false);
+    }
+  }
+
   async function selectPlayer(
     player: WorldPlayer
   ) {
@@ -295,7 +356,7 @@ export default function WorldDominationGame() {
       selecting ||
       result ||
       selectedPlayers.length >=
-        MAX_PLAYERS
+      MAX_PLAYERS
     ) {
       return;
     }
@@ -351,7 +412,7 @@ export default function WorldDominationGame() {
         ) {
           throw new Error(
             data?.error ??
-              "Unable to save player selection."
+            "Unable to save player selection."
           );
         }
       }
@@ -363,7 +424,7 @@ export default function WorldDominationGame() {
         ]
       );
     } catch (
-      selectionError
+    selectionError
     ) {
       setError(
         selectionError instanceof
@@ -377,23 +438,31 @@ export default function WorldDominationGame() {
   }
 
   async function completeGame() {
-    if (
-      !challenge?.gameSessionId
-    ) {
-      setError(
-        "Guest World scoring is not yet persisted."
-      );
+    if (!challenge) {
+      setError("No active World game was found.");
       return;
     }
 
-    if (
-      !validation.valid
-    ) {
-      setError(
-        validation.errors.join(
-          " "
-        )
-      );
+    if (!validation.valid) {
+      setError(validation.errors.join(" "));
+      return;
+    }
+
+    // Guest games are scored locally and are not persisted.
+    // Registered players use the server-authoritative completion API.
+    if (!challenge.gameSessionId) {
+      setError(null);
+      setResult({
+        result: evaluateWorldXI(
+          selectedPlayers,
+          `${challenge.teamSeasonId}|${selectedPlayers
+            .map((player) => player.id)
+            .sort()
+            .join("|")}`
+        ),
+        gameScoreId: null,
+        completedAt: new Date().toISOString(),
+      });
       return;
     }
 
@@ -433,7 +502,7 @@ export default function WorldDominationGame() {
       ) {
         throw new Error(
           data?.error ??
-            "Unable to complete World game."
+          "Unable to complete World game."
         );
       }
 
@@ -441,7 +510,7 @@ export default function WorldDominationGame() {
         data
       );
     } catch (
-      completionError
+    completionError
     ) {
       setError(
         completionError instanceof
@@ -584,6 +653,18 @@ export default function WorldDominationGame() {
         >
           Build Another XI
         </button>
+        {result.gameScoreId && !challengeId && (
+          <button
+            type="button"
+            disabled={creatingChallenge}
+            onClick={() => void createWorldChallenge()}
+            className="mt-3 w-full rounded-xl border border-[var(--line)] px-4 py-3 font-black disabled:opacity-50"
+          >
+            {creatingChallenge
+              ? "Creating Challenge…"
+              : "Create World Challenge"}
+          </button>
+        )}
       </div>
     );
   }
@@ -811,45 +892,45 @@ export default function WorldDominationGame() {
 
           {selectedPlayers.length ===
             MAX_PLAYERS && (
-            <div className="mt-3 shrink-0">
-              {!validation.valid && (
-                <div className="mb-3 rounded-lg border border-red-400/20 bg-red-400/5 p-3">
-                  {validation.errors.map(
-                    (
-                      message
-                    ) => (
-                      <p
-                        key={
-                          message
-                        }
-                        className="text-xs text-red-400"
-                      >
-                        {
-                          message
-                        }
-                      </p>
-                    )
-                  )}
-                </div>
-              )}
+              <div className="mt-3 shrink-0">
+                {!validation.valid && (
+                  <div className="mb-3 rounded-lg border border-red-400/20 bg-red-400/5 p-3">
+                    {validation.errors.map(
+                      (
+                        message
+                      ) => (
+                        <p
+                          key={
+                            message
+                          }
+                          className="text-xs text-red-400"
+                        >
+                          {
+                            message
+                          }
+                        </p>
+                      )
+                    )}
+                  </div>
+                )}
 
-              <button
-                type="button"
-                disabled={
-                  completing ||
-                  !validation.valid
-                }
-                onClick={() =>
-                  void completeGame()
-                }
-                className="w-full rounded-xl border border-[var(--line)] px-4 py-3 text-sm font-black disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {completing
-                  ? "Calculating…"
-                  : "Get Score"}
-              </button>
-            </div>
-          )}
+                <button
+                  type="button"
+                  disabled={
+                    completing ||
+                    !validation.valid
+                  }
+                  onClick={() =>
+                    void completeGame()
+                  }
+                  className="w-full rounded-xl border border-[var(--line)] px-4 py-3 text-sm font-black disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {completing
+                    ? "Calculating…"
+                    : "Get Score"}
+                </button>
+              </div>
+            )}
         </aside>
       </div>
 
