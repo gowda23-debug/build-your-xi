@@ -12,7 +12,7 @@ import type {
   WorldTeam,
   WorldSeason,
 } from "@/types/world";
-
+import Link from "next/link";
 import {
   canAddWorldPlayer,
   validateWorldXI,
@@ -124,7 +124,7 @@ export default function WorldDominationGame({
     useState<string | null>(
       null
     );
-
+  const [dataNotReady, setDataNotReady] = useState(false);
   const [
     search,
     setSearch,
@@ -148,7 +148,11 @@ export default function WorldDominationGame({
       async () => {
         setLoading(true);
         setError(null);
-
+        setDataNotReady(false);
+        setChallenge(null);
+        setPlayers([]);
+        setSelectedPlayers([]);
+        setResult(null);
         try {
           const endpoint = challengeId
             ? `/api/world/random/challenge?challengeId=${encodeURIComponent(
@@ -167,29 +171,34 @@ export default function WorldDominationGame({
                 () => null
               );
 
-          if (
-            !response.ok
-          ) {
+          if (!response.ok) {
+            if (data?.code === "WORLD_DATA_NOT_READY") {
+              setDataNotReady(true);
+            }
+
             throw new Error(
-              data?.error ??
-              "Unable to start World Domination."
+              data?.error ?? "Unable to start World Domination."
             );
           }
 
-          setChallenge(
-            data
-          );
+          const challengeData = data as ChallengeResponse;
 
-          const playerResponse =
-            await fetch(
-              `/api/world/team-season/${encodeURIComponent(
-                data.teamSeasonId
-              )}/players`,
-              {
-                cache:
-                  "no-store",
-              }
+          const playerData = await playerResponse.json().catch(() => null);
+
+          if (!playerResponse.ok) {
+            if (playerData?.code === "WORLD_PLAYER_POOL_NOT_READY") {
+              setDataNotReady(true);
+            }
+
+            throw new Error(
+              playerData?.error ?? "Unable to load World players."
             );
+          }
+
+          setChallenge(challengeData);
+          setPlayers(playerData.players ?? []);
+          setSelectedPlayers([]);
+          setResult(null);
 
           const playerData =
             await playerResponse
@@ -535,34 +544,51 @@ export default function WorldDominationGame({
     );
   }
 
-  if (
-    error &&
-    !challenge
-  ) {
-    return (
-      <div className="flex h-full w-full items-center justify-center rounded-2xl border border-red-400/20 bg-red-400/5 p-6 text-center">
-        <div>
-          <p className="font-black">
-            World Domination unavailable
-          </p>
+if (error && !challenge) {
+  return (
+    <div className="flex h-full w-full items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 text-center">
+      <div className="max-w-lg">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)]">
+          <span className="text-2xl">🏏</span>
+        </div>
 
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            {error}
-          </p>
+        <p className="mt-5 text-xs font-black uppercase tracking-[0.22em] text-[var(--accent)]">
+          World Domination
+        </p>
 
+        <h1 className="mt-2 text-2xl font-black sm:text-3xl">
+          {dataNotReady
+            ? "World Cup data is being prepared"
+            : "World Domination unavailable"}
+        </h1>
+
+        <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+          {dataNotReady
+            ? "A playable World Cup edition needs validated player statistics and verified roles. No sample or fabricated player pool will be shown. Please return when an edition has been published."
+            : error}
+        </p>
+
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
-            onClick={() =>
-              void loadChallenge()
-            }
-            className="mt-4 rounded-lg border border-[var(--line)] px-4 py-2 text-sm font-black"
+            onClick={() => void loadChallenge()}
+            className="btn btn-primary min-h-10"
           >
             Try Again
           </button>
+
+          <Link href="/home" className="btn btn-secondary min-h-10">
+            Back to Home
+          </Link>
+
+          <Link href="/leaderboard" className="btn btn-secondary min-h-10">
+            Leaderboard
+          </Link>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   if (
     result

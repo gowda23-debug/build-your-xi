@@ -9,6 +9,8 @@ type GameMode =
     | "ipl"
     | "world";
 
+type StatsMode = "all" | GameMode;
+
 type ProfileRow = {
     id: string;
     display_name: string | null;
@@ -308,7 +310,7 @@ async function loadPlayerScores(
     return rows;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
         /*
          * ============================================================
@@ -334,6 +336,25 @@ export async function GET() {
                 )
             );
         }
+        const requestedMode =
+            new URL(request.url).searchParams.get("mode") ?? "all";
+
+        if (
+            requestedMode !== "all" &&
+            requestedMode !== "ipl" &&
+            requestedMode !== "world"
+        ) {
+            return NextResponse.json(
+                {
+                    error: "mode must be one of: all, ipl, world.",
+                },
+                {
+                    status: 400,
+                }
+            );
+        }
+
+        const statsMode = requestedMode as StatsMode;
 
         /*
          * ============================================================
@@ -357,7 +378,7 @@ export async function GET() {
                                 .toUpperCase()}`,
                         isGuest: true,
                     },
-
+                    mode: statsMode,
                     stats: {
                         gamesPlayed: 0,
                         bestScore: null,
@@ -414,10 +435,17 @@ export async function GET() {
          * ============================================================
          */
 
-        const gameScores =
+        const allGameScores =
             await loadPlayerScores(
                 user.id
             );
+
+        const gameScores =
+            statsMode === "all"
+                ? allGameScores
+                : allGameScores.filter(
+                    (row) => row.game_mode === statsMode
+                );
 
         /*
 * ============================================================
@@ -729,6 +757,7 @@ export async function GET() {
 
         return NextResponse.json(
             {
+                mode: statsMode,
                 player: {
                     id: user.id,
 

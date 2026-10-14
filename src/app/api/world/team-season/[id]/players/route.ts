@@ -90,7 +90,13 @@ export async function GET(
     if (statsError) throw statsError;
     const rows = stats ?? [];
     if (rows.length === 0) {
-      return NextResponse.json({ error: "No validated players are available for this World Cup team." }, { status: 404 });
+      return NextResponse.json(
+        {
+          error: "No validated players are available for this World Cup team.",
+          code: "WORLD_PLAYER_POOL_NOT_READY",
+        },
+        { status: 404 }
+      );
     }
 
     const playerIds = rows.map((row) => row.player_id);
@@ -167,13 +173,18 @@ export async function GET(
       roleCounts.AR + roleCounts.BOWL >= 5;
 
     if (!poolCanFormXI) {
-      return NextResponse.json(
-        {
-          error:
-            "This World Cup team does not yet have enough verified players to form a valid XI.",
-        },
-        { status: 409 }
-      );
+      if (!poolCanFormXI) {
+        return NextResponse.json(
+          {
+            error:
+              "This World Cup team does not yet have enough verified players to form a valid XI.",
+            code: "WORLD_PLAYER_POOL_NOT_READY",
+          },
+          { status: 409 }
+        );
+      }
+      return NextResponse.json({ players });
+
     }
   } catch (error) {
     console.error("World player pool endpoint failed:", error);

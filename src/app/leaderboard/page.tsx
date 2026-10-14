@@ -48,7 +48,7 @@ const MODE_OPTIONS: {
         },
         {
             value: "world",
-            label: "International World Domination",
+            label: "World Domination",
         },
     ];
 
@@ -121,16 +121,16 @@ function PodiumPlayer({
     return (
         <div
             className={`flex min-w-0 flex-col items-center text-center ${isFirst
-                    ? "order-2"
-                    : position === 2
-                        ? "order-1"
-                        : "order-3"
+                ? "order-2"
+                : position === 2
+                    ? "order-1"
+                    : "order-3"
                 }`}
         >
             <div
                 className={`flex items-center justify-center rounded-full border-2 ${isFirst
-                        ? "h-20 w-20 border-[var(--accent)] bg-[var(--accent)]/15 text-xl"
-                        : "h-14 w-14 border-white/15 bg-white/[0.04] text-sm"
+                    ? "h-20 w-20 border-[var(--accent)] bg-[var(--accent)]/15 text-xl"
+                    : "h-14 w-14 border-white/15 bg-white/[0.04] text-sm"
                     } font-black`}
             >
                 {initials}
@@ -138,8 +138,8 @@ function PodiumPlayer({
 
             <p
                 className={`mt-2 max-w-[120px] truncate font-black ${isFirst
-                        ? "text-sm"
-                        : "text-xs"
+                    ? "text-sm"
+                    : "text-xs"
                     }`}
             >
                 {player.name}
@@ -147,8 +147,8 @@ function PodiumPlayer({
 
             <p
                 className={`mt-1 font-bold text-[var(--accent)] ${isFirst
-                        ? "text-xs"
-                        : "text-[10px]"
+                    ? "text-xs"
+                    : "text-[10px]"
                     }`}
             >
                 {formatPoints(
@@ -159,8 +159,8 @@ function PodiumPlayer({
 
             <div
                 className={`mt-2 flex items-center justify-center font-black ${isFirst
-                        ? "h-10 w-20 bg-[var(--accent)]/20 text-lg text-[var(--accent)]"
-                        : "h-8 w-14 bg-white/[0.05] text-sm text-[var(--muted)]"
+                    ? "h-10 w-20 bg-[var(--accent)]/20 text-lg text-[var(--accent)]"
+                    : "h-8 w-14 bg-white/[0.05] text-sm text-[var(--muted)]"
                     } rounded-t-lg`}
             >
                 {position}
@@ -364,7 +364,9 @@ export default function LeaderboardPage() {
                     </h1>
 
                     <p className="mt-2 text-sm text-[var(--muted)]">
-                        Compete across Build Your XI.
+                        {mode === "world"
+                            ? "Compare your World Domination scores against other players."
+                            : "Compete across IPL Challenge scores."}
                     </p>
                 </div>
 
@@ -390,8 +392,8 @@ export default function LeaderboardPage() {
                                             )
                                         }
                                         className={`rounded-lg px-3 py-3 text-xs font-black transition ${active
-                                                ? "bg-[var(--accent)] text-black"
-                                                : "text-[var(--muted)] hover:bg-white/[0.04] hover:text-white"
+                                            ? "bg-[var(--accent)] text-black"
+                                            : "text-[var(--muted)] hover:bg-white/[0.04] hover:text-white"
                                             }`}
                                     >
                                         {option.label}
@@ -423,8 +425,8 @@ export default function LeaderboardPage() {
                                         )
                                     }
                                     className={`rounded-lg border px-4 py-2 text-xs font-black transition ${active
-                                            ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
-                                            : "border-white/10 text-[var(--muted)] hover:border-white/20 hover:text-white"
+                                        ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
+                                        : "border-white/10 text-[var(--muted)] hover:border-white/20 hover:text-white"
                                         }`}
                                 >
                                     {option.label}

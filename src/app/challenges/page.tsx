@@ -103,7 +103,9 @@ export default function ChallengesPage() {
 
     const [gameMode, setGameMode] =
         useState<GameMode>("ipl");
-
+    const [worldAvailability, setWorldAvailability] = useState<
+        "checking" | "ready" | "preparing" | "unknown"
+    >("checking");
     const [copied, setCopied] =
         useState<string | null>(null);
 
@@ -411,6 +413,42 @@ export default function ChallengesPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        let cancelled = false;
+
+        async function loadWorldAvailability() {
+            try {
+                const response = await fetch("/api/world/editions", {
+                    cache: "no-store",
+                });
+
+                const data = await response.json().catch(() => null);
+
+                if (!response.ok) {
+                    throw new Error("Unable to check World Cup availability.");
+                }
+
+                if (!cancelled) {
+                    setWorldAvailability(
+                        Array.isArray(data?.editions) && data.editions.length > 0
+                            ? "ready"
+                            : "preparing"
+                    );
+                }
+            } catch {
+                if (!cancelled) {
+                    setWorldAvailability("unknown");
+                }
+            }
+        }
+
+        void loadWorldAvailability();
+
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
     /*
      * ============================================================
      * CREATE CHALLENGE
@@ -422,6 +460,15 @@ export default function ChallengesPage() {
             title.trim();
 
         setError("");
+        if (gameMode === "world" && worldAvailability !== "ready") {
+            setError(
+                worldAvailability === "preparing"
+                    ? "World Domination challenges can be created once a validated World Cup edition is published."
+                    : "World Cup availability could not be verified. Refresh the page and try again."
+            );
+
+            return;
+        }
 
         if (!cleanedTitle) {
             setError(
@@ -1007,19 +1054,39 @@ export default function ChallengesPage() {
                                     </div>
                                 </div>
 
+                                {gameMode === "world" && (
+                                    <p
+                                        className="mt-5 rounded-xl border border-[var(--line)] bg-white/[0.02] px-4 py-3 text-xs leading-5 text-[var(--muted)]"
+                                        role="status"
+                                    >
+                                        {worldAvailability === "ready"
+                                            ? "Published World Cup editions are available."
+                                            : worldAvailability === "preparing"
+                                                ? "World Cup data is being prepared. World challenges unlock when an edition is published."
+                                                : worldAvailability === "checking"
+                                                    ? "Checking World Cup data availability…"
+                                                    : "World Cup availability could not be verified. Refresh this page to retry."}
+                                    </p>
+                                )}
+
                                 <button
                                     type="button"
                                     disabled={
-                                        creating
+                                        creating ||
+                                        (gameMode === "world" && worldAvailability !== "ready")
                                     }
-                                    onClick={
-                                        handleCreateChallenge
-                                    }
-                                    className="btn btn-primary mt-8 w-full"
+                                    onClick={handleCreateChallenge}
+                                    className="btn btn-primary mt-8 w-full disabled:cursor-not-allowed disabled:opacity-50"
                                 >
                                     {creating
                                         ? "CREATING CHALLENGE..."
-                                        : "CREATE CHALLENGE +"}
+                                        : gameMode === "world" && worldAvailability !== "ready"
+                                            ? worldAvailability === "preparing"
+                                                ? "WORLD CUP DATA PREPARING"
+                                                : worldAvailability === "checking"
+                                                    ? "CHECKING WORLD CUP DATA"
+                                                    : "WORLD DATA UNAVAILABLE"
+                                            : "CREATE CHALLENGE +"}
                                 </button>
                             </div>
                         </div>

@@ -24,6 +24,17 @@ type GameType =
   | "IPL Challenge"
   | "World Domination";
 
+type StatsMode = "all" | "ipl" | "world";
+
+const STATS_MODE_OPTIONS: {
+  value: StatsMode;
+  label: string;
+}[] = [
+    { value: "all", label: "All Games" },
+    { value: "ipl", label: "IPL Challenge" },
+    { value: "world", label: "World Domination" },
+  ];
+
 type RecentGame = {
   id: string;
 
@@ -97,6 +108,7 @@ function formatDate(
 }
 
 export default function StatsPage() {
+  const [mode, setMode] = useState<StatsMode>("all");
   const [
     player,
     setPlayer,
@@ -165,7 +177,7 @@ export default function StatsPage() {
       try {
         const response =
           await fetch(
-            "/api/stats",
+            `/api/stats?mode=${mode}`,
             {
               method: "GET",
               cache: "no-store",
@@ -256,7 +268,7 @@ export default function StatsPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [mode]);
 
   if (loading) {
     return (
@@ -353,6 +365,27 @@ export default function StatsPage() {
           </p>
         </section>
 
+        <section
+          className="mt-6"
+          aria-label="Statistics game mode"
+        >
+          <div className="flex flex-wrap gap-2">
+            {STATS_MODE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                aria-pressed={mode === option.value}
+                onClick={() => setMode(option.value)}
+                className={`rounded-xl border px-4 py-2.5 text-xs font-black transition ${mode === option.value
+                  ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
+                  : "border-white/10 text-[var(--muted)] hover:border-white/20 hover:text-white"
+                  }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </section>
         {/* PROFILE */}
 
         <section className="card mt-8 overflow-hidden">
@@ -430,7 +463,13 @@ export default function StatsPage() {
                 bestRecord ??
                 "—"
               }
-              label="Best Record All Time"
+              label={
+                mode === "all"
+                  ? "Best Record All Time"
+                  : mode === "world"
+                    ? "Best World Record"
+                    : "Best IPL Record"
+              }
             />
           </div>
         </section>
@@ -449,7 +488,11 @@ export default function StatsPage() {
               </h2>
 
               <p className="mt-2 text-xs text-[var(--muted)]">
-                Showing your 10 most recent completed games.
+                {mode === "all"
+                  ? "Showing your 10 most recent completed games."
+                  : mode === "world"
+                    ? "Showing your 10 most recent World Domination games."
+                    : "Showing your 10 most recent IPL Challenge games."}
               </p>
             </div>
 
@@ -467,11 +510,19 @@ export default function StatsPage() {
               </div>
 
               <h3 className="mt-5 text-lg font-bold">
-                No games played yet
+                {mode === "world"
+                  ? "No World Domination games yet"
+                  : mode === "ipl"
+                    ? "No IPL Challenge games yet"
+                    : "No games played yet"}
               </h3>
 
               <p className="mt-2 max-w-md text-sm leading-6 text-[var(--muted)]">
-                Your completed IPL Challenge and World Domination games will appear here.
+                {mode === "world"
+                  ? "Your completed World Domination games will appear here."
+                  : mode === "ipl"
+                    ? "Your completed IPL Challenge games will appear here."
+                    : "Your completed IPL Challenge and World Domination games will appear here."}
               </p>
 
               <Link

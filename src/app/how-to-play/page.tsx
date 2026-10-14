@@ -130,8 +130,9 @@ export default function HowToPlayPage() {
                             </h3>
 
                             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-                                Take your cricket knowledge global and compete
-                                using players from around the world.
+                                Build an XI from a World Cup team and edition. The player pool
+                                and statistics belong to that tournament, and an edition becomes
+                                playable only after its data and player roles are validated.
                             </p>
                         </article>
                     </div>

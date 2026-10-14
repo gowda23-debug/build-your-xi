@@ -17,7 +17,9 @@ export default function HomePage() {
   const supabase = createClient();
 
   const [loading, setLoading] = useState(true);
-
+  const [worldAvailability, setWorldAvailability] = useState<
+    "checking" | "ready" | "preparing" | "unknown"
+  >("checking");
   useEffect(() => {
     const checkUser = async () => {
       const {
@@ -36,7 +38,43 @@ export default function HomePage() {
 
     checkUser();
   }, [router, supabase]);
+  useEffect(() => {
+    let cancelled = false;
 
+    async function loadWorldAvailability() {
+      try {
+        const response = await fetch("/api/world/editions", {
+          cache: "no-store",
+        });
+
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+          throw new Error("Unable to check World Cup availability.");
+        }
+
+        if (cancelled) {
+          return;
+        }
+
+        setWorldAvailability(
+          Array.isArray(data?.editions) && data.editions.length > 0
+            ? "ready"
+            : "preparing"
+        );
+      } catch {
+        if (!cancelled) {
+          setWorldAvailability("unknown");
+        }
+      }
+    }
+
+    void loadWorldAvailability();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   // Prevent the page from appearing before authentication is checked
   if (loading) {
     return (
@@ -143,8 +181,14 @@ export default function HomePage() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/15 text-[var(--accent)]">
                   <Globe2 size={28} />
                 </div>
-                <span className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 text-xs font-bold text-[var(--accent)]">
-                  FEATURED
+                <span className="max-w-[130px] rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 text-center text-[10px] font-bold text-[var(--accent)]">
+                  {worldAvailability === "ready"
+                    ? "READY"
+                    : worldAvailability === "preparing"
+                      ? "IN PREPARATION"
+                      : worldAvailability === "checking"
+                        ? "CHECKING"
+                        : "STATUS UNKNOWN"}
                 </span>
               </div>
 
@@ -158,17 +202,30 @@ export default function HomePage() {
                 </h2>
 
                 <p className="mt-4 leading-7 text-[var(--muted)]">
-                  Take your cricket knowledge beyond the IPL. Build
-                  powerful XIs across international teams, tournaments,
-                  eras and different conditions.
+                  Build an XI from international World Cup players. Each edition
+                  uses its own player pool and tournament statistics, so every
+                  era brings a different selection challenge.
+                </p>
+
+                <p className="mt-3 text-xs leading-5 text-[var(--muted)]">
+                  {worldAvailability === "ready"
+                    ? "Published World Cup editions are available."
+                    : worldAvailability === "preparing"
+                      ? "World Cup data is being prepared. Play unlocks when a validated edition is published."
+                      : worldAvailability === "checking"
+                        ? "Checking published World Cup editions…"
+                        : "Availability could not be checked. Open the mode to retry."}
                 </p>
               </div>
 
               <Link
-                href="/_not-found"
+                href="/world"
                 className="btn btn-primary relative mt-auto inline-flex w-full items-center justify-center gap-2"
               >
-                Play Challenge
+                {worldAvailability === "ready"
+                  ? "Play Challenge"
+                  : "View Mode Status"}
+
                 <ChevronRight size={19} />
               </Link>
             </article>

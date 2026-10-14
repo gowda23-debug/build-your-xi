@@ -208,8 +208,10 @@ export async function GET(request: Request) {
 
     if (editionYears.size === 0) {
       return NextResponse.json(
-        { error: "No published World Cup editions are available yet." },
-        { status: 404 },
+        {
+          error: "No published World Cup editions are available yet.",
+          code: "WORLD_DATA_NOT_READY",
+        }
       );
     }
 
@@ -251,8 +253,10 @@ export async function GET(request: Request) {
 
     if (valid.length === 0) {
       return NextResponse.json(
-        { error: "No World Cup team-seasons are available." },
-        { status: 404 },
+        {
+          error: "No World Cup data is available yet.",
+          code: "WORLD_DATA_NOT_READY",
+        }
       );
     }
 
