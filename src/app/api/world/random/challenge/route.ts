@@ -211,7 +211,8 @@ export async function GET(request: Request) {
         {
           error: "No published World Cup editions are available yet.",
           code: "WORLD_DATA_NOT_READY",
-        }
+        },
+        { status: 503 }
       );
     }
 
@@ -256,7 +257,8 @@ export async function GET(request: Request) {
         {
           error: "No World Cup data is available yet.",
           code: "WORLD_DATA_NOT_READY",
-        }
+        },
+        { status: 503 }
       );
     }
 

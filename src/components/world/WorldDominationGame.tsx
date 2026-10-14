@@ -183,51 +183,50 @@ export default function WorldDominationGame({
 
           const challengeData = data as ChallengeResponse;
 
-          const playerData = await playerResponse.json().catch(() => null);
+          const playerResponse = await fetch(
+            `/api/world/team-season/${encodeURIComponent(
+              challengeData.teamSeasonId
+            )}/players`,
+            {
+              cache: "no-store",
+            }
+          );
+
+          const playerData = await playerResponse
+            .json()
+            .catch(() => null);
 
           if (!playerResponse.ok) {
-            if (playerData?.code === "WORLD_PLAYER_POOL_NOT_READY") {
+            if (
+              playerData?.code ===
+              "WORLD_PLAYER_POOL_NOT_READY"
+            ) {
               setDataNotReady(true);
             }
 
-            throw new Error(
-              playerData?.error ?? "Unable to load World players."
-            );
-          }
-
-          setChallenge(challengeData);
-          setPlayers(playerData.players ?? []);
-          setSelectedPlayers([]);
-          setResult(null);
-
-          const playerData =
-            await playerResponse
-              .json()
-              .catch(
-                () => null
-              );
-
-          if (
-            !playerResponse.ok
-          ) {
             throw new Error(
               playerData?.error ??
               "Unable to load World players."
             );
           }
 
-          setPlayers(
-            playerData.players ??
-            []
-          );
+          const loadedPlayers = playerData?.players;
 
-          setSelectedPlayers(
-            []
-          );
+          if (
+            !Array.isArray(loadedPlayers) ||
+            loadedPlayers.length < MAX_PLAYERS
+          ) {
+            setDataNotReady(true);
 
-          setResult(
-            null
-          );
+            throw new Error(
+              "This World Cup team does not have enough validated players to form an XI."
+            );
+          }
+
+          setChallenge(challengeData);
+          setPlayers(loadedPlayers as WorldPlayer[]);
+          setSelectedPlayers([]);
+          setResult(null);
         } catch (
         loadError
         ) {
@@ -544,51 +543,51 @@ export default function WorldDominationGame({
     );
   }
 
-if (error && !challenge) {
-  return (
-    <div className="flex h-full w-full items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 text-center">
-      <div className="max-w-lg">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)]">
-          <span className="text-2xl">🏏</span>
-        </div>
+  if (error && !challenge) {
+    return (
+      <div className="flex h-full w-full items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 text-center">
+        <div className="max-w-lg">
+          <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <span className="text-2xl">🏏</span>
+          </div>
 
-        <p className="mt-5 text-xs font-black uppercase tracking-[0.22em] text-[var(--accent)]">
-          World Domination
-        </p>
+          <p className="mt-5 text-xs font-black uppercase tracking-[0.22em] text-[var(--accent)]">
+            World Domination
+          </p>
 
-        <h1 className="mt-2 text-2xl font-black sm:text-3xl">
-          {dataNotReady
-            ? "World Cup data is being prepared"
-            : "World Domination unavailable"}
-        </h1>
+          <h1 className="mt-2 text-2xl font-black sm:text-3xl">
+            {dataNotReady
+              ? "World Cup data is being prepared"
+              : "World Domination unavailable"}
+          </h1>
 
-        <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-          {dataNotReady
-            ? "A playable World Cup edition needs validated player statistics and verified roles. No sample or fabricated player pool will be shown. Please return when an edition has been published."
-            : error}
-        </p>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+            {dataNotReady
+              ? "A playable World Cup edition needs validated player statistics and verified roles. No sample or fabricated player pool will be shown. Please return when an edition has been published."
+              : error}
+          </p>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => void loadChallenge()}
-            className="btn btn-primary min-h-10"
-          >
-            Try Again
-          </button>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => void loadChallenge()}
+              className="btn btn-primary min-h-10"
+            >
+              Try Again
+            </button>
 
-          <Link href="/home" className="btn btn-secondary min-h-10">
-            Back to Home
-          </Link>
+            <Link href="/home" className="btn btn-secondary min-h-10">
+              Back to Home
+            </Link>
 
-          <Link href="/leaderboard" className="btn btn-secondary min-h-10">
-            Leaderboard
-          </Link>
+            <Link href="/leaderboard" className="btn btn-secondary min-h-10">
+              Leaderboard
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   if (
     result

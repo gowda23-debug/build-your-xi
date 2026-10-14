@@ -481,7 +481,9 @@ export default function LeaderboardPage() {
                             </h2>
 
                             <p className="mt-2 text-sm text-[var(--muted)]">
-                                Complete a game to appear on the leaderboard.
+                                {mode === "world"
+                                    ? "World Domination scores will appear here after players complete validated World Cup games."
+                                    : "Complete an IPL Challenge game to appear on this leaderboard."}
                             </p>
                         </div>
                     )}

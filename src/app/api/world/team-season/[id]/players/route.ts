@@ -173,19 +173,17 @@ export async function GET(
       roleCounts.AR + roleCounts.BOWL >= 5;
 
     if (!poolCanFormXI) {
-      if (!poolCanFormXI) {
-        return NextResponse.json(
-          {
-            error:
-              "This World Cup team does not yet have enough verified players to form a valid XI.",
-            code: "WORLD_PLAYER_POOL_NOT_READY",
-          },
-          { status: 409 }
-        );
-      }
-      return NextResponse.json({ players });
-
+      return NextResponse.json(
+        {
+          error:
+            "This World Cup team does not yet have enough verified players to form a valid XI.",
+          code: "WORLD_PLAYER_POOL_NOT_READY",
+        },
+        { status: 409 }
+      );
     }
+
+    return NextResponse.json({ players });
   } catch (error) {
     console.error("World player pool endpoint failed:", error);
     return NextResponse.json({ error: "Unable to load World Cup players." }, { status: 500 });
