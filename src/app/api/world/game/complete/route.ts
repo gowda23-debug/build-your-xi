@@ -1,19 +1,13 @@
 import { NextResponse } from "next/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { requireUser } from "@/lib/auth/require-user";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
-import {
-  evaluateWorldXI,
-} from "@/lib/world/scoring";
+import { evaluateWorldXI } from "@/lib/world/scoring";
+import { validateWorldXI } from "@/lib/world/validate-xi";
 
-import {
-  validateWorldXI,
-} from "@/lib/world/validate-xi"
-
-import type {
-  WorldPlayer,
-} from "@/types/world";
+import type { WorldPlayer } from "@/types/world";
 
 type DraftSelection = {
   playerId: string;
@@ -26,92 +20,51 @@ type SessionContext = {
   [key: string]: unknown;
 };
 
-export const dynamic =
-  "force-dynamic";
+export const dynamic = "force-dynamic";
 
-export async function POST(
-  request: Request
-) {
+const worldDb = supabaseAdmin as unknown as SupabaseClient;
+
+export async function POST(request: Request) {
   try {
-    const {
-      user,
-      error: authError,
-    } = await requireUser();
+    const { user, error: authError } = await requireUser();
 
-    if (
-      authError ||
-      !user
-    ) {
-      return (
-        authError ??
-        NextResponse.json(
-          {
-            error:
-              "Unauthorized",
-          },
-          {
-            status: 401,
-          }
-        )
+    if (authError || !user) {
+      return authError ?? NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 },
       );
     }
 
-    const body =
-      (await request
-        .json()
-        .catch(
-          () => ({})
-        )) as {
-        gameSessionId?: string;
-      };
+    const body = (await request.json().catch(() => ({}))) as {
+      gameSessionId?: string;
+    };
 
     const gameSessionId =
-      typeof body.gameSessionId ===
-      "string"
+      typeof body.gameSessionId === "string"
         ? body.gameSessionId.trim()
         : "";
 
     if (!gameSessionId) {
       return NextResponse.json(
-        {
-          error:
-            "gameSessionId is required.",
-        },
-        {
-          status: 400,
-        }
+        { error: "gameSessionId is required." },
+        { status: 400 },
       );
     }
 
-    /*
-     * Guests deliberately do not persist
-     * World games.
-     */
-    if (
-      user.is_anonymous
-    ) {
+    if (user.is_anonymous) {
       return NextResponse.json(
         {
           error:
             "Guest World games cannot be completed through the persistent game endpoint.",
         },
-        {
-          status: 403,
-        }
+        { status: 403 },
       );
     }
 
-    const {
-      data: session,
-      error:
-        sessionError,
-    } =
+    const { data: session, error: sessionError } =
       await supabaseAdmin
-        .from(
-          "game_sessions"
-        )
-        .select(
-          `
+        .from("game_sessions")
+        .select(`
           id,
           user_id,
           game_mode,
@@ -119,104 +72,108 @@ export async function POST(
           world_team_season_id,
           challenge_id,
           context
-          `
-        )
-        .eq(
-          "id",
-          gameSessionId
-        )
-        .eq(
-          "user_id",
-          user.id
-        )
-        .eq(
-          "game_mode",
-          "world"
-        )
+        `)
+        .eq("id", gameSessionId)
+        .eq("user_id", user.id)
+        .eq("game_mode", "world")
         .maybeSingle();
 
-    if (
-      sessionError
-    ) {
-      throw sessionError;
-    }
+    if (sessionError) throw sessionError;
 
     if (!session) {
       return NextResponse.json(
-        {
-          error:
-            "World game session not found.",
-        },
-        {
-          status: 404,
-        }
+        { error: "World game session not found." },
+        { status: 404 },
       );
     }
 
-    if (
-      session.status !==
-      "started"
-    ) {
+    if (session.status !== "started") {
+      return NextResponse.json(
+        { error: "This World game has already been completed." },
+        { status: 409 },
+      );
+    }
+
+    if (!session.world_team_season_id) {
+      return NextResponse.json(
+        { error: "World game session has no team-season." },
+        { status: 409 },
+      );
+    }
+
+    const { data: teamSeasonRows, error: teamSeasonError } =
+      await worldDb
+        .from("team_seasons")
+        .select("world_edition_id,season:seasons(year)")
+        .eq("id", session.world_team_season_id)
+        .returns<
+          Array<{
+            world_edition_id: string | null;
+            season:
+              | { year: number }
+              | Array<{ year: number }>
+              | null;
+          }>
+        >();
+
+    if (teamSeasonError) throw teamSeasonError;
+
+    const teamSeason = teamSeasonRows?.[0] ?? null;
+
+    const season = teamSeason
+      ? Array.isArray(teamSeason.season)
+        ? teamSeason.season[0]
+        : teamSeason.season
+      : null;
+
+    if (!teamSeason?.world_edition_id || !season) {
       return NextResponse.json(
         {
           error:
-            "This World game has already been completed.",
+            "This World team-season is not assigned to a published edition.",
         },
-        {
-          status: 409,
-        }
+        { status: 409 },
       );
     }
 
-    if (
-      !session.world_team_season_id
-    ) {
+    const { data: editionRows, error: editionError } =
+      await worldDb
+        .from("world_editions")
+        .select("id,year")
+        .eq("id", teamSeason.world_edition_id)
+        .eq("status", "published")
+        .returns<Array<{ id: string; year: number }>>();
+
+    if (editionError) throw editionError;
+
+    const edition = editionRows?.[0] ?? null;
+
+    if (!edition || edition.year !== season.year) {
       return NextResponse.json(
         {
           error:
-            "World game session has no team-season.",
+            "The World Cup edition is not published or its season metadata is invalid.",
         },
-        {
-          status: 409,
-        }
+        { status: 409 },
       );
     }
 
-    const context =
-      (
-        session.context ??
-        {}
-      ) as SessionContext;
+    const context = (session.context ?? {}) as SessionContext;
 
-    const selections =
-      Array.isArray(
-        context.draftSelections
-      )
-        ? context.draftSelections
-        : [];
+    const selections = Array.isArray(context.draftSelections)
+      ? context.draftSelections
+      : [];
 
-    if (
-      selections.length !==
-      11
-    ) {
+    if (selections.length !== 11) {
       return NextResponse.json(
-        {
-          error:
-            "The World XI is not complete.",
-        },
-        {
-          status: 400,
-        }
+        { error: "The World XI is not complete." },
+        { status: 400 },
       );
     }
 
-    const selectedPlayers:
-      WorldPlayer[] = [];
+    const selectedPlayers: WorldPlayer[] = [];
 
-    for (
-      const selection of
-        selections
-    ) {
+    for (const selection of selections) {
       if (
         selection.teamSeasonId !==
         session.world_team_season_id
@@ -226,23 +183,14 @@ export async function POST(
             error:
               "The game session contains an invalid team-season selection.",
           },
-          {
-            status: 400,
-          }
+          { status: 400 },
         );
       }
 
-      const {
-        data: stat,
-        error:
-          statError,
-      } =
+      const { data: stat, error: statError } =
         await supabaseAdmin
-          .from(
-            "player_season_stats"
-          )
-          .select(
-            `
+          .from("player_season_stats")
+          .select(`
             player_id,
             matches,
             innings,
@@ -260,527 +208,233 @@ export async function POST(
               id,
               full_name
             )
-            `
-          )
-          .eq(
-            "team_season_id",
-            session.world_team_season_id
-          )
-          .eq(
-            "player_id",
-            selection.playerId
-          )
+          `)
+          .eq("team_season_id", session.world_team_season_id)
+          .eq("player_id", selection.playerId)
           .maybeSingle();
 
-      if (
-        statError
-      ) {
-        throw statError;
-      }
+      if (statError) throw statError;
 
       if (!stat) {
         return NextResponse.json(
-          {
-            error:
-              "One or more selected World players are invalid.",
-          },
-          {
-            status: 400,
-          }
+          { error: "One or more selected World players are invalid." },
+          { status: 400 },
         );
       }
 
-      const player =
-        Array.isArray(
-          stat.player
-        )
-          ? stat.player[0]
-          : stat.player;
+      const player = Array.isArray(stat.player)
+        ? stat.player[0]
+        : stat.player;
 
       if (!player) {
         return NextResponse.json(
-          {
-            error:
-              "Selected World player could not be resolved.",
-          },
-          {
-            status: 500,
-          }
+          { error: "Selected World player could not be resolved." },
+          { status: 500 },
         );
       }
 
-      const {
-        data: roleRows,
-        error:
-          roleError,
-      } =
-        await supabaseAdmin
-          .from(
-            "player_roles"
-          )
-          .select(
-            "role"
-          )
-          .eq(
-            "player_id",
-            player.id
-          );
+      const { data: roleRow, error: roleError } =
+        await worldDb
+          .from("world_edition_player_roles")
+          .select("role")
+          .eq("world_edition_id", edition.id)
+          .eq("player_id", player.id)
+          .maybeSingle();
 
-      if (
-        roleError
-      ) {
-        throw roleError;
-      }
+      if (roleError) throw roleError;
 
-      const allowedRoles =
-        new Set([
-          "BAT",
-          "WK",
-          "AR",
-          "BOWL",
-        ]);
+      const allowedRoles = new Set([
+        "BAT",
+        "WK",
+        "AR",
+        "BOWL",
+      ]);
 
       const role =
-        (
-          roleRows ??
-          []
-        )
-          .map(
-            (row) =>
-              row.role
-          )
-          .find(
-            (value) =>
-              allowedRoles.has(
-                value
-              )
-          );
+        roleRow && allowedRoles.has(roleRow.role)
+          ? roleRow.role
+          : null;
 
       if (!role) {
         return NextResponse.json(
-          {
-            error:
-              "A selected player does not have a verified role.",
-          },
-          {
-            status: 400,
-          }
+          { error: "A selected player does not have a verified role." },
+          { status: 400 },
         );
       }
 
       selectedPlayers.push({
-        id:
-          player.id,
-
-        name:
-          player.full_name,
-
+        id: player.id,
+        name: player.full_name,
         role,
-
         stats: {
-          matches:
-            stat.matches ??
-            0,
-
-          innings:
-            stat.innings ??
-            0,
-
-          runs:
-            stat.runs ??
-            0,
-
-          battingAverage:
-            stat.batting_average ??
-            null,
-
-          strikeRate:
-            stat.strike_rate ??
-            null,
-
-          hundreds:
-            stat.hundreds ??
-            0,
-
-          fifties:
-            stat.fifties ??
-            0,
-
-          wickets:
-            stat.wickets ??
-            0,
-
-          bowlingAverage:
-            stat.bowling_average ??
-            null,
-
-          economy:
-            stat.economy ??
-            null,
-
-          catches:
-            stat.catches ??
-            0,
-
-          stumpings:
-            stat.stumpings ??
-            0,
+          matches: stat.matches ?? 0,
+          innings: stat.innings ?? 0,
+          runs: stat.runs ?? 0,
+          battingAverage: stat.batting_average ?? null,
+          strikeRate: stat.strike_rate ?? null,
+          hundreds: stat.hundreds ?? 0,
+          fifties: stat.fifties ?? 0,
+          wickets: stat.wickets ?? 0,
+          bowlingAverage: stat.bowling_average ?? null,
+          economy: stat.economy ?? null,
+          catches: stat.catches ?? 0,
+          stumpings: stat.stumpings ?? 0,
         },
       });
     }
 
-    const validation =
-      validateWorldXI(
-        selectedPlayers
-      );
+    const validation = validateWorldXI(selectedPlayers);
 
-    if (
-      !validation.valid
-    ) {
+    if (!validation.valid) {
       return NextResponse.json(
         {
-          error:
-            "The selected XI does not satisfy the World rules.",
-          details:
-            validation.errors,
+          error: "The selected XI does not satisfy the World rules.",
+          details: validation.errors,
         },
-        {
-          status: 400,
-        }
+        { status: 400 },
       );
     }
 
-    const result =
-      evaluateWorldXI(
-        selectedPlayers,
-        gameSessionId
-      );
+    const result = evaluateWorldXI(
+      selectedPlayers,
+      gameSessionId,
+    );
 
     const challengeId =
       session.challenge_id ??
-      (
-        typeof context.challengeId ===
-        "string"
-          ? context.challengeId
-          : null
-      );
+      (typeof context.challengeId === "string"
+        ? context.challengeId
+        : null);
 
-    /*
-     * Persist the authoritative result.
-     *
-     * The session is transitioned before returning success.
-     */
     const storedResult = {
       version: 1,
-
       challengeId,
-
-      gameMode:
-        "world",
-
-      teamSeasonId:
-        session.world_team_season_id,
-
-      players:
-        selectedPlayers.map(
-          (player) => ({
-            id:
-              player.id,
-
-            name:
-              player.name,
-
-            role:
-              player.role,
-          })
-        ),
-
-      score:
-        result.score,
-
-      teamStrength:
-        result.teamStrength,
-
-      wins:
-        result.wins,
-
-      losses:
-        result.losses,
-
-      matches:
-        result.matches,
-
-      breakdown:
-        result.breakdown,
+      gameMode: "world",
+      teamSeasonId: session.world_team_season_id,
+      players: selectedPlayers.map((player) => ({
+        id: player.id,
+        name: player.name,
+        role: player.role,
+      })),
+      score: result.score,
+      teamStrength: result.teamStrength,
+      wins: result.wins,
+      losses: result.losses,
+      matches: result.matches,
+      breakdown: result.breakdown,
     };
 
-    /*
-     * Insert authoritative score.
-     *
-     * Score is calculated exclusively on the server.
-     */
     const {
-      data: gameScore,
-      error:
-        scoreError,
-    } =
-      await supabaseAdmin
-        .from(
-          "game_scores"
-        )
-        .insert({
-          user_id:
-            user.id,
+      data: persistedScore,
+      error: persistenceError,
+    } = await supabaseAdmin.rpc("complete_world_game", {
+      p_game_session_id: session.id,
+      p_user_id: user.id,
+      p_challenge_id: challengeId,
+      p_score: result.score,
+      p_result: storedResult,
+    });
 
-          game_mode:
-            "world",
+    if (persistenceError) {
+      const message = persistenceError.message ?? "";
 
-          score:
-            result.score,
-
-          result:
-            storedResult,
-        })
-        .select(
-          "id, score, created_at"
-        )
-        .single();
-
-    if (
-      scoreError
-    ) {
-      throw scoreError;
-    }
-
-    /*
-     * Mark the session completed.
-     *
-     * The filter prevents a second completion
-     * from changing an already-completed session.
-     */
-    const {
-      data: completedSession,
-      error:
-        completionError,
-    } =
-      await supabaseAdmin
-        .from(
-          "game_sessions"
-        )
-        .update({
-          status:
-            "completed",
-        })
-        .eq(
-          "id",
-          session.id
-        )
-        .eq(
-          "user_id",
-          user.id
-        )
-        .eq(
-          "status",
-          "started"
-        )
-        .select(
-          "id"
-        )
-        .maybeSingle();
-
-    if (
-      completionError
-    ) {
-      throw completionError;
-    }
-
-    if (
-      !completedSession
-    ) {
-      return NextResponse.json(
-        {
-          error:
-            "The World game was already completed.",
-        },
-        {
-          status: 409,
-        }
-      );
-    }
-
-    /*
-     * Challenge score.
-     *
-     * Only the server writes it.
-     */
-    if (
-      challengeId
-    ) {
-      const {
-        data: membership,
-        error:
-          membershipError,
-      } =
-        await supabaseAdmin
-          .from(
-            "challenge_players"
-          )
-          .select(
-            "challenge_id"
-          )
-          .eq(
-            "challenge_id",
-            challengeId
-          )
-          .eq(
-            "user_id",
-            user.id
-          )
-          .maybeSingle();
-
-      if (
-        membershipError
-      ) {
-        throw membershipError;
-      }
-
-      if (!membership) {
+      if (message.includes("WORLD_GAME_ALREADY_COMPLETED")) {
         return NextResponse.json(
-          {
-            error:
-              "The World game completed, but you are not a member of this challenge.",
-          },
-          {
-            status: 403,
-          }
+          { error: "This World game has already been completed." },
+          { status: 409 },
         );
       }
 
-      const {
-        data: existing,
-        error:
-          existingError,
-      } =
-        await supabaseAdmin
-          .from(
-            "challenge_scores"
-          )
-          .select(
-            "score"
-          )
-          .eq(
-            "challenge_id",
-            challengeId
-          )
-          .eq(
-            "user_id",
-            user.id
-          )
-          .maybeSingle();
+      if (message.includes("WORLD_GAME_CHALLENGE_MISMATCH")) {
+        return NextResponse.json(
+          { error: "The World game challenge does not match its session." },
+          { status: 409 },
+        );
+      }
 
-      if (
-        existingError
-      ) {
-        throw existingError;
+      if (message.includes("WORLD_GAME_EDITION_NOT_PUBLISHED")) {
+        return NextResponse.json(
+          { error: "The World Cup edition is no longer published." },
+          { status: 409 },
+        );
       }
 
       if (
-        !existing
-      ) {
-        const {
-          error,
-        } =
-          await supabaseAdmin
-            .from(
-              "challenge_scores"
-            )
-            .insert({
-              challenge_id:
-                challengeId,
-
-              user_id:
-                user.id,
-
-              score:
-                result.score,
-            });
-
-        if (error) {
-          throw error;
-        }
-      } else if (
-        result.score >
-        Number(
-          existing.score
+        message.includes(
+          "WORLD_GAME_CHALLENGE_MEMBERSHIP_REQUIRED",
         )
       ) {
-        const {
-          error,
-        } =
-          await supabaseAdmin
-            .from(
-              "challenge_scores"
-            )
-            .update({
-              score:
-                result.score,
-            })
-            .eq(
-              "challenge_id",
-              challengeId
-            )
-            .eq(
-              "user_id",
-              user.id
-            );
-
-        if (error) {
-          throw error;
-        }
+        return NextResponse.json(
+          {
+            error:
+              "You must be a member of this challenge to submit a score.",
+          },
+          { status: 403 },
+        );
       }
+
+      if (message.includes("WORLD_GAME_SESSION_NOT_FOUND")) {
+        return NextResponse.json(
+          { error: "World game session not found." },
+          { status: 404 },
+        );
+      }
+
+      if (message.includes("WORLD_GAME_ACCESS_DENIED")) {
+        return NextResponse.json(
+          {
+            error:
+              "You are not allowed to complete this World game.",
+          },
+          { status: 403 },
+        );
+      }
+
+      throw persistenceError;
+    }
+
+    if (
+      !persistedScore ||
+      typeof persistedScore !== "object" ||
+      Array.isArray(persistedScore)
+    ) {
+      throw new Error(
+        "Atomic World game completion returned an invalid score payload.",
+      );
+    }
+
+    const gameScore = persistedScore as {
+      id?: unknown;
+      created_at?: unknown;
+    };
+
+    if (
+      typeof gameScore.id !== "string" ||
+      typeof gameScore.created_at !== "string"
+    ) {
+      throw new Error(
+        "Atomic World game completion omitted score ID or creation timestamp.",
+      );
     }
 
     return NextResponse.json({
       result: {
-        score:
-          result.score,
-
-        teamStrength:
-          result.teamStrength,
-
-        wins:
-          result.wins,
-
-        losses:
-          result.losses,
-
-        matches:
-          result.matches,
-
-        breakdown:
-          result.breakdown,
+        score: result.score,
+        teamStrength: result.teamStrength,
+        wins: result.wins,
+        losses: result.losses,
+        matches: result.matches,
+        breakdown: result.breakdown,
       },
-
-      gameScoreId:
-        gameScore.id,
-
-      completedAt:
-        gameScore.created_at,
+      gameScoreId: gameScore.id,
+      completedAt: gameScore.created_at,
     });
   } catch (error) {
-    console.error(
-      "World game completion error:",
-      error
-    );
+    console.error("World game completion error:", error);
 
     return NextResponse.json(
-      {
-        error:
-          "Unable to complete the World game.",
-      },
-      {
-        status: 500,
-      }
+      { error: "Unable to complete the World game." },
+      { status: 500 },
     );
   }
 }
