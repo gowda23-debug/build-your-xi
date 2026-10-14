@@ -308,7 +308,7 @@ export function loadWorldRegister(): WorldRegister {
         cricketArchiveToId.get(
           keyCricketArchive
         ) !==
-          person.identifier
+        person.identifier
       ) {
         fail(
           `CricketArchive identifier ${keyCricketArchive} maps to multiple Cricsheet IDs.`
@@ -413,13 +413,13 @@ export function resolveRegisterName(
 
   if (!ids || ids.size === 0) {
     fail(
-      `Unable to map CricketArchive player name "${rawName}" to the Cricsheet Register.`
+      `Unable to map player name "${rawName}" to the Cricsheet Register.`
     );
   }
 
   if (ids.size > 1) {
     fail(
-      `Ambiguous CricketArchive player name "${rawName}". Candidate Cricsheet IDs: ${[
+      `Ambiguous player name "${rawName}". Candidate Cricsheet IDs: ${[
         ...ids,
       ].join(", ")}`
     );

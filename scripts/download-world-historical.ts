@@ -328,27 +328,67 @@ function isValidScorecardStructure(
   const body = cleanText($("body").text());
   const lines = getScorecardLines(html);
 
-  const inningsHeaders = lines.filter(
-    (line) =>
-      /\binnings\b/i.test(line) &&
-      /\bR\s+(?:M\s+)?B\b/i.test(line)
-  );
+  const inningsHeaders = lines.filter((line) =>
+    /^[A-Za-z][A-Za-z .'-]*\s+innings\b/i.test(line)
+  ).length;
 
-  const hasBowlingHeader = lines.some(
-    (line) => /\bBowling\s+O\s+M\s+R\s+W\b/i.test(line)
-  );
+  const battingHeaders = lines.filter((line) =>
+    /\bR\s+(?:M\s+)?B\b/i.test(line)
+  ).length;
 
-  const hasYear = new RegExp(`\\b${source.year}\\b`).test(body);
+  const bowlingHeaders = lines.filter((line) =>
+    /\bBowling\s+(?:O|Overs)\s+(?:M|Mdns)\s+(?:R|Runs)\s+(?:W|Wkts)\b/i.test(
+      line
+    )
+  ).length;
+
+  const rosterHeaders = lines.filter((line) =>
+    /^.+?\s+team\s*:/i.test(line)
+  ).length;
+
+  const hasYear = new RegExp(
+    "\\b" + source.year + "\\b"
+  ).test(body);
+
   const hasResult = /\bResult\s*:/i.test(body);
+
+  const hasNoResult = /\bResult\s*:\s*(?:no result|abandoned|match abandoned|no play|washed out|cancelled|canceled)\b/i.test(
+    body
+  );
+
+  const completeScorecard =
+    inningsHeaders >= 2 &&
+    battingHeaders >= 2 &&
+    bowlingHeaders >= 2;
+
+  // Some no-result matches have only one played innings and a roster
+  // for the team that never batted.
+  const partialNoResultScorecard =
+    hasNoResult &&
+    inningsHeaders >= 1 &&
+    battingHeaders >= 1 &&
+    bowlingHeaders >= 1 &&
+    rosterHeaders >= 1;
+
+  // Also tolerate a no-result page with no played innings, provided both
+  // teams have roster headings. The prepare step validates those separately.
+  const unplayedNoResultScorecard =
+    hasNoResult &&
+    inningsHeaders === 0 &&
+    battingHeaders === 0 &&
+    bowlingHeaders === 0 &&
+    rosterHeaders >= 2;
 
   return (
     hasYear &&
-    inningsHeaders.length >= 2 &&
-    hasBowlingHeader &&
-    hasResult
+    hasResult &&
+    (
+      completeScorecard ||
+      partialNoResultScorecard ||
+      unplayedNoResultScorecard
+    )
   );
 }
-
 function normalizeForComparison(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }

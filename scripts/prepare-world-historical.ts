@@ -22,6 +22,14 @@ type ManifestEntry = {
   cacheKey: string;
 };
 
+type PendingBowlingResolution = {
+  innings: HistoricalInnings;
+  playerName: string;
+  overs: string;
+  runsConceded: number;
+  wickets: number;
+};
+
 type EditionManifest = {
   year: number;
   seasonName: string;
@@ -88,6 +96,19 @@ type HistoricalNormalizedEdition = {
 };
 
 type TableMode = "batting" | "bowling" | null;
+
+type ParsedDismissalReferences = {
+  bowlerName: string | null;
+  catcherName: string | null;
+  stumperName: string | null;
+  wicketCreditedToBowler: boolean;
+};
+
+type PendingDismissalResolution = {
+  record: HistoricalBattingRecord;
+  innings: HistoricalInnings;
+  references: ParsedDismissalReferences;
+};
 
 const ROOT = process.cwd();
 
@@ -182,17 +203,29 @@ function parseMatchDate(
   const year = Number(match[3]);
 
   const months: Record<string, string> = {
+    jan: "01",
     january: "01",
+    feb: "02",
     february: "02",
+    mar: "03",
     march: "03",
+    apr: "04",
     april: "04",
     may: "05",
+    jun: "06",
     june: "06",
+    jul: "07",
     july: "07",
+    aug: "08",
     august: "08",
+    sep: "09",
+    sept: "09",
     september: "09",
+    oct: "10",
     october: "10",
+    nov: "11",
     november: "11",
+    dec: "12",
     december: "12",
   };
 
@@ -247,20 +280,15 @@ function resolvePerson(
 }
 
 function parseDismissal(
-  dismissal: string,
-  register: ReturnType<typeof loadWorldRegister>
-): {
-  bowlerSourcePlayerId: string | null;
-  catcherSourcePlayerId: string | null;
-  stumperSourcePlayerId: string | null;
-  wicketCreditedToBowler: boolean;
-} {
+  dismissal: string
+): ParsedDismissalReferences {
   const value = cleanText(dismissal);
+  const lower = value.toLowerCase();
 
-  const empty = {
-    bowlerSourcePlayerId: null,
-    catcherSourcePlayerId: null,
-    stumperSourcePlayerId: null,
+  const empty: ParsedDismissalReferences = {
+    bowlerName: null,
+    catcherName: null,
+    stumperName: null,
     wicketCreditedToBowler: false,
   };
 
@@ -270,8 +298,6 @@ function parseDismissal(
   ) {
     return empty;
   }
-
-  const lower = value.toLowerCase();
 
   const retired =
     lower.includes("retired hurt") ||
@@ -284,68 +310,203 @@ function parseDismissal(
     !lower.startsWith("timed out") &&
     !lower.startsWith("retired");
 
-  let bowlerSourcePlayerId: string | null = null;
-  let catcherSourcePlayerId: string | null = null;
-  let stumperSourcePlayerId: string | null = null;
-
+  // Caught and bowled: one player performed both actions.
   const caughtAndBowled = value.match(
     /^c\s*(?:&|and)\s*b\s+(.+)$/i
   );
 
   if (caughtAndBowled?.[1]) {
-    const person = resolvePerson(register, caughtAndBowled[1]);
+    const playerName = cleanText(caughtAndBowled[1]);
 
     return {
-      bowlerSourcePlayerId: person.identifier,
-      catcherSourcePlayerId: person.identifier,
-      stumperSourcePlayerId: null,
+      bowlerName: playerName,
+      catcherName: playerName,
+      stumperName: null,
       wicketCreditedToBowler,
     };
   }
 
   const bowlerMatch = value.match(/\bb\s+(.+)$/i);
+  let bowlerName: string | null = null;
 
   if (bowlerMatch?.[1]) {
-    const bowlerName = cleanText(bowlerMatch[1]);
+    const name = cleanText(bowlerMatch[1]);
 
-    if (!/^sub$/i.test(bowlerName)) {
-      bowlerSourcePlayerId = resolvePerson(
-        register,
-        bowlerName
-      ).identifier;
+    if (!/^sub(?:stitute)?$/i.test(name)) {
+      bowlerName = name;
     }
   }
 
-  const caught = value.match(
-    /^c\s+(.+?)\s+b\s+(.+)$/i
-  );
+  let catcherName: string | null = null;
+  const caught = value.match(/^c\s+(.+?)\s+b\s+(.+)$/i);
 
-  if (caught?.[1] && !/^sub$/i.test(caught[1])) {
-    catcherSourcePlayerId = resolvePerson(
-      register,
-      caught[1]
-    ).identifier;
+  if (caught?.[1]) {
+    const fielderText = cleanText(caught[1]);
+
+    // ESPN archives sometimes identify a substitute as "sub (Name)".
+    const substitute = fielderText.match(
+      /^sub(?:stitute)?\s*\((.+)\)$/i
+    );
+
+    if (substitute?.[1]) {
+      catcherName = cleanText(substitute[1]);
+    } else if (!/^sub(?:stitute)?$/i.test(fielderText)) {
+      catcherName = fielderText;
+    }
   }
 
-  const stumped = value.match(
-    /^st\s+(.+?)\s+b\s+(.+)$/i
-  );
+  let stumperName: string | null = null;
+  const stumped = value.match(/^st\s+(.+?)\s+b\s+(.+)$/i);
 
   if (stumped?.[1]) {
-    stumperSourcePlayerId = resolvePerson(
-      register,
-      stumped[1]
-    ).identifier;
+    const name = cleanText(stumped[1]);
+
+    if (!/^sub(?:stitute)?$/i.test(name)) {
+      stumperName = name;
+    }
   }
 
   return {
-    bowlerSourcePlayerId,
-    catcherSourcePlayerId,
-    stumperSourcePlayerId,
+    bowlerName,
+    catcherName,
+    stumperName,
     wicketCreditedToBowler,
   };
 }
+function normalizeHistoricalPlayerName(value: string): string {
+  return cleanText(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,'’]/g, " ")
+    .replace(/[^a-zA-Z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
 
+function playerNameMatchesReference(
+  candidateName: string,
+  referenceName: string
+): boolean {
+  const candidate = normalizeHistoricalPlayerName(candidateName);
+  const reference = normalizeHistoricalPlayerName(referenceName);
+
+  if (!candidate || !reference) {
+    return false;
+  }
+
+  if (candidate === reference) {
+    return true;
+  }
+
+  const candidateTokens = candidate.split(" ");
+  const referenceTokens = reference.split(" ");
+
+  // A surname-only reference, such as "Amarnath", must match the surname
+  // of a player in the relevant team, not a globally selected person.
+  if (referenceTokens.length === 1) {
+    return candidateTokens[candidateTokens.length - 1] === referenceTokens[0];
+  }
+
+  if (referenceTokens.length > candidateTokens.length) {
+    return false;
+  }
+
+  const suffix = candidateTokens.slice(-referenceTokens.length);
+
+  // Support shortened forms such as "M Amarnath" matching "Mohinder Amarnath".
+  // Any initial must match the corresponding given-name token.
+  return referenceTokens.every((token, index) => {
+    const candidateToken = suffix[index];
+
+    return token.length === 1
+      ? candidateToken.startsWith(token)
+      : candidateToken === token;
+  });
+}
+
+function resolveMatchPlayerReference(
+  rawName: string,
+  expectedTeam: string,
+  players: Map<string, HistoricalPlayerRecord>,
+  register: ReturnType<typeof loadWorldRegister>,
+  source: HistoricalWorldSource,
+  matchId: string,
+  participantKind: "bowler" | "catcher" | "wicketkeeper",
+  preferredPlayerIds?: Set<string>
+): string {
+  const reference = cleanText(rawName);
+
+  if (!reference) {
+    fail(
+      source.year + "/" + matchId +
+      ": received an empty " + participantKind + " reference."
+    );
+  }
+
+  const teamCandidates = [...players.values()].filter(
+    (player) => player.team === expectedTeam
+  );
+
+  // For a bowler reference, the innings' bowling figures are authoritative.
+  // This is the key protection against matching the wrong "Amarnath".
+  const candidatePool = preferredPlayerIds
+    ? teamCandidates.filter((player) =>
+      preferredPlayerIds.has(player.sourcePlayerId)
+    )
+    : teamCandidates;
+
+  const matchingCandidates = candidatePool.filter((candidate) => {
+    const aliases = new Set<string>([candidate.fullName]);
+
+    const registeredPerson = register.peopleById.get(
+      candidate.sourcePlayerId
+    );
+
+    if (registeredPerson) {
+      aliases.add(registeredPerson.name);
+      aliases.add(registeredPerson.uniqueName);
+    }
+
+    // Cricsheet's names.csv includes abbreviated and alternate names.
+    // Only consider aliases attached to this candidate's canonical ID.
+    for (const [alias, ids] of register.nameToIds) {
+      if (ids.has(candidate.sourcePlayerId)) {
+        aliases.add(alias);
+      }
+    }
+
+    return [...aliases].some((alias) =>
+      playerNameMatchesReference(alias, reference)
+    );
+  });
+
+  if (matchingCandidates.length === 1) {
+    return matchingCandidates[0].sourcePlayerId;
+  }
+
+  if (matchingCandidates.length === 0) {
+    fail(
+      source.year + "/" + matchId +
+      ': unable to resolve ' + participantKind +
+      ' "' + reference + '" for team "' + expectedTeam +
+      '". Checked ' + candidatePool.length +
+      " relevant match candidates. Verify the lineup, bowling figures, " +
+      "and source spelling."
+    );
+  }
+
+  fail(
+    source.year + "/" + matchId +
+    ': ambiguous ' + participantKind +
+    ' "' + reference + '" for team "' + expectedTeam +
+    '". Candidates: ' +
+    matchingCandidates
+      .map((player) => player.fullName + " [" + player.sourcePlayerId + "]")
+      .join(", ") +
+    ". Resolve the ambiguity from the source scorecard; do not guess."
+  );
+}
 function extractCells(
   $: cheerio.CheerioAPI,
   row: AnyNode
@@ -445,6 +606,198 @@ function isBowlingHeader(
   );
 }
 
+
+function extractHistoricalScorecardLines(html: string): string[] {
+  const $ = cheerio.load(html);
+
+  const preformatted = $("pre")
+    .map((_, element) => $(element).text())
+    .get()
+    .filter((value) => value.trim().length > 0)
+    .join("\n");
+
+  let scorecardText = preformatted;
+
+  // Legacy ESPNcricinfo scorecards are commonly fixed-width text inside
+  // <pre>. Do not treat a whole page-layout row as a scorecard row.
+  if (!scorecardText.trim()) {
+    $("script, style, noscript, iframe").remove();
+    $("br").replaceWith("\n");
+
+    $("p, div, section, article, li, h1, h2, h3, h4, tr").each(
+      (_, element) => {
+        $(element).prepend("\n").append("\n");
+      }
+    );
+
+    scorecardText = $("body").text();
+  }
+
+  return scorecardText
+    .replace(/\r\n?/g, "\n")
+    .replace(/\u00a0/g, " ")
+    .replace(/[\u200b-\u200d\uFEFF]/g, "")
+    .split("\n")
+    // Preserve internal spacing because player/dismissal fields are aligned
+    // by whitespace in the legacy scorecard.
+    .map((line) => line.replace(/\t/g, "    ").trim())
+    .filter(Boolean);
+}
+
+function splitHistoricalBattingPlayerLine(
+  prefix: string
+): { playerName: string; dismissal: string } {
+  const value = prefix.trim();
+  const separator = value.search(/\s{2,}/);
+
+  if (separator < 0) {
+    return {
+      playerName: value,
+      dismissal: "",
+    };
+  }
+
+  return {
+    playerName: value.slice(0, separator).trim(),
+    dismissal: cleanText(value.slice(separator).trim()),
+  };
+}
+
+function parseHistoricalBattingColumns(
+  line: string
+): { prefix: string; runs: number; balls: number } | null {
+  // Five numeric columns: runs, minutes, balls, fours, sixes.
+  const withMinutes = line.match(
+    /^(.*?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$/
+  );
+
+  if (withMinutes) {
+    return {
+      prefix: withMinutes[1].trimEnd(),
+      runs: Number(withMinutes[2]),
+      balls: Number(withMinutes[4]),
+    };
+  }
+
+  // Four numeric columns: runs, balls, fours, sixes.
+  // This also supports rows where the minutes field was left blank.
+  const withoutMinutes = line.match(
+    /^(.*?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$/
+  );
+
+  if (withoutMinutes) {
+    return {
+      prefix: withoutMinutes[1].trimEnd(),
+      runs: Number(withoutMinutes[2]),
+      balls: Number(withoutMinutes[3]),
+    };
+  }
+
+  return null;
+}
+
+function parseHistoricalBowlingColumns(
+  line: string
+): {
+  playerName: string;
+  overs: string;
+  runsConceded: number;
+  wickets: number;
+} | null {
+  // Some editions append bowling extras such as "(2w)" after the figures.
+  const match = line.match(
+    /^(.*?)\s+(\d+(?:\.\d+)?)\s+(\d+)\s+(\d+)\s+(\d+)(?:\s+\([^)]*\))*\s*$/
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  const overs = match[2];
+
+  // Cricket overs use .1 through .5 to represent balls, not decimal fractions.
+  if (!/^\d+(?:\.[0-5])?$/.test(overs)) {
+    return null;
+  }
+
+  return {
+    playerName: match[1].trim(),
+    overs,
+    runsConceded: Number(match[4]),
+    wickets: Number(match[5]),
+  };
+}
+
+function extractHistoricalTeamRosterBlocks(
+  lines: string[]
+): Array<{ team: string; names: string[] }> {
+  const rosters = new Map<string, string[]>();
+  let currentTeam: string | null = null;
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+
+    if (!line) {
+      continue;
+    }
+
+    const heading = line.match(/^(.+?)\s+team\s*:\s*(.*)$/i);
+
+    if (heading) {
+      currentTeam = cleanText(heading[1]);
+
+      if (!rosters.has(currentTeam)) {
+        rosters.set(currentTeam, []);
+      }
+
+      const inlineNames = heading[2].trim();
+
+      if (inlineNames) {
+        rosters.get(currentTeam)!.push(
+          ...parseDnbNames(inlineNames)
+        );
+
+        currentTeam = /,\s*$/.test(inlineNames)
+          ? currentTeam
+          : null;
+      }
+
+      continue;
+    }
+
+    if (!currentTeam) {
+      continue;
+    }
+
+    // Do not mistake match commentary/footer text for roster continuations.
+    // A single leading "*" is deliberately not excluded: it can mark a player.
+    if (
+      /^(?:\*\s+\*|Team Pages:|Ground Page:|Match Officials|Thanks:|Source:|Contributed by|©)/i.test(
+        line
+      )
+    ) {
+      currentTeam = null;
+      continue;
+    }
+
+    rosters.get(currentTeam)!.push(
+      ...parseDnbNames(line)
+    );
+
+    // Wrapped team rosters conventionally end continued lines with a comma.
+    currentTeam = /,\s*$/.test(line)
+      ? currentTeam
+      : null;
+  }
+
+  return [...rosters.entries()]
+    .map(([team, names]) => ({
+      team,
+      names: [...new Set(names)].filter(Boolean),
+    }))
+    .filter((roster) => roster.names.length > 0);
+}
+
 function parseScorecard(
   html: string,
   manifestEntry: ManifestEntry,
@@ -452,45 +805,139 @@ function parseScorecard(
   register: ReturnType<typeof loadWorldRegister>
 ): HistoricalMatch {
   const $ = cheerio.load(html);
-  const text = cleanText($("body").text());
+  const bodyText = cleanText($("body").text());
 
-  // Verify the source ID using the rules for the configured provider.
+  let scorecardUrl: URL;
 
-  // Validate the match ID against the configured ESPNcricinfo scorecard filename.
-  const filename = path.posix
-    .basename(new URL(manifestEntry.url).pathname)
-    .replace(/\.html$/i, "")
-    .toLowerCase();
-
-  if (filename !== manifestEntry.sourceMatchId.toLowerCase()) {
+  try {
+    scorecardUrl = new URL(manifestEntry.url);
+  } catch {
     fail(
-      `${source.year}: manifest ID does not match the ESPNcricinfo scorecard filename.`
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": invalid scorecard URL."
     );
   }
 
+  const archiveRootUrl = new URL(source.archiveRoot);
+  const archiveCode = path.posix
+    .basename(archiveRootUrl.pathname.replace(/\/+$/, ""))
+    .toLowerCase();
 
-  const date = parseMatchDate(text, source.year);
+  const filename = path.posix.basename(
+    scorecardUrl.pathname
+  ).toLowerCase();
+
+  const allowedScorecardHosts = new Set([
+    "i.imgci.com",
+    "img.cricinfo.com",
+    "static.espncricinfo.com",
+  ]);
+
+  // The internal match ID intentionally differs from the archive filename.
+  // Date ranges such as 13-14 Jun 1979 must also be accepted.
+  const expectedInternalMatchId = new RegExp(
+    "^wc" + String(source.year).slice(-2) +
+    "_match_\\d{2}_[a-z]+_[a-z]+_\\d{2}(?:-\\d{2})?[a-z]{3}\\d{4}$",
+    "i"
+  );
+
+  if (
+    scorecardUrl.protocol !== "https:" ||
+    !allowedScorecardHosts.has(
+      scorecardUrl.hostname.toLowerCase()
+    ) ||
+    scorecardUrl.username ||
+    scorecardUrl.password ||
+    !filename.endsWith(".html") ||
+    !scorecardUrl.pathname.toLowerCase().includes(
+      "/" + archiveCode + "/"
+    ) ||
+    !expectedInternalMatchId.test(manifestEntry.sourceMatchId)
+  ) {
+    fail(
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": invalid scorecard URL, archive path, or internal match ID."
+    );
+  }
+
+  const date = parseMatchDate(bodyText, source.year);
+  const lines = extractHistoricalScorecardLines(html);
+  const rosterBlocks = extractHistoricalTeamRosterBlocks(lines);
+  const rosterTeamNames = rosterBlocks.map((roster) => roster.team);
+
+  const hasNoResult =
+    /\bResult\s*:\s*(?:no result|abandoned|match abandoned|no play|washed out|cancelled|canceled)\b/i.test(
+      bodyText
+    );
+
+  const inningsHeaderCount = lines.filter((line) =>
+    Boolean(getInningsTeam(cleanText(line)))
+  ).length;
+
+  const battingHeaderCount = lines.filter((line) =>
+    isBattingHeader(cleanText(line), source)
+  ).length;
+
+  const bowlingHeaderCount = lines.filter((line) =>
+    isBowlingHeader(cleanText(line), source)
+  ).length;
+
+  const completeScorecard =
+    inningsHeaderCount >= 2 &&
+    battingHeaderCount >= 2 &&
+    bowlingHeaderCount >= 2;
+
+  const partialNoResultScorecard =
+    hasNoResult &&
+    inningsHeaderCount >= 1 &&
+    battingHeaderCount >= 1 &&
+    bowlingHeaderCount >= 1 &&
+    rosterBlocks.length >= 1;
+
+  const unplayedNoResultScorecard =
+    hasNoResult &&
+    inningsHeaderCount === 0 &&
+    battingHeaderCount === 0 &&
+    bowlingHeaderCount === 0 &&
+    new Set(rosterTeamNames).size >= 2;
+
+  // A short, specific error is much more useful than a fabricated team name
+  // created by interpreting the HTML navigation as a scorecard row.
+  if (
+    !completeScorecard &&
+    !partialNoResultScorecard &&
+    !unplayedNoResultScorecard
+  ) {
+    fail(
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": unrecognized scorecard layout (innings headings=" +
+      inningsHeaderCount +
+      ", batting headers=" + battingHeaderCount +
+      ", bowling headers=" + bowlingHeaderCount +
+      ", roster teams=" + new Set(rosterTeamNames).size +
+      ", no-result=" + hasNoResult + ")."
+    );
+  }
+
   const innings: HistoricalInnings[] = [];
+  const pendingDismissals: PendingDismissalResolution[] = [];
+  const pendingBowling: PendingBowlingResolution[] = [];
 
   let currentInnings: HistoricalInnings | null = null;
   let mode: TableMode = null;
-  let battingHasMinutesColumn = false;
+  let continueDnb = false;
 
-  $("tr").each((_, row) => {
-    const cells = extractCells($, row);
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    const normalizedLine = cleanText(line);
 
-    if (cells.length === 0) {
-      return;
+    if (!normalizedLine) {
+      continue;
     }
 
-    const rowText = cleanText(cells.join(" "));
-
-    if (!rowText) {
-      return;
-    }
-
-    // Start a new innings when the team heading is encountered.
-    const inningsTeam = getInningsTeam(rowText);
+    // Critical fix: detect innings from an individual formatted scorecard line,
+    // never from a whole <tr> or the entire page body.
+    const inningsTeam = getInningsTeam(normalizedLine);
 
     if (inningsTeam) {
       currentInnings = {
@@ -500,110 +947,110 @@ function parseScorecard(
       };
 
       innings.push(currentInnings);
-      mode = null;
-      battingHasMinutesColumn = false;
-      return;
+      mode = isBattingHeader(normalizedLine, source)
+        ? "batting"
+        : null;
+      continueDnb = false;
+      continue;
     }
 
-    // Switch to batting mode when the batting column headers appear.
-    if (isBattingHeader(rowText, source)) {
+    if (isBattingHeader(normalizedLine, source)) {
       if (!currentInnings) {
-        return;
+        fail(
+          source.year + "/" + manifestEntry.sourceMatchId +
+          ": batting header appeared before an innings heading."
+        );
       }
 
       mode = "batting";
-      battingHasMinutesColumn = /\bR\s+M\s+B\b/i.test(rowText);
-      return;
+      continue;
     }
 
-    // Switch to bowling mode when the bowling column headers appear.
-    if (isBowlingHeader(rowText, source)) {
+    if (isBowlingHeader(normalizedLine, source)) {
       if (!currentInnings) {
         fail(
-          `${source.year}/${manifestEntry.sourceMatchId}: bowling section appeared before an innings heading.`
+          source.year + "/" + manifestEntry.sourceMatchId +
+          ": bowling header appeared before an innings heading."
         );
       }
 
       mode = "bowling";
-      return;
+      continueDnb = false;
+      continue;
     }
 
     if (!currentInnings) {
-      return;
+      continue;
     }
 
-    const first = cells[0] ?? "";
-
-    // DNB can appear as one row containing a comma-separated list.
+    // DNB lists sometimes wrap onto the following line. Continue only when
+    // the preceding list line explicitly ends in a comma.
     if (
       source.provider === "ESPNcricinfo" &&
-      /^DNB\s*:/i.test(rowText)
+      /^DNB\s*:/i.test(normalizedLine)
     ) {
       addDnbPlayers(
         currentInnings,
-        parseDnbNames(rowText),
+        parseDnbNames(normalizedLine),
         register
       );
-      return;
+
+      continueDnb = /,\s*$/.test(line);
+      continue;
     }
 
-    // Ignore non-player summary rows; keep batting mode active so DNB
-    // rows following the total can still be collected.
     if (
-      /^(Extras|Total|Fall of wickets|FoW|Did not bat|DNB)\b/i.test(
-        first
+      source.provider === "ESPNcricinfo" &&
+      continueDnb
+    ) {
+      if (
+        /^(?:FoW\s*:|Fall of wickets\b|Bowling\b|Extras\b|Total\b)/i.test(
+          normalizedLine
+        )
+      ) {
+        continueDnb = false;
+      } else {
+        addDnbPlayers(
+          currentInnings,
+          parseDnbNames(normalizedLine),
+          register
+        );
+
+        continueDnb = /,\s*$/.test(line);
+        continue;
+      }
+    }
+
+    if (
+      /^(?:Extras\b|Total\b|Fall of wickets\b|FoW\b|Did not bat\b|DNB\b)/i.test(
+        normalizedLine
       )
     ) {
-      return;
+      continue;
     }
 
     if (!mode) {
-      return;
+      continue;
     }
 
     if (mode === "batting") {
-      if (cells.length < 3) {
-        return;
+      const columns = parseHistoricalBattingColumns(line);
+
+      if (!columns) {
+        continue;
       }
 
-      // Skip repeated headings and non-player table rows.
-      if (
-        /^(Batter|Batsman|Player|R|M|B|Bowling)$/i.test(first)
-      ) {
-        return;
+      const separated = splitHistoricalBattingPlayerLine(
+        columns.prefix
+      );
+
+      if (!separated.playerName) {
+        continue;
       }
 
-      const dismissal = cleanText(cells[1] ?? "");
-      const didNotBat = /did not bat/i.test(dismissal);
-      const retired = /retired hurt|retired not out/i.test(dismissal);
-
-      // ESPN legacy layouts are usually:
-      // player, dismissal, runs, [minutes], balls, fours, sixes.
-      // CricketArchive layouts are:
-      // player, dismissal, runs, balls, ...
-      const runsIndex = 2;
-      const ballsIndex =
-        source.provider === "ESPNcricinfo" &&
-          battingHasMinutesColumn
-          ? 4
-          : 3;
-
-      const runs = parseNumber(cells[runsIndex] ?? "");
-      const balls = parseNumber(cells[ballsIndex] ?? "");
-
-      // A valid batting row must have a numeric score or be explicitly
-      // marked as DNB/retired. This prevents headings becoming players.
-      if (
-        runs === null &&
-        !didNotBat &&
-        !retired &&
-        !/^(not out|retired hurt|retired not out)$/i.test(dismissal)
-      ) {
-        return;
-      }
-
-      const person = resolvePerson(register, first);
-      const events = parseDismissal(dismissal, register);
+      const dismissal = cleanText(separated.dismissal);
+      const person = resolvePerson(register, separated.playerName);
+      const events = parseDismissal(dismissal);
 
       const existing = currentInnings.batting.find(
         (player) => player.sourcePlayerId === person.identifier
@@ -612,106 +1059,130 @@ function parseScorecard(
       const record: HistoricalBattingRecord = {
         sourcePlayerId: person.identifier,
         fullName: person.name,
-        runs,
-        balls,
-        didNotBat,
-        notOut: /not out/i.test(dismissal),
-        retired,
+        runs: columns.runs,
+        balls: columns.balls,
+        didNotBat: false,
+        notOut: /\bnot out\b/i.test(dismissal),
+        retired: /\bretired hurt\b|\bretired not out\b/i.test(dismissal),
         dismissal,
-        bowlerSourcePlayerId: events.bowlerSourcePlayerId,
-        catcherSourcePlayerId: events.catcherSourcePlayerId,
-        stumperSourcePlayerId: events.stumperSourcePlayerId,
+        bowlerSourcePlayerId: null,
+        catcherSourcePlayerId: null,
+        stumperSourcePlayerId: null,
         wicketCreditedToBowler: events.wicketCreditedToBowler,
       };
 
       if (!existing) {
         currentInnings.batting.push(record);
+
+        pendingDismissals.push({
+          record,
+          innings: currentInnings,
+          references: events,
+        });
       }
 
-      return;
+      continue;
     }
 
     if (mode === "bowling") {
-      if (cells.length < 5) {
-        return;
+      const bowling = parseHistoricalBowlingColumns(line);
+
+      if (!bowling || !bowling.playerName) {
+        continue;
       }
 
-      if (
-        /^(Bowling|Player|Bowler|O)$/i.test(first)
-      ) {
-        return;
-      }
-
-      const overs = cleanText(cells[1] ?? "");
-      const runs = parseNumber(cells[3] ?? "");
-      const wickets = parseNumber(cells[4] ?? "");
-
-      if (
-        !overs ||
-        !/^\d+(?:\.\d+)?$/.test(overs) ||
-        runs === null ||
-        wickets === null
-      ) {
-        return;
-      }
-
-      const person = resolvePerson(register, first);
-
-      const existing = currentInnings.bowling.find(
-        (player) => player.sourcePlayerId === person.identifier
-      );
-
-      if (!existing) {
-        currentInnings.bowling.push({
-          sourcePlayerId: person.identifier,
-          fullName: person.name,
-          overs,
-          runsConceded: runs,
-          wickets,
-        });
-      }
+      // Do not resolve abbreviated names here. The opposing team's complete
+      // batting and DNB inventory may not have been parsed yet.
+      pendingBowling.push({
+        innings: currentInnings,
+        playerName: bowling.playerName,
+        overs: bowling.overs,
+        runsConceded: bowling.runsConceded,
+        wickets: bowling.wickets,
+      });
     }
-  });
+  }
 
-  if (innings.length < 2) {
+  if (innings.length > 2) {
     fail(
-      `${source.year}/${manifestEntry.sourceMatchId}: expected at least two innings, found ${innings.length}.`
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": expected no more than two innings, found " + innings.length + "."
+    );
+  }
+
+  if (!hasNoResult && innings.length !== 2) {
+    fail(
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": expected two innings, found " + innings.length +
+      ", and the source does not identify this as a no-result match."
+    );
+  }
+
+  if (hasNoResult && innings.length === 1) {
+    const playedTeam = innings[0].battingTeam;
+    const hasOpposingRoster = rosterBlocks.some(
+      (roster) =>
+        roster.team !== playedTeam &&
+        roster.names.length > 0
+    );
+
+    if (!hasOpposingRoster) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": no-result scorecard has one played innings but no opposing-team roster."
+      );
+    }
+  }
+
+  if (
+    hasNoResult &&
+    innings.length === 0 &&
+    new Set(rosterTeamNames).size < 2
+  ) {
+    fail(
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": no-result scorecard has no innings and does not identify both teams."
     );
   }
 
   for (const inningsEntry of innings) {
-    if (!inningsEntry.battingTeam) {
-      fail(
-        `${source.year}/${manifestEntry.sourceMatchId}: innings has no batting team.`
-      );
-    }
-
     if (inningsEntry.batting.length === 0) {
       fail(
-        `${source.year}/${manifestEntry.sourceMatchId}: no batting players parsed for ${inningsEntry.battingTeam}.`
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": no batting players parsed for \"" +
+        inningsEntry.battingTeam +
+        "\". Verify the scorecard text and batting-column format."
       );
     }
 
     if (inningsEntry.bowling.length === 0) {
       fail(
-        `${source.year}/${manifestEntry.sourceMatchId}: no bowling figures parsed for ${inningsEntry.battingTeam}.`
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": no bowling figures parsed for \"" +
+        inningsEntry.battingTeam +
+        "\". Verify the scorecard text and bowling-column format."
       );
     }
   }
 
   const teamNames = [
-    ...new Set(innings.map((entry) => entry.battingTeam)),
+    ...new Set([
+      ...innings.map((entry) => entry.battingTeam),
+      ...rosterTeamNames,
+    ]),
   ];
 
   if (teamNames.length !== 2) {
     fail(
-      `${source.year}/${manifestEntry.sourceMatchId}: expected exactly two teams, found ${teamNames.length}: ${teamNames.join(", ")}.`
+      source.year + "/" + manifestEntry.sourceMatchId +
+      ": expected exactly two teams, found " + teamNames.length +
+      ": " + teamNames.join(", ") + "."
     );
   }
 
-  // First pass: build the full player inventory from every batting innings.
   const players = new Map<string, HistoricalPlayerRecord>();
 
+  // First, collect players with actual batting records, including DNB names.
   for (const inningsEntry of innings) {
     for (const batting of inningsEntry.batting) {
       const existing = players.get(batting.sourcePlayerId);
@@ -719,7 +1190,10 @@ function parseScorecard(
 
       if (existing && existing.team !== team) {
         fail(
-          `${source.year}/${manifestEntry.sourceMatchId}: player ${batting.fullName} appears for both "${existing.team}" and "${team}".`
+          source.year + "/" + manifestEntry.sourceMatchId +
+          ": player " + batting.fullName +
+          " appears for both \"" + existing.team +
+          "\" and \"" + team + "\"."
         );
       }
 
@@ -731,7 +1205,168 @@ function parseScorecard(
     }
   }
 
-  // Second pass: every bowler must belong to the opposing team inventory.
+  // A roster can supply the fielding side for a one-innings no-result match.
+  // Do not count rosters as player appearances when no innings were played.
+  if (innings.length > 0) {
+    for (const roster of rosterBlocks) {
+      for (const name of roster.names) {
+        const person = resolvePerson(register, name);
+        const existing = players.get(person.identifier);
+
+        if (existing && existing.team !== roster.team) {
+          fail(
+            source.year + "/" + manifestEntry.sourceMatchId +
+            ": roster player " + person.name +
+            " conflicts across teams \"" + existing.team +
+            "\" and \"" + roster.team + "\"."
+          );
+        }
+
+        players.set(person.identifier, {
+          sourcePlayerId: person.identifier,
+          fullName: person.name,
+          team: roster.team,
+        });
+      }
+    }
+  }
+
+  // Resolve bowling figures only after all batting and DNB inventories
+  // have been collected. This supports surnames and abbreviated references.
+  for (const pending of pendingBowling) {
+    const fieldingTeam = teamNames.find(
+      (team) => team !== pending.innings.battingTeam
+    );
+
+    if (!fieldingTeam) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": cannot identify the fielding team for bowler \"" +
+        pending.playerName + "\"."
+      );
+    }
+
+    const playerId = resolveMatchPlayerReference(
+      pending.playerName,
+      fieldingTeam,
+      players,
+      register,
+      source,
+      manifestEntry.sourceMatchId,
+      "bowler"
+    );
+
+    const player = players.get(playerId);
+
+    if (!player) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": resolved bowler ID " + playerId +
+        " is missing from the player inventory."
+      );
+    }
+
+    const duplicate = pending.innings.bowling.some(
+      (bowler) => bowler.sourcePlayerId === playerId
+    );
+
+    if (duplicate) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": duplicate bowling entry for " + player.fullName +
+        " in the innings."
+      );
+    }
+
+    pending.innings.bowling.push({
+      sourcePlayerId: playerId,
+      fullName: player.fullName,
+      overs: pending.overs,
+      runsConceded: pending.runsConceded,
+      wickets: pending.wickets,
+    });
+  }
+
+  // Validate bowling data after deferred name resolution.
+  for (const inningsEntry of innings) {
+    if (inningsEntry.bowling.length === 0) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": no bowling figures resolved for \"" +
+        inningsEntry.battingTeam + "\"."
+      );
+    }
+  }
+  // Resolve dismissal participants after both teams' player inventories
+  // and the innings' bowling figures are available.
+  for (const pending of pendingDismissals) {
+    const fieldingTeam = teamNames.find(
+      (team) => team !== pending.innings.battingTeam
+    );
+
+    if (!fieldingTeam) {
+      fail(
+        source.year + "/" + manifestEntry.sourceMatchId +
+        ": cannot identify the fielding team for dismissal resolution."
+      );
+    }
+
+    const { references, record, innings: battingInnings } = pending;
+
+    const inningsBowlerIds = new Set(
+      battingInnings.bowling.map((bowler) => bowler.sourcePlayerId)
+    );
+
+    if (references.bowlerName) {
+      record.bowlerSourcePlayerId = resolveMatchPlayerReference(
+        references.bowlerName,
+        fieldingTeam,
+        players,
+        register,
+        source,
+        manifestEntry.sourceMatchId,
+        "bowler",
+        inningsBowlerIds
+      );
+    }
+
+    const caughtAndBowled =
+      /\bc\s*(?:&|and)\s*b\b/i.test(record.dismissal);
+
+    if (references.catcherName) {
+      // In a caught-and-bowled dismissal, reuse the already-resolved bowler ID.
+      // This avoids treating a surname shared by two players as ambiguous.
+      if (
+        caughtAndBowled &&
+        record.bowlerSourcePlayerId
+      ) {
+        record.catcherSourcePlayerId = record.bowlerSourcePlayerId;
+      } else {
+        record.catcherSourcePlayerId = resolveMatchPlayerReference(
+          references.catcherName,
+          fieldingTeam,
+          players,
+          register,
+          source,
+          manifestEntry.sourceMatchId,
+          "catcher"
+        );
+      }
+    }
+
+    if (references.stumperName) {
+      record.stumperSourcePlayerId = resolveMatchPlayerReference(
+        references.stumperName,
+        fieldingTeam,
+        players,
+        register,
+        source,
+        manifestEntry.sourceMatchId,
+        "wicketkeeper"
+      );
+    }
+  }
+  // Every listed bowler must resolve to the opposing team's inventory.
   for (const inningsEntry of innings) {
     const fieldingTeam = teamNames.find(
       (team) => team !== inningsEntry.battingTeam
@@ -742,13 +1377,18 @@ function parseScorecard(
 
       if (!player) {
         fail(
-          `${source.year}/${manifestEntry.sourceMatchId}: bowler ${bowling.fullName} is missing from the match inventory.`
+          source.year + "/" + manifestEntry.sourceMatchId +
+          ": bowler " + bowling.fullName +
+          " is missing from the match inventory."
         );
       }
 
       if (player.team !== fieldingTeam) {
         fail(
-          `${source.year}/${manifestEntry.sourceMatchId}: bowler ${bowling.fullName} is listed for ${player.team}, but should field for ${fieldingTeam}.`
+          source.year + "/" + manifestEntry.sourceMatchId +
+          ": bowler " + bowling.fullName +
+          " is listed for " + player.team +
+          ", but should field for " + fieldingTeam + "."
         );
       }
     }
