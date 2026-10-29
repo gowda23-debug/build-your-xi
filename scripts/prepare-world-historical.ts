@@ -8,12 +8,13 @@ import {
   type HistoricalWorldSource,
   type HistoricalWorldProvider,
 } from "./data/world/historical-sources";
-
 import {
   loadWorldRegister,
   resolveRegisterName,
+  matchesRegisterNameReference,
   type RegisterPerson,
 } from "./world-historical-utils";
+
 
 type ManifestEntry = {
   sourceMatchId: string;
@@ -384,47 +385,55 @@ function normalizeHistoricalPlayerName(value: string): string {
     .toLowerCase();
 }
 
+// function playerNameMatchesReference(
+//   candidateName: string,
+//   referenceName: string
+// ): boolean {
+//   const candidate = normalizeHistoricalPlayerName(candidateName);
+//   const reference = normalizeHistoricalPlayerName(referenceName);
+
+//   if (!candidate || !reference) {
+//     return false;
+//   }
+
+//   if (candidate === reference) {
+//     return true;
+//   }
+
+//   const candidateTokens = candidate.split(" ");
+//   const referenceTokens = reference.split(" ");
+
+//   // A surname-only reference, such as "Amarnath", must match the surname
+//   // of a player in the relevant team, not a globally selected person.
+//   if (referenceTokens.length === 1) {
+//     return candidateTokens[candidateTokens.length - 1] === referenceTokens[0];
+//   }
+
+//   if (referenceTokens.length > candidateTokens.length) {
+//     return false;
+//   }
+
+//   const suffix = candidateTokens.slice(-referenceTokens.length);
+
+//   // Support shortened forms such as "M Amarnath" matching "Mohinder Amarnath".
+//   // Any initial must match the corresponding given-name token.
+//   return referenceTokens.every((token, index) => {
+//     const candidateToken = suffix[index];
+
+//     return token.length === 1
+//       ? candidateToken.startsWith(token)
+//       : candidateToken === token;
+//   });
+// }
 function playerNameMatchesReference(
   candidateName: string,
   referenceName: string
 ): boolean {
-  const candidate = normalizeHistoricalPlayerName(candidateName);
-  const reference = normalizeHistoricalPlayerName(referenceName);
-
-  if (!candidate || !reference) {
-    return false;
-  }
-
-  if (candidate === reference) {
-    return true;
-  }
-
-  const candidateTokens = candidate.split(" ");
-  const referenceTokens = reference.split(" ");
-
-  // A surname-only reference, such as "Amarnath", must match the surname
-  // of a player in the relevant team, not a globally selected person.
-  if (referenceTokens.length === 1) {
-    return candidateTokens[candidateTokens.length - 1] === referenceTokens[0];
-  }
-
-  if (referenceTokens.length > candidateTokens.length) {
-    return false;
-  }
-
-  const suffix = candidateTokens.slice(-referenceTokens.length);
-
-  // Support shortened forms such as "M Amarnath" matching "Mohinder Amarnath".
-  // Any initial must match the corresponding given-name token.
-  return referenceTokens.every((token, index) => {
-    const candidateToken = suffix[index];
-
-    return token.length === 1
-      ? candidateToken.startsWith(token)
-      : candidateToken === token;
-  });
+  return matchesRegisterNameReference(
+    candidateName,
+    referenceName
+  );
 }
-
 function resolveMatchPlayerReference(
   rawName: string,
   expectedTeam: string,
@@ -1145,6 +1154,10 @@ function parseScorecard(
     );
   }
 
+
+  // Validate batting rows and raw bowling rows after scorecard parsing.
+  // Bowling figures are intentionally resolved later, so do not inspect
+  // inningsEntry.bowling until the deferred resolution phase has completed.
   for (const inningsEntry of innings) {
     if (inningsEntry.batting.length === 0) {
       fail(
@@ -1155,15 +1168,20 @@ function parseScorecard(
       );
     }
 
-    if (inningsEntry.bowling.length === 0) {
+    const parsedBowlingCount = pendingBowling.filter(
+      (pending) => pending.innings === inningsEntry
+    ).length;
+
+    if (parsedBowlingCount === 0) {
       fail(
         source.year + "/" + manifestEntry.sourceMatchId +
-        ": no bowling figures parsed for \"" +
+        ": no bowling rows parsed for \"" +
         inningsEntry.battingTeam +
-        "\". Verify the scorecard text and bowling-column format."
+        "\". Verify the scorecard text, bowling header, and bowling-column parser."
       );
     }
   }
+
 
   const teamNames = [
     ...new Set([

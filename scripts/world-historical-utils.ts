@@ -297,6 +297,27 @@ export function loadWorldRegister(): WorldRegister {
       normalized,
       ids
     );
+    // Index unique_name too. It may contain additional parts of a player's
+    // name that are needed to interpret initials in historical scorecards.
+    const normalizedUniqueName = normalizePersonName(
+      person.uniqueName
+    );
+
+    if (
+      normalizedUniqueName &&
+      normalizedUniqueName !== normalized
+    ) {
+      const uniqueNameIds =
+        nameToIds.get(normalizedUniqueName) ??
+        new Set<string>();
+
+      uniqueNameIds.add(person.identifier);
+
+      nameToIds.set(
+        normalizedUniqueName,
+        uniqueNameIds
+      );
+    }
 
     if (
       keyCricketArchive
@@ -401,43 +422,189 @@ export function resolveRegisterName(
   register: WorldRegister,
   rawName: string
 ): RegisterPerson {
-  const normalized =
-    normalizePersonName(
-      rawName
-    );
+  const normalized = normalizePersonName(rawName);
 
-  const ids =
-    register.nameToIds.get(
-      normalized
-    );
+  if (!normalized) {
+    fail("Cannot resolve an empty player name.");
+  }
 
-  if (!ids || ids.size === 0) {
+  function getPerson(identifier: string): RegisterPerson {
+    const person = register.peopleById.get(identifier);
+
+    if (!person) {
+      fail(
+        `Register ID ${identifier} was referenced but no people.csv record exists.`
+      );
+    }
+
+    return person;
+  }
+
+  function describeCandidates(
+    identifiers: Iterable<string>
+  ): string {
+    return [...identifiers]
+      .map((identifier) => {
+        const person = register.peopleById.get(identifier);
+
+        return person
+          ? `${person.name} [${person.identifier}]`
+          : identifier;
+      })
+      .join(", ");
+  }
+
+  // 1. Exact matching takes priority.
+  const exactIds = register.nameToIds.get(normalized);
+
+  if (exactIds?.size === 1) {
+    return getPerson([...exactIds][0]);
+  }
+
+  if (exactIds && exactIds.size > 1) {
     fail(
-      `Unable to map player name "${rawName}" to the Cricsheet Register.`
+      `Ambiguous exact player name "${rawName}". Candidates: ` +
+      describeCandidates(exactIds) +
+      ". A reviewed identity mapping is required."
     );
   }
 
-  if (ids.size > 1) {
+  // 2. Try initials and shortened-name matching across registered names
+  // and aliases. Each alias remains linked to its canonical player ID.
+  const matchingIds = new Set<string>();
+
+  for (const [alias, identifiers] of register.nameToIds) {
+    if (matchesRegisterNameReference(alias, rawName)) {
+      for (const identifier of identifiers) {
+        matchingIds.add(identifier);
+      }
+    }
+  }
+
+  if (matchingIds.size === 1) {
+    return getPerson([...matchingIds][0]);
+  }
+
+  if (matchingIds.size > 1) {
     fail(
-      `Ambiguous player name "${rawName}". Candidate Cricsheet IDs: ${[
-        ...ids,
-      ].join(", ")}`
+      `Ambiguous abbreviated player name "${rawName}". Candidates: ` +
+      describeCandidates(matchingIds) +
+      ". Do not select a player automatically; resolve this reference " +
+      "using the relevant match, team and source scorecard."
     );
   }
 
-  const id =
-    [...ids][0];
+  // 3. Never silently invent an identity when the register cannot resolve it.
+  fail(
+    `Unable to resolve player name "${rawName}" using exact or abbreviated ` +
+    "Cricsheet Register matching. Check the source spelling and registered " +
+    "aliases; add a reviewed source-specific mapping if necessary."
+  );
+}
 
-  const person =
-    register.peopleById.get(
-      id
-    );
-
-  if (!person) {
-    fail(
-      `Register ID ${id} was referenced but no people.csv record exists.`
-    );
+/**
+ * Matches historical scorecard names against a registered name or alias.
+ *
+ * Supported examples:
+ *   S Madan Lal  -> Sharma Madan Lal
+ *   Madan Lal    -> Sharma Madan Lal
+ *   M Amarnath   -> Mohinder Amarnath
+ *   S Abid Ali   -> Syed Abid Ali
+ *   DL Amiss     -> a matching registered full name containing
+ *                   the corresponding leading-name initials
+ *
+ * This function only determines whether names are compatible.
+ * resolveRegisterName() still requires exactly one matching player.
+ */
+export function matchesRegisterNameReference(
+  candidateName: string,
+  rawName: string
+): boolean {
+  function tokens(value: string): string[] {
+    return value
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\u00a0/g, " ")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
   }
 
-  return person;
+  const candidateTokens = tokens(candidateName);
+  const referenceTokens = tokens(rawName);
+
+  if (
+    candidateTokens.length === 0 ||
+    referenceTokens.length === 0
+  ) {
+    return false;
+  }
+
+  const candidate = candidateTokens.join(" ");
+  const reference = referenceTokens.join(" ");
+
+  if (candidate === reference) {
+    return true;
+  }
+
+  // Match from the end so that surnames and remaining name parts must
+  // agree. This also permits a scorecard to omit a leading given name.
+  function matchFromEnd(
+    candidateIndex: number,
+    referenceIndex: number
+  ): boolean {
+    if (referenceIndex < 0) {
+      return true;
+    }
+
+    if (candidateIndex < 0) {
+      return false;
+    }
+
+    const candidateToken = candidateTokens[candidateIndex];
+    const referenceToken = referenceTokens[referenceIndex];
+
+    // Exact token match.
+    if (
+      candidateToken === referenceToken &&
+      matchFromEnd(candidateIndex - 1, referenceIndex - 1)
+    ) {
+      return true;
+    }
+
+    // A single initial must agree with the start of the corresponding name.
+    if (
+      referenceToken.length === 1 &&
+      candidateToken.startsWith(referenceToken) &&
+      matchFromEnd(candidateIndex - 1, referenceIndex - 1)
+    ) {
+      return true;
+    }
+
+    // Historical scorecards sometimes combine initials, for example
+    // "DL Amiss" for a full name containing the initials D.L.
+    // Only use this rule for the leading reference token.
+    if (
+      referenceIndex === 0 &&
+      referenceToken.length > 1
+    ) {
+      const leadingInitials = candidateTokens
+        .slice(0, candidateIndex + 1)
+        .map((token) => token[0])
+        .join("");
+
+      if (leadingInitials === referenceToken) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  return matchFromEnd(
+    candidateTokens.length - 1,
+    referenceTokens.length - 1
+  );
 }

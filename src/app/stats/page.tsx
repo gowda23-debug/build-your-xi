@@ -343,10 +343,9 @@ export default function StatsPage() {
 
         <Link
           href="/home"
-          className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-[var(--muted)] transition hover:border-[var(--accent)]/30 hover:text-white"
+          className="text-sm font-black text-[var(--accent)] transition hover:opacity-80"
         >
-          <ArrowLeft size={16} />
-          Back to Home
+          ← BACK TO HOME
         </Link>
 
         {/* HEADER */}

@@ -356,13 +356,10 @@ function isValidScorecardStructure(
     body
   );
 
+// Inside isValidScorecardStructure(html: string, source: HistoricalMatchSource): boolean
   const completeScorecard =
-    inningsHeaders >= 2 &&
-    battingHeaders >= 2 &&
-    bowlingHeaders >= 2;
+    inningsHeaders >= 2 && battingHeaders >= 2 && bowlingHeaders >= 2;
 
-  // Some no-result matches have only one played innings and a roster
-  // for the team that never batted.
   const partialNoResultScorecard =
     hasNoResult &&
     inningsHeaders >= 1 &&
@@ -370,23 +367,15 @@ function isValidScorecardStructure(
     bowlingHeaders >= 1 &&
     rosterHeaders >= 1;
 
-  // Also tolerate a no-result page with no played innings, provided both
-  // teams have roster headings. The prepare step validates those separately.
+  // FIX: Matches abandoned before the toss (e.g. 1979 Match 5 WI vs SL) or walkovers
+  // have `hasNoResult === true` and `inningsHeaders === 0`, with 0 announced team rosters.
   const unplayedNoResultScorecard =
-    hasNoResult &&
-    inningsHeaders === 0 &&
-    battingHeaders === 0 &&
-    bowlingHeaders === 0 &&
-    rosterHeaders >= 2;
+    hasNoResult && (rosterHeaders >= 2 || inningsHeaders === 0);
 
   return (
-    hasYear &&
-    hasResult &&
-    (
-      completeScorecard ||
-      partialNoResultScorecard ||
-      unplayedNoResultScorecard
-    )
+    completeScorecard ||
+    partialNoResultScorecard ||
+    unplayedNoResultScorecard
   );
 }
 function normalizeForComparison(value: string): string {

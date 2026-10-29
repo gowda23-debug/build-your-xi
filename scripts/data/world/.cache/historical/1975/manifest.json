@@ -4,7 +4,7 @@
   "provider": "ESPNcricinfo",
   "archiveRoot": "https://i.imgci.com/link_to_database/ARCHIVE/WORLD_CUPS/WC75/",
   "expectedMatchCount": 15,
-  "retrievedAt": "2026-10-14T13:30:50.103Z",
+  "retrievedAt": "2026-10-19T11:50:04.228Z",
   "matches": [
     {
       "sourceMatchId": "wc75_match_01_eng_ind_07jun1975",
