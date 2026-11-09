@@ -1,0 +1,998 @@
+
+import fs from "node:fs";
+import path from "node:path";
+import { WORLD_CRICSHEET_EDITIONS, type WorldEdition } from "./data/world/editions";
+import { WORLD_HISTORICAL_SOURCES } from "./data/world/historical-sources";
+
+type JsonObject = Record<string, unknown>;
+type Role = "BAT" | "WK" | "AR" | "BOWL";
+type RoleProvider = "ICC" | "BOARD" | "ESPNCRICINFO";
+
+type RawMatch = {
+  info?: {
+    dates?: string[];
+    players?: Record<string, string[]>;
+    registry?: { people?: Record<string, string> };
+    teams?: string[];
+    event?: { name?: string; match_number?: number };
+  };
+  innings?: Array<{
+    overs?: Array<{
+      deliveries?: Array<{
+        batter?: string;
+        bowler?: string;
+        non_striker?: string;
+        wickets?: Array<{
+          player_out?: string;
+          fielders?: Array<{ name?: string }>;
+        }>;
+      }>;
+    }>;
+  }>;
+};
+
+type RoleEntry = {
+  role?: Role;
+  source?: {
+    provider?: RoleProvider;
+    url?: string;
+    retrievedAt?: string;
+  };
+};
+
+type EditionReport = {
+  year: number;
+  provider: string;
+  status: "READY" | "BLOCKED" | "PENDING";
+  rawMatchCount?: number;
+  expectedMatchCount?: number;
+  rawPlayerCount?: number;
+  unresolvedRoleCount?: number;
+  processedPlayerCount?: number;
+  blockers: string[];
+};
+
+const ROOT = process.cwd();
+const WORLD_DIR = path.join(ROOT, "scripts", "data", "world");
+const RAW_DIR = path.join(WORLD_DIR, "raw");
+const PROCESSED_DIR = path.join(WORLD_DIR, "processed");
+const ROLE_FILE = path.join(WORLD_DIR, "role-sources.json");
+const REPORT_DIR = path.join(WORLD_DIR, "reports");
+const REPORT_FILE = path.join(REPORT_DIR, "import-readiness.json");
+
+const VALID_ROLES = new Set<Role>(["BAT", "WK", "AR", "BOWL"]);
+
+const VALID_ROLE_PROVIDERS = new Set<RoleProvider>([
+  "ICC",
+  "BOARD",
+  "ESPNCRICINFO",
+]);
+
+const OFFICIAL_BOARD_DOMAINS = [
+  "bcci.tv",
+  "cricket.com.au",
+  "ecb.co.uk",
+  "pcb.com.pk",
+  "nzc.nz",
+  "nzcricket.co.nz",
+  "srilankacricket.lk",
+  "tigercricket.com.bd",
+  "bangladeshcricket.com",
+  "cricketwestindies.org",
+  "cricketireland.ie",
+  "cricketscotland.com",
+  "cricket.co.za",
+  "cricket.co.zw",
+  "afghanistancricketboard.com",
+  "cricketkenya.or.ke",
+  "kncb.nl",
+  "cricketcanada.org",
+  "cricketnamibia.com",
+  "cricketbermuda.com",
+] as const;
+
+function fail(message: string): never {
+  throw new Error(`[WORLD READINESS] ${message}`);
+}
+
+function isObject(value: unknown): value is JsonObject {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value)
+  );
+}
+
+function readJson(filePath: string): unknown {
+  if (!fs.existsSync(filePath)) {
+    fail(`Missing file: ${filePath}`);
+  }
+
+  const text = fs.readFileSync(filePath, "utf8");
+
+  if (!text.trim()) {
+    fail(`File is empty: ${filePath}`);
+  }
+
+  try {
+    return JSON.parse(text) as unknown;
+  } catch (error) {
+    fail(
+      `Invalid JSON in ${filePath}: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
+  }
+}
+
+function safeRoleSource(entry: RoleEntry | undefined): boolean {
+  if (!entry || !entry.role || !VALID_ROLES.has(entry.role)) {
+    return false;
+  }
+
+  const source = entry.source;
+
+  if (
+    !source ||
+    !source.provider ||
+    !VALID_ROLE_PROVIDERS.has(source.provider)
+  ) {
+    return false;
+  }
+
+  if (
+    typeof source.retrievedAt !== "string" ||
+    Number.isNaN(Date.parse(source.retrievedAt))
+  ) {
+    return false;
+  }
+
+  if (typeof source.url !== "string") {
+    return false;
+  }
+
+  let url: URL;
+
+  try {
+    url = new URL(source.url);
+  } catch {
+    return false;
+  }
+
+  if (url.protocol !== "https:" || url.username || url.password) {
+    return false;
+  }
+
+  const host = url.hostname.toLowerCase();
+
+  if (source.provider === "ICC") {
+    return (
+      host === "icc-cricket.com" ||
+      host.endsWith(".icc-cricket.com")
+    );
+  }
+
+  if (source.provider === "ESPNCRICINFO") {
+    return (
+      host === "espncricinfo.com" ||
+      host.endsWith(".espncricinfo.com") ||
+      host === "core.espnuk.org"
+    );
+  }
+
+  return OFFICIAL_BOARD_DOMAINS.some(
+    (domain) => host === domain || host.endsWith(`.${domain}`),
+  );
+}
+
+function collectRawPlayerIds(
+  matches: RawMatch[],
+  year: number,
+): Set<string> {
+  const ids = new Set<string>();
+
+  function addName(
+    match: RawMatch,
+    name: unknown,
+    where: string,
+  ): void {
+    if (typeof name !== "string" || !name.trim()) {
+      fail(`${year}: ${where} contains a blank player name.`);
+    }
+
+    const id =
+      match.info?.registry?.people?.[name]?.toLowerCase();
+
+    if (!id || !/^[0-9a-f]{8}$/.test(id)) {
+      fail(
+        `${year}: ${where} has no valid Cricsheet Register ID for "${name}".`,
+      );
+    }
+
+    ids.add(id);
+  }
+
+  const seenMatchKeys = new Set<string>();
+
+  for (const [matchIndex, match] of matches.entries()) {
+    const info = match.info;
+
+    if (
+      !info ||
+      !Array.isArray(info.dates) ||
+      typeof info.dates[0] !== "string"
+    ) {
+      fail(`${year}: match ${matchIndex + 1} is missing a match date.`);
+    }
+
+    if (Number(info.dates[0].slice(0, 4)) !== year) {
+      fail(
+        `${year}: match ${matchIndex + 1} has a date outside ${year}.`,
+      );
+    }
+
+    if (
+      !Array.isArray(info.teams) ||
+      info.teams.length !== 2 ||
+      !info.teams.every(
+        (team) => typeof team === "string" && team.trim(),
+      )
+    ) {
+      fail(
+        `${year}: match ${matchIndex + 1} must contain exactly two named teams.`,
+      );
+    }
+
+    if (
+      !info.event?.name ||
+      !info.event.name.toLowerCase().includes("world cup")
+    ) {
+      fail(
+        `${year}: match ${matchIndex + 1} is not explicitly identified as a World Cup match.`,
+      );
+    }
+
+    if (
+      !info.players ||
+      !info.registry?.people ||
+      !Array.isArray(match.innings) ||
+      match.innings.length === 0
+    ) {
+      fail(
+        `${year}: match ${matchIndex + 1} is missing line-ups, registry IDs, or innings.`,
+      );
+    }
+
+    const matchKey = `${info.dates[0]}|${String(
+      info.event?.match_number ?? "",
+    )}|${[...info.teams].sort().join("|")}`;
+
+    if (seenMatchKeys.has(matchKey)) {
+      fail(`${year}: duplicate date/match-number/team key ${matchKey}.`);
+    }
+
+    seenMatchKeys.add(matchKey);
+
+    for (const [team, names] of Object.entries(info.players)) {
+      if (!Array.isArray(names) || names.length === 0) {
+        fail(
+          `${year}: match ${matchIndex + 1} has an empty lineup for ${team}.`,
+        );
+      }
+
+      for (const name of names) {
+        addName(match, name, `match ${matchIndex + 1} lineup`);
+      }
+    }
+
+    for (const [inningsIndex, innings] of match.innings.entries()) {
+      for (const [overIndex, over] of (innings.overs ?? []).entries()) {
+        for (const [deliveryIndex, delivery] of (
+          over.deliveries ?? []
+        ).entries()) {
+          const where = `match ${matchIndex + 1}, innings ${
+            inningsIndex + 1
+          }, over ${overIndex + 1}, delivery ${deliveryIndex + 1}`;
+
+          addName(match, delivery.batter, where);
+          addName(match, delivery.bowler, where);
+          addName(match, delivery.non_striker, where);
+
+          for (const wicket of delivery.wickets ?? []) {
+            addName(match, wicket.player_out, `${where} wicket`);
+
+            for (const fielder of wicket.fielders ?? []) {
+              addName(match, fielder.name, `${where} fielder`);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return ids;
+}
+
+function countProcessedPlayers(
+  value: unknown,
+  year: number,
+  roles: Record<string, RoleEntry>,
+): { count: number; blockers: string[] } {
+  const blockers: string[] = [];
+
+  if (!isObject(value)) {
+    return {
+      count: 0,
+      blockers: [`${year}: processed file must be a JSON object.`],
+    };
+  }
+
+  const teams = value.teams;
+
+  if (!Array.isArray(teams) || teams.length < 6) {
+    return {
+      count: 0,
+      blockers: [
+        `${year}: processed file must contain at least six teams.`,
+      ],
+    };
+  }
+
+  let count = 0;
+  const playerIds = new Set<string>();
+  const teamSlugs = new Set<string>();
+
+  const requiredStats = [
+    "matches",
+    "innings",
+    "runs",
+    "hundreds",
+    "fifties",
+    "wickets",
+    "catches",
+    "stumpings",
+  ] as const;
+
+  const decimalStats = [
+    "batting_average",
+    "strike_rate",
+    "bowling_average",
+    "economy",
+  ] as const;
+
+  for (const team of teams) {
+    if (
+      !isObject(team) ||
+      typeof team.name !== "string" ||
+      !team.name.trim() ||
+      typeof team.slug !== "string" ||
+      !team.slug.trim() ||
+      !Array.isArray(team.players)
+    ) {
+      blockers.push(`${year}: team metadata is invalid.`);
+      continue;
+    }
+
+    if (teamSlugs.has(team.slug)) {
+      blockers.push(`${year}: duplicate team slug ${team.slug}.`);
+    }
+
+    teamSlugs.add(team.slug);
+
+    let wk = 0;
+    let bat = 0;
+    let ar = 0;
+    let bowl = 0;
+
+    for (const player of team.players) {
+      if (!isObject(player)) {
+        blockers.push(
+          `${year}/${team.name}: player entry is not an object.`,
+        );
+        continue;
+      }
+
+      count++;
+
+      const fullName =
+        typeof player.fullName === "string"
+          ? player.fullName
+          : "<blank name>";
+
+      const sourcePlayerId = player.sourcePlayerId;
+
+      if (typeof fullName !== "string" || !fullName.trim()) {
+        blockers.push(
+          `${year}/${team.name}: player has a blank name.`,
+        );
+      }
+
+      let canonicalId: string | null = null;
+
+      if (
+        typeof sourcePlayerId !== "string" ||
+        !/^cricsheet:[0-9a-f]{8}$/.test(sourcePlayerId)
+      ) {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: sourcePlayerId must be cricsheet:<8-hex-register-id>.`,
+        );
+      } else {
+        canonicalId = sourcePlayerId.slice("cricsheet:".length);
+
+        if (playerIds.has(sourcePlayerId)) {
+          blockers.push(
+            `${year}: duplicate canonical player ID ${sourcePlayerId} across teams.`,
+          );
+        } else {
+          playerIds.add(sourcePlayerId);
+        }
+
+        const approved = roles[canonicalId];
+
+        if (!safeRoleSource(approved)) {
+          blockers.push(
+            `${year}/${team.name}/${fullName}: no currently approved role source exists for ${canonicalId}.`,
+          );
+        } else {
+          if (player.role !== approved.role) {
+            blockers.push(
+              `${year}/${team.name}/${fullName}: processed role differs from approved role source.`,
+            );
+          }
+
+          if (
+            !isObject(player.roleSource) ||
+            player.roleSource.provider !== approved.source?.provider ||
+            player.roleSource.url !== approved.source?.url ||
+            player.roleSource.retrievedAt !== approved.source?.retrievedAt
+          ) {
+            blockers.push(
+              `${year}/${team.name}/${fullName}: processed role provenance is stale or differs from role-sources.json.`,
+            );
+          }
+        }
+      }
+
+      if (player.role === "WK") wk++;
+      else if (player.role === "BAT") bat++;
+      else if (player.role === "AR") ar++;
+      else if (player.role === "BOWL") bowl++;
+      else {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: invalid or missing role.`,
+        );
+      }
+
+      const stats = player.stats;
+
+      if (!isObject(stats)) {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: stats object is missing.`,
+        );
+        continue;
+      }
+
+      for (const field of requiredStats) {
+        const statValue = stats[field];
+
+        if (
+          typeof statValue !== "number" ||
+          !Number.isInteger(statValue) ||
+          statValue < 0
+        ) {
+          blockers.push(
+            `${year}/${team.name}/${fullName}: ${field} must be a non-negative integer.`,
+          );
+        }
+      }
+
+      for (const field of decimalStats) {
+        const statValue = stats[field];
+
+        if (
+          statValue !== null &&
+          (typeof statValue !== "number" ||
+            !Number.isFinite(statValue) ||
+            statValue < 0)
+        ) {
+          blockers.push(
+            `${year}/${team.name}/${fullName}: ${field} must be null or a non-negative finite number.`,
+          );
+        }
+      }
+
+      if (
+        typeof stats.innings === "number" &&
+        typeof stats.matches === "number" &&
+        stats.innings > stats.matches
+      ) {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: innings exceed matches.`,
+        );
+      }
+
+      if (
+        typeof stats.innings === "number" &&
+        typeof stats.hundreds === "number" &&
+        typeof stats.fifties === "number" &&
+        stats.hundreds + stats.fifties > stats.innings
+      ) {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: hundreds + fifties exceed innings.`,
+        );
+      }
+
+      if (
+        !Array.isArray(player.sources) ||
+        !player.sources.some(
+          (source) =>
+            typeof source === "string" &&
+            source.includes("cricsheet.org"),
+        )
+      ) {
+        blockers.push(
+          `${year}/${team.name}/${fullName}: Cricsheet attribution is missing.`,
+        );
+      }
+    }
+
+    if (team.players.length < 11) {
+      blockers.push(`${year}/${team.name}: fewer than 11 players.`);
+    }
+
+    if (!(wk >= 1 && bat >= 4 && ar >= 1 && bowl >= 3 && ar + bowl >= 5)) {
+      blockers.push(
+        `${year}/${team.name}: verified role pool cannot form a valid XI (WK>=1, BAT>=4, AR>=1, BOWL>=3, AR+BOWL>=5).`,
+      );
+    }
+  }
+
+  return { count, blockers };
+}
+
+function inspectCricsheetEdition(
+  edition: WorldEdition,
+  roles: Record<string, RoleEntry>,
+  sourceOnly: boolean,
+): EditionReport {
+  const report: EditionReport = {
+    year: edition.year,
+    provider: "Cricsheet",
+    status: "PENDING",
+    blockers: [],
+  };
+
+  const rawPath = path.join(RAW_DIR, `${edition.year}.json`);
+
+  if (!fs.existsSync(rawPath)) {
+    report.blockers.push(
+      `Missing raw/${edition.year}.json. Run the World download stage first.`,
+    );
+    return report;
+  }
+
+  let raw: unknown;
+
+  try {
+    raw = readJson(rawPath);
+  } catch (error) {
+    report.blockers.push(
+      error instanceof Error ? error.message : String(error),
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  if (
+    !isObject(raw) ||
+    raw.year !== edition.year ||
+    !Array.isArray(raw.matches)
+  ) {
+    report.blockers.push(
+      `${edition.year}: raw wrapper must contain the correct year and a matches array.`,
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  const matches = raw.matches as RawMatch[];
+
+  report.rawMatchCount = matches.length;
+  report.expectedMatchCount = edition.expectedMatchCount;
+
+  if (matches.length !== edition.expectedMatchCount) {
+    report.blockers.push(
+      `Cricsheet match coverage is ${matches.length}/${edition.expectedMatchCount}; incomplete editions cannot be imported.`,
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  let playerIds: Set<string>;
+
+  try {
+    playerIds = collectRawPlayerIds(matches, edition.year);
+  } catch (error) {
+    report.blockers.push(
+      error instanceof Error ? error.message : String(error),
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  report.rawPlayerCount = playerIds.size;
+
+  const unresolved = [...playerIds].filter(
+    (id) => !safeRoleSource(roles[id]),
+  );
+
+  report.unresolvedRoleCount = unresolved.length;
+
+  if (unresolved.length > 0) {
+    report.blockers.push(
+      `${unresolved.length}/${playerIds.size} source players do not have an explicitly verified role with approved provenance. First unresolved IDs: ${unresolved.slice(0, 10).join(", ")}.`,
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  if (sourceOnly) {
+    report.status = "READY";
+    return report;
+  }
+
+  const processedPath = path.join(
+    PROCESSED_DIR,
+    `${edition.year}.json`,
+  );
+
+  if (!fs.existsSync(processedPath)) {
+    report.blockers.push(
+      "Processed file is missing. Run the processing stage after all source and role checks pass.",
+    );
+    return report;
+  }
+
+  let processed: unknown;
+
+  try {
+    processed = readJson(processedPath);
+  } catch (error) {
+    report.blockers.push(
+      error instanceof Error ? error.message : String(error),
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  if (!isObject(processed)) {
+    report.blockers.push(
+      `${edition.year}: processed file must be a JSON object.`,
+    );
+    report.status = "BLOCKED";
+    return report;
+  }
+
+  const metadataChecks: Array<[string, unknown, unknown]> = [
+    ["year", processed.year, edition.year],
+    ["seasonName", processed.seasonName, edition.seasonName],
+    ["format", processed.format, "ODI"],
+    ["competition", processed.competition, "ICC Men's Cricket World Cup"],
+    ["oversPerInnings", processed.oversPerInnings, 50],
+    ["sourceProvider", processed.sourceProvider, "Cricsheet"],
+    ["sourceUrl", processed.sourceUrl, "https://cricsheet.org/downloads/"],
+    ["license", processed.license, "ODC-By-1.0"],
+    ["coverageStatus", processed.coverageStatus, "complete"],
+    ["expectedMatchCount", processed.expectedMatchCount, edition.expectedMatchCount],
+    ["sourceMatchCount", processed.sourceMatchCount, edition.expectedMatchCount],
+  ];
+
+  for (const [label, actual, expected] of metadataChecks) {
+    if (actual !== expected) {
+      report.blockers.push(
+        `${edition.year}: processed ${label}=${String(actual)}; expected ${String(expected)}.`,
+      );
+    }
+  }
+
+  const playerValidation = countProcessedPlayers(
+    processed,
+    edition.year,
+    roles,
+  );
+
+  report.processedPlayerCount = playerValidation.count;
+  report.blockers.push(...playerValidation.blockers);
+
+  const processedIds = new Set<string>();
+
+  if (Array.isArray(processed.teams)) {
+    for (const team of processed.teams) {
+      if (!isObject(team) || !Array.isArray(team.players)) continue;
+
+      for (const player of team.players) {
+        if (
+          isObject(player) &&
+          typeof player.sourcePlayerId === "string"
+        ) {
+          processedIds.add(
+            player.sourcePlayerId
+              .replace(/^cricsheet:/, "")
+              .toLowerCase(),
+          );
+        }
+      }
+    }
+  }
+
+  const missing = [...playerIds].filter(
+    (id) => !processedIds.has(id),
+  );
+
+  const extra = [...processedIds].filter(
+    (id) => !playerIds.has(id),
+  );
+
+  if (missing.length) {
+    report.blockers.push(
+      `${edition.year}: processed output omits ${missing.length} raw source player IDs. First: ${missing.slice(0, 10).join(", ")}.`,
+    );
+  }
+
+  if (extra.length) {
+    report.blockers.push(
+      `${edition.year}: processed output contains ${extra.length} IDs absent from raw source. First: ${extra.slice(0, 10).join(", ")}.`,
+    );
+  }
+
+  report.status = report.blockers.length === 0 ? "READY" : "BLOCKED";
+
+  return report;
+}
+
+function inspectHistoricalEdition(
+  year: number,
+  seasonName: string,
+): EditionReport {
+  const report: EditionReport = {
+    year,
+    provider: "ESPNcricinfo historical archive",
+    status: "BLOCKED",
+    blockers: [],
+  };
+
+  const processedPath = path.join(
+    PROCESSED_DIR,
+    `${year}.json`,
+  );
+
+  if (!fs.existsSync(processedPath)) {
+    report.blockers.push(
+      `${year}: no normalized historical player pool is available. The configured ESPNcricinfo archive is publicly readable, but this repository does not record an open redistribution license for bulk data from it.`,
+    );
+
+    report.blockers.push(
+      `${year}: Cricsheet does not cover the 1975–1999 editions; the current CricketArchive-based historical-averages importer must not be used.`,
+    );
+
+    return report;
+  }
+
+  let value: unknown;
+
+  try {
+    value = readJson(processedPath);
+  } catch (error) {
+    report.blockers.push(
+      error instanceof Error ? error.message : String(error),
+    );
+    return report;
+  }
+
+  if (!isObject(value)) {
+    report.blockers.push(
+      `${year}: processed file is not a JSON object.`,
+    );
+    return report;
+  }
+
+  const provider =
+    typeof value.sourceProvider === "string"
+      ? value.sourceProvider
+      : typeof value.provider === "string"
+        ? value.provider
+        : "unknown";
+
+  const license =
+    typeof value.license === "string"
+      ? value.license
+      : "missing";
+
+  report.provider = provider;
+
+  if (
+    provider.toLowerCase().includes("cricketarchive") ||
+    license === "Public-Archive"
+  ) {
+    report.blockers.push(
+      `${year}: processed data still uses CricketArchive identity/provenance or the unrecognized "Public-Archive" license label.`,
+    );
+  }
+
+  if (provider !== "Cricsheet" || license !== "ODC-By-1.0") {
+    report.blockers.push(
+      `${year}: not publishable through the current strict RPC. A documented, reusable source license is required; source URLs alone are not a license.`,
+    );
+  }
+
+  if (
+    value.year !== year ||
+    value.seasonName !== seasonName
+  ) {
+    report.blockers.push(
+      `${year}: historical season metadata is invalid.`,
+    );
+  }
+
+  if (!Array.isArray(value.teams) || value.teams.length < 6) {
+    report.blockers.push(
+      `${year}: processed file must contain at least six teams.`,
+    );
+  }
+
+  return report;
+}
+
+function main(): void {
+  const args: string[] = process.argv.slice(2);
+
+  const sourceOnly = args.includes("--source-only");
+
+  const yearArg = args.find(
+    (arg: string) => arg.startsWith("--year="),
+  );
+
+  const requestedYear = yearArg
+    ? Number(yearArg.slice("--year=".length))
+    : null;
+
+  if (
+    yearArg &&
+    (!Number.isInteger(requestedYear) ||
+      requestedYear === null ||
+      requestedYear < 1975 ||
+      requestedYear > 2100)
+  ) {
+    fail(`Invalid year argument: ${yearArg}`);
+  }
+
+  if (
+    args.some(
+      (arg: string) =>
+        arg !== "--source-only" &&
+        !arg.startsWith("--year="),
+    )
+  ) {
+    fail("Supported arguments: --source-only and --year=YYYY.");
+  }
+
+  let roles: Record<string, RoleEntry> = {};
+
+  if (fs.existsSync(ROLE_FILE)) {
+    const roleFile = readJson(ROLE_FILE);
+
+    if (isObject(roleFile) && isObject(roleFile.players)) {
+      roles = roleFile.players as unknown as Record<
+        string,
+        RoleEntry
+      >;
+    }
+  }
+
+  const reports: EditionReport[] = [];
+
+  for (const edition of WORLD_CRICSHEET_EDITIONS) {
+    if (
+      requestedYear !== null &&
+      requestedYear !== edition.year
+    ) {
+      continue;
+    }
+
+    reports.push(
+      inspectCricsheetEdition(
+        edition,
+        roles,
+        sourceOnly,
+      ),
+    );
+  }
+
+  for (const edition of WORLD_HISTORICAL_SOURCES) {
+    if (
+      requestedYear !== null &&
+      requestedYear !== edition.year
+    ) {
+      continue;
+    }
+
+    reports.push(
+      inspectHistoricalEdition(
+        edition.year,
+        edition.seasonName,
+      ),
+    );
+  }
+
+  if (requestedYear !== null && reports.length === 0) {
+    fail(
+      `No World Cup source is configured for ${requestedYear}.`,
+    );
+  }
+
+  fs.mkdirSync(REPORT_DIR, { recursive: true });
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    mode: sourceOnly ? "source-preflight" : "import-readiness",
+    readyCount: reports.filter(
+      (report) => report.status === "READY",
+    ).length,
+    blockedCount: reports.filter(
+      (report) => report.status === "BLOCKED",
+    ).length,
+    editions: reports,
+  };
+
+  fs.writeFileSync(
+    REPORT_FILE,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    "utf8",
+  );
+
+  console.log(`[WORLD READINESS] Mode: ${payload.mode}`);
+
+  for (const report of reports) {
+    console.log(
+      `[WORLD READINESS] ${report.year}: ${report.status} — ${report.provider}`,
+    );
+
+    if (report.rawMatchCount !== undefined) {
+      console.log(
+        `  Source matches: ${report.rawMatchCount}/${report.expectedMatchCount ?? "?"}; source players: ${report.rawPlayerCount ?? 0}; unresolved roles: ${report.unresolvedRoleCount ?? "n/a"}.`,
+      );
+    }
+
+    for (const blocker of report.blockers) {
+      console.log(`  - ${blocker}`);
+    }
+  }
+
+  console.log(
+    `[WORLD READINESS] Report written to ${REPORT_FILE}`,
+  );
+
+  const readyCount = reports.filter(
+    (report) => report.status === "READY",
+  ).length;
+
+  if (readyCount === 0) {
+    console.error(
+      "[WORLD READINESS] No edition is safe to import. No database writes were performed.",
+    );
+
+    process.exitCode = 2;
+  }
+}
+
+try {
+  main();
+} catch (error) {
+  console.error(
+    `[WORLD READINESS] Failed: ${
+      error instanceof Error ? error.message : String(error)
+    }`,
+  );
+
+  process.exitCode = 2;
+}
